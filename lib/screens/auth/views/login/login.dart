@@ -9,6 +9,7 @@ import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_text.dart';
 import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../gen/fonts.gen.dart';
+import '../../../users/home_layout/home_layout.dart';
 import '../../data/auth_cubit.dart';
 import '../forget_pass/forget_pass.dart';
 import '../register/register.dart';
@@ -116,7 +117,7 @@ class LogIn extends StatelessWidget {
             InkWell(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              // onTap: () => AppRouter.navigateTo(context, const HomeLayout()),
+              onTap: () => AppRouter.navigateTo(context, const HomeLayout()),
               child: SizedBox(
                 height: 20.h,
                 width: 150.w,

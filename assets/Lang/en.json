@@ -336,5 +336,16 @@
       "we_care_about_your_trip_details": "We care about the details of your trip",
       "all_your_data_is_protected_and_secure": "All your data is protected and secure",
       "order_now": "Order now",
-      "agree_to_terms_and_conditions_is_required": "Please agree to the terms and conditions"
+      "agree_to_terms_and_conditions_is_required": "Please agree to the terms and conditions",
+      "markets": "Markets",
+      "shopping_carts": "Shopping carts",
+      "markets_and_shops": "Markets and shops",
+      "view_all": "View all",
+      "best_products": "Best products",
+      "sort_by_most_requested": "Sort by most requested",
+      "shop_page": "Shop page",
+      "view_on_map": "View on the map",
+      "add_to_cart": "Add to cart",
+      "product_description": "Product description",
+      "request_warranty_certificate": "Request warranty certificate for the device"
 }

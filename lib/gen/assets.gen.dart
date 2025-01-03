@@ -55,6 +55,15 @@ class $AssetsImgGen {
   AssetGenImage get onboarding3 =>
       const AssetGenImage('assets/img/onboarding3.png');
 
+  /// File path: assets/img/shop.png
+  AssetGenImage get shop => const AssetGenImage('assets/img/shop.png');
+
+  /// File path: assets/img/swiper.png
+  AssetGenImage get swiper => const AssetGenImage('assets/img/swiper.png');
+
+  /// File path: assets/img/wash.png
+  AssetGenImage get wash => const AssetGenImage('assets/img/wash.png');
+
   /// List of all assets
   List<dynamic> get values => [
         alert,
@@ -65,7 +74,70 @@ class $AssetsImgGen {
         logo,
         onboarding1,
         onboarding2,
-        onboarding3
+        onboarding3,
+        shop,
+        swiper,
+        wash
+      ];
+}
+
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/bag-tick.svg
+  String get bagTick => 'assets/svg/bag-tick.svg';
+
+  /// File path: assets/svg/bag.svg
+  String get bag => 'assets/svg/bag.svg';
+
+  /// File path: assets/svg/copy.svg
+  String get copy => 'assets/svg/copy.svg';
+
+  /// File path: assets/svg/favorites.svg
+  String get favorites => 'assets/svg/favorites.svg';
+
+  /// File path: assets/svg/filter.svg
+  String get filter => 'assets/svg/filter.svg';
+
+  /// File path: assets/svg/home.svg
+  String get home => 'assets/svg/home.svg';
+
+  /// File path: assets/svg/location.svg
+  String get location => 'assets/svg/location.svg';
+
+  /// File path: assets/svg/markets.svg
+  String get markets => 'assets/svg/markets.svg';
+
+  /// File path: assets/svg/more.svg
+  String get more => 'assets/svg/more.svg';
+
+  /// File path: assets/svg/search.svg
+  String get search => 'assets/svg/search.svg';
+
+  /// File path: assets/svg/shoppingcart.svg
+  String get shoppingcart => 'assets/svg/shoppingcart.svg';
+
+  /// File path: assets/svg/trash.svg
+  String get trash => 'assets/svg/trash.svg';
+
+  /// File path: assets/svg/user.svg
+  String get user => 'assets/svg/user.svg';
+
+  /// List of all assets
+  List<String> get values => [
+        bagTick,
+        bag,
+        copy,
+        favorites,
+        filter,
+        home,
+        location,
+        markets,
+        more,
+        search,
+        shoppingcart,
+        trash,
+        user
       ];
 }
 
@@ -74,6 +146,7 @@ class Assets {
 
   static const $AssetsLangGen lang = $AssetsLangGen();
   static const $AssetsImgGen img = $AssetsImgGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {

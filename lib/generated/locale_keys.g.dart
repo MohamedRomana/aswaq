@@ -245,8 +245,8 @@ abstract class  LocaleKeys {
   static const anytimeServices = 'anytimeServices';
   static const start_now = 'start_now';
   static const new_registration = 'new_registration';
-  static const firstName = 'firstName';
   static const firstNameValidate = 'firstNameValidate';
+  static const firstName = 'firstName';
   static const lastName = 'lastName';
   static const lastNameValidate = 'lastNameValidate';
   static const visaRequirements = 'visaRequirements';
@@ -339,5 +339,16 @@ abstract class  LocaleKeys {
   static const all_your_data_is_protected_and_secure = 'all_your_data_is_protected_and_secure';
   static const order_now = 'order_now';
   static const agree_to_terms_and_conditions_is_required = 'agree_to_terms_and_conditions_is_required';
+  static const markets = 'markets';
+  static const shopping_carts = 'shopping_carts';
+  static const markets_and_shops = 'markets_and_shops';
+  static const view_all = 'view_all';
+  static const best_products = 'best_products';
+  static const sort_by_most_requested = 'sort_by_most_requested';
+  static const shop_page = 'shop_page';
+  static const view_on_map = 'view_on_map';
+  static const add_to_cart = 'add_to_cart';
+  static const product_description = 'product_description';
+  static const request_warranty_certificate = 'request_warranty_certificate';
 
 }

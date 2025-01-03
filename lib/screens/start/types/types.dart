@@ -5,6 +5,7 @@ import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
 import 'package:aswaq/gen/assets.gen.dart';
 import 'package:aswaq/screens/auth/views/login/login.dart';
+import 'package:aswaq/screens/users/home_layout/home_layout.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +28,8 @@ class Types extends StatelessWidget {
               children: [
                 Image.asset(
                   Assets.img.logo.path,
-                  height: 85.h,
-                  width: 188.w,
+                  height: 86.h,
+                  width: 195.w,
                   fit: BoxFit.cover,
                 ),
                 const CustomLangChoice(),
@@ -52,12 +53,18 @@ class Types extends StatelessWidget {
                     size: 18.sp,
                   ),
                 ),
-                AppText(
-                  top: 33.h,
-                  text: 'الرئيسية',
-                  size: 18.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () =>
+                      AppRouter.navigateAndFinish(context, const HomeLayout()),
+                  child: AppText(
+                    top: 33.h,
+                    text: 'الرئيسية',
+                    size: 18.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),

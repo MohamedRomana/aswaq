@@ -1,9 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
+import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
+import 'package:aswaq/screens/users/home_layout/shopping_carts/shopping_carts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../screens/users/home_layout/home/home.dart';
+import '../../../screens/users/home_layout/more/more.dart';
 import '../../cache/cache_helper.dart';
 import '../../constants/contsants.dart';
 import '../../models/on_boarding_model.dart';
@@ -14,17 +19,45 @@ class AppCubit extends Cubit<AppState> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
-  int bottomNavIndex = 0;
+  int bottomNavIndex = 2;
   List<Widget> bottomNavScreens = [
-    // const Home(),
-    // const Orders(),
-    // const Requirements(),
-    // const More(),
+    const Markets(),
+    const Favorites(),
+    const Home(),
+    const ShoppingCarts(),
+    const More(),
   ];
+
+  double? lat = 0;
+  double? lng = 0;
+  String? address;
+  void changeAddress({required String newAddress}) {
+    address = newAddress;
+    emit(ChangeIndex());
+  }
 
   int paymentIndex = -1;
   void changePaymentIndex({required int index}) {
     paymentIndex = index;
+    emit(ChangeIndex());
+  }
+
+  int count = 1;
+  void increseCount() {
+    count++;
+    emit(ChangeCount());
+  }
+
+  void decreseCount() {
+    if (count > 0) {
+      count--;
+    }
+    emit(ChangeCount());
+  }
+
+  int requestIndex = -1;
+  void changerequestIndex({required int index}) {
+    requestIndex = index;
     emit(ChangeIndex());
   }
 
@@ -64,7 +97,6 @@ class AppCubit extends Cubit<AppState> {
   }
 
   int changeTermsIndex = -1;
-
   void changeTermsIndexs({required int index}) {
     changeTermsIndex = index;
 
@@ -106,118 +138,6 @@ class AppCubit extends Cubit<AppState> {
 
   void removePassportImage() {
     passportImage.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> lastVisaImage = [];
-  Future<void> getLastVisaImage() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    lastVisaImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removeLastVisaImage() {
-    lastVisaImage.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> originalPassportImage = [];
-  Future<void> getoriginalPassportImage() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    originalPassportImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removeoriginalPassportImage() {
-    originalPassportImage.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> personalImage = [];
-  Future<void> getpersonalImage() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    personalImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removepersonalImage() {
-    personalImage.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> personalImage2 = [];
-  Future<void> getpersonalImage2() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    personalImage2 = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removepersonalImage2() {
-    personalImage2.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> cashImage = [];
-  Future<void> getcashImage() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    cashImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removecashImage() {
-    cashImage.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> originalSalaryImage = [];
-  Future<void> getoriginalSalaryImage() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    originalSalaryImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removeoriginalSalaryImage() {
-    originalSalaryImage.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> identityImage = [];
-  Future<void> getIdentityImage() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    identityImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removeIdentityImage() {
-    identityImage.clear();
     emit(RemoveImageSuccess());
   }
 

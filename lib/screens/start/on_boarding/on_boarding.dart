@@ -106,9 +106,9 @@ class _OnBoardingState extends State<OnBoarding> {
                       },
                     ),
                     PositionedDirectional(
-                      start: 150.w,
-                      end: 150.w,
-                      bottom: 48.h,
+                      bottom: 50.h,
+                      end: 20.w,
+                      start: 20.w,
                       child: DotsIndicator(
                         dotsCount: pagesList.length,
                         position: currPage,

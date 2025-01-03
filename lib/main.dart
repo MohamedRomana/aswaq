@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'core/location/location_helper.dart';
 import 'screens/auth/data/auth_cubit.dart';
 import 'core/cache/cache_helper.dart';
 import 'core/service/bloc_observer.dart';
@@ -22,6 +23,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // await NotificationHelper.init();
+  LocationHelper.determinePosition();
   await EasyLocalization.ensureInitialized();
   debugPrint("userId is ${CacheHelper.getUserId()}");
 

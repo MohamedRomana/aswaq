@@ -103,7 +103,7 @@ class CustomUserRegisterFields extends StatelessWidget {
           AppText(
             start: 38.w,
             bottom: 8.h,
-            text: LocaleKeys.email.tr(),
+            text: LocaleKeys.chooseCity.tr(),
             color: Colors.black,
             fontWeight: FontWeight.w400,
             size: 14.sp,
@@ -155,7 +155,7 @@ class CustomUserRegisterFields extends StatelessWidget {
             },
             validate: (value) {
               if (value!.isEmpty) {
-                return LocaleKeys.yourEmailValidate.tr();
+                return LocaleKeys.cityValidation.tr();
               } else {
                 return null;
               }

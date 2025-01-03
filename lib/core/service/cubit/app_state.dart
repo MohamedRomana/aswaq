@@ -17,6 +17,8 @@ final class Timeoutt extends AppState {}
 
 final class GetIntroLoading extends AppState {}
 
+final class ChangeCount extends AppState {}
+
 final class GetIntroSuccess extends AppState {}
 
 final class ChangeBottomNav extends AppState {}
