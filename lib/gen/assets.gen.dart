@@ -25,6 +25,10 @@ class $AssetsLangGen {
 class $AssetsImgGen {
   const $AssetsImgGen();
 
+  /// File path: assets/img/Ellipse 234.png
+  AssetGenImage get ellipse234 =>
+      const AssetGenImage('assets/img/Ellipse 234.png');
+
   /// File path: assets/img/alert.json
   String get alert => 'assets/img/alert.json';
 
@@ -66,6 +70,7 @@ class $AssetsImgGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        ellipse234,
         alert,
         emptyorder,
         emptysearch,
@@ -90,8 +95,17 @@ class $AssetsSvgGen {
   /// File path: assets/svg/bag.svg
   String get bag => 'assets/svg/bag.svg';
 
+  /// File path: assets/svg/bank.svg
+  String get bank => 'assets/svg/bank.svg';
+
+  /// File path: assets/svg/book.svg
+  String get book => 'assets/svg/book.svg';
+
   /// File path: assets/svg/copy.svg
   String get copy => 'assets/svg/copy.svg';
+
+  /// File path: assets/svg/edit.svg
+  String get edit => 'assets/svg/edit.svg';
 
   /// File path: assets/svg/favorites.svg
   String get favorites => 'assets/svg/favorites.svg';
@@ -99,23 +113,71 @@ class $AssetsSvgGen {
   /// File path: assets/svg/filter.svg
   String get filter => 'assets/svg/filter.svg';
 
+  /// File path: assets/svg/global.svg
+  String get global => 'assets/svg/global.svg';
+
   /// File path: assets/svg/home.svg
   String get home => 'assets/svg/home.svg';
+
+  /// File path: assets/svg/iconcard.svg
+  String get iconcard => 'assets/svg/iconcard.svg';
+
+  /// File path: assets/svg/import.svg
+  String get import => 'assets/svg/import.svg';
 
   /// File path: assets/svg/location.svg
   String get location => 'assets/svg/location.svg';
 
+  /// File path: assets/svg/map.svg
+  String get map => 'assets/svg/map.svg';
+
   /// File path: assets/svg/markets.svg
   String get markets => 'assets/svg/markets.svg';
+
+  /// File path: assets/svg/menu.svg
+  String get menu => 'assets/svg/menu.svg';
+
+  /// File path: assets/svg/messages.svg
+  String get messages => 'assets/svg/messages.svg';
 
   /// File path: assets/svg/more.svg
   String get more => 'assets/svg/more.svg';
 
+  /// File path: assets/svg/notification-bing.svg
+  String get notificationBing => 'assets/svg/notification-bing.svg';
+
+  /// File path: assets/svg/output.svg
+  String get output => 'assets/svg/output.svg';
+
+  /// File path: assets/svg/people.svg
+  String get people => 'assets/svg/people.svg';
+
+  /// File path: assets/svg/profile.svg
+  String get profile => 'assets/svg/profile.svg';
+
   /// File path: assets/svg/search.svg
   String get search => 'assets/svg/search.svg';
 
+  /// File path: assets/svg/share.svg
+  String get share => 'assets/svg/share.svg';
+
   /// File path: assets/svg/shoppingcart.svg
   String get shoppingcart => 'assets/svg/shoppingcart.svg';
+
+  /// File path: assets/svg/sms.svg
+  String get sms => 'assets/svg/sms.svg';
+
+  /// File path: assets/svg/star.svg
+  String get star => 'assets/svg/star.svg';
+
+  /// File path: assets/svg/task.svg
+  String get task => 'assets/svg/task.svg';
+
+  /// File path: assets/svg/text.svg
+  String get text => 'assets/svg/text.svg';
+
+  /// File path: assets/svg/trak.svg
+  String get trak => 'assets/svg/trak.svg';
 
   /// File path: assets/svg/trash.svg
   String get trash => 'assets/svg/trash.svg';
@@ -127,15 +189,34 @@ class $AssetsSvgGen {
   List<String> get values => [
         bagTick,
         bag,
+        bank,
+        book,
         copy,
+        edit,
         favorites,
         filter,
+        global,
         home,
+        iconcard,
+        import,
         location,
+        map,
         markets,
+        menu,
+        messages,
         more,
+        notificationBing,
+        output,
+        people,
+        profile,
         search,
+        share,
         shoppingcart,
+        sms,
+        star,
+        task,
+        text,
+        trak,
         trash,
         user
       ];

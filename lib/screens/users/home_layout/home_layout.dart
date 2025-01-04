@@ -44,22 +44,21 @@ class HomeLayout extends StatelessWidget {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             floatingActionButton: Container(
+              height: 73.h,
               padding: EdgeInsets.only(top: 3.h),
-              clipBehavior: Clip.antiAlias,
-              height: 60.h,
-              width: double.infinity,
-              margin: EdgeInsets.all(16.r),
+              margin: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
               decoration: BoxDecoration(
-                  color: const Color(0xffF3F3F3),
-                  borderRadius: BorderRadius.circular(5.r),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 5.r,
-                      spreadRadius: 1.r,
-                      color: Colors.grey,
-                      offset: Offset(0, 5.r),
-                    )
-                  ]),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 5.r,
+                    spreadRadius: 1.r,
+                    offset: Offset(0, 5.r),
+                  ),
+                ],
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -216,10 +215,15 @@ class HomeLayout extends StatelessWidget {
                             ),
                           ),
                         ),
-                        AppText(
-                          text: LocaleKeys.shopping_carts.tr(),
-                          color: Colors.black,
-                          size: 11.sp,
+                        SizedBox(
+                          width: 60.w,
+                          child: AppText(
+                            textAlign: TextAlign.center,
+                            lines: 2,
+                            text: LocaleKeys.shopping_carts.tr(),
+                            color: Colors.black,
+                            size: 11.sp,
+                          ),
                         ),
                       ],
                     ),

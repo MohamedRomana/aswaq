@@ -42,6 +42,18 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeIndex());
   }
 
+  int paymentlocatIndex = -1;
+  void changePaymentlocatIndex({required int index}) {
+    paymentlocatIndex = index;
+    emit(ChangeIndex());
+  }
+
+  int shipIndex = -1;
+  void changeShipIndex({required int index}) {
+    shipIndex = index;
+    emit(ChangeIndex());
+  }
+
   int count = 1;
   void increseCount() {
     count++;

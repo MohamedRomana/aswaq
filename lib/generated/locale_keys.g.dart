@@ -350,5 +350,34 @@ abstract class  LocaleKeys {
   static const add_to_cart = 'add_to_cart';
   static const product_description = 'product_description';
   static const request_warranty_certificate = 'request_warranty_certificate';
+  static const shop_details_number = 'shop_details_number';
+  static const total_value = 'total_value';
+  static const complete_order = 'complete_order';
+  static const bank_transfer = 'bank_transfer';
+  static const order_shipping = 'order_shipping';
+  static const pickup_from_site = 'pickup_from_site';
+  static const shipping_method = 'shipping_method';
+  static const ship_to_another_location = 'ship_to_another_location';
+  static const set_location_on_map = 'set_location_on_map';
+  static const inclusive_of_vat = 'inclusive_of_vat';
+  static const payment_confirmation = 'payment_confirmation';
+  static const ship_to_my_location = 'ship_to_my_location';
+  static const add_payment_method = 'add_payment_method';
+  static const track_order_status = 'track_order_status';
+  static const order_contents = 'order_contents';
+  static const order_details = 'order_details';
+  static const shipping_fees = 'shipping_fees';
+  static const neighborhood_or_street_name = 'neighborhood_or_street_name';
+  static const landmarks_near_area = 'landmarks_near_area';
+  static const region_or_governorate = 'region_or_governorate';
+  static const support_and_complaints = 'support_and_complaints';
+  static const frequently_asked_questions = 'frequently_asked_questions';
+  static const share_app = 'share_app';
+  static const delete_product_confirmation = 'delete_product_confirmation';
+  static const confirm_deletion = 'confirm_deletion';
+  static const cancel_deletion = 'cancel_deletion';
+  static const certificates = 'certificates';
+  static const order_returns = 'order_returns';
+  static const chats = 'chats';
 
 }
