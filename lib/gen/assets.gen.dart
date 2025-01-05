@@ -22,6 +22,22 @@ class $AssetsLangGen {
   List<String> get values => [ar, en];
 }
 
+class $AssetsFontsGen {
+  const $AssetsFontsGen();
+
+  /// File path: assets/fonts/Norsal-Bold.otf
+  String get norsalBold => 'assets/fonts/Norsal-Bold.otf';
+
+  /// File path: assets/fonts/Norsal-Light.otf
+  String get norsalLight => 'assets/fonts/Norsal-Light.otf';
+
+  /// File path: assets/fonts/Norsal-Medium.otf
+  String get norsalMedium => 'assets/fonts/Norsal-Medium.otf';
+
+  /// List of all assets
+  List<String> get values => [norsalBold, norsalLight, norsalMedium];
+}
+
 class $AssetsImgGen {
   const $AssetsImgGen();
 
@@ -104,6 +120,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/copy.svg
   String get copy => 'assets/svg/copy.svg';
 
+  /// File path: assets/svg/done3.svg
+  String get done3 => 'assets/svg/done3.svg';
+
   /// File path: assets/svg/edit.svg
   String get edit => 'assets/svg/edit.svg';
 
@@ -121,6 +140,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/iconcard.svg
   String get iconcard => 'assets/svg/iconcard.svg';
+
+  /// File path: assets/svg/id.svg
+  String get id => 'assets/svg/id.svg';
 
   /// File path: assets/svg/import.svg
   String get import => 'assets/svg/import.svg';
@@ -142,6 +164,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/more.svg
   String get more => 'assets/svg/more.svg';
+
+  /// File path: assets/svg/moresquare.svg
+  String get moresquare => 'assets/svg/moresquare.svg';
 
   /// File path: assets/svg/notification-bing.svg
   String get notificationBing => 'assets/svg/notification-bing.svg';
@@ -192,12 +217,14 @@ class $AssetsSvgGen {
         bank,
         book,
         copy,
+        done3,
         edit,
         favorites,
         filter,
         global,
         home,
         iconcard,
+        id,
         import,
         location,
         map,
@@ -205,6 +232,7 @@ class $AssetsSvgGen {
         menu,
         messages,
         more,
+        moresquare,
         notificationBing,
         output,
         people,
@@ -226,6 +254,7 @@ class Assets {
   Assets._();
 
   static const $AssetsLangGen lang = $AssetsLangGen();
+  static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsImgGen img = $AssetsImgGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
 }

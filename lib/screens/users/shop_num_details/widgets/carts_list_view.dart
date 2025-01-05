@@ -74,7 +74,7 @@ class CartsListView extends StatelessWidget {
                     child: AppText(
                       text: 'اسم المنتج',
                       size: 16.sp,
-                      fontWeight: FontWeight.bold,
+                      family: Assets.fonts.norsalBold,
                     ),
                   ),
                   SizedBox(
@@ -135,7 +135,7 @@ class CartsListView extends StatelessWidget {
                       end: 11.w,
                       text: AppCubit.get(context).count.toString(),
                       size: 16.sp,
-                      fontWeight: FontWeight.bold,
+                      family: Assets.fonts.norsalBold,
                     ),
                     InkWell(
                       splashColor: Colors.transparent,

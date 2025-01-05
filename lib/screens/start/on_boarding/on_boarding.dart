@@ -83,7 +83,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                     text: 'عنوان تجريبي',
                                     size: 30.sp,
                                     color: Colors.black,
-                                    fontWeight: FontWeight.bold,
+                                    family: Assets.fonts.norsalBold,
                                   ),
                                   AppText(
                                     text: AppCubit.get(context)

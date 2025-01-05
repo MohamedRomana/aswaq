@@ -8,6 +8,7 @@ import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_input.dart';
 import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../gen/fonts.gen.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../data/auth_cubit.dart';
 import '../reset_pass/reset_pass.dart';
 import '../widgets/auth_header.dart';
@@ -36,7 +37,7 @@ class ForgetPass extends StatelessWidget {
                   start: 26.w,
                   text: LocaleKeys.phone.tr(),
                   size: 24.sp,
-                  fontWeight: FontWeight.bold,
+                  family: Assets.fonts.norsalBold,
                 ),
               ),
               Align(

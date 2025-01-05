@@ -74,8 +74,10 @@ class ShopProductsGrideView extends StatelessWidget {
                       onTap: () {
                         showModalBottomSheet(
                           context: context,
+                          isScrollControlled: true,
                           backgroundColor: Colors.white,
-                          builder: (context) => const CustomProductDetails(),
+                          builder: (context) =>
+                              const ProductDetailsBottomSheet(),
                         );
                       },
                       child: Stack(
@@ -108,7 +110,7 @@ class ShopProductsGrideView extends StatelessWidget {
                                   start: 10.w,
                                   text: 'اسم المنتج',
                                   size: 11.sp,
-                                  fontWeight: FontWeight.bold,
+                                  family: Assets.fonts.norsalBold,
                                 ),
                                 AppText(
                                   top: 5.h,

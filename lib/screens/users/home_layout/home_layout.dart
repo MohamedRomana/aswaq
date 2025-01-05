@@ -46,7 +46,7 @@ class HomeLayout extends StatelessWidget {
             floatingActionButton: Container(
               height: 73.h,
               padding: EdgeInsets.only(top: 3.h),
-              margin: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10.r),

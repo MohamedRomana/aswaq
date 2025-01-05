@@ -78,6 +78,7 @@ flutter:
   assets:
     - assets/img/
     - assets/svg/
+    - assets/fonts/
     - assets/Lang/ar.json
     - assets/Lang/en.json
 

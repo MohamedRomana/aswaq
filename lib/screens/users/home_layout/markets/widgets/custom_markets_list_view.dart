@@ -17,7 +17,7 @@ class CustomMarketsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       padding:
-          EdgeInsetsDirectional.only(bottom: 160.h, start: 16.w, end: 16.w),
+          EdgeInsetsDirectional.only(bottom: 130.h, start: 16.w, end: 16.w),
       physics: const BouncingScrollPhysics(),
       itemCount: 10,
       separatorBuilder: (context, index) => SizedBox(
@@ -69,7 +69,7 @@ class CustomMarketsListView extends StatelessWidget {
                             text: 'اسم المحل',
                             color: Colors.black,
                             size: 16.sp,
-                            fontWeight: FontWeight.bold,
+                            family: Assets.fonts.norsalBold,
                           ),
                         ),
                         Icon(

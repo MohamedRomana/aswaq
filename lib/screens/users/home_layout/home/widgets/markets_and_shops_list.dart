@@ -26,7 +26,7 @@ class MarketsAndShopsListView extends StatelessWidget {
           start: 21.w,
           text: LocaleKeys.markets_and_shops.tr(),
           size: 20.sp,
-          fontWeight: FontWeight.bold,
+          family: Assets.fonts.norsalBold,
         ),
         ListView.separated(
           padding: EdgeInsets.all(16.r),
@@ -82,7 +82,7 @@ class MarketsAndShopsListView extends StatelessWidget {
                                 text: 'اسم المحل',
                                 color: Colors.black,
                                 size: 16.sp,
-                                fontWeight: FontWeight.bold,
+                                family: Assets.fonts.norsalBold,
                               ),
                             ),
                             Icon(
@@ -149,7 +149,7 @@ class MarketsAndShopsListView extends StatelessWidget {
               text: LocaleKeys.view_all.tr(),
               color: AppColors.primary,
               size: 18.sp,
-              fontWeight: FontWeight.bold,
+              family: Assets.fonts.norsalBold,
             ),
           ),
         ),

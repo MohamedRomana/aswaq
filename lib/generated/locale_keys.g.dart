@@ -245,8 +245,8 @@ abstract class  LocaleKeys {
   static const anytimeServices = 'anytimeServices';
   static const start_now = 'start_now';
   static const new_registration = 'new_registration';
-  static const firstNameValidate = 'firstNameValidate';
   static const firstName = 'firstName';
+  static const firstNameValidate = 'firstNameValidate';
   static const lastName = 'lastName';
   static const lastNameValidate = 'lastNameValidate';
   static const visaRequirements = 'visaRequirements';
@@ -379,5 +379,27 @@ abstract class  LocaleKeys {
   static const certificates = 'certificates';
   static const order_returns = 'order_returns';
   static const chats = 'chats';
+  static const search_term = 'search_term';
+  static const enter_search_term = 'enter_search_term';
+  static const all_certificates = 'all_certificates';
+  static const home_certificates = 'home_certificates';
+  static const work_certificates = 'work_certificates';
+  static const add_new_category = 'add_new_category';
+  static const add_certificate = 'add_certificate';
+  static const section = 'section';
+  static const enter_section = 'enter_section';
+  static const insert_certificate_into_category = 'insert_certificate_into_category';
+  static const choose_appropriate_category = 'choose_appropriate_category';
+  static const warranty_name = 'warranty_name';
+  static const warranty_duration = 'warranty_duration';
+  static const transfer_certificate = 'transfer_certificate';
+  static const view_certificate = 'view_certificate';
+  static const transfer_warranty_certificate = 'transfer_warranty_certificate';
+  static const beneficiary_name = 'beneficiary_name';
+  static const identity_number = 'identity_number';
+  static const certificate_transfer_request_status = 'certificate_transfer_request_status';
+  static const recipient_name = 'recipient_name';
+  static const request_rejected_due_to_invalid_data = 'request_rejected_due_to_invalid_data';
+  static const warranty_certificate = 'warranty_certificate';
 
 }

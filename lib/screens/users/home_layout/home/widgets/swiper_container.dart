@@ -9,21 +9,36 @@ class SwiperContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 150.h,
+      width: 343.w,
+      margin: EdgeInsetsDirectional.only(bottom: 20.h, start: 20.w, end: 20.w),
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.all(Radius.circular(10.r)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 5.r,
+            spreadRadius: 1.r,
+            offset: Offset(0, 5.r),
+          ),
+        ],
+      ),
       child: Swiper(
-        scrollDirection: Axis.horizontal,
-        itemCount: 3,
-        curve: Curves.fastOutSlowIn,
-        itemBuilder: (context, index) => ClipRRect(
-          borderRadius: BorderRadius.circular(20.r),
-          child: Image.asset(Assets.img.swiper.path),
+        itemBuilder: (context, index) => Image.asset(
+          Assets.img.swiper.path,
+          fit: BoxFit.cover,
         ),
         autoplay: true,
+        itemCount: 3,
+        scrollDirection: Axis.horizontal,
+        curve: Curves.fastOutSlowIn,
         pagination: SwiperPagination(
           alignment: Alignment.bottomCenter,
           builder: DotSwiperPaginationBuilder(
-            color: Colors.white,
+            color: const Color(0xffB3B3B3),
             activeColor: AppColors.primary,
             size: 8.r,
             activeSize: 11.r,

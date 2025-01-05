@@ -49,7 +49,7 @@ class Types extends StatelessWidget {
                   child: AppText(
                     text: 'تأكيد',
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    family: Assets.fonts.norsalBold,
                     size: 18.sp,
                   ),
                 ),
@@ -63,7 +63,7 @@ class Types extends StatelessWidget {
                     text: 'الرئيسية',
                     size: 18.sp,
                     color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                    family: Assets.fonts.norsalBold,
                   ),
                 ),
               ],

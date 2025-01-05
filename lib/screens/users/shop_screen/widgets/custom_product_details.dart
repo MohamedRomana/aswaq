@@ -13,8 +13,8 @@ import '../../../../core/widgets/app_text.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 
-class CustomProductDetails extends StatelessWidget {
-  const CustomProductDetails({super.key});
+class ProductDetailsBottomSheet extends StatelessWidget {
+  const ProductDetailsBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class CustomProductDetails extends StatelessWidget {
                           child: AppText(
                             text: 'اسم المنتج',
                             size: 19.sp,
-                            fontWeight: FontWeight.bold,
+                            family: Assets.fonts.norsalBold,
                           ),
                         ),
                         SizedBox(
@@ -82,7 +82,7 @@ class CustomProductDetails extends StatelessWidget {
                         text: '‏350 ${LocaleKeys.sar.tr()}',
                         color: AppColors.primary,
                         size: 22.sp,
-                        fontWeight: FontWeight.bold,
+                        family: Assets.fonts.norsalBold,
                       ),
                     ),
                   ],
@@ -185,7 +185,7 @@ class CustomProductDetails extends StatelessWidget {
                           end: 11.w,
                           text: AppCubit.get(context).count.toString(),
                           size: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          family: Assets.fonts.norsalBold,
                         ),
                         InkWell(
                           splashColor: Colors.transparent,
@@ -239,7 +239,7 @@ class CustomProductDetails extends StatelessWidget {
                               text: LocaleKeys.add_to_cart.tr(),
                               color: Colors.white,
                               size: 16.sp,
-                              fontWeight: FontWeight.bold,
+                              family: Assets.fonts.norsalBold,
                             ),
                           ],
                         ),

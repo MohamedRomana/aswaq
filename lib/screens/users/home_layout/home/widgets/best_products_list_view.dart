@@ -21,7 +21,7 @@ class BestProductsListView extends StatelessWidget {
           bottom: 11.h,
           text: LocaleKeys.best_products.tr(),
           size: 20.sp,
-          fontWeight: FontWeight.bold,
+          family: Assets.fonts.norsalBold,
         ),
         SizedBox(
           height: 248.h,
@@ -65,7 +65,7 @@ class BestProductsListView extends StatelessWidget {
                                 text: 'اسم المنتج',
                                 color: Colors.white,
                                 size: 11.sp,
-                                fontWeight: FontWeight.bold,
+                                family: Assets.fonts.norsalBold,
                               ),
                               AppText(
                                 top: 5.h,

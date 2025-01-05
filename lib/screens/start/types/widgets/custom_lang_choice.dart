@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../gen/assets.gen.dart';
 
 class CustomLangChoice extends StatelessWidget {
   const CustomLangChoice({super.key});
@@ -21,7 +22,7 @@ class CustomLangChoice extends StatelessWidget {
               text: 'اختر لغة التطبيق',
               size: 30.sp,
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              family: Assets.fonts.norsalBold,
             ),
             InkWell(
               splashColor: Colors.transparent,
@@ -47,7 +48,7 @@ class CustomLangChoice extends StatelessWidget {
                           ? Colors.black
                           : Colors.grey,
                       size: 14.sp,
-                      fontWeight: FontWeight.bold,
+                      family: Assets.fonts.norsalBold,
                     ),
                     Container(
                       height: 22.w,
@@ -97,7 +98,7 @@ class CustomLangChoice extends StatelessWidget {
                           ? Colors.black
                           : Colors.grey,
                       size: 14.sp,
-                      fontWeight: FontWeight.bold,
+                      family: Assets.fonts.norsalBold,
                     ),
                     Container(
                       height: 22.w,

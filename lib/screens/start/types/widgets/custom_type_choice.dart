@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../gen/assets.gen.dart';
 
 class CustomTypeChoice extends StatelessWidget {
   const CustomTypeChoice({super.key});
@@ -20,7 +21,7 @@ class CustomTypeChoice extends StatelessWidget {
               text: 'اختر نوع الحساب',
               size: 30.sp,
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              family: Assets.fonts.norsalBold,
             ),
             InkWell(
               splashColor: Colors.transparent,
@@ -46,7 +47,7 @@ class CustomTypeChoice extends StatelessWidget {
                           ? Colors.black
                           : Colors.grey,
                       size: 14.sp,
-                      fontWeight: FontWeight.bold,
+                      family: Assets.fonts.norsalBold,
                     ),
                     Container(
                       height: 22.w,
@@ -96,7 +97,7 @@ class CustomTypeChoice extends StatelessWidget {
                           ? Colors.black
                           : Colors.grey,
                       size: 14.sp,
-                      fontWeight: FontWeight.bold,
+                      family: Assets.fonts.norsalBold,
                     ),
                     Container(
                       height: 22.w,

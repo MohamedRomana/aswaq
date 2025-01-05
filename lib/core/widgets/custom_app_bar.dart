@@ -1,5 +1,6 @@
 import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/screens/users/profile/profile.dart';
+import 'package:aswaq/screens/users/search/search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,11 +81,18 @@ class CustomAppBar extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      Assets.svg.search,
-                      height: 24.w,
-                      width: 24.w,
-                      fit: BoxFit.cover,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        AppRouter.navigateTo(context, const Search());
+                      },
+                      child: SvgPicture.asset(
+                        Assets.svg.search,
+                        height: 24.w,
+                        width: 24.w,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     SizedBox(width: 6.w),
                     SvgPicture.asset(
@@ -171,11 +179,18 @@ class CustomAppBar extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 6.w),
-                          SvgPicture.asset(
-                            Assets.svg.search,
-                            height: 24.w,
-                            width: 24.w,
-                            fit: BoxFit.cover,
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              AppRouter.navigateTo(context, const Search());
+                            },
+                            child: SvgPicture.asset(
+                              Assets.svg.search,
+                              height: 24.w,
+                              width: 24.w,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ],
                       ),
@@ -191,20 +206,30 @@ class CustomAppBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppText(
-                    text: text!,
-                    size: 20.sp,
-                    fontWeight: FontWeight.bold,
+                  SizedBox(
+                    width: 260.w,
+                    child: AppText(
+                      text: text!,
+                      size: 20.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Row(
                     children: [
                       if (isSearch!) ...{
-                        SvgPicture.asset(
-                          Assets.svg.search,
-                          height: 24.w,
-                          width: 24.w,
-                          fit: BoxFit.cover,
-                        ),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            AppRouter.navigateTo(context, const Search());
+                          },
+                          child: SvgPicture.asset(
+                            Assets.svg.search,
+                            height: 24.w,
+                            width: 24.w,
+                            fit: BoxFit.cover,
+                          ),
+                        )
                       } else ...{
                         const SizedBox.shrink()
                       },

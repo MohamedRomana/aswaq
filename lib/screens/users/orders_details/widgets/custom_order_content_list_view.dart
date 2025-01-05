@@ -67,7 +67,7 @@ class CustomOrderContentListView extends StatelessWidget {
                     child: AppText(
                       text: 'اسم المنتج',
                       size: 16.sp,
-                      fontWeight: FontWeight.bold,
+                      family: Assets.fonts.norsalBold,
                     ),
                   ),
                   SizedBox(

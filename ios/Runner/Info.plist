@@ -53,6 +53,5 @@
 	<string>Need to upload profile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need to upload profile picture</string>
-	<key>LSApplicationQueriesSchemes</key>
 </dict>
 </plist>

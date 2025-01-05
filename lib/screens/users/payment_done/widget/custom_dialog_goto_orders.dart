@@ -33,7 +33,7 @@ class CustomDialogGoToOrders extends StatelessWidget {
         ),
         AppButton(
           onPressed: () {
-            AppRouter.navigateTo(context, const Orders());
+            AppRouter.navigateAndPop(context, const Orders());
           },
           radius: 10.r,
           borderColor: AppColors.primary,
