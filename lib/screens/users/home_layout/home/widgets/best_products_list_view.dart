@@ -70,18 +70,26 @@ class BestProductsListView extends StatelessWidget {
                             start: 16.w,
                             child: Column(
                               children: [
-                                AppText(
-                                  start: 10.w,
-                                  text: 'اسم المنتج',
-                                  color: Colors.white,
-                                  size: 11.sp,
-                                  family: Assets.fonts.norsalBold,
+                                SizedBox(
+                                  width: 150.w,
+                                  child: AppText(
+                                    textAlign: TextAlign.start,
+                                    start: 10.w,
+                                    text: 'اسم المنتج',
+                                    color: Colors.white,
+                                    size: 11.sp,
+                                    family: Assets.fonts.norsalBold,
+                                  ),
                                 ),
-                                AppText(
-                                  top: 5.h,
-                                  text: 'اسم القسم',
-                                  color: AppColors.primary,
-                                  size: 9.sp,
+                                SizedBox(
+                                  width: 150.w,
+                                  child: AppText(
+                                    textAlign: TextAlign.start,
+                                    top: 5.h,
+                                    text: 'اسم القسم',
+                                    color: AppColors.primary,
+                                    size: 9.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -116,10 +124,14 @@ class BestProductsListView extends StatelessWidget {
                           PositionedDirectional(
                             bottom: 12.h,
                             end: 13.w,
-                            child: AppText(
-                              text: '175 ${LocaleKeys.sar.tr()}',
-                              size: 12.sp,
-                              color: AppColors.primary,
+                            child: SizedBox(
+                              width: 150.w,
+                              child: AppText(
+                                textAlign: TextAlign.end,
+                                text: '157 ${LocaleKeys.sar.tr()}',
+                                size: 12.sp,
+                                color: AppColors.primary,
+                              ),
                             ),
                           ),
                         ],
