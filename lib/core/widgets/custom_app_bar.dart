@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/screens/users/profile/profile.dart';
 import 'package:aswaq/screens/users/search/search.dart';
@@ -76,6 +78,7 @@ class CustomAppBar extends StatelessWidget {
                       ),
                       SizedBox(width: 6.w),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppText(
                             text: LocaleKeys.welcome_dear_customer.tr(),
