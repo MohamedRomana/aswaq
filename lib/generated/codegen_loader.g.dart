@@ -414,7 +414,12 @@ class CodegenLoader extends AssetLoader{
   "certificate_transfer_request_status": "Certificate transfer request status",
   "recipient_name": "Recipient name",
   "request_rejected_due_to_invalid_data": "Your request has been rejected due to invalid data",
-  "warranty_certificate": "Warranty certificate"
+  "warranty_certificate": "Warranty certificate",
+  "previous_chats": "Previous chats",
+  "current_chats": "Current chats",
+  "order_number": "Order number",
+  "reason_for_returning_product": "Reason for returning the product",
+  "chat_with": "Chat with"
 };
 static const Map<String,dynamic> ar = {
   "chooseLang": "اختر اللغة المناسبة",
@@ -816,7 +821,12 @@ static const Map<String,dynamic> ar = {
   "certificate_transfer_request_status": "حالة طلب نقل الشهادة",
   "recipient_name": "اسم المستفيد",
   "request_rejected_due_to_invalid_data": "تم رفض طلبك لعدم صحة البيانات",
-  "warranty_certificate": "شهادة ضمان"
+  "warranty_certificate": "شهادة ضمان",
+  "previous_chats": "المحادثات السابقة",
+  "current_chats": "المحادثات الحالية",
+  "order_number": "رقم الطلب",
+  "reason_for_returning_product": "سبب استرجاع المنتج",
+  "chat_with": "محادثة مع"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};
 }

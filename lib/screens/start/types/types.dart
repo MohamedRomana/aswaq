@@ -30,7 +30,7 @@ class Types extends StatelessWidget {
                   Assets.img.logo.path,
                   height: 86.h,
                   width: 195.w,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
                 const CustomLangChoice(),
                 const CustomTypeChoice(),
@@ -56,8 +56,10 @@ class Types extends StatelessWidget {
                 InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onTap: () =>
-                      AppRouter.navigateAndFinish(context, const HomeLayout()),
+                  onTap: () {
+                    AppCubit.get(context).changebottomNavIndex(2);
+                    AppRouter.navigateAndFinish(context, const HomeLayout());
+                  },
                   child: AppText(
                     top: 33.h,
                     text: 'الرئيسية',

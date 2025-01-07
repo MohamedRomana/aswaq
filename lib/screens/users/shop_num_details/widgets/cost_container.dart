@@ -36,8 +36,9 @@ class CostContainer extends StatelessWidget {
                 size: 14.sp,
               ),
               SizedBox(
-                width: 70.w,
+                width: 150.w,
                 child: AppText(
+                  textAlign: TextAlign.end,
                   text: '‏280  ${LocaleKeys.sar.tr()}',
                   size: 14.sp,
                   color: AppColors.primary,
@@ -54,12 +55,14 @@ class CostContainer extends StatelessWidget {
                 size: 14.sp,
               ),
               SizedBox(
-                  width: 70.w,
-                  child: AppText(
-                    text: '‏280  ${LocaleKeys.sar.tr()}',
-                    size: 14.sp,
-                    color: AppColors.primary,
-                  )),
+                width: 150.w,
+                child: AppText(
+                  textAlign: TextAlign.end,
+                  text: '‏280  ${LocaleKeys.sar.tr()}',
+                  size: 14.sp,
+                  color: AppColors.primary,
+                ),
+              ),
             ],
           ),
         ],

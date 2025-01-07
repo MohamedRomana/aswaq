@@ -12,7 +12,7 @@ class SwiperContainer extends StatelessWidget {
     return Container(
       height: 150.h,
       width: 343.w,
-      margin: EdgeInsetsDirectional.only(bottom: 20.h, start: 20.w, end: 20.w),
+      margin: EdgeInsetsDirectional.only(top: 20.h, bottom: 20.h, start: 20.w, end: 20.w),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: Colors.transparent,

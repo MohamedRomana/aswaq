@@ -32,7 +32,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         return CustomBottomNav(
           key: scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(100.h),
+            preferredSize: Size.fromHeight(60.h),
             child: CustomAppBar(
               text: LocaleKeys.privacy_policy.tr(),
             ),
@@ -50,9 +50,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         Image.asset(
                           Assets.img.logo.path,
                           color: AppColors.primary,
-                          height: 105.h,
+                          height: 115.h,
                           width: 240.w,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                         SizedBox(height: 20.h),
                         AppText(

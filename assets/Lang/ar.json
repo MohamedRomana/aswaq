@@ -398,6 +398,10 @@
     "certificate_transfer_request_status": "حالة طلب نقل الشهادة",
     "recipient_name": "اسم المستفيد",
     "request_rejected_due_to_invalid_data": "تم رفض طلبك لعدم صحة البيانات",
-    "warranty_certificate": "شهادة ضمان"
-
+    "warranty_certificate": "شهادة ضمان",
+    "previous_chats": "المحادثات السابقة",
+    "current_chats": "المحادثات الحالية",
+    "order_number": "رقم الطلب",
+    "reason_for_returning_product": "سبب استرجاع المنتج",
+    "chat_with": "محادثة مع"
 }

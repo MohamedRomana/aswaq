@@ -18,7 +18,7 @@ class ShoppingCarts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.h),
+        preferredSize: Size.fromHeight(60.h),
         child: CustomAppBar(
           isHomeLayout: true,
           text: LocaleKeys.shopping_carts.tr(),
@@ -26,7 +26,6 @@ class ShoppingCarts extends StatelessWidget {
       ),
       body: ListView.separated(
         padding: EdgeInsetsDirectional.only(
-          top: 16.h,
           start: 16.w,
           end: 16.w,
           bottom: 140.h,
@@ -89,7 +88,7 @@ class ShoppingCarts extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: 170.w,
-                              child:  AppText(
+                              child: AppText(
                                 text: 'محل رقم 1',
                                 size: 16,
                                 family: Assets.fonts.norsalBold,
@@ -120,8 +119,9 @@ class ShoppingCarts extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 60.w,
+                              width: 110.w,
                               child: AppText(
+                                textAlign: TextAlign.end,
                                 text: '‏1705 ${LocaleKeys.sar.tr()}',
                                 size: 14.sp,
                                 color: AppColors.primary,

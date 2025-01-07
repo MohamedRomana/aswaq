@@ -108,3 +108,21 @@ final class PrivacyPolicyFailure extends AppState {
   final String error;
   PrivacyPolicyFailure({required this.error});
 }
+
+final class GetChatMessagesLoading extends AppState {}
+
+final class GetChatMessagesSuccess extends AppState {}
+
+final class GetChatMessagesFailure extends AppState {
+  final String error;
+  GetChatMessagesFailure({required this.error});
+}
+
+final class SendMessageLoading extends AppState {}
+
+final class SendMessageSuccess extends AppState {}
+
+final class SendMessageFailure extends AppState {
+  final String error;
+  SendMessageFailure({required this.error});
+}

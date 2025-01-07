@@ -17,7 +17,7 @@ class Orders extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.h),
+        preferredSize: Size.fromHeight(60.h),
         child: CustomAppBar(
           text: LocaleKeys.orders.tr(),
         ),
@@ -67,36 +67,40 @@ class Orders extends StatelessWidget {
                           size: 14.sp,
                         ),
                         SizedBox(
-                            width: 120.w,
-                            child: AppText(
-                              text: '#15446464',
-                              color: AppColors.primary,
-                              size: 14.sp,
-                            )),
+                          width: 110.w,
+                          child: AppText(
+                            text: '#15446464',
+                            color: AppColors.primary,
+                            size: 14.sp,
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(height: 24.h),
                     SizedBox(
-                        width: 150.w,
-                        child: AppText(
-                          text: 'الخميس12 مارس 2023',
-                          color: Colors.grey,
-                          size: 12.sp,
-                        ))
+                      width: 150.w,
+                      child: AppText(
+                        text: 'الخميس12 مارس 2023',
+                        color: Colors.grey,
+                        size: 12.sp,
+                      ),
+                    ),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(
-                      width: 100.w,
+                      width: 90.w,
                       child: Align(
-                          alignment: AlignmentDirectional.centerEnd,
-                          child: AppText(
-                            text: 'منذ ساعة',
-                            size: 14.sp,
-                            color: Colors.grey,
-                          )),
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: AppText(
+                          textAlign: TextAlign.end,
+                          text: 'منذ 15 دقيقة',
+                          size: 14.sp,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 15.h),
                     Container(
@@ -107,10 +111,14 @@ class Orders extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                       child: Center(
-                        child: AppText(
-                          text: 'تم قبول الطلب',
-                          size: 12.sp,
-                          color: Colors.green,
+                        child: SizedBox(
+                          width: 93.w,
+                          child: AppText(
+                            textAlign: TextAlign.center,
+                            text: 'تم قبول الطلب',
+                            size: 12.sp,
+                            color: Colors.green,
+                          ),
                         ),
                       ),
                     ),

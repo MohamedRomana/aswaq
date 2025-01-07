@@ -1,8 +1,8 @@
-import 'package:aswaq/screens/users/drawer_container/about_us/about_us.dart';
-import 'package:aswaq/screens/users/drawer_container/contact_us/contact_us.dart';
-import 'package:aswaq/screens/users/drawer_container/faq/faq.dart';
-import 'package:aswaq/screens/users/drawer_container/privacy_policy/privacy_policy.dart';
-import 'package:aswaq/screens/users/drawer_container/technical_support/technical_support_view.dart';
+import 'package:aswaq/screens/users/drawer_items/about_us/about_us.dart';
+import 'package:aswaq/screens/users/drawer_items/contact_us/contact_us.dart';
+import 'package:aswaq/screens/users/drawer_items/faq/faq.dart';
+import 'package:aswaq/screens/users/drawer_items/privacy_policy/privacy_policy.dart';
+import 'package:aswaq/screens/users/drawer_items/technical_support/technical_support_view.dart';
 import 'package:aswaq/screens/users/profile/profile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

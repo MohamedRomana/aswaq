@@ -1,4 +1,5 @@
 import 'package:aswaq/core/widgets/app_router.dart';
+import 'package:aswaq/screens/users/notifications/notifications.dart';
 import 'package:aswaq/screens/users/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,13 +51,20 @@ class CustomMoreProfileRow extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsetsDirectional.only(end: 16.w),
-            child: SvgPicture.asset(
-              Assets.svg.notificationBing,
-              height: 24.w,
-              width: 24.w,
-              fit: BoxFit.cover,
+          InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () {
+              AppRouter.navigateTo(context, const Notifications());
+            },
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(end: 16.w),
+              child: SvgPicture.asset(
+                Assets.svg.notificationBing,
+                height: 24.w,
+                width: 24.w,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ],

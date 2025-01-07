@@ -14,9 +14,9 @@ class CustomSoonDialog extends StatelessWidget {
           SizedBox(height: 60.h),
           Image.asset(
             Assets.img.logo.path,
-            height: 141.h,
+            height: 115.h,
             width: 163.w,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
           AppText(
             top: 10.h,

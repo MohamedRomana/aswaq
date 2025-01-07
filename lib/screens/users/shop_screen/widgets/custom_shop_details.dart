@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/colors.dart';
-import '../../../../core/location/location.dart';
+import '../../../../core/map/map.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/widgets/custom_bottom_sheet.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 
@@ -84,11 +85,12 @@ class CustomShopDetails extends StatelessWidget {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      showModalBottomSheet(
+                      customBottomSheet(
                         context: context,
-                        builder: (context) {
-                          return const Location();
-                        },
+                        enableDrag: false,
+                        child: const MapScreen(
+                          isTab: true,
+                        ),
                       );
                     },
                     child: Container(

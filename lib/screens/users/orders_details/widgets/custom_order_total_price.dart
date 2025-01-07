@@ -41,8 +41,9 @@ class CustomOrderTotalPrice extends StatelessWidget {
                     size: 14.sp,
                   ),
                   SizedBox(
-                    width: 60.w,
+                    width: 150.w,
                     child: AppText(
+                      textAlign: TextAlign.end,
                       text: '‏250 ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
@@ -65,8 +66,9 @@ class CustomOrderTotalPrice extends StatelessWidget {
                     size: 14.sp,
                   ),
                   SizedBox(
-                    width: 70.w,
+                    width: 150.w,
                     child: AppText(
+                      textAlign: TextAlign.end,
                       text: '- 250 ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
@@ -89,8 +91,9 @@ class CustomOrderTotalPrice extends StatelessWidget {
                     size: 14.sp,
                   ),
                   SizedBox(
-                    width: 60.w,
+                    width: 150.w,
                     child: AppText(
+                      textAlign: TextAlign.end,
                       text: '‏250 ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
@@ -113,8 +116,9 @@ class CustomOrderTotalPrice extends StatelessWidget {
                     size: 14.sp,
                   ),
                   SizedBox(
-                    width: 60.w,
+                    width: 150.w,
                     child: AppText(
+                      textAlign: TextAlign.end,
                       text: '‏250 ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,

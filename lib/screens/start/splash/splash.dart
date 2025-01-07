@@ -57,7 +57,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                           Assets.img.logo.path,
                           height: 121.w,
                           width: 267.w,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       );
                     },

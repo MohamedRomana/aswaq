@@ -18,7 +18,7 @@ class AllCertifcates extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.h),
+        preferredSize: Size.fromHeight(60.h),
         child: CustomAppBar(
           text: LocaleKeys.all_certificates.tr(),
         ),
@@ -28,7 +28,6 @@ class AllCertifcates extends StatelessWidget {
         padding: EdgeInsetsDirectional.only(
           start: 16.w,
           end: 16.w,
-          top: 16.h,
           bottom: 140.h,
         ),
         itemCount: 10,
@@ -87,9 +86,10 @@ class AllCertifcates extends StatelessWidget {
                     );
                   },
                   child: SvgPicture.asset(
-                    Assets.svg.moresquare,
+                    Assets.svg.more,
                     height: 24.w,
                     width: 24.w,
+                    color: Colors.black,
                     fit: BoxFit.cover,
                   ),
                 ),

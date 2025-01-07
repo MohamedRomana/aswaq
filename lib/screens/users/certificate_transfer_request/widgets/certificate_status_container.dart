@@ -14,7 +14,11 @@ class CertificateStatusContainer extends StatelessWidget {
       height: 253.h,
       width: 343.w,
       padding: EdgeInsets.all(16.r),
-      margin: EdgeInsets.all(16.r),
+      margin: EdgeInsetsDirectional.only(
+        start: 16.w,
+        end: 16.w,
+        bottom: 16.h,
+      ),
       decoration: BoxDecoration(
         color: const Color(0xffF2F2F2),
         borderRadius: BorderRadius.circular(10.r),

@@ -87,9 +87,12 @@ class CustomMarketsListView extends StatelessWidget {
                           size: 15.sp,
                         ),
                         SizedBox(width: 3.w),
-                        AppText(
-                          text: '+3',
-                          size: 14.sp,
+                        SizedBox(
+                          width: 50.w,
+                          child: AppText(
+                            text: '+3',
+                            size: 14.sp,
+                          ),
                         ),
                       ],
                     ),

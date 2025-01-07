@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:aswaq/core/widgets/app_button.dart';
-import 'package:aswaq/screens/users/home_layout/home_layout.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -141,7 +140,6 @@ class MarketsAndShopsListView extends StatelessWidget {
             bottom: 22.h,
             onPressed: () {
               AppCubit.get(context).changebottomNavIndex(0);
-              AppRouter.navigateAndFinish(context, const HomeLayout());
             },
             color: Colors.white,
             borderColor: AppColors.primary,

@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/colors.dart';
-import '../../../../core/location/location.dart';
+import '../../../../core/map/map.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/widgets/custom_bottom_sheet.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 
@@ -187,9 +188,11 @@ class CustomShippingMethod extends StatelessWidget {
                       highlightColor: Colors.transparent,
                       onTap: () {
                         if (AppCubit.get(context).shipIndex == 1) {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) => const Location());
+                          customBottomSheet(
+                            context: context,
+                            enableDrag: false,
+                            child: const MapScreen(),
+                          );
                         } else {
                           const SizedBox.shrink();
                         }

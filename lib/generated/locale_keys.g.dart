@@ -401,5 +401,10 @@ abstract class  LocaleKeys {
   static const recipient_name = 'recipient_name';
   static const request_rejected_due_to_invalid_data = 'request_rejected_due_to_invalid_data';
   static const warranty_certificate = 'warranty_certificate';
+  static const previous_chats = 'previous_chats';
+  static const current_chats = 'current_chats';
+  static const order_number = 'order_number';
+  static const reason_for_returning_product = 'reason_for_returning_product';
+  static const chat_with = 'chat_with';
 
 }

@@ -10,10 +10,12 @@ import 'app_router.dart';
 class CustomBottomNav extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Widget? floatingActionButton;
   const CustomBottomNav({
     super.key,
     this.appBar,
-    this.body,
+    this.body, this.floatingActionButtonLocation, this.floatingActionButton,
   });
 
   @override
@@ -25,10 +27,10 @@ class CustomBottomNav extends StatelessWidget {
         return Scaffold(
           appBar: appBar,
           body: body,
-          floatingActionButtonLocation:
+          floatingActionButtonLocation: floatingActionButtonLocation ??
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: Visibility(
-              visible: !showBotton,
+          floatingActionButton: floatingActionButton ?? Visibility(
+            visible: !showBotton,
             child: Container(
               padding: EdgeInsets.only(top: 3.h),
               clipBehavior: Clip.antiAlias,

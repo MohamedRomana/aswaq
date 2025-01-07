@@ -32,7 +32,7 @@ class _AboutUsState extends State<AboutUs> {
         return CustomBottomNav(
           key: scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(100.h),
+            preferredSize: Size.fromHeight(60.h),
             child: CustomAppBar(
               text: LocaleKeys.aboutus.tr(),
             ),
@@ -49,9 +49,9 @@ class _AboutUsState extends State<AboutUs> {
                       Image.asset(
                         Assets.img.logo.path,
                         color: AppColors.primary,
-                        height: 105.h,
+                        height: 115.h,
                         width: 240.w,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                       SizedBox(height: 20.h),
                       SizedBox(height: 35.h),

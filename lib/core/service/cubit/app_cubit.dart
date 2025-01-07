@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
@@ -12,6 +13,7 @@ import '../../../screens/users/home_layout/more/more.dart';
 import '../../cache/cache_helper.dart';
 import '../../constants/contsants.dart';
 import '../../models/on_boarding_model.dart';
+import '../model/chat_messages_model.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -137,19 +139,35 @@ class AppCubit extends Cubit<AppState> {
 
   // Get Images
 
-  List<File> passportImage = [];
-  Future<void> getPassportImage() async {
+  List<File> profileImage = [];
+  Future<void> getProfileImage() async {
     final picker = ImagePicker();
     final pickedImages = await picker.pickMultiImage();
-    passportImage = pickedImages
+    profileImage = pickedImages
         .map((pickedImage) => File(pickedImage.path))
         .take(1)
         .toList();
     emit(ChooseImageSuccess());
   }
 
-  void removePassportImage() {
-    passportImage.clear();
+  void removeProfileImage() {
+    profileImage.clear();
+    emit(RemoveImageSuccess());
+  }
+
+  List<File> orderImage = [];
+  Future<void> getOrderImage() async {
+    final picker = ImagePicker();
+    final pickedImages = await picker.pickMultiImage();
+    orderImage = pickedImages
+        .map((pickedImage) => File(pickedImage.path))
+        .take(1)
+        .toList();
+    emit(ChooseImageSuccess());
+  }
+
+  void removeOrderImage() {
+    orderImage.clear();
     emit(RemoveImageSuccess());
   }
 
@@ -160,7 +178,7 @@ class AppCubit extends Cubit<AppState> {
         http.MultipartRequest('POST', Uri.parse("${baseUrl}api/upload-image"));
     request.fields['lang'] = CacheHelper.getLang();
 
-    for (var image in passportImage) {
+    for (var image in profileImage) {
       var stream = http.ByteStream(image.openRead());
       var length = await image.length();
       var multipartFile = http.MultipartFile(
@@ -247,5 +265,103 @@ class AppCubit extends Cubit<AppState> {
     } else {
       emit(ContactUsFailure(error: data["msg"]));
     }
+  }
+
+  List<ChatMessagesModel> chatMessages = [];
+  Map chatDetails = {};
+  Future getChatMessages({
+    required String salerId,
+    String roomId = "",
+    bool isloading = true,
+  }) async {
+    if (isloading) {
+      emit(GetChatMessagesLoading());
+    }
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/all-chats"), body: {
+        "lang": CacheHelper.getLang(),
+        "user_id": CacheHelper.getUserId(),
+        "saler_id": salerId,
+        "room_id": roomId,
+      }).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+
+        if (data["key"] == 1) {
+          chatDetails = data;
+          debugPrint(chatDetails.toString());
+          chatMessages = List<ChatMessagesModel>.from(
+            (data["data"] ?? [])
+                .map((e) => ChatMessagesModel.fromJson(e))
+                .toList()
+                .reversed,
+          );
+
+          emit(GetChatMessagesSuccess());
+        } else {
+          debugPrint(data["msg"]);
+          emit(GetChatMessagesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(GetChatMessagesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future sendMessage({required String message}) async {
+    emit(SendMessageLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/store-chat"), body: {
+        "lang": CacheHelper.getLang(),
+        "from_id": CacheHelper.getUserId(),
+        "to_id": CacheHelper.getUserType() == "saler"
+            ? chatDetails["user_id"].toString()
+            : chatDetails["saler_id"].toString(),
+        "type": "text",
+        "message": message,
+      }).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+
+        if (data["key"] == 1) {
+          debugPrint(data["data"].toString());
+          emit(SendMessageSuccess());
+          getChatMessages(
+            salerId: chatDetails["saler_id"].toString(),
+            roomId: chatDetails["room_id"].toString(),
+            isloading: false,
+          );
+        } else {
+          debugPrint(data["msg"]);
+          emit(SendMessageFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(SendMessageFailure(error: error.toString()));
+      }
+    }
+  }
+
+  int buttonIndex = 0;
+  void chanebuttonIndex({required int index}) {
+    bottomNavIndex = index;
+    emit(ChangeIndex());
   }
 }

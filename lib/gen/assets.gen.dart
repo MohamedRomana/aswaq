@@ -165,9 +165,6 @@ class $AssetsSvgGen {
   /// File path: assets/svg/more.svg
   String get more => 'assets/svg/more.svg';
 
-  /// File path: assets/svg/moresquare.svg
-  String get moresquare => 'assets/svg/moresquare.svg';
-
   /// File path: assets/svg/notification-bing.svg
   String get notificationBing => 'assets/svg/notification-bing.svg';
 
@@ -180,8 +177,14 @@ class $AssetsSvgGen {
   /// File path: assets/svg/profile.svg
   String get profile => 'assets/svg/profile.svg';
 
+  /// File path: assets/svg/profilecircle.svg
+  String get profilecircle => 'assets/svg/profilecircle.svg';
+
   /// File path: assets/svg/search.svg
   String get search => 'assets/svg/search.svg';
+
+  /// File path: assets/svg/send.svg
+  String get send => 'assets/svg/send.svg';
 
   /// File path: assets/svg/share.svg
   String get share => 'assets/svg/share.svg';
@@ -232,12 +235,13 @@ class $AssetsSvgGen {
         menu,
         messages,
         more,
-        moresquare,
         notificationBing,
         output,
         people,
         profile,
+        profilecircle,
         search,
+        send,
         share,
         shoppingcart,
         sms,

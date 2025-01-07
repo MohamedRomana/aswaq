@@ -16,7 +16,7 @@ class Markets extends StatelessWidget {
     ];
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.h),
+          preferredSize: Size.fromHeight(60.h),
           child: const CustomAppBar(isMarket: true)),
       body: DefaultTabController(
         initialIndex: 0,
@@ -24,13 +24,22 @@ class Markets extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsetsDirectional.only(start: 16.w, bottom: 16.h),
+              margin: EdgeInsetsDirectional.only(start: 10.w, bottom: 20.h),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5.r),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Colors.grey.withOpacity(0.5),
+                //     spreadRadius: 1.r,
+                //     blurRadius: 5.r,
+                //     offset: Offset(-1.r, 5.r),
+                //   ),
+                // ],
               ),
               child: TabBar(
                 onTap: (index) {},
+                padding: EdgeInsetsDirectional.only(start: -40.w),
                 physics: const BouncingScrollPhysics(),
                 isScrollable: true,
                 splashBorderRadius: BorderRadius.circular(5.r),
@@ -39,8 +48,7 @@ class Markets extends StatelessWidget {
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(19.r),
-                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(15.r),
                 ),
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.grey,

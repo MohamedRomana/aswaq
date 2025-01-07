@@ -3,6 +3,8 @@ import 'package:aswaq/core/widgets/app_text.dart';
 import 'package:aswaq/core/widgets/custom_app_bar.dart';
 import 'package:aswaq/core/widgets/custom_bottom_nav.dart';
 import 'package:aswaq/screens/users/Certificates/certificates.dart';
+import 'package:aswaq/screens/users/chats/chats_list.dart';
+import 'package:aswaq/screens/users/order_returns/order_returns.dart';
 import 'package:aswaq/screens/users/orders/orders.dart';
 import 'package:aswaq/screens/users/profile_edit/profile_edit.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,7 +22,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.h),
+        preferredSize: Size.fromHeight(60.h),
         child: CustomAppBar(
           text: LocaleKeys.profile.tr(),
         ),
@@ -37,7 +39,11 @@ class Profile extends StatelessWidget {
               height: 101.h,
               width: 343.w,
               padding: EdgeInsets.all(16.r),
-              margin: EdgeInsets.all(16.r),
+              margin: EdgeInsetsDirectional.only(
+                start: 16.w,
+                end: 16.w,
+                bottom: 16.h,
+              ),
               decoration: BoxDecoration(
                 color: const Color(0xffFAFAFA),
                 borderRadius: BorderRadius.circular(10.r),
@@ -91,48 +97,55 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: 50.h,
-            width: 343.w,
-            margin: EdgeInsets.only(top: 16.h),
-            padding: EdgeInsets.all(13.r),
-            decoration: BoxDecoration(
-              color: const Color(0xffFAFAFA),
-              borderRadius: BorderRadius.circular(10.r),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.r,
-                  spreadRadius: 1.r,
-                  offset: Offset(0, 5.r),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      Assets.svg.messages,
-                      height: 24.w,
-                      width: 24.w,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(width: 6.w),
-                    AppText(
-                      text: LocaleKeys.chats.tr(),
-                      size: 14.sp,
-                      color: const Color(0xff4E4E4E),
-                    ),
-                  ],
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 24.sp,
-                  color: const Color(0xff4E4E4E),
-                )
-              ],
+          InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () {
+              AppRouter.navigateTo(context, const ChatsList());
+            },
+            child: Container(
+              height: 50.h,
+              width: 343.w,
+              margin: EdgeInsets.only(top: 16.h),
+              padding: EdgeInsets.all(13.r),
+              decoration: BoxDecoration(
+                color: const Color(0xffFAFAFA),
+                borderRadius: BorderRadius.circular(10.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 5.r,
+                    spreadRadius: 1.r,
+                    offset: Offset(0, 5.r),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        Assets.svg.messages,
+                        height: 24.w,
+                        width: 24.w,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(width: 6.w),
+                      AppText(
+                        text: LocaleKeys.chats.tr(),
+                        size: 14.sp,
+                        color: const Color(0xff4E4E4E),
+                      ),
+                    ],
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 24.sp,
+                    color: const Color(0xff4E4E4E),
+                  )
+                ],
+              ),
             ),
           ),
           InkWell(
@@ -237,48 +250,55 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: 50.h,
-            width: 343.w,
-            margin: EdgeInsets.only(top: 16.h),
-            padding: EdgeInsets.all(13.r),
-            decoration: BoxDecoration(
-              color: const Color(0xffFAFAFA),
-              borderRadius: BorderRadius.circular(10.r),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.r,
-                  spreadRadius: 1.r,
-                  offset: Offset(0, 5.r),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      Assets.svg.import,
-                      height: 24.w,
-                      width: 24.w,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(width: 6.w),
-                    AppText(
-                      text: LocaleKeys.order_returns.tr(),
-                      size: 14.sp,
-                      color: const Color(0xff4E4E4E),
-                    ),
-                  ],
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 24.sp,
-                  color: const Color(0xff4E4E4E),
-                )
-              ],
+          InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () {
+              AppRouter.navigateTo(context, const OrderReturns());
+            },
+            child: Container(
+              height: 50.h,
+              width: 343.w,
+              margin: EdgeInsets.only(top: 16.h),
+              padding: EdgeInsets.all(13.r),
+              decoration: BoxDecoration(
+                color: const Color(0xffFAFAFA),
+                borderRadius: BorderRadius.circular(10.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 5.r,
+                    spreadRadius: 1.r,
+                    offset: Offset(0, 5.r),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        Assets.svg.import,
+                        height: 24.w,
+                        width: 24.w,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(width: 6.w),
+                      AppText(
+                        text: LocaleKeys.order_returns.tr(),
+                        size: 14.sp,
+                        color: const Color(0xff4E4E4E),
+                      ),
+                    ],
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 24.sp,
+                    color: const Color(0xff4E4E4E),
+                  )
+                ],
+              ),
             ),
           ),
         ],

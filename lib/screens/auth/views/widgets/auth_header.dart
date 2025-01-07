@@ -11,7 +11,7 @@ class CustomAuthHeader extends StatelessWidget {
       height: 250.h,
       width: double.infinity,
       padding: EdgeInsets.only(top: 64.w),
-      child: Image.asset(Assets.img.logo.path),
+      child: Image.asset(Assets.img.logo.path ),
     );
   }
 }

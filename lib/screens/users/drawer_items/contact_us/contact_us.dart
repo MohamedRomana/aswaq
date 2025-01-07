@@ -33,7 +33,7 @@ class ContactUs extends StatelessWidget {
           child: CustomBottomNav(
             key: scaffoldKey,
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(100.h),
+              preferredSize: Size.fromHeight(60.h),
               child: CustomAppBar(
                 text: LocaleKeys.contactUs.tr(),
               ),
@@ -49,7 +49,7 @@ class ContactUs extends StatelessWidget {
                       color: AppColors.primary,
                       height: 105.h,
                       width: 240.w,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                     SizedBox(height: 20.h),
                     Align(

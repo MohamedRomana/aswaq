@@ -70,7 +70,7 @@ class CartsListView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 100.w,
+                    width: 120.w,
                     child: AppText(
                       text: 'اسم المنتج',
                       size: 16.sp,
@@ -78,7 +78,7 @@ class CartsListView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 100.w,
+                    width: 120.w,
                     child: AppText(
                       top: 6.h,
                       text: 'اسم القسم',
@@ -87,7 +87,7 @@ class CartsListView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 100.w,
+                    width: 120.w,
                     child: AppText(
                       top: 22.h,
                       text: '‏175  ${LocaleKeys.sar.tr()}',

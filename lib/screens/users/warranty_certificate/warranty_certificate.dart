@@ -20,7 +20,7 @@ class WarrantyCertificate extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.h),
+        preferredSize: Size.fromHeight(60.h),
         child: CustomAppBar(
           text: LocaleKeys.warranty_certificate.tr(),
         ),
@@ -57,7 +57,7 @@ class WarrantyCertificate extends StatelessWidget {
                   width: 165.w,
                   radius: 15.r,
                   child: AppText(
-                    text: LocaleKeys.transfer_certificate.tr(),
+                    text: LocaleKeys.view_certificate.tr(),
                     color: Colors.white,
                     size: 16.sp,
                     family: Assets.fonts.norsalBold,

@@ -29,7 +29,7 @@ class _FaqState extends State<Faq> {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90.h),
+        preferredSize: Size.fromHeight(60.h),
         child: CustomAppBar(
           text: LocaleKeys.faq.tr(),
         ),
@@ -38,9 +38,9 @@ class _FaqState extends State<Faq> {
         children: [
           Image.asset(
             Assets.img.logo.path,
-            height: 105.h,
+            height: 115.h,
             width: 240.w,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
           SizedBox(height: 20.h),
           Expanded(

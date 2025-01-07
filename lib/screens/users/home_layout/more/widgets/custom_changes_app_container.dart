@@ -1,5 +1,6 @@
 import 'package:aswaq/core/cache/cache_helper.dart';
 import 'package:aswaq/screens/auth/data/auth_cubit.dart';
+import 'package:aswaq/screens/start/splash/splash.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -132,6 +133,7 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
                       onChanged: (bool value) {
                         setState(
                           () {
+                            AppRouter.navigateAndFinish(context, Splash());
                             if (CacheHelper.getLang() == "ar") {
                               CacheHelper.setLang('en');
                               context.setLocale(const Locale('en'));

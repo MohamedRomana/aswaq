@@ -52,7 +52,7 @@ void showFlashMessage({
             margin: EdgeInsetsDirectional.only(start: 16.w),
             clipBehavior: Clip.antiAlias,
             decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: Image.asset(Assets.img.logo.path, fit: BoxFit.cover),
+            child: Image.asset(Assets.img.logo.path, fit: BoxFit.fill),
           ),
           behavior: FlashBehavior.fixed,
           position: position,

@@ -16,6 +16,7 @@ class CusomTotalPriceContainer extends StatelessWidget {
       children: [
         Container(
           width: 343.w,
+          clipBehavior: Clip.antiAlias,
           padding: EdgeInsets.symmetric(vertical: 21.h, horizontal: 16.w),
           margin: EdgeInsets.only(bottom: 10.h),
           decoration: BoxDecoration(
@@ -41,8 +42,9 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     size: 14.sp,
                   ),
                   SizedBox(
-                    width: 60.w,
+                    width: 150.w,
                     child: AppText(
+                      textAlign: TextAlign.end,
                       text: '‏250 ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
@@ -65,8 +67,9 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     size: 14.sp,
                   ),
                   SizedBox(
-                    width: 70.w,
+                    width: 150.w,
                     child: AppText(
+                      textAlign: TextAlign.end,
                       text: '- 250 ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
@@ -89,8 +92,9 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     size: 14.sp,
                   ),
                   SizedBox(
-                    width: 60.w,
+                    width: 150.w,
                     child: AppText(
+                      textAlign: TextAlign.end,
                       text: '‏250 ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,

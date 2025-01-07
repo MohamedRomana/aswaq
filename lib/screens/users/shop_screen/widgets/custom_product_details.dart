@@ -77,8 +77,9 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      width: 90.w,
+                      width: 150.w,
                       child: AppText(
+                        textAlign: TextAlign.end,
                         text: '‏350 ${LocaleKeys.sar.tr()}',
                         color: AppColors.primary,
                         size: 22.sp,
@@ -146,10 +147,13 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                             ),
                           ),
                         ),
-                        AppText(
-                          start: 8.w,
-                          text: LocaleKeys.request_warranty_certificate.tr(),
-                          size: 16.sp,
+                        SizedBox(
+                          width: 300.w,
+                          child: AppText(
+                            start: 8.w,
+                            text: LocaleKeys.request_warranty_certificate.tr(),
+                            size: 14.sp,
+                          ),
                         ),
                       ],
                     ),
