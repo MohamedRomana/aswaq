@@ -162,56 +162,59 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () {
-                            AppCubit.get(context).increseCount();
-                          },
-                          child: Container(
-                            height: 20.w,
-                            width: 20.w,
-                            decoration: const BoxDecoration(
-                              color: AppColors.primary,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 15.sp,
-                            ),
-                          ),
-                        ),
-                        AppText(
-                          start: 11.w,
-                          end: 11.w,
-                          text: AppCubit.get(context).count.toString(),
-                          size: 16.sp,
-                          family: Assets.fonts.norsalBold,
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () {
-                            AppCubit.get(context).decreseCount();
-                          },
-                          child: Container(
-                            height: 20.w,
-                            width: 20.w,
-                            decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.remove,
-                              color: Colors.white,
-                              size: 15.sp,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              AppCubit.get(context).increseCount();
+                            },
+                            child: Container(
+                              height: 25.w,
+                              width: 25.w,
+                              decoration: const BoxDecoration(
+                                color: AppColors.primary,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 20.sp,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          AppText(
+                            start: 11.w,
+                            end: 11.w,
+                            text: AppCubit.get(context).count.toString(),
+                            size: 18.sp,
+                            family: Assets.fonts.norsalBold,
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              AppCubit.get(context).decreseCount();
+                            },
+                            child: Container(
+                              height: 25.w,
+                              width: 25.w,
+                              decoration: const BoxDecoration(
+                                color: Colors.grey,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                                size: 20.sp,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     InkWell(
                       splashColor: Colors.transparent,

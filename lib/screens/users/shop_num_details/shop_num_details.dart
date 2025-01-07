@@ -22,7 +22,7 @@ class ShopNumDetails extends StatelessWidget {
       builder: (context, state) {
         return CustomBottomNav(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60.h),
+            preferredSize: Size.fromHeight(70.h),
             child: CustomAppBar(
               text: ' ${LocaleKeys.shop_details_number.tr()} 1',
             ),

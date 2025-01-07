@@ -26,7 +26,7 @@ class Favorites extends StatelessWidget {
       ),
       body: ListView.separated(
         padding:
-            EdgeInsetsDirectional.only(start: 16.w, bottom: 140.h, end: 16.w),
+            EdgeInsetsDirectional.only(top: 16.h, start: 16.w, bottom: 140.h, end: 16.w),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: 2,

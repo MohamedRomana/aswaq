@@ -1,9 +1,11 @@
 import 'package:aswaq/core/widgets/app_button.dart';
+import 'package:aswaq/screens/users/payment/payment.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/widgets/app_input.dart';
+import '../../../../core/widgets/app_router.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -85,7 +87,10 @@ class AddNewCategoryBottomSheet extends StatelessWidget {
             ],
           ),
           AppButton(
-            onPressed: () {},
+            onPressed: () {
+              AppRouter.pop(context);
+              AppRouter.navigateTo(context, const Payment());
+            },
             child: AppText(
               text: LocaleKeys.add_certificate.tr(),
               size: 16.sp,

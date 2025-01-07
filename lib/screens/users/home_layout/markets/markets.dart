@@ -24,7 +24,7 @@ class Markets extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsetsDirectional.only(start: 10.w, bottom: 20.h),
+              margin: EdgeInsetsDirectional.only(top: 16.h, start: 10.w, bottom: 20.h),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5.r),

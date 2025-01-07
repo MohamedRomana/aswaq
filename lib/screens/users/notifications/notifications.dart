@@ -17,14 +17,14 @@ class Notifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(70.h),
         child: CustomAppBar(
           text: LocaleKeys.notifications.tr(),
         ),
       ),
       body: ListView.separated(
         padding:
-            EdgeInsetsDirectional.only(bottom: 140.h, start: 16.w, end: 16.w),
+            EdgeInsetsDirectional.only(top: 16.h, bottom: 140.h, start: 16.w, end: 16.w),
         itemCount: 10,
         separatorBuilder: (context, index) => SizedBox(height: 16.h),
         itemBuilder: (context, index) => Container(

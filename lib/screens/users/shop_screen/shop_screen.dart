@@ -27,7 +27,7 @@ class ShopScreen extends StatelessWidget {
     ];
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(70.h),
         child: CustomAppBar(
           isSearch: true,
           text: LocaleKeys.shop_page.tr(),
@@ -82,7 +82,7 @@ class ShopScreen extends StatelessWidget {
                     itemCount: 12,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisExtent: 210.h,
+                      mainAxisExtent: 205.h,
                       crossAxisSpacing: 16.w,
                       mainAxisSpacing: 16.h,
                     ),

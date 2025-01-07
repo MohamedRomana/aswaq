@@ -3,12 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../../core/constants/colors.dart';
-import '../../../../core/map/map.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/custom_bottom_sheet.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
+import 'shop_location.dart';
 
 class CustomShopDetails extends StatelessWidget {
   const CustomShopDetails({super.key});
@@ -16,7 +17,7 @@ class CustomShopDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -63,20 +64,27 @@ class CustomShopDetails extends StatelessWidget {
               const Spacer(),
               Row(
                 children: [
-                  Container(
-                    height: 35.w,
-                    width: 35.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(15.r),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        Assets.svg.copy,
-                        height: 24.w,
-                        width: 24.w,
-                        color: Colors.white,
-                        fit: BoxFit.cover,
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () {
+                      Share.share('https://play.google.com/');
+                    },
+                    child: Container(
+                      height: 35.w,
+                      width: 35.w,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          Assets.svg.copy,
+                          height: 24.w,
+                          width: 24.w,
+                          color: Colors.white,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -88,8 +96,10 @@ class CustomShopDetails extends StatelessWidget {
                       customBottomSheet(
                         context: context,
                         enableDrag: false,
-                        child: const MapScreen(
-                          isTab: true,
+                        child: const ShopLocation(
+                          lat: 32.357,
+                          lng: 23.587,
+                          address: 'jhg jg k',
                         ),
                       );
                     },

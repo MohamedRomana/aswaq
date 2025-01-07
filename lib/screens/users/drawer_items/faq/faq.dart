@@ -34,17 +34,21 @@ class _FaqState extends State<Faq> {
           text: LocaleKeys.faq.tr(),
         ),
       ),
-      body: Column(
-        children: [
-          Image.asset(
-            Assets.img.logo.path,
-            height: 115.h,
-            width: 240.w,
-            fit: BoxFit.fill,
-          ),
-          SizedBox(height: 20.h),
-          Expanded(
-            child: ListView.separated(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(height: 25.h),
+            Image.asset(
+              Assets.img.logo.path,
+              height: 115.h,
+              width: 240.w,
+              fit: BoxFit.fill,
+            ),
+            SizedBox(height: 20.h),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 4,
               separatorBuilder: (context, index) => SizedBox(
                 height: 16.h,
@@ -139,9 +143,9 @@ class _FaqState extends State<Faq> {
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 160.h),
-        ],
+            SizedBox(height: 160.h),
+          ],
+        ),
       ),
     );
   }

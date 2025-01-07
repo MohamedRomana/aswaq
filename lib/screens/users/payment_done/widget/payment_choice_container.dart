@@ -124,7 +124,7 @@ class PaymentChoiceContainer extends StatelessWidget {
                           ),
                           SizedBox(width: 6.w),
                           AppText(
-                            text: LocaleKeys.bank_transfer.tr(),
+                            text: LocaleKeys.cashOnDelivery.tr(),
                             size: 14.sp,
                             color: AppCubit.get(context).paymentIndex == 1
                                 ? Colors.black

@@ -29,6 +29,7 @@ class Profile extends StatelessWidget {
       ),
       body: Column(
         children: [
+          SizedBox(height: 16.h),
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,

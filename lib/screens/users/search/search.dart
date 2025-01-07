@@ -54,24 +54,30 @@ class _SearchState extends State<Search> {
                 hint: LocaleKeys.enter_search_term.tr(),
                 // controller: searchController,
               ),
-              AppButton(
-                onPressed: () {},
-                bottom: 20.h,
-                child: AppText(
-                  color: Colors.white,
-                  family: Assets.fonts.norsalBold,
-                  text: LocaleKeys.search.tr(),
+              Center(
+                child: AppButton(
+                  onPressed: () {},
+                  bottom: 20.h,
+                  child: AppText(
+                    color: Colors.white,
+                    family: Assets.fonts.norsalBold,
+                    text: LocaleKeys.search.tr(),
+                  ),
                 ),
               ),
               GridView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsetsDirectional.only(
-                    top: 10.h, start: 10.w, end: 10.w, bottom: 150.h),
+                  top: 10.h,
+                  start: 10.w,
+                  end: 10.w,
+                  bottom: 150.h,
+                ),
                 itemCount: 12,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisExtent: 210.h,
+                  mainAxisExtent: 205.h,
                   crossAxisSpacing: 16.w,
                   mainAxisSpacing: 16.h,
                 ),

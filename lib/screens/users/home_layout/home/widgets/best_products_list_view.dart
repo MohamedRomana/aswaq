@@ -60,7 +60,7 @@ class BestProductsListView extends StatelessWidget {
                       height: 210.h,
                       width: 165.w,
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.49),
+                        color: Colors.black.withOpacity(0.4),
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                       child: Stack(

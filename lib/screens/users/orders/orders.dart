@@ -17,7 +17,7 @@ class Orders extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(70.h),
         child: CustomAppBar(
           text: LocaleKeys.orders.tr(),
         ),

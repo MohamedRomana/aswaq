@@ -1,5 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/screens/users/profile/profile.dart';
 import 'package:aswaq/screens/users/search/search.dart';
@@ -31,13 +30,13 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: 90.h,
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      margin: EdgeInsets.only(bottom: 15.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      margin: EdgeInsets.only(bottom: 10.h),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: isHome! ? Colors.transparent : Colors.grey.withOpacity(0.5),
+            color: isHome! ? Colors.transparent : Colors.grey.withOpacity(0.3),
             blurRadius: 5.r,
             spreadRadius: 1.r,
             offset: Offset(0, 3.r),
@@ -109,13 +108,6 @@ class CustomAppBar extends StatelessWidget {
                         width: 24.w,
                         fit: BoxFit.cover,
                       ),
-                    ),
-                    SizedBox(width: 6.w),
-                    SvgPicture.asset(
-                      Assets.svg.location,
-                      height: 24.w,
-                      width: 24.w,
-                      fit: BoxFit.cover,
                     ),
                   ],
                 )

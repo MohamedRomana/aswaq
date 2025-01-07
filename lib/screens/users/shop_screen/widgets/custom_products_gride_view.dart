@@ -25,39 +25,34 @@ class CustomProductsGridView extends StatelessWidget {
           builder: (context) => const ProductDetailsBottomSheet(),
         );
       },
-      child: Stack(
-        children: [
-          Container(
-            height: 210.h,
-            width: 165.w,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.r),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 5.r,
-                  spreadRadius: 1.r,
-                  color: Colors.grey,
-                  offset: Offset(0, 5.r),
-                ),
-              ],
+      child: Container(
+        height: 210.h,
+        width: 165.w,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 5.r,
+              spreadRadius: 1.r,
+              color: Colors.grey,
+              offset: const Offset(0, 0),
             ),
-            child: Image.asset(
-              Assets.img.wash.path,
-            ),
-          ),
-          PositionedDirectional(
-            top: 11.h,
-            start: 16.w,
-            child: Column(
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
               children: [
                 SizedBox(
                   width: 150.w,
                   child: AppText(
                     textAlign: TextAlign.start,
                     start: 10.w,
+                    top: 10.h,
                     text: 'اسم المنتج',
-                    size: 11.sp,
+                    size: 12.sp,
                     family: Assets.fonts.norsalBold,
                   ),
                 ),
@@ -65,7 +60,8 @@ class CustomProductsGridView extends StatelessWidget {
                   width: 150.w,
                   child: AppText(
                     textAlign: TextAlign.start,
-                    top: 5.h,
+                    start: 10.w,
+                    top: 3.h,
                     text: 'اسم القسم',
                     color: AppColors.primary,
                     size: 9.sp,
@@ -73,11 +69,14 @@ class CustomProductsGridView extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          PositionedDirectional(
-            bottom: 0,
-            start: 0,
-            child: Row(
+            Image.asset(
+              Assets.img.wash.path,
+              height: 120.h,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   height: 37.h,
@@ -98,23 +97,20 @@ class CustomProductsGridView extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: 100.w,
+                  child: AppText(
+                    end: 10.w,
+                    textAlign: TextAlign.end,
+                    text: '150 ${LocaleKeys.sar.tr()}',
+                    size: 12.sp,
+                    color: AppColors.primary,
+                  ),
+                ),
               ],
             ),
-          ),
-          PositionedDirectional(
-            bottom: 12.h,
-            end: 13.w,
-            child: SizedBox(
-              width: 100.w,
-              child: AppText(
-                textAlign: TextAlign.end,
-                text: '150 ${LocaleKeys.sar.tr()}',
-                size: 12.sp,
-                color: AppColors.primary,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
