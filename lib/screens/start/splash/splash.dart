@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:aswaq/core/cache/cache_helper.dart';
-import 'package:aswaq/screens/start/types/types.dart';
+import 'package:aswaq/screens/auth/views/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aswaq/core/widgets/app_router.dart';
@@ -77,7 +77,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
       () {
         _shakeController.forward();
         CacheHelper.getLang() != ""
-            ? AppRouter.navigateAndPop(context, const Types())
+            ? AppRouter.navigateAndPop(context, const LogIn())
             : AppRouter.navigateAndPop(context, const OnBoarding());
 
         // CacheHelper.getLang() != ""

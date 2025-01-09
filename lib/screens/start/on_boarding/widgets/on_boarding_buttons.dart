@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 import 'package:aswaq/core/constants/colors.dart';
-import 'package:aswaq/screens/start/types/types.dart';
+import 'package:aswaq/screens/auth/views/login/login.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -95,7 +95,7 @@ class CustomOnBoardingButtons extends StatelessWidget {
                         if (currPage == pagesList.length - 1) {
                           CacheHelper.setLang('ar');
                           context.setLocale(const Locale('ar'));
-                          AppRouter.navigateAndPop(context, const Types());
+                          AppRouter.navigateAndPop(context, const LogIn());
                         } else {
                           pageController.nextPage(
                             duration: const Duration(milliseconds: 300),
