@@ -130,7 +130,7 @@ class ContactUs extends StatelessWidget {
                     BlocConsumer<AppCubit, AppState>(
                       listener: (context, state) {
                         if (state is ContactUsSuccess) {
-                          AppCubit.get(context).changebottomNavIndex(0);
+                          AppCubit.get(context).changebottomNavIndex(2);
                           AppRouter.navigateAndFinish(
                               context, const HomeLayout());
                           _nameController.clear();

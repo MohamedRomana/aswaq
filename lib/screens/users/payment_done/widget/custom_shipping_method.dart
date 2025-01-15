@@ -27,7 +27,7 @@ class CustomShippingMethod extends StatelessWidget {
               bottom: 15.h,
               text: LocaleKeys.shipping_method.tr(),
               size: 16.sp,
-              family: Assets.fonts.norsalBold,
+              fontWeight: FontWeight.bold,
             ),
             InkWell(
               splashColor: Colors.transparent,

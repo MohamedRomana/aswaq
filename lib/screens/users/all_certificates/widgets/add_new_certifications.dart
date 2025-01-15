@@ -1,12 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/constants/colors.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_text.dart';
-import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 final _categoryControllder = TextEditingController();
@@ -25,7 +23,7 @@ class AddNewCertificationBottSheet extends StatelessWidget {
           AppText(
             text: LocaleKeys.insert_certificate_into_category.tr(),
             size: 18.sp,
-            family: Assets.fonts.norsalBold,
+            fontWeight: FontWeight.bold,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +88,7 @@ class AddNewCertificationBottSheet extends StatelessWidget {
               text: LocaleKeys.add_certificate.tr(),
               size: 16.sp,
               color: Colors.white,
-              family: Assets.fonts.norsalBold,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],

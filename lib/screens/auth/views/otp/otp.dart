@@ -20,14 +20,15 @@ class OTPscreen extends StatelessWidget {
     String otpCode = "";
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const CustomAuthHeader(),
             AppText(
+              top: 23.h,
               text: LocaleKeys.enterActivationCode.tr(),
               color: const Color(0xff00818A),
-              bottom: 27.h,
+              bottom: 32.h,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35.w),
@@ -40,7 +41,7 @@ class OTPscreen extends StatelessWidget {
                 cursorColor: AppColors.primary,
                 textStyle: TextStyle(
                   fontSize: 24.sp,
-                  color: AppColors.primary,
+                  color: Colors.white,
                   fontFamily: FontFamily.norsalBold,
                 ),
                 pinTheme: PinTheme(
@@ -51,7 +52,7 @@ class OTPscreen extends StatelessWidget {
                   activeColor: Colors.white,
                   inactiveColor: AppColors.primary,
                   inactiveFillColor: Colors.white,
-                  activeFillColor: AppColors.secondray,
+                  activeFillColor: AppColors.primary,
                   selectedColor: AppColors.primary,
                   selectedFillColor: Colors.transparent,
                 ),

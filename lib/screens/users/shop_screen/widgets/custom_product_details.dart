@@ -61,7 +61,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                           child: AppText(
                             text: 'اسم المنتج',
                             size: 19.sp,
-                            family: Assets.fonts.norsalBold,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(
@@ -83,7 +83,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                         text: '‏350 ${LocaleKeys.sar.tr()}',
                         color: AppColors.primary,
                         size: 22.sp,
-                        family: Assets.fonts.norsalBold,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -191,7 +191,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                             end: 11.w,
                             text: AppCubit.get(context).count.toString(),
                             size: 18.sp,
-                            family: Assets.fonts.norsalBold,
+                            fontWeight: FontWeight.bold,
                           ),
                           InkWell(
                             splashColor: Colors.transparent,
@@ -246,7 +246,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                               text: LocaleKeys.add_to_cart.tr(),
                               color: Colors.white,
                               size: 16.sp,
-                              family: Assets.fonts.norsalBold,
+                              fontWeight: FontWeight.bold,
                             ),
                           ],
                         ),

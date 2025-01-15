@@ -29,7 +29,7 @@ class LogIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const CustomAuthHeader(),
@@ -41,12 +41,8 @@ class LogIn extends StatelessWidget {
             BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is LogInSuccess) {
-                  // AppCubit.get(context).changebottomNavIndex(0);
-                  // AppRouter.navigateAndFinish(
-                  //     context,
-                  //     CacheHelper.getUserType() == "client"
-                  //         ? const HomeLayout()
-                  //         : const ProviderHomeLayout());
+                  AppCubit.get(context).changebottomNavIndex(2);
+                  AppRouter.navigateAndFinish(context, const HomeLayout());
                   _phoneController.clear();
                   _passController.clear();
                   showFlashMessage(

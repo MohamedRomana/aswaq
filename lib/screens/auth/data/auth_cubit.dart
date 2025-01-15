@@ -52,7 +52,6 @@ class AuthCubit extends Cubit<AuthState> {
   String sectionId = "";
   Future register({
     required String fullName,
-    required String city,
     required String phone,
     required String password,
   }) async {
@@ -60,9 +59,8 @@ class AuthCubit extends Cubit<AuthState> {
     http.Response response =
         await http.post(Uri.parse("${baseUrl}api/register"), body: {
       "lang": CacheHelper.getLang(),
-      "user_type": 'userType',
-      "full_name": fullName,
-      "city": city,
+      "first_name": fullName,
+      "city_id": cityId,
       "phone": phone,
       "password": password,
     });
@@ -146,12 +144,11 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   String resetPassId = "";
-  Future forgetPass({required String phoneCode, required String phone}) async {
+  Future forgetPass({required String phone}) async {
     emit(ForgetPassLoading());
     http.Response response =
         await http.post(Uri.parse("${baseUrl}api/forget-password"), body: {
       "lang": CacheHelper.getLang(),
-      "phone_code": phoneCode,
       "phone": phone,
     });
     Map<String, dynamic> data = jsonDecode(response.body);

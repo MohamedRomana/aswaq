@@ -80,10 +80,10 @@ class _OnBoardingState extends State<OnBoarding> {
                                   AppText(
                                     top: 48.h,
                                     bottom: 20.h,
-                                    text: 'عنوان تجريبي',
+                                    text: AppCubit.get(context).onBoardingList[index].title,
                                     size: 30.sp,
                                     color: Colors.black,
-                                    family: Assets.fonts.norsalBold,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                   AppText(
                                     text: AppCubit.get(context)

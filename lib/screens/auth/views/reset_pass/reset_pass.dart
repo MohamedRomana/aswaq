@@ -25,7 +25,7 @@ class ResetPass extends StatelessWidget {
     String otpCode = "";
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Form(
           key: _formKey,
           child: Column(
@@ -33,6 +33,7 @@ class ResetPass extends StatelessWidget {
               const CustomAuthHeader(),
               AppText(
                 text: LocaleKeys.enterActivationCode.tr(),
+                top: 26.h,
                 color: const Color(0xff00818A),
                 bottom: 27.h,
               ),

@@ -4,7 +4,6 @@ import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
 import 'package:aswaq/core/widgets/custom_app_bar.dart';
 import 'package:aswaq/core/widgets/custom_bottom_nav.dart';
-import 'package:aswaq/gen/assets.gen.dart';
 import 'package:aswaq/screens/users/certificate_transfer_request/certificate_transfer_request_status.dart';
 import 'package:aswaq/screens/users/transfer_warranty/transfer_warranty_certificate.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -46,7 +45,7 @@ class WarrantyCertificate extends StatelessWidget {
                     text: LocaleKeys.transfer_certificate.tr(),
                     color: AppColors.primary,
                     size: 16.sp,
-                    family: Assets.fonts.norsalBold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 AppButton(
@@ -60,7 +59,7 @@ class WarrantyCertificate extends StatelessWidget {
                     text: LocaleKeys.view_certificate.tr(),
                     color: Colors.white,
                     size: 16.sp,
-                    family: Assets.fonts.norsalBold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

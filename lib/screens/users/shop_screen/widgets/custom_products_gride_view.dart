@@ -53,7 +53,7 @@ class CustomProductsGridView extends StatelessWidget {
                     top: 10.h,
                     text: 'اسم المنتج',
                     size: 12.sp,
-                    family: Assets.fonts.norsalBold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(

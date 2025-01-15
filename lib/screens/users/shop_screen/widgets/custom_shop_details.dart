@@ -24,7 +24,7 @@ class CustomShopDetails extends StatelessWidget {
           AppText(
             text: 'اسم السوق او المحل',
             size: 20.sp,
-            family: Assets.fonts.norsalBold,
+            fontWeight: FontWeight.bold,
           ),
           SizedBox(height: 10.h),
           Row(

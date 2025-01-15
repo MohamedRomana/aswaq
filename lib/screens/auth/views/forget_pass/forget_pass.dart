@@ -8,7 +8,6 @@ import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_input.dart';
 import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../gen/fonts.gen.dart';
-import '../../../../gen/assets.gen.dart';
 import '../../data/auth_cubit.dart';
 import '../reset_pass/reset_pass.dart';
 import '../widgets/auth_header.dart';
@@ -24,27 +23,26 @@ class ForgetPass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomAuthHeader(),
               Align(
                 alignment: Alignment.center,
                 child: AppText(
-                  start: 26.w,
+                  top: 26.h,
                   text: LocaleKeys.phone.tr(),
                   size: 24.sp,
-                  family: Assets.fonts.norsalBold,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Align(
                 alignment: Alignment.center,
                 child: AppText(
                   top: 14.h,
-                  text: 'ادخل رقم الجوال الخص بك لارسال كود التفعيل',
+                  text: LocaleKeys.enterMobileNumberToSendActivationCode.tr(),
                   color: Colors.grey,
                   size: 14.sp,
                 ),
@@ -97,20 +95,17 @@ class ForgetPass extends StatelessWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           AuthCubit.get(context).forgetPass(
-                            phoneCode: forgetPassPhoneCode,
                             phone: _phoneController.text,
                           );
                         }
                       },
-                      child:
-                          //  state is ForgetPassLoading
-                          //     ? const CircularProgressIndicator(color: Colors.white)
-                          //     :
-                          AppText(
-                        text: LocaleKeys.confirm.tr(),
-                        color: Colors.white,
-                        family: FontFamily.norsalBold,
-                      ),
+                      child: state is ForgetPassLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : AppText(
+                              text: LocaleKeys.confirm.tr(),
+                              color: Colors.white,
+                              family: FontFamily.norsalBold,
+                            ),
                     ),
                   );
                 },

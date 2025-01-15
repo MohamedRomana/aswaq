@@ -7,15 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/service/cubit/app_cubit.dart';
+import '../../../../../core/constants/contsants.dart';
 import '../../../../../core/widgets/alert_dialog.dart';
 import '../../../../../core/widgets/app_router.dart';
 import '../../../../../core/widgets/app_text.dart';
 import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
+import '../../../../auth/views/login/login.dart';
 import 'deleteAccount_dialog.dart';
 
 class CustomChangesAppContainer extends StatefulWidget {
@@ -133,7 +134,8 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
                       onChanged: (bool value) {
                         setState(
                           () {
-                            AppRouter.navigateAndFinish(context, Splash());
+                            AppRouter.navigateAndFinish(
+                                context, const Splash());
                             if (CacheHelper.getLang() == "ar") {
                               CacheHelper.setLang('en');
                               context.setLocale(const Locale('en'));
@@ -155,8 +157,7 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () {
-              Share.share('check out my website https://example.com',
-                  subject: 'Look what I made!');
+              launchUrl(Uri.parse(baseUrl));
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -186,119 +187,143 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
             ),
           ),
           SizedBox(height: 24.h),
-          BlocListener<AuthCubit, AuthState>(
-            listener: (context, state) {
-              if (state is LogOutSuccess) {
-                Navigator.pop(context);
-                Navigator.pop(context);
-                showFlashMessage(
-                  message: state.message,
-                  type: FlashMessageType.success,
-                  context: context,
-                );
-              } else if (state is LogOutFailure) {
-                showFlashMessage(
-                  message: state.error,
-                  type: FlashMessageType.error,
-                  context: context,
-                );
-              }
-            },
-            child: InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () {
-                AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.warning,
-                  animType: AnimType.rightSlide,
-                  title: LocaleKeys.logout.tr(),
-                  desc: LocaleKeys.logOutSubtitle.tr(),
-                  btnCancelOnPress: () {},
-                  btnOkOnPress: () {
-                    AuthCubit.get(context).logOut();
+          CacheHelper.getUserId() == ""
+              ? InkWell(
+                  onTap: () {
+                    AppRouter.navigateAndPop(context, const LogIn());
                   },
-                ).show();
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SvgPicture.asset(
-                        Assets.svg.output,
-                        height: 24.w,
-                        width: 24.w,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(width: 6.w),
                       AppText(
-                        text: LocaleKeys.logout.tr(),
-                        size: 14.sp,
-                        color: const Color(0xff4E4E4E),
+                        text: LocaleKeys.login.tr(),
+                        size: 16.sp,
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
                       ),
+                      Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Colors.red,
+                        size: 24.sp,
+                      )
                     ],
                   ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 24.sp,
-                    color: const Color(0xff4E4E4E),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 24.h),
-          BlocConsumer<AuthCubit, AuthState>(
-            listener: (context, state) {
-              if (state is DeleteAccountLoading) {
-                showLoadingDialog(context: context, isLottie: true);
-              } else if (state is DeleteAccountSuccess) {
-                AppRouter.pop(context);
-                AppRouter.pop(context);
-                AppCubit.get(context).changebottomNavIndex(0);
-                showFlashMessage(
-                  message: state.message,
-                  type: FlashMessageType.success,
-                  context: context,
-                );
-              } else if (state is DeleteAccountFailure) {
-                showFlashMessage(
-                  message: state.error,
-                  type: FlashMessageType.error,
-                  context: context,
-                );
-              }
-            },
-            builder: (context, state) {
-              return InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () {
-                  customAlertDialog(
-                    context: context,
-                    child: const DeleteAccountDialog(),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                )
+              : Column(
                   children: [
-                    AppText(
-                      text: LocaleKeys.deleteAccount.tr(),
-                      color: Colors.red,
-                      size: 14.sp,
+                    BlocListener<AuthCubit, AuthState>(
+                      listener: (context, state) {
+                        if (state is LogOutSuccess) {
+                          AppRouter.navigateAndFinish(context, const Splash());
+                          showFlashMessage(
+                            message: state.message,
+                            type: FlashMessageType.success,
+                            context: context,
+                          );
+                        } else if (state is LogOutFailure) {
+                          showFlashMessage(
+                            message: state.error,
+                            type: FlashMessageType.error,
+                            context: context,
+                          );
+                        }
+                      },
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.warning,
+                            animType: AnimType.rightSlide,
+                            title: LocaleKeys.logout.tr(),
+                            desc: LocaleKeys.logOutSubtitle.tr(),
+                            btnCancelOnPress: () {},
+                            btnOkOnPress: () {
+                              AuthCubit.get(context).logOut();
+                            },
+                          ).show();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  Assets.svg.output,
+                                  height: 24.w,
+                                  width: 24.w,
+                                  fit: BoxFit.cover,
+                                ),
+                                SizedBox(width: 6.w),
+                                AppText(
+                                  text: LocaleKeys.logout.tr(),
+                                  size: 14.sp,
+                                  color: const Color(0xff4E4E4E),
+                                ),
+                              ],
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 24.sp,
+                              color: const Color(0xff4E4E4E),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    SvgPicture.asset(
-                      Assets.svg.trash,
-                      height: 24.w,
-                      width: 24.w,
-                      fit: BoxFit.cover,
+                    SizedBox(height: 24.h),
+                    BlocConsumer<AuthCubit, AuthState>(
+                      listener: (context, state) {
+                        if (state is DeleteAccountLoading) {
+                          showLoadingDialog(context: context, isLottie: true);
+                        } else if (state is DeleteAccountSuccess) {
+                          AppRouter.navigateAndFinish(context, const Splash());
+
+                          showFlashMessage(
+                            message: state.message,
+                            type: FlashMessageType.success,
+                            context: context,
+                          );
+                        } else if (state is DeleteAccountFailure) {
+                          showFlashMessage(
+                            message: state.error,
+                            type: FlashMessageType.error,
+                            context: context,
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            customAlertDialog(
+                              context: context,
+                              child: const DeleteAccountDialog(),
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AppText(
+                                text: LocaleKeys.deleteAccount.tr(),
+                                color: Colors.red,
+                                size: 14.sp,
+                              ),
+                              SvgPicture.asset(
+                                Assets.svg.trash,
+                                height: 24.w,
+                                width: 24.w,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
-              );
-            },
-          ),
         ],
       ),
     );

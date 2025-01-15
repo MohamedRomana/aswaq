@@ -126,3 +126,67 @@ final class SendMessageFailure extends AppState {
   final String error;
   SendMessageFailure({required this.error});
 }
+
+final class GetSectionsLoading extends AppState {}
+
+final class GetSectionsSuccess extends AppState {}
+
+final class GetSectionsFailure extends AppState {
+  final String error;
+  GetSectionsFailure({required this.error});
+}
+
+final class GetQuestionsLoading extends AppState {}
+
+final class GetQuestionsSuccess extends AppState {} 
+
+final class GetQuestionsFailure extends AppState {
+  final String error;
+  GetQuestionsFailure({required this.error});
+}
+
+final class ShowUserLoading extends AppState {}
+
+final class ShowUserSuccess extends AppState {} 
+
+final class ShowUserFailure extends AppState {
+  final String error;
+  ShowUserFailure({required this.error});
+}
+
+final class UpdateUserLoading extends AppState {}
+
+final class UpdateUserSuccess extends AppState {
+  final String message;
+  UpdateUserSuccess({required this.message});
+}
+
+final class UpdateUserFailure extends AppState {
+  final String error;
+  UpdateUserFailure({required this.error});
+}
+
+final class ShowNotificationsLoading extends AppState {}
+
+final class ShowNotificationsSuccess extends AppState {
+  final String message;
+  ShowNotificationsSuccess({required this.message});
+}
+
+final class ShowNotificationsFailure extends AppState {
+  final String error;
+  ShowNotificationsFailure({required this.error});
+}
+
+
+final class DeleteNotificationLoading extends AppState {}
+
+final class DeleteNotificationSuccess extends AppState {
+  final String message;
+  DeleteNotificationSuccess({required this.message});
+}
+
+final class DeleteNotificationFailure extends AppState {
+  final String error;
+  DeleteNotificationFailure({required this.error});
+}

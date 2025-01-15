@@ -8,10 +8,10 @@ class CustomAuthHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250.h,
-      width: double.infinity,
-      padding: EdgeInsets.only(top: 64.w),
-      child: Image.asset(Assets.img.logo.path ),
+      height: 85.h,
+      width: 188.w,
+      margin: EdgeInsets.only(top: 90.w),
+      child: Image.asset(Assets.img.logo.path , fit: BoxFit.cover,),
     );
   }
 }

@@ -89,10 +89,10 @@ class ShoppingCarts extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: 170.w,
-                              child: AppText(
+                              child: const AppText(
                                 text: 'محل رقم 1',
                                 size: 16,
-                                family: Assets.fonts.norsalBold,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             const Spacer(),

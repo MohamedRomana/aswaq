@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aswaq/core/widgets/app_router.dart';
 import '../../../../core/cache/cache_helper.dart';
 import '../../../../core/widgets/app_text.dart';
-import '../../../../gen/assets.gen.dart';
 
 class CustomOnBoardingButtons extends StatelessWidget {
   const CustomOnBoardingButtons({
@@ -84,7 +83,7 @@ class CustomOnBoardingButtons extends StatelessWidget {
                           text: 'التالي',
                           color: Colors.white,
                           size: 18.sp,
-                          family: Assets.fonts.norsalBold,
+                          fontWeight: FontWeight.bold,
                         ),
                       ],
                     )
@@ -111,7 +110,7 @@ class CustomOnBoardingButtons extends StatelessWidget {
                             text: 'ابدأ الأن',
                             color: Colors.white,
                             size: 18.sp,
-                            family: Assets.fonts.norsalBold,
+                            fontWeight: FontWeight.bold,
                           ),
                         ],
                       ),

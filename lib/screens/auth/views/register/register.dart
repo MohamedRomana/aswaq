@@ -28,7 +28,7 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const CustomAuthHeader(),
@@ -69,10 +69,10 @@ class Register extends StatelessWidget {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       await AuthCubit.get(context).register(
-                          fullName: _fullNameController.text,
-                          phone: _phoneController.text,
-                          password: _passController.text,
-                          city: _locationController.text);
+                        fullName: _fullNameController.text,
+                        phone: _phoneController.text,
+                        password: _passController.text,
+                      );
                     }
                   },
                   child: state is RegisterLoading

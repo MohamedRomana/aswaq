@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/screens/start/on_boarding/on_boarding.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../../core/service/cubit/app_cubit.dart';
+import '../../users/home_layout/home_layout.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -24,7 +26,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    // AppCubit.get(context).getSections();
+    AppCubit.get(context).getSections();
     _customAnimation();
     _customNavigation();
   }
@@ -77,7 +79,9 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
       () {
         _shakeController.forward();
         CacheHelper.getLang() != ""
-            ? AppRouter.navigateAndPop(context, const LogIn())
+            ? CacheHelper.getUserId() != ""
+                ? AppRouter.navigateAndPop(context, const HomeLayout())
+                : AppRouter.navigateAndPop(context, const LogIn())
             : AppRouter.navigateAndPop(context, const OnBoarding());
 
         // CacheHelper.getLang() != ""

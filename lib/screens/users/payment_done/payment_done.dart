@@ -8,7 +8,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../gen/assets.gen.dart';
 import '../../../generated/locale_keys.g.dart';
 import 'widget/custom_add_payment_container.dart';
 import 'widget/custom_dialog_goto_orders.dart';
@@ -54,7 +53,7 @@ class PaymentDone extends StatelessWidget {
                     child: AppText(
                       text: LocaleKeys.payment_confirmation.tr(),
                       color: Colors.white,
-                      family: Assets.fonts.norsalBold,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 140.h),

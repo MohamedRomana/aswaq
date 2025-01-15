@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_text.dart';
-import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
 
 class CustomDeletFavContainer extends StatelessWidget {
@@ -27,7 +26,7 @@ class CustomDeletFavContainer extends StatelessWidget {
             bottom: 25.h,
             text: LocaleKeys.delete_product_confirmation.tr(),
             size: 18.sp,
-            family: Assets.fonts.norsalBold,
+            fontWeight: FontWeight.bold,
           ),
           AppButton(
             onPressed: () {},

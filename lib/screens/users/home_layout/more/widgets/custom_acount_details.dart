@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../../core/cache/cache_helper.dart';
 import '../../../../../core/widgets/app_router.dart';
 import '../../../../../core/widgets/app_text.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -42,7 +43,9 @@ class CustomAccountDetails extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () {
-              AppRouter.navigateTo(context, const Profile());
+              CacheHelper.getUserId() == ""
+                  ? const SizedBox()
+                  : AppRouter.navigateTo(context, const Profile());
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

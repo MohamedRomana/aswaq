@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
 import '../../../../../../core/widgets/app_input.dart';
 import '../../../../../../generated/locale_keys.g.dart';
-import '../../../../../gen/assets.gen.dart';
+import '../../../../../core/constants/colors.dart';
 import '../../../data/auth_cubit.dart';
 
 class CustomLoginFields extends StatelessWidget {
@@ -30,10 +30,11 @@ class CustomLoginFields extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: AppText(
+              top: 26.h,
               bottom: 31.h,
               text: LocaleKeys.login.tr(),
               size: 24.sp,
-              family: Assets.fonts.norsalBold,
+             fontWeight: FontWeight.bold,
             ),
           ),
           AppText(
@@ -118,7 +119,7 @@ class CustomLoginFields extends StatelessWidget {
                           padding: EdgeInsets.all(8.h),
                           child: Icon(
                             Icons.visibility,
-                            color: Colors.grey,
+                            color: AppColors.primary,
                             size: 21.sp,
                           ),
                         ),

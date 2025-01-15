@@ -87,7 +87,7 @@ class Certificates extends StatelessWidget {
               child: AppText(
                 text: LocaleKeys.add_new_category.tr(),
                 color: Colors.white,
-                family: Assets.fonts.norsalBold,
+                fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 150.h,),

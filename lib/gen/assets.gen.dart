@@ -63,6 +63,9 @@ class $AssetsImgGen {
   /// File path: assets/img/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/img/logo.png');
 
+  /// File path: assets/img/noti_empty.json
+  String get notiEmpty => 'assets/img/noti_empty.json';
+
   /// File path: assets/img/onboarding1.png
   AssetGenImage get onboarding1 =>
       const AssetGenImage('assets/img/onboarding1.png');
@@ -93,6 +96,7 @@ class $AssetsImgGen {
         loading,
         login,
         logo,
+        notiEmpty,
         onboarding1,
         onboarding2,
         onboarding3,

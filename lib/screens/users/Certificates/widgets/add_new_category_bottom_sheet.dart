@@ -7,7 +7,6 @@ import '../../../../core/constants/colors.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_router.dart';
 import '../../../../core/widgets/app_text.dart';
-import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 final _secrtionController = TextEditingController();
@@ -27,7 +26,7 @@ class AddNewCategoryBottomSheet extends StatelessWidget {
           AppText(
             text: LocaleKeys.add_new_category.tr(),
             size: 18.sp,
-            family: Assets.fonts.norsalBold,
+            fontWeight: FontWeight.bold,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +94,7 @@ class AddNewCategoryBottomSheet extends StatelessWidget {
               text: LocaleKeys.add_certificate.tr(),
               size: 16.sp,
               color: Colors.white,
-              family: Assets.fonts.norsalBold,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],

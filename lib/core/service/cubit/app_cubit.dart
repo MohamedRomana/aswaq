@@ -12,8 +12,11 @@ import '../../../screens/users/home_layout/home/home.dart';
 import '../../../screens/users/home_layout/more/more.dart';
 import '../../cache/cache_helper.dart';
 import '../../constants/contsants.dart';
-import '../../models/on_boarding_model.dart';
+import '../model/cities_model.dart';
+import '../model/notifications_model.dart';
+import '../model/on_boarding_model.dart';
 import '../model/chat_messages_model.dart';
+import '../model/question_model.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -363,5 +366,210 @@ class AppCubit extends Cubit<AppState> {
   void chanebuttonIndex({required int index}) {
     bottomNavIndex = index;
     emit(ChangeIndex());
+  }
+
+  List<CitiesModel> citiesList = [];
+  Future getSections() async {
+    emit(GetSectionsLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/sections"), body: {
+        "lang": CacheHelper.getLang(),
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          citiesList = List<CitiesModel>.from(
+            (data["data"]["cities"] ?? []).map((e) => CitiesModel.fromJson(e)),
+          );
+          emit(GetSectionsSuccess());
+        } else {
+          emit(GetSectionsFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(GetSectionsFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<QuestionsModel> questionsList = [];
+  Future getQuestions() async {
+    emit(GetQuestionsLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/questions"), body: {
+        "lang": CacheHelper.getLang(),
+        "user_id": CacheHelper.getUserId(),
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          questionsList = List<QuestionsModel>.from(
+            (data["data"] ?? []).map((e) => QuestionsModel.fromJson(e)),
+          );
+          emit(GetQuestionsSuccess());
+        } else {
+          emit(GetQuestionsFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(GetQuestionsFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Map showUserMap = {};
+  Future showUser() async {
+    emit(ShowUserLoading());
+    http.Response response =
+        await http.post(Uri.parse("${baseUrl}api/show-user"), body: {
+      "lang": CacheHelper.getLang(),
+      "user_id": CacheHelper.getUserId(),
+    });
+    Map<String, dynamic> data = jsonDecode(response.body);
+    debugPrint(data.toString());
+
+    if (data["key"] == 1) {
+      showUserMap = data["data"];
+      emit(ShowUserSuccess());
+    } else {
+      emit(ShowUserFailure(error: data["msg"]));
+    }
+  }
+
+Future updateUser({
+    required String firstName,
+    required String lastName,
+    required String phone,
+    required String password,
+  }) async {
+    if (profileImage.isNotEmpty) {
+      await uploadProfileImage();
+    }
+    emit(UpdateUserLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/update-user"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "first_name": firstName,
+        "last_name": lastName,
+        "phone": phone,
+        "password": password,
+        if (profileImage.isNotEmpty) "avatar": profileImageUrl,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(UpdateUserSuccess(message: data["msg"]));
+          profileImage.clear();
+          profileImageUrl = null;
+          showUser();
+        } else {
+          emit(UpdateUserFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(UpdateProfileFailure(error: error.toString()));
+      }
+    }
+  }
+
+List<NotificationsModel> notificationsModel = [];
+  Future showNotifications() async {
+    emit(ShowNotificationsLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/show-notification"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          notificationsModel = List<NotificationsModel>.from(
+            (data["data"] ?? []).map((e) => NotificationsModel.fromJson(e)),
+          );
+
+          emit(ShowNotificationsSuccess(message: data["msg"]));
+        } else {
+          emit(ShowNotificationsFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(ShowNotificationsFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future deleteNotification({
+    required String notificationId,
+    required int index,
+  }) async {
+    emit(DeleteNotificationLoading());
+    try {
+      http.Response response = await http
+          .post(Uri.parse("${baseUrl}api/delete-notification"), body: {
+        "lang": CacheHelper.getLang(),
+        'notification_id': notificationId,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          notificationsModel.removeAt(index);
+          emit(DeleteNotificationSuccess(message: data["msg"]));
+          // showNotifications();
+        } else {
+          emit(DeleteNotificationFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(DeleteNotificationFailure(error: error.toString()));
+      }
+    }
   }
 }

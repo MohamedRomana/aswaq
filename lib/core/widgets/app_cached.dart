@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../gen/assets.gen.dart';
 import '../constants/colors.dart';
 import 'custom_shimmer.dart';
 
@@ -29,7 +30,15 @@ class AppCachedImage extends StatelessWidget {
         child: Container(
           height: height ?? 100.h,
           width: width ?? 100.w,
-          color: AppColors.primary.withOpacity(0.1),
+          decoration: BoxDecoration(
+            color: AppColors.primary.withOpacity(0.1),
+            image: DecorationImage(
+              image: AssetImage(
+                Assets.img.logo.path,
+              ),
+              fit: BoxFit.fill,
+            ),
+          ),
         ),
       ),
       errorWidget: (context, url, error) => Container(

@@ -69,7 +69,7 @@ class CustomMarketsListView extends StatelessWidget {
                             text: 'اسم المحل',
                             color: Colors.black,
                             size: 16.sp,
-                            family: Assets.fonts.norsalBold,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         Icon(

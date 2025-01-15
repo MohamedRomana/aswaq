@@ -8,7 +8,6 @@ import 'package:aswaq/screens/users/shop_screen/widgets/custom_products_gride_vi
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../gen/assets.gen.dart';
 
 final _searchController = TextEditingController();
 
@@ -60,7 +59,7 @@ class _SearchState extends State<Search> {
                   bottom: 20.h,
                   child: AppText(
                     color: Colors.white,
-                    family: Assets.fonts.norsalBold,
+                    fontWeight: FontWeight.bold,
                     text: LocaleKeys.search.tr(),
                   ),
                 ),
