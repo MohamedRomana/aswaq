@@ -20,7 +20,7 @@ class TransferWarrantyCertificate extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
           text: LocaleKeys.transfer_warranty_certificate.tr(),
         ),

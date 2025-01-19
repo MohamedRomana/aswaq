@@ -54,7 +54,7 @@ class ForgetPass extends StatelessWidget {
                 enabledBorderColor: Colors.grey,
                 hint: LocaleKeys.phone.tr(),
                 controller: _phoneController,
-                inputType: TextInputType.emailAddress,
+                inputType: TextInputType.phone,
                 validate: (value) {
                   if (value!.isEmpty) {
                     return LocaleKeys.phoneValidate.tr();

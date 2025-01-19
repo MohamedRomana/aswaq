@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_text.dart';
@@ -14,6 +15,7 @@ class EditProfileFields extends StatelessWidget {
   final TextEditingController passController;
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
+  final TextEditingController cityController;
   final TextEditingController phoneController;
   const EditProfileFields({
     super.key,
@@ -21,6 +23,7 @@ class EditProfileFields extends StatelessWidget {
     required this.phoneController,
     required this.firstNameController,
     required this.lastNameController,
+    required this.cityController,
   });
 
   @override
@@ -86,6 +89,57 @@ class EditProfileFields extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16.h),
+                  AppInput(
+                    enabledBorderColor: Colors.grey,
+                    bottom: 16.h,
+                    filled: true,
+                    hint: AppCubit.get(context).showUserMap['city_title'],
+                    controller: cityController,
+                    prefixIcon: Icon(
+                      Icons.location_on_outlined,
+                      color: Colors.grey,
+                      size: 25.sp,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.grey,
+                      size: 25.sp,
+                    ),
+                    read: true,
+                    onTap: () async {
+                      String? value = await showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SimpleDialog(
+                            backgroundColor: AppColors.borderColor,
+                            title: AppText(
+                              text: LocaleKeys.chooseCity.tr(),
+                              size: 21.sp,
+                            ),
+                            children: AppCubit.get(context).citiesList.map(
+                              (value) {
+                                return SimpleDialogOption(
+                                  onPressed: () {
+                                    AppCubit.get(context).cityId =
+                                        value.id.toString();
+                                    Navigator.pop(context, value.title);
+                                  },
+                                  child: AppText(
+                                    text: value.title,
+                                    size: 18.sp,
+                                    color: AppColors.primary,
+                                  ),
+                                );
+                              },
+                            ).toList(),
+                          );
+                        },
+                      );
+                      if (value != null) {
+                        cityController.text = value;
+                      }
+                    },
+                  ),
                   BlocBuilder<AppCubit, AppState>(
                     builder: (context, state) {
                       return AppInput(

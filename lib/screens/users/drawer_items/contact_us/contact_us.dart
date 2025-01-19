@@ -33,7 +33,7 @@ class ContactUs extends StatelessWidget {
           child: CustomBottomNav(
             key: scaffoldKey,
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(60.h),
+              preferredSize: Size.fromHeight(80.h),
               child: CustomAppBar(
                 text: LocaleKeys.contactUs.tr(),
               ),
@@ -163,11 +163,11 @@ class ContactUs extends StatelessWidget {
                           width: 343.w,
                           child: state is ContactUsLoading
                               ? const CircularProgressIndicator(
-                                  color: AppColors.secondray,
+                                  color: Colors.white,
                                 )
                               : AppText(
                                   text: LocaleKeys.send.tr(),
-                                  color: AppColors.secondray,
+                                  color: Colors.white,
                                 ),
                         );
                       },

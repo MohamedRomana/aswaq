@@ -80,7 +80,10 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
         _shakeController.forward();
         CacheHelper.getLang() != ""
             ? CacheHelper.getUserId() != ""
-                ? AppRouter.navigateAndPop(context, const HomeLayout())
+                ? {
+                    AppCubit.get(context).changebottomNavIndex(2),
+                    AppRouter.navigateAndPop(context, const HomeLayout()),
+                  }
                 : AppRouter.navigateAndPop(context, const LogIn())
             : AppRouter.navigateAndPop(context, const OnBoarding());
 

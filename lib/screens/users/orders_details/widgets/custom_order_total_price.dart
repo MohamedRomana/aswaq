@@ -16,7 +16,10 @@ class CustomOrderTotalPrice extends StatelessWidget {
       children: [
         Container(
           width: 343.w,
-          padding: EdgeInsets.symmetric(vertical: 21.h, horizontal: 16.w),
+          padding: EdgeInsets.symmetric(
+            vertical: 21.h,
+            horizontal: 16.w,
+          ),
           margin: EdgeInsets.only(bottom: 10.h),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -131,10 +134,10 @@ class CustomOrderTotalPrice extends StatelessWidget {
         ),
         AppText(
           top: 15.h,
-          bottom: 31.h,
+          bottom: 130.h,
           text: LocaleKeys.inclusive_of_vat.tr(),
           size: 14.sp,
-        )
+        ),
       ],
     );
   }

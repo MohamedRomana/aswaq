@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../../../core/constants/colors.dart';
 import '../../../../../core/widgets/app_text.dart';
 import '../../../../../gen/assets.gen.dart';
 
@@ -48,23 +49,49 @@ class _CustomMoreProfileRowState extends State<CustomMoreProfileRow> {
                 },
                 child: Row(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100.r),
-                      child: AppCachedImage(
-                        image:
-                            AppCubit.get(context).showUserMap['avatar'] ?? "",
-                        height: 36.w,
-                        width: 36.w,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    AppText(
-                      start: 10.w,
-                      text:
-                          AppCubit.get(context).showUserMap['first_name'] ?? "",
-                      size: 14.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    CacheHelper.getUserId() == "" ||
+                            state is ShowUserLoading &&
+                                AppCubit.get(context).showUserMap.isEmpty
+                        ? Container(
+                            height: 36.w,
+                            width: 36.w,
+                            decoration: const BoxDecoration(
+                              color: AppColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                Assets.svg.user,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(100.r),
+                            child: AppCachedImage(
+                              image:
+                                  AppCubit.get(context).showUserMap['avatar'] ??
+                                      "",
+                              height: 36.w,
+                              width: 36.w,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                    CacheHelper.getUserId() == ""
+                        ? AppText(
+                            start: 10.w,
+                            text: "Guest",
+                            size: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          )
+                        : AppText(
+                            start: 10.w,
+                            text: AppCubit.get(context)
+                                    .showUserMap['first_name'] ??
+                                "",
+                            size: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                   ],
                 ),
               ),

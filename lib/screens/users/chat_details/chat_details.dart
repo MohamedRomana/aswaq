@@ -51,7 +51,7 @@ class _ChatDetailsState extends State<ChatDetails> {
       builder: (context, state) {
         return CustomBottomNav(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50.h),
+            preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text: LocaleKeys.chat.tr(),
             ),

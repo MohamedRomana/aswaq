@@ -48,16 +48,34 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                 },
                 child: Row(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100.r),
-                      child: AppCachedImage(
-                        image:
-                            AppCubit.get(context).showUserMap['avatar'] ?? "",
-                        height: 36.w,
-                        width: 36.w,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    CacheHelper.getUserId() == '' ||
+                            state is ShowUserLoading &&
+                                AppCubit.get(context).showUserMap.isEmpty
+                        ? Container(
+                            height: 36.w,
+                            width: 36.w,
+                            decoration: const BoxDecoration(
+                              color: AppColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                Assets.svg.user,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(100.r),
+                            child: AppCachedImage(
+                              image:
+                                  AppCubit.get(context).showUserMap['avatar'] ??
+                                      "",
+                              height: 36.w,
+                              width: 36.w,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                     SizedBox(width: 6.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

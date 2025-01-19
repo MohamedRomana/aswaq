@@ -32,7 +32,7 @@ class _AboutUsState extends State<AboutUs> {
         return CustomBottomNav(
           key: scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60.h),
+            preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text: LocaleKeys.aboutus.tr(),
             ),

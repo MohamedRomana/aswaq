@@ -96,7 +96,7 @@ class OTPscreen extends StatelessWidget {
                       ? const CircularProgressIndicator(color: Colors.white)
                       : AppText(
                           text: LocaleKeys.confirm.tr(),
-                          color: AppColors.secondray,
+                          color: Colors.white,
                           family: FontFamily.norsalBold,
                         ),
                 );

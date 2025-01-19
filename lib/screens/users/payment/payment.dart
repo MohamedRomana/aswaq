@@ -21,7 +21,7 @@ class Payment extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
           text: LocaleKeys.payment.tr(),
         ),
@@ -171,43 +171,45 @@ class Payment extends StatelessWidget {
                   ],
                 ),
               ),
-                Container(
-          width: 343.w,
-          clipBehavior: Clip.antiAlias,
-          padding: EdgeInsets.symmetric(vertical: 21.h, horizontal: 16.w),
-          margin: EdgeInsets.only(top: 16.h,),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15.r),
-            border: Border.all(color: Colors.grey),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 5.r,
-                spreadRadius: 1.r,
-                offset: Offset(0, 5.r),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppText(
-                text: LocaleKeys.total_value.tr(),
-                size: 14.sp,
-              ),
-              SizedBox(
-                width: 150.w,
-                child: AppText(
-                  textAlign: TextAlign.end,
-                  text: '‏250 ${LocaleKeys.sar.tr()}',
-                  size: 14.sp,
-                  color: AppColors.primary,
+              Container(
+                width: 343.w,
+                clipBehavior: Clip.antiAlias,
+                padding: EdgeInsets.symmetric(vertical: 21.h, horizontal: 16.w),
+                margin: EdgeInsets.only(
+                  top: 16.h,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15.r),
+                  border: Border.all(color: Colors.grey),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5.r,
+                      spreadRadius: 1.r,
+                      offset: Offset(0, 5.r),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppText(
+                      text: LocaleKeys.total_value.tr(),
+                      size: 14.sp,
+                    ),
+                    SizedBox(
+                      width: 150.w,
+                      child: AppText(
+                        textAlign: TextAlign.end,
+                        text: '‏250 ${LocaleKeys.sar.tr()}',
+                        size: 14.sp,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
             ],
           );
         },

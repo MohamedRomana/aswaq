@@ -18,7 +18,7 @@ class ShoppingCarts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
           isHomeLayout: true,
           text: LocaleKeys.shopping_carts.tr(),

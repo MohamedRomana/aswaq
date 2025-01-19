@@ -27,7 +27,7 @@ class ShopScreen extends StatelessWidget {
     ];
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
           isSearch: true,
           text: LocaleKeys.shop_page.tr(),

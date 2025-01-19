@@ -32,7 +32,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         return CustomBottomNav(
           key: scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60.h),
+            preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text: LocaleKeys.privacy_policy.tr(),
             ),

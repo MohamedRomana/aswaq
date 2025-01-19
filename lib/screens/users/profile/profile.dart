@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
       builder: (context, state) {
         return CustomBottomNav(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60.h),
+            preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text: LocaleKeys.profile.tr(),
             ),
@@ -128,8 +128,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           AppText(
                             text: AppCubit.get(context)
-                                    .showUserMap['city_title'] ??
-                                "",
+                                    .showUserMap['city_title'],
                             color: Colors.grey,
                             size: 12.sp,
                           ),

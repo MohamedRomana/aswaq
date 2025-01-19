@@ -15,7 +15,7 @@ class ChatsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
           text: LocaleKeys.chats.tr(),
         ),
@@ -35,6 +35,7 @@ class ChatsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5.r),
               ),
               child: TabBar(
+                splashBorderRadius: BorderRadius.circular(5.r),
                 labelColor: Colors.white,
                 dividerColor: Colors.transparent,
                 indicatorSize: TabBarIndicatorSize.tab,

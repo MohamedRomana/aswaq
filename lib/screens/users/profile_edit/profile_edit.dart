@@ -22,6 +22,7 @@ final _lastNameController = TextEditingController();
 final _emailController = TextEditingController();
 final _phoneController = TextEditingController();
 final _passController = TextEditingController();
+final _cityController = TextEditingController();
 
 class ProfileEdit extends StatelessWidget {
   const ProfileEdit({super.key});
@@ -112,6 +113,7 @@ class ProfileEdit extends StatelessWidget {
                         phoneController: _phoneController,
                         firstNameController: _firstNameController,
                         lastNameController: _lastNameController,
+                        cityController: _cityController,
                       ),
                       BlocConsumer<AppCubit, AppState>(
                         listener: (context, state) {
@@ -126,6 +128,7 @@ class ProfileEdit extends StatelessWidget {
                             _lastNameController.clear();
                             _phoneController.clear();
                             _emailController.clear();
+                            _cityController.clear();
                             _passController.clear();
                           } else if (state is UpdateUserFailure) {
                             showFlashMessage(

@@ -18,7 +18,7 @@ class Favorites extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
           text: LocaleKeys.favorites.tr(),
           isHomeLayout: true,

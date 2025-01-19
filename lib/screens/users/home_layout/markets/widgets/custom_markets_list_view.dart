@@ -16,8 +16,11 @@ class CustomMarketsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding:
-          EdgeInsetsDirectional.only(bottom: 130.h, start: 16.w, end: 16.w),
+      padding: EdgeInsetsDirectional.only(
+        bottom: 130.h,
+        start: 16.w,
+        end: 16.w,
+      ),
       physics: const BouncingScrollPhysics(),
       itemCount: 10,
       separatorBuilder: (context, index) => SizedBox(

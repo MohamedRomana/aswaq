@@ -20,7 +20,6 @@ class CustomAccountDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 282.h,
       width: 343.w,
       padding: EdgeInsets.all(16.r),
       margin: EdgeInsets.symmetric(horizontal: 16.w),
@@ -39,41 +38,46 @@ class CustomAccountDetails extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () {
-              CacheHelper.getUserId() == ""
-                  ? const SizedBox()
-                  : AppRouter.navigateTo(context, const Profile());
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      Assets.svg.profile,
-                      height: 24.w,
-                      width: 24.w,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(width: 6.w),
-                    AppText(
-                      text: LocaleKeys.profile.tr(),
-                      size: 14.sp,
-                      color: const Color(0xff4E4E4E),
-                    ),
-                  ],
+          CacheHelper.getUserId() == ""
+              ? const SizedBox()
+              : InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () {
+                    CacheHelper.getUserId() == ""
+                        ? const SizedBox()
+                        : AppRouter.navigateTo(context, const Profile());
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.svg.profile,
+                            height: 24.w,
+                            width: 24.w,
+                            fit: BoxFit.cover,
+                          ),
+                          SizedBox(width: 6.w),
+                          AppText(
+                            text: LocaleKeys.profile.tr(),
+                            size: 14.sp,
+                            color: const Color(0xff4E4E4E),
+                          ),
+                        ],
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 24.sp,
+                        color: const Color(0xff4E4E4E),
+                      ),
+                    ],
+                  ),
                 ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 24.sp,
-                  color: const Color(0xff4E4E4E),
-                ),
-              ],
-            ),
-          ),
+          CacheHelper.getUserId() == ""
+              ? const SizedBox()
+              : SizedBox(height: 16.h),
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -107,6 +111,7 @@ class CustomAccountDetails extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 16.h),
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -140,6 +145,7 @@ class CustomAccountDetails extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 16.h),
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -173,6 +179,7 @@ class CustomAccountDetails extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 16.h),
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -206,6 +213,7 @@ class CustomAccountDetails extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 16.h),
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,

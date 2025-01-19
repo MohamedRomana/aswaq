@@ -36,7 +36,7 @@ class _NotificationsState extends State<Notifications> {
       builder: (context, state) {
         return CustomBottomNav(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(70.h),
+            preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text: LocaleKeys.notifications.tr(),
             ),

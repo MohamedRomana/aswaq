@@ -17,6 +17,7 @@ class CustomChatWithContainer extends StatelessWidget {
       width: 343.w,
       padding: EdgeInsets.all(16.r),
       margin: EdgeInsetsDirectional.only(
+        top: 16.h,
         start: 16.w,
         end: 16.w,
         bottom: 21.h,

@@ -16,9 +16,9 @@ class OrdersDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
-          text: LocaleKeys.orders.tr(),
+          text: LocaleKeys.orderDetails.tr(),
         ),
       ),
       body: DefaultTabController(
@@ -37,6 +37,7 @@ class OrdersDetails extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5.r),
               ),
               child: TabBar(
+                splashBorderRadius: BorderRadius.circular(5.r),
                 labelColor: Colors.white,
                 dividerColor: Colors.transparent,
                 indicatorSize: TabBarIndicatorSize.tab,
@@ -69,26 +70,24 @@ class OrdersDetails extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        const CustomOrderContentListView(),
-                        const CustomOrderTotalPrice(),
-                        SizedBox(height: 140.h),
+                        CustomOrderContentListView(),
+                        CustomOrderTotalPrice(),
                       ],
                     ),
                   ),
                   SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        const CustomOrderInformation(),
-                        const CustomOrderTotalPrice(),
-                        SizedBox(height: 140.h),
+                        CustomOrderInformation(),
+                        CustomOrderTotalPrice(),
                       ],
                     ),
                   ),

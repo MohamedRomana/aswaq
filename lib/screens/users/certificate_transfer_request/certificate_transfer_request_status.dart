@@ -16,7 +16,7 @@ class CertificateTransferRequestStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomNav(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(80.h),
         child: CustomAppBar(
           text: LocaleKeys.certificate_transfer_request_status.tr(),
         ),

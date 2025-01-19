@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'core/constants/colors.dart';
 import 'core/map/location_helper.dart';
 import 'screens/auth/data/auth_cubit.dart';
 import 'core/cache/cache_helper.dart';
@@ -74,6 +77,13 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeData(
               fontFamily: FontFamily.norsalMedium,
               scaffoldBackgroundColor: Colors.white,
+              textSelectionTheme: TextSelectionThemeData(
+                cursorColor: AppColors.primary, // Cursor color
+                selectionColor: AppColors.primary
+                    .withOpacity(0.3), // Highlighted text background color
+                selectionHandleColor: AppColors.primary,
+                // Handle color
+              ),
             ),
             debugShowCheckedModeBanner: false,
             builder: (context, child) => child!,

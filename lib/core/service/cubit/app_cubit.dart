@@ -113,6 +113,12 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeIndex());
   }
 
+  int changeFavIndex = 0;
+  void changeFavIndexs({required int index}) {
+    changeFavIndex = index;
+    emit(ChangeIndex());
+  }
+
   int changeTermsIndex = -1;
   void changeTermsIndexs({required int index}) {
     changeTermsIndex = index;
@@ -454,7 +460,8 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-Future updateUser({
+  String cityId = '';
+  Future updateUser({
     required String firstName,
     required String lastName,
     required String phone,
@@ -473,6 +480,7 @@ Future updateUser({
         "last_name": lastName,
         "phone": phone,
         "password": password,
+        if (cityId != "") "city_id": cityId,
         if (profileImage.isNotEmpty) "avatar": profileImageUrl,
       }).timeout(const Duration(milliseconds: 8000));
       if (response.statusCode == 500) {
@@ -483,6 +491,7 @@ Future updateUser({
 
         if (data["key"] == 1) {
           emit(UpdateUserSuccess(message: data["msg"]));
+          cityId = "";
           profileImage.clear();
           profileImageUrl = null;
           showUser();
@@ -501,7 +510,7 @@ Future updateUser({
     }
   }
 
-List<NotificationsModel> notificationsModel = [];
+  List<NotificationsModel> notificationsModel = [];
   Future showNotifications() async {
     emit(ShowNotificationsLoading());
     try {
