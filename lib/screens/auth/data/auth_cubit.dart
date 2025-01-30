@@ -91,6 +91,7 @@ class AuthCubit extends Cubit<AuthState> {
     debugPrint(data.toString());
 
     if (data["key"] == 1) {
+      await CacheHelper.setUserId(data["data"]["id"].toString());
       emit(OTPSuccess());
     } else {
       emit(OTPFailure(error: data["msg"]));

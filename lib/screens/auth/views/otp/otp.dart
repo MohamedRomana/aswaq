@@ -1,3 +1,4 @@
+import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,8 @@ import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_text.dart';
 import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../generated/locale_keys.g.dart';
+import '../../../../core/widgets/app_router.dart';
+import '../../../users/home_layout/home_layout.dart';
 import '../../data/auth_cubit.dart';
 import '../widgets/auth_header.dart';
 
@@ -76,7 +79,8 @@ class OTPscreen extends StatelessWidget {
                     message: state.error,
                   );
                 } else if (state is OTPSuccess) {
-                  Navigator.pop(context);
+                  AppCubit.get(context).changebottomNavIndex(2);
+                  AppRouter.navigateAndFinish(context, const HomeLayout());
                   otpCode = "";
                   showFlashMessage(
                     context: context,

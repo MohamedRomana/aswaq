@@ -30,7 +30,7 @@ class CustomMarketsListView extends StatelessWidget {
         return InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
-          onTap: () => AppRouter.navigateTo(context, const ShopScreen()),
+          onTap: () => AppRouter.navigateTo(context,  ShopScreen(id: 0,)),
           child: Container(
             height: 100.h,
             width: 343.w,

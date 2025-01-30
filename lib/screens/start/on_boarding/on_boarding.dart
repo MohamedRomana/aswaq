@@ -63,7 +63,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   children: [
                     PageView.builder(
                       controller: pageController,
-                      itemCount: pagesList.length,
+                      itemCount: AppCubit.get(context).onBoardingList.length,
                       itemBuilder: (context, index) {
                         return Stack(
                           children: [

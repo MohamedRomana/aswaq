@@ -138,7 +138,7 @@ final class GetSectionsFailure extends AppState {
 
 final class GetQuestionsLoading extends AppState {}
 
-final class GetQuestionsSuccess extends AppState {} 
+final class GetQuestionsSuccess extends AppState {}
 
 final class GetQuestionsFailure extends AppState {
   final String error;
@@ -147,7 +147,7 @@ final class GetQuestionsFailure extends AppState {
 
 final class ShowUserLoading extends AppState {}
 
-final class ShowUserSuccess extends AppState {} 
+final class ShowUserSuccess extends AppState {}
 
 final class ShowUserFailure extends AppState {
   final String error;
@@ -178,7 +178,6 @@ final class ShowNotificationsFailure extends AppState {
   ShowNotificationsFailure({required this.error});
 }
 
-
 final class DeleteNotificationLoading extends AppState {}
 
 final class DeleteNotificationSuccess extends AppState {
@@ -189,4 +188,40 @@ final class DeleteNotificationSuccess extends AppState {
 final class DeleteNotificationFailure extends AppState {
   final String error;
   DeleteNotificationFailure({required this.error});
+}
+
+final class ClientHomeLoading extends AppState {}
+
+final class ClientHomeSuccess extends AppState {}
+
+final class ClientHomeFailure extends AppState {
+  final String error;
+  ClientHomeFailure({required this.error});
+}
+
+final class ShowProviderLoading extends AppState {}
+
+final class ShowProviderSuccess extends AppState {}
+
+final class ShowProviderFailure extends AppState {
+  final String error;
+  ShowProviderFailure({required this.error});
+}
+
+final class ShowServicesLoading extends AppState {}
+
+final class ShowServicesSuccess extends AppState {}
+
+final class ShowServicesFailure extends AppState {
+  final String error;
+  ShowServicesFailure({required this.error});
+}
+
+final class AllServicesLoading extends AppState {}
+
+final class AllServicesSuccess extends AppState {}
+
+final class AllServicesFailure extends AppState {
+  final String error;
+  AllServicesFailure({required this.error});
 }

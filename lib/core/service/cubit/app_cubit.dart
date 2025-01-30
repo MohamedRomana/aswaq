@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:aswaq/core/service/model/client_home_model.dart';
+import 'package:aswaq/core/service/model/show_provider_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
 import 'package:aswaq/screens/users/home_layout/shopping_carts/shopping_carts.dart';
@@ -566,7 +568,6 @@ class AppCubit extends Cubit<AppState> {
         if (data["key"] == 1) {
           notificationsModel.removeAt(index);
           emit(DeleteNotificationSuccess(message: data["msg"]));
-          // showNotifications();
         } else {
           emit(DeleteNotificationFailure(error: data["msg"]));
         }
@@ -578,6 +579,120 @@ class AppCubit extends Cubit<AppState> {
       } else {
         debugPrint(error.toString());
         emit(DeleteNotificationFailure(error: error.toString()));
+      }
+    }
+  }
+
+  ClientHomeModel? clientHomeModel;
+  Future clientHome() async {
+    emit(ClientHomeLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/client_home"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+      });
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          clientHomeModel = ClientHomeModel.fromJson(data["data"]);
+          emit(ClientHomeSuccess());
+        } else {
+          emit(ClientHomeFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(ClientHomeFailure(error: error.toString()));
+      }
+    }
+  }
+
+  ShowProviderModel? showProviderModel;
+  List subSections = [];
+  Future showProvider({required String providerId}) async {
+    emit(ShowProviderLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/show-provider"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "provider_id": providerId,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          showProviderModel = ShowProviderModel.fromJson(data["data"]);
+          allServiceList = showProviderModel!.services;
+          if (data["data"]["sub_sections"].length == 1) {
+            subSections = data["data"]["sub_sections"];
+          } else {
+            subSections = [
+              {"id": 0, "title": "الكل"}
+            ];
+            subSections.addAll(data["data"]["sub_sections"]);
+          }
+          emit(ShowProviderSuccess());
+        } else {
+          emit(ShowProviderFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(ShowProviderFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<AllServiceModel> allServiceList = [];
+
+  Future allServices({required String subsectionId}) async {
+    emit(AllServicesLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/services"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "sub_section_id": subsectionId,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          allServiceList = List<AllServiceModel>.from(
+            (data["data"] ?? []).map((e) => AllServiceModel.fromJson(e)),
+          );
+          emit(AllServicesSuccess());
+        } else {
+          emit(AllServicesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(AllServicesFailure(error: error.toString()));
       }
     }
   }
