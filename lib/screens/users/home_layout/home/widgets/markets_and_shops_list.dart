@@ -42,8 +42,14 @@ class MarketsAndShopsListView extends StatelessWidget {
                 return InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onTap: () =>
-                      AppRouter.navigateTo(context,  ShopScreen(id: AppCubit.get(context).clientHomeModel!.providers[index].id,)),
+                  onTap: () => AppRouter.navigateTo(
+                      context,
+                      ShopScreen(
+                        id: AppCubit.get(context)
+                            .clientHomeModel!
+                            .providers[index]
+                            .id,
+                      )),
                   child: Container(
                     height: 100.h,
                     width: 343.w,
@@ -99,22 +105,25 @@ class MarketsAndShopsListView extends StatelessWidget {
                                 SizedBox(
                                   width: 30.w,
                                   child: InkWell(
-                                    onTap: () {},
-                                    child: AppCubit.get(context)
-                                                .clientHomeModel
-                                                ?.providers[index]
-                                                .isUserFav ==
-                                            true
-                                        ? Icon(
-                                            Icons.favorite,
-                                            color: Colors.red,
-                                            size: 19.sp,
-                                          )
-                                        : Icon(
-                                            Icons.favorite_border,
-                                            color: Colors.red,
-                                            size: 19.sp,
-                                          ),
+                                    onTap: () {
+                                      AppCubit.get(context).addFavorite(
+                                        providerId: AppCubit.get(context)
+                                            .clientHomeModel!
+                                            .providers[index]
+                                            .id
+                                            .toString(),
+                                      );
+                                    },
+                                    child: Icon(
+                                      AppCubit.get(context)
+                                              .clientHomeModel!
+                                              .providers[index]
+                                              .isUserFav
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: Colors.red,
+                                      size: 19.sp,
+                                    ),
                                   ),
                                 ),
                               ],

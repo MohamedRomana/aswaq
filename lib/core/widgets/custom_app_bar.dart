@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../gen/assets.gen.dart';
 import '../../generated/locale_keys.g.dart';
+import '../../screens/users/home_layout/markets/widgets/filter_bottom_sheet.dart';
 import '../service/cubit/app_cubit.dart';
 import 'app_text.dart';
 
@@ -68,44 +69,7 @@ class CustomAppBar extends StatelessWidget {
                             showModalBottomSheet(
                               context: context,
                               builder: (context) {
-                                return Container(
-                                  height: 209.h,
-                                  padding: EdgeInsets.all(28.r),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadiusDirectional.only(
-                                      topEnd: Radius.circular(15.r),
-                                      topStart: Radius.circular(15.r),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      AppText(
-                                        text: LocaleKeys.sortByNearest.tr(),
-                                        color: Colors.black,
-                                        size: 16.sp,
-                                      ),
-                                      const Divider(
-                                          thickness: 1, color: Colors.grey),
-                                      AppText(
-                                        text:
-                                            LocaleKeys.sortByHighestRating.tr(),
-                                        color: Colors.black,
-                                        size: 16.sp,
-                                      ),
-                                      const Divider(
-                                          thickness: 1, color: Colors.grey),
-                                      AppText(
-                                        text: LocaleKeys.sort_by_most_requested
-                                            .tr(),
-                                        color: Colors.black,
-                                        size: 16.sp,
-                                      ),
-                                    ],
-                                  ),
-                                );
+                                return const FilterBottomSheet();
                               },
                             );
                           },

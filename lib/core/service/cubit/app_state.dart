@@ -225,3 +225,81 @@ final class AllServicesFailure extends AppState {
   final String error;
   AllServicesFailure({required this.error});
 }
+
+final class ShowServiceLoading extends AppState {}
+
+final class ShowServiceSuccess extends AppState {}
+
+final class ShowServiceFailure extends AppState {
+  final String error;
+  ShowServiceFailure({required this.error});
+}
+
+final class AllProvidersLoading extends AppState {}
+
+final class AllProvidersSuccess extends AppState {}
+
+final class AllProvidersFailure extends AppState {
+  final String error;
+  AllProvidersFailure({required this.error});
+}
+
+final class SubSectionsLoading extends AppState {}
+
+final class SubSectionsSuccess extends AppState {}
+
+final class SubSectionsFailure extends AppState {
+  final String error;
+  SubSectionsFailure({required this.error});
+}
+
+final class GetDataLoading extends AppState {}
+
+final class GetDataSuccess extends AppState {}
+
+final class GetDataFailure extends AppState {
+  final String error;
+  GetDataFailure({required this.error});
+}
+
+final class AddFavoriteLoading extends AppState {}
+
+final class AddFavoriteSuccess extends AppState {
+  final String message;
+  AddFavoriteSuccess({required this.message});
+}
+
+final class AddFavoriteFailure extends AppState {
+  final String error;
+  AddFavoriteFailure({required this.error});
+}
+
+final class ShowFavoriteLoading extends AppState {}
+
+final class ShowFavoriteSuccess extends AppState {}
+
+final class ShowFavoriteFailure extends AppState {
+  final String error;
+  ShowFavoriteFailure({required this.error});
+}
+
+final class RemoveFavLoading extends AppState {}
+
+final class RemoveFavSuccess extends AppState {}
+
+final class RemoveFavFailure extends AppState {
+  final String error;
+  RemoveFavFailure({required this.error});
+}
+
+final class AddToCartLoading extends AppState {}
+
+final class AddToCartSuccess extends AppState {
+  final String message;
+  AddToCartSuccess({required this.message});
+}
+
+final class AddToCartFailure extends AppState {
+  final String error;
+  AddToCartFailure({required this.error});
+}

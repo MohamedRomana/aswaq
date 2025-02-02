@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:aswaq/core/service/model/client_home_model.dart';
+import 'package:aswaq/core/service/model/fav_list_model.dart';
 import 'package:aswaq/core/service/model/show_provider_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
 import 'package:aswaq/screens/users/home_layout/shopping_carts/shopping_carts.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,11 +16,14 @@ import '../../../screens/users/home_layout/home/home.dart';
 import '../../../screens/users/home_layout/more/more.dart';
 import '../../cache/cache_helper.dart';
 import '../../constants/contsants.dart';
+import '../model/all_providers_model.dart';
 import '../model/cities_model.dart';
+import '../model/data_model.dart';
 import '../model/notifications_model.dart';
 import '../model/on_boarding_model.dart';
 import '../model/chat_messages_model.dart';
 import '../model/question_model.dart';
+import '../model/show_service_model.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -693,6 +698,349 @@ class AppCubit extends Cubit<AppState> {
       } else {
         debugPrint(error.toString());
         emit(AllServicesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  ShowServiceModel? showServiceModel;
+  List<ImagesList> serviceImages = [];
+
+  Future showService({required String serviceId}) async {
+    emit(ShowServiceLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/show-service"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "service_id": serviceId,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+        if (data["key"] == 1) {
+          serviceImages = List<ImagesList>.from(
+            (data["data"]["images"] ?? []).map((e) => ImagesList.fromJson(e)),
+          );
+          showServiceModel = ShowServiceModel.fromJson(data["data"]);
+          emit(ShowServiceSuccess());
+        } else {
+          emit(ShowServiceFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(ShowServiceFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<AllProvidersModel> allProvidersList = [];
+
+  Future allProviders() async {
+    emit(AllProvidersLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/providers"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          allProvidersList = List<AllProvidersModel>.from(
+            (data["data"] ?? []).map((e) => AllProvidersModel.fromJson(e)),
+          );
+          emit(AllProvidersSuccess());
+        } else {
+          emit(AllProvidersFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(AllProvidersFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<Sections> sections = [];
+  Future getData() async {
+    emit(GetDataLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/sections"), body: {
+        "lang": CacheHelper.getLang(),
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          sections = List<Sections>.from(
+            (data["data"]['sections'] ?? []).map((e) => Sections.fromJson(e)),
+          );
+          emit(GetDataSuccess());
+        } else {
+          emit(GetDataFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(GetDataFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List serviceList = [];
+  Future subSection({required String salerId}) async {
+    emit(SubSectionsLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/sub_sections"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "saler_id": salerId,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          serviceList = data["data"]['services'];
+          emit(SubSectionsSuccess());
+        } else {
+          emit(SubSectionsFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(SubSectionsFailure(error: error.toString()));
+      }
+    }
+  }
+
+  int marketIndex = 0;
+  void changeMarketIndex({required int index}) {
+    marketIndex = index;
+    emit(ChangeIndex());
+  }
+
+  List sectionsProvidersList = [];
+  Future allSections({
+    required String sectionId,
+    String? filter = "",
+    bool isDistance = false,
+  }) async {
+    emit(GetSectionsLoading());
+    if (isDistance) {
+      Position? myPosition;
+      myPosition = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      lat = myPosition.latitude;
+      lng = myPosition.longitude;
+    }
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/sections"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "section_id": sectionId,
+        if (isDistance) "lat": lat.toString(),
+        if (isDistance) "lng": lng.toString(),
+        "filter": filter,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+        if (data["key"] == 1) {
+          sectionsProvidersList = data["data"]['providers'];
+          emit(GetSectionsSuccess());
+        } else {
+          emit(GetSectionsFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(GetSectionsFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future addFavorite({required String providerId}) async {
+    emit(AddFavoriteLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/add-to-favourite"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "provider_id": providerId,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(AddFavoriteSuccess(message: data["msg"]));
+        } else {
+          emit(AddFavoriteFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(AddFavoriteFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<Provicers> provicersList = [];
+  Future showFavorite() async {
+    emit(ShowFavoriteLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/show-favourites"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          provicersList = List<Provicers>.from(
+            (data["data"]['provicers'] ?? []).map((e) => Provicers.fromJson(e)),
+          );
+          emit(ShowFavoriteSuccess());
+        } else {
+          emit(ShowFavoriteFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(ShowFavoriteFailure(error: error.toString()));
+      }
+    }
+  }
+
+  int removeFavIndex = 0;
+  void changeRemoveFavIndex({required int index}) {
+    removeFavIndex = index;
+    emit(ChangeIndex());
+  }
+
+  Future removeFav({required String providerId, required int index}) async {
+    emit(RemoveFavLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/add-to-favourite"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "provider_id": providerId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          provicersList.removeAt(index);
+          emit(RemoveFavSuccess());
+        } else {
+          debugPrint(data["msg"]);
+          emit(RemoveFavFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(RemoveFavFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future addToCart({
+    required String serviceId,
+  }) async {
+    emit(AddToCartLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/add-to-cart"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "service_id": serviceId,
+          "count": count.toString(),
+          "has_certificate": requestIndex == 1 ? "1" : "0",
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(AddToCartSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(AddToCartFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(AddToCartFailure(error: error.toString()));
       }
     }
   }

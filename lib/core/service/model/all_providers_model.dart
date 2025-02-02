@@ -1,48 +1,4 @@
-class ClientHomeModel {
-  late final List<Sliders> sliders;
-  late final List<Providers> providers;
-  late final List<Services> services;
-
-  ClientHomeModel.fromJson(Map<String, dynamic> json) {
-    if (json['sliders'] != null) {
-      sliders = <Sliders>[];
-      json['sliders'].forEach((v) {
-        sliders.add(Sliders.fromJson(v));
-      });
-    }
-    if (json['providers'] != null) {
-      providers = <Providers>[];
-      json['providers'].forEach((v) {
-        providers.add(Providers.fromJson(v));
-      });
-    }
-    if (json['services'] != null) {
-      services = <Services>[];
-      json['services'].forEach((v) {
-        services.add(Services.fromJson(v));
-      });
-    }
-  }
-}
-
-class Sliders {
-  late final int id;
-  late final String image;
-
-  Sliders.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    image = json['image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['image'] = image;
-    return data;
-  }
-}
-
-class Providers {
+class AllProvidersModel {
   late final int id;
   late final String firstName;
   late final String email;
@@ -52,7 +8,7 @@ class Providers {
   late final double lat;
   late final double lng;
   late final int distance;
-  bool isUserFav = false;
+  late final bool isUserFav;
   late final int rate;
   late final int rateCount;
   late final int finishOrdersCount;
@@ -63,7 +19,7 @@ class Providers {
   late final List<SubSections> subSections;
   late final List<Services> services;
 
-  Providers.fromJson(Map<String, dynamic> json) {
+  AllProvidersModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['first_name'];
     email = json['email'];
@@ -121,7 +77,6 @@ class SubSections {
   late final int id;
   late final String title;
   late final bool checked;
-
   SubSections.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
@@ -147,6 +102,7 @@ class Services {
   late final int sectionId;
   late final String sectionTitle;
   late final String firstImage;
+  late final List<Images> images;
   late final List<Null> rates;
 
   Services.fromJson(Map<String, dynamic> json) {
@@ -167,5 +123,21 @@ class Services {
     sectionId = json['section_id'];
     sectionTitle = json['section_title'];
     firstImage = json['first_image'];
+    if (json['images'] != null) {
+      images = <Images>[];
+      json['images'].forEach((v) {
+        images.add(Images.fromJson(v));
+      });
+    }
+  }
+}
+
+class Images {
+  late final int id;
+  late final String image;
+
+  Images.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    image = json['image'];
   }
 }

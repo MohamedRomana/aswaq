@@ -45,7 +45,12 @@ class BestProductsListView extends StatelessWidget {
                       context: context,
                       isScrollControlled: true,
                       backgroundColor: Colors.white,
-                      builder: (context) => const ProductDetailsBottomSheet(),
+                      builder: (context) => ProductDetailsBottomSheet(
+                        id: AppCubit.get(context)
+                            .clientHomeModel!
+                            .services[index]
+                            .id,
+                      ),
                     ),
                     child: Stack(
                       children: [
@@ -145,7 +150,8 @@ class BestProductsListView extends StatelessWidget {
                                   width: 150.w,
                                   child: AppText(
                                     textAlign: TextAlign.end,
-                                    text: '${AppCubit.get(context).clientHomeModel?.services[index].price} ${LocaleKeys.sar.tr()}',
+                                    text:
+                                        '${AppCubit.get(context).clientHomeModel?.services[index].price} ${LocaleKeys.sar.tr()}',
                                     size: 12.sp,
                                     color: AppColors.primary,
                                   ),

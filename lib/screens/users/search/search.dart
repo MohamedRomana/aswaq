@@ -93,7 +93,7 @@ class _SearchState extends State<Search> {
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.white,
-                        builder: (context) => const ProductDetailsBottomSheet(),
+                        builder: (context) => const ProductDetailsBottomSheet(id: 0,),
                       );
                     },
                     child: Container(

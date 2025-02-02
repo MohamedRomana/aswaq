@@ -1,13 +1,14 @@
-class ClientHomeModel {
-  late final List<Sliders> sliders;
+class DataModel {
+  late final int sectionId;
+  late final List<Sections> sections;
   late final List<Providers> providers;
-  late final List<Services> services;
 
-  ClientHomeModel.fromJson(Map<String, dynamic> json) {
-    if (json['sliders'] != null) {
-      sliders = <Sliders>[];
-      json['sliders'].forEach((v) {
-        sliders.add(Sliders.fromJson(v));
+  DataModel.fromJson(Map<String, dynamic> json) {
+    sectionId = json['section_id'];
+    if (json['sections'] != null) {
+      sections = <Sections>[];
+      json['sections'].forEach((v) {
+        sections.add(Sections.fromJson(v));
       });
     }
     if (json['providers'] != null) {
@@ -16,29 +17,18 @@ class ClientHomeModel {
         providers.add(Providers.fromJson(v));
       });
     }
-    if (json['services'] != null) {
-      services = <Services>[];
-      json['services'].forEach((v) {
-        services.add(Services.fromJson(v));
-      });
-    }
   }
 }
 
-class Sliders {
+class Sections {
   late final int id;
-  late final String image;
+  late final String title;
+  late final bool checked;
 
-  Sliders.fromJson(Map<String, dynamic> json) {
+  Sections.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    image = json['image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['image'] = image;
-    return data;
+    title = json['title'];
+    checked = json['checked'];
   }
 }
 
@@ -52,7 +42,7 @@ class Providers {
   late final double lat;
   late final double lng;
   late final int distance;
-  bool isUserFav = false;
+  late final bool isUserFav;
   late final int rate;
   late final int rateCount;
   late final int finishOrdersCount;
@@ -60,7 +50,6 @@ class Providers {
   late final int servicesCount;
   late final String avatar;
   late final List<Rates> rates;
-  late final List<SubSections> subSections;
   late final List<Services> services;
 
   Providers.fromJson(Map<String, dynamic> json) {
@@ -86,12 +75,7 @@ class Providers {
         rates.add(Rates.fromJson(v));
       });
     }
-    if (json['sub_sections'] != null) {
-      subSections = <SubSections>[];
-      json['sub_sections'].forEach((v) {
-        subSections.add(SubSections.fromJson(v));
-      });
-    }
+
     if (json['services'] != null) {
       services = <Services>[];
       json['services'].forEach((v) {
@@ -117,18 +101,6 @@ class Rates {
   }
 }
 
-class SubSections {
-  late final int id;
-  late final String title;
-  late final bool checked;
-
-  SubSections.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    checked = json['checked'];
-  }
-}
-
 class Services {
   late final int id;
   late final String title;
@@ -147,6 +119,7 @@ class Services {
   late final int sectionId;
   late final String sectionTitle;
   late final String firstImage;
+  late final List<Images> images;
   late final List<Null> rates;
 
   Services.fromJson(Map<String, dynamic> json) {
@@ -167,5 +140,21 @@ class Services {
     sectionId = json['section_id'];
     sectionTitle = json['section_title'];
     firstImage = json['first_image'];
+    if (json['images'] != null) {
+      images = <Images>[];
+      json['images'].forEach((v) {
+        images.add(Images.fromJson(v));
+      });
+    }
+  }
+}
+
+class Images {
+  late final int id;
+  late final String image;
+
+  Images.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    image = json['image'];
   }
 }
