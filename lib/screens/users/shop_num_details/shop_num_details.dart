@@ -12,9 +12,22 @@ import '../../../core/service/cubit/app_cubit.dart';
 import '../../../generated/locale_keys.g.dart';
 import 'widgets/carts_list_view.dart';
 import 'widgets/cost_container.dart';
+import 'widgets/custom_shop_num_shimmer.dart';
 
-class ShopNumDetails extends StatelessWidget {
-  const ShopNumDetails({super.key});
+class ShopNumDetails extends StatefulWidget {
+  final int id;
+  const ShopNumDetails({super.key, required this.id});
+
+  @override
+  State<ShopNumDetails> createState() => _ShopNumDetailsState();
+}
+
+class _ShopNumDetailsState extends State<ShopNumDetails> {
+  @override
+  void initState() {
+    AppCubit.get(context).cartItems(cartItemId: widget.id.toString());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,29 +37,39 @@ class ShopNumDetails extends StatelessWidget {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
-              text: ' ${LocaleKeys.shop_details_number.tr()} 1',
+              text:
+                  '${LocaleKeys.shop_details_number.tr()} ${AppCubit.get(context).cartItemsModel?.salerName}',
             ),
           ),
-          body: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                const CartsListView(),
-                const CostContainer(),
-                AppButton(
-                  top: 24.h,
-                  bottom: 140.h,
-                  onPressed: () {
-                    AppRouter.navigateTo(context, const PaymentDone());
-                  },
-                  child: AppText(
-                    text: LocaleKeys.complete_order.tr(),
-                    color: Colors.white,
+          body: state is CartItemsLoading &&
+                  AppCubit.get(context).cartItemsModel == null
+              ? const CustomShopNumShimmer()
+              : SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      const CartsListView(),
+                      const CostContainer(),
+                      AppButton(
+                        top: 24.h,
+                        bottom: 140.h,
+                        onPressed: () {
+                          AppRouter.navigateTo(
+                            context,
+                            PaymentDone(
+                              cartItemsModel:
+                                  AppCubit.get(context).cartItemsModel!,
+                            ),
+                          );
+                        },
+                        child: AppText(
+                          text: LocaleKeys.complete_order.tr(),
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
         );
       },
     );

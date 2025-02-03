@@ -303,3 +303,63 @@ final class AddToCartFailure extends AppState {
   final String error;
   AddToCartFailure({required this.error});
 }
+
+final class ShowCartLoading extends AppState {}
+
+final class ShowCartSuccess extends AppState {}
+
+final class ShowCartFailure extends AppState {
+  final String error;
+  ShowCartFailure({required this.error});
+}
+
+final class DeleteCartLoading extends AppState {}
+
+final class DeleteCartSuccess extends AppState {
+  final String message;
+  DeleteCartSuccess({required this.message});
+}
+
+final class DeleteCartFailure extends AppState {
+  final String error;
+  DeleteCartFailure({required this.error});
+}
+
+final class CartItemsLoading extends AppState {}
+
+final class CartItemsSuccess extends AppState {
+  final String message;
+  CartItemsSuccess({required this.message});
+}
+
+final class CartItemsFailure extends AppState {
+  final String error;
+  CartItemsFailure({required this.error});
+}
+
+final class UpdateCartLoading extends AppState {}
+
+final class UpdateCartSuccess extends AppState {
+  final String message;
+  UpdateCartSuccess({required this.message});
+}
+
+final class UpdateCartFailure extends AppState {
+  final String error;
+  UpdateCartFailure({required this.error});
+}
+
+final class ChangeIndexSuccess extends AppState {}
+
+
+final class StoreOrderLoading extends AppState {}
+
+final class StoreOrderSuccess extends AppState {
+  final String message;
+  StoreOrderSuccess({required this.message});
+}
+
+final class StoreOrderFailure extends AppState {
+  final String error;
+  StoreOrderFailure({required this.error});
+}

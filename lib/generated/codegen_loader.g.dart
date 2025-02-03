@@ -364,7 +364,7 @@ class CodegenLoader extends AssetLoader{
   "add_to_cart": "Add to cart",
   "product_description": "Product description",
   "request_warranty_certificate": "Request warranty certificate for the device",
-  "shop_details_number": "Shop details number",
+  "shop_details_number": "Shop details",
   "total_value": "Total value",
   "complete_order": "Complete order",
   "bank_transfer": "Bank transfer",
@@ -419,7 +419,10 @@ class CodegenLoader extends AssetLoader{
   "current_chats": "Current chats",
   "order_number": "Order number",
   "reason_for_returning_product": "Reason for returning the product",
-  "chat_with": "Chat with"
+  "chat_with": "Chat with",
+  "total_cart": "Total cart",
+  "store_number": "Store number",
+  "complete_the_selections": "Complete the selections, please"
 };
 static const Map<String,dynamic> ar = {
   "chooseLang": "اختر اللغة المناسبة",
@@ -771,7 +774,7 @@ static const Map<String,dynamic> ar = {
   "add_to_cart": "اضف للسلة",
   "product_description": "وصف المنتج",
   "request_warranty_certificate": "طلب شهادة ضمان للجهاز",
-  "shop_details_number": "تفاصيل محل رقم",
+  "shop_details_number": "تفاصيل محل",
   "total_value": "القيمة الاجمالية",
   "complete_order": "اتمام الطلب",
   "bank_transfer": "تحويل بنكي",
@@ -826,7 +829,10 @@ static const Map<String,dynamic> ar = {
   "current_chats": "المحادثات الحالية",
   "order_number": "رقم الطلب",
   "reason_for_returning_product": "سبب استرجاع المنتج",
-  "chat_with": "محادثة مع"
+  "chat_with": "محادثة مع",
+  "total_cart": "اجمالي السلة",
+  "store_number": "محل رقم",
+  "complete_the_selections": "اكمل الاختيارات من فضلك"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};
 }

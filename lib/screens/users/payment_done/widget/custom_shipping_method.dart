@@ -118,6 +118,12 @@ class CustomShippingMethod extends StatelessWidget {
                   AppCubit.get(context).changeShipIndex(index: -1);
                 } else {
                   AppCubit.get(context).changeShipIndex(index: 1);
+                  customBottomSheet(
+                    context: context,
+                    enableDrag: false,
+                    isDismissible: false,
+                    child: const MapScreen(),
+                  );
                 }
               },
               child: Container(
@@ -191,6 +197,7 @@ class CustomShippingMethod extends StatelessWidget {
                           customBottomSheet(
                             context: context,
                             enableDrag: false,
+                            isDismissible: false,
                             child: const MapScreen(),
                           );
                         } else {

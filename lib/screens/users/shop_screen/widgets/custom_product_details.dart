@@ -11,6 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/widgets/app_router.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/widgets/flash_message.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 import 'custom_bottom_sheet_load.dart';
@@ -28,6 +29,8 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
   @override
   void initState() {
     AppCubit.get(context).showService(serviceId: widget.id.toString());
+    AppCubit.get(context).hasCertificate = false;
+    AppCubit.get(context).count = 1;
     super.initState();
   }
 
@@ -157,11 +160,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () {
-                          if (AppCubit.get(context).requestIndex == 0) {
-                            AppCubit.get(context).changerequestIndex(index: -1);
-                          } else {
-                            AppCubit.get(context).changerequestIndex(index: 0);
-                          }
+                          AppCubit.get(context).changeCertificate();
                         },
                         child: Padding(
                           padding: EdgeInsets.only(top: 16.h, bottom: 30.h),
@@ -171,7 +170,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                                 height: 22.w,
                                 width: 22.w,
                                 decoration: BoxDecoration(
-                                  color: AppCubit.get(context).requestIndex == 0
+                                  color: AppCubit.get(context).hasCertificate
                                       ? AppColors.primary
                                       : Colors.transparent,
                                   shape: BoxShape.circle,
@@ -255,41 +254,69 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                               ],
                             ),
                           ),
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () {
-                              AppCubit.get(context).changebottomNavIndex(3);
-                              AppRouter.navigateAndFinish(
-                                  context, const HomeLayout());
+                          BlocConsumer<AppCubit, AppState>(
+                            listener: (context, state) {
+                              if (state is AddToCartSuccess) {
+                                AppCubit.get(context).changebottomNavIndex(3);
+                                AppRouter.navigateAndFinish(
+                                    context, const HomeLayout());
+                                showFlashMessage(
+                                  context: context,
+                                  type: FlashMessageType.success,
+                                  message: state.message,
+                                );
+                              } else if (state is AddToCartFailure) {
+                                showFlashMessage(
+                                  message: state.error,
+                                  type: FlashMessageType.error,
+                                  context: context,
+                                );
+                              }
                             },
-                            child: Container(
-                              height: 50.h,
-                              width: 155.w,
-                              decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(15.r),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    Assets.svg.bag,
-                                    height: 24.w,
-                                    width: 24.w,
-                                    fit: BoxFit.cover,
-                                    color: Colors.white,
+                            builder: (context, state) {
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () {
+                                  AppCubit.get(context).addToCart(
+                                      serviceId: widget.id.toString());
+                                },
+                                child: Container(
+                                  height: 50.h,
+                                  width: 155.w,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(15.r),
                                   ),
-                                  SizedBox(width: 3.w),
-                                  AppText(
-                                    text: LocaleKeys.add_to_cart.tr(),
-                                    color: Colors.white,
-                                    size: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ],
-                              ),
-                            ),
+                                  child: state is AddToCartLoading
+                                      ? const Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              Assets.svg.bag,
+                                              height: 24.w,
+                                              width: 24.w,
+                                              fit: BoxFit.cover,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(width: 3.w),
+                                            AppText(
+                                              text: LocaleKeys.add_to_cart.tr(),
+                                              color: Colors.white,
+                                              size: 16.sp,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ],
+                                        ),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       )

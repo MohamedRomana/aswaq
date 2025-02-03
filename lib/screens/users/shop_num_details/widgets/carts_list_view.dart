@@ -1,3 +1,4 @@
+import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
+import '../../../../core/widgets/app_cached.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -14,7 +16,13 @@ class CartsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {
+        if (state is CartItemsFailure) {
+          AppCubit.get(context).showCart();
+          AppRouter.pop(context);
+        }
+      },
       builder: (context, state) {
         return ListView.separated(
           shrinkWrap: true,
@@ -25,7 +33,8 @@ class CartsListView extends StatelessWidget {
             start: 16.w,
             end: 16.w,
           ),
-          itemCount: 3,
+          itemCount:
+              AppCubit.get(context).cartItemsModel?.cartItems.length ?? 0,
           separatorBuilder: (context, index) => SizedBox(
             height: 16.h,
           ),
@@ -61,10 +70,13 @@ class CartsListView extends StatelessWidget {
                         offset: Offset(0, 5.r),
                       ),
                     ],
-                    image: DecorationImage(
-                      image: AssetImage(Assets.img.wash.path),
-                      fit: BoxFit.cover,
-                    ),
+                  ),
+                  child: AppCachedImage(
+                    image: AppCubit.get(context)
+                        .cartItemsModel!
+                        .cartItems[index]
+                        .serviceFirstImage,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Padding(
@@ -73,27 +85,35 @@ class CartsListView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 120.w,
+                        width: 110.w,
                         child: AppText(
-                          text: 'اسم المنتج',
+                          text: AppCubit.get(context)
+                              .cartItemsModel!
+                              .cartItems[index]
+                              .serviceTitle,
                           size: 16.sp,
+                          lines: 2,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(
-                        width: 120.w,
+                        width: 110.w,
                         child: AppText(
                           top: 6.h,
-                          text: 'اسم القسم',
+                          text: AppCubit.get(context)
+                              .cartItemsModel!
+                              .cartItems[index]
+                              .serviceSectionTitle,
                           size: 14.sp,
                           color: Colors.grey,
                         ),
                       ),
                       SizedBox(
-                        width: 120.w,
+                        width: 110.w,
                         child: AppText(
                           top: 22.h,
-                          text: '‏175  ${LocaleKeys.sar.tr()}',
+                          text:
+                              '${AppCubit.get(context).cartItemsModel!.cartItems[index].servicePrice}  ${LocaleKeys.sar.tr()}',
                           size: 14.sp,
                           color: AppColors.primary,
                         ),
@@ -103,12 +123,32 @@ class CartsListView extends StatelessWidget {
                 ),
                 const Spacer(),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    SvgPicture.asset(
-                      Assets.svg.trash,
-                      height: 24.w,
-                      width: 24.w,
-                      fit: BoxFit.cover,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        AppCubit.get(context).updateCartIndex(index: index);
+                        AppCubit.get(context).updateCart(
+                          cartItemId: AppCubit.get(context)
+                              .cartItemsModel!
+                              .cartItems[index]
+                              .id
+                              .toString(),
+                          cartId: AppCubit.get(context)
+                              .cartItemsModel!
+                              .id
+                              .toString(),
+                          count: '0',
+                        );
+                      },
+                      child: SvgPicture.asset(
+                        Assets.svg.trash,
+                        height: 24.w,
+                        width: 24.w,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     SizedBox(height: 41.h),
                     Row(
@@ -117,7 +157,24 @@ class CartsListView extends StatelessWidget {
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () {
-                            AppCubit.get(context).increseCount();
+                            AppCubit.get(context).updateCartIndex(index: index);
+                            AppCubit.get(context).updateCart(
+                              cartItemId: AppCubit.get(context)
+                                  .cartItemsModel!
+                                  .cartItems[index]
+                                  .id
+                                  .toString(),
+                              cartId: AppCubit.get(context)
+                                  .cartItemsModel!
+                                  .id
+                                  .toString(),
+                              count: (AppCubit.get(context)
+                                          .cartItemsModel!
+                                          .cartItems[index]
+                                          .count +
+                                      1)
+                                  .toString(),
+                            );
                           },
                           child: Container(
                             height: 25.w,
@@ -134,9 +191,13 @@ class CartsListView extends StatelessWidget {
                           ),
                         ),
                         AppText(
-                          start: 11.w,
-                          end: 11.w,
-                          text: AppCubit.get(context).count.toString(),
+                          start: 10.w,
+                          end: 10.w,
+                          text: AppCubit.get(context)
+                              .cartItemsModel!
+                              .cartItems[index]
+                              .count
+                              .toString(),
                           size: 18.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -144,7 +205,24 @@ class CartsListView extends StatelessWidget {
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () {
-                            AppCubit.get(context).decreseCount();
+                            AppCubit.get(context).updateCartIndex(index: index);
+                            AppCubit.get(context).updateCart(
+                              cartItemId: AppCubit.get(context)
+                                  .cartItemsModel!
+                                  .cartItems[index]
+                                  .id
+                                  .toString(),
+                              cartId: AppCubit.get(context)
+                                  .cartItemsModel!
+                                  .id
+                                  .toString(),
+                              count: (AppCubit.get(context)
+                                          .cartItemsModel!
+                                          .cartItems[index]
+                                          .count -
+                                      1)
+                                  .toString(),
+                            );
                           },
                           child: Container(
                             height: 25.w,

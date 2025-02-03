@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:aswaq/core/service/model/client_home_model.dart';
 import 'package:aswaq/core/service/model/fav_list_model.dart';
+import 'package:aswaq/core/service/model/show_cart_model.dart';
 import 'package:aswaq/core/service/model/show_provider_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
@@ -23,6 +24,7 @@ import '../model/notifications_model.dart';
 import '../model/on_boarding_model.dart';
 import '../model/chat_messages_model.dart';
 import '../model/question_model.dart';
+import '../model/show_cart_items_model.dart';
 import '../model/show_service_model.dart';
 part 'app_state.dart';
 
@@ -79,9 +81,9 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeCount());
   }
 
-  int requestIndex = -1;
-  void changerequestIndex({required int index}) {
-    requestIndex = index;
+  bool hasCertificate = false;
+  void changeCertificate() {
+    hasCertificate = !hasCertificate;
     emit(ChangeIndex());
   }
 
@@ -591,6 +593,7 @@ class AppCubit extends Cubit<AppState> {
   ClientHomeModel? clientHomeModel;
   Future clientHome() async {
     emit(ClientHomeLoading());
+
     try {
       http.Response response =
           await http.post(Uri.parse("${baseUrl}api/client_home"), body: {
@@ -855,8 +858,14 @@ class AppCubit extends Cubit<AppState> {
     required String sectionId,
     String? filter = "",
     bool isDistance = false,
+    bool isFav = false,
   }) async {
-    emit(GetSectionsLoading());
+    if (!isFav) {
+      emit(GetSectionsLoading());
+    } else {
+      emit(AddFavoriteLoading());
+    }
+
     if (isDistance) {
       Position? myPosition;
       myPosition = await Geolocator.getCurrentPosition(
@@ -864,6 +873,7 @@ class AppCubit extends Cubit<AppState> {
       lat = myPosition.latitude;
       lng = myPosition.longitude;
     }
+
     try {
       http.Response response =
           await http.post(Uri.parse("${baseUrl}api/sections"), body: {
@@ -914,6 +924,9 @@ class AppCubit extends Cubit<AppState> {
 
         if (data["key"] == 1) {
           emit(AddFavoriteSuccess(message: data["msg"]));
+          clientHome();
+          allSections(
+              sectionId: sections[marketIndex].id.toString(), isFav: true);
         } else {
           emit(AddFavoriteFailure(error: data["msg"]));
         }
@@ -1018,7 +1031,7 @@ class AppCubit extends Cubit<AppState> {
           "user_id": CacheHelper.getUserId(),
           "service_id": serviceId,
           "count": count.toString(),
-          "has_certificate": requestIndex == 1 ? "1" : "0",
+          "has_certificate": hasCertificate ? "1" : "0",
         },
       ).timeout(const Duration(milliseconds: 8000));
 
@@ -1041,6 +1054,212 @@ class AppCubit extends Cubit<AppState> {
         emit(Timeoutt());
       } else {
         emit(AddToCartFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<ShowCartModel> cartList = [];
+  Future showCart() async {
+    emit(ShowCartLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/show-cart"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          cartList = List<ShowCartModel>.from(
+            (data["data"] ?? []).map((e) => ShowCartModel.fromJson(e)),
+          );
+
+          emit(ShowCartSuccess());
+        } else {
+          debugPrint(data["msg"]);
+          emit(ShowCartFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(ShowCartFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future deleteCart({required String cartId}) async {
+    emit(DeleteCartLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/delete-cart"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "cart_id": cartId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(DeleteCartSuccess(message: data["msg"]));
+          showCart();
+        } else {
+          debugPrint(data["msg"]);
+          emit(DeleteCartFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(DeleteCartFailure(error: error.toString()));
+      }
+    }
+  }
+
+  ShowCartItemsModel? cartItemsModel;
+  Future cartItems({required String cartItemId}) async {
+    emit(CartItemsLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/show-cart-items"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "cart_id": cartItemId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          cartItemsModel = ShowCartItemsModel.fromJson(data["data"]);
+          emit(CartItemsSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(CartItemsFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(CartItemsFailure(error: error.toString()));
+      }
+    }
+  }
+
+  int cartIndex = 0;
+  void updateCartIndex({required int index}) {
+    cartIndex = index;
+    emit(ChangeIndexSuccess());
+  }
+
+  Future updateCart({
+    required String cartItemId,
+    required String cartId,
+    required String count,
+  }) async {
+    emit(UpdateCartLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/update-to-cart"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "cart_item_id": cartItemId,
+          "count": count,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(UpdateCartSuccess(message: data["msg"]));
+          cartItems(cartItemId: cartId);
+        } else {
+          debugPrint(data["msg"]);
+          emit(UpdateCartFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(UpdateCartFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future storeOrder({required String cartId}) async {
+    emit(StoreOrderLoading());
+    if (shipIndex == 0) {
+      Position? myPosition;
+      myPosition = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      lat = myPosition.latitude;
+      lng = myPosition.longitude;
+    }
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/store-order"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "cart_id": cartId,
+          "payment_method": paymentIndex == 0 ? "online" : "cash",
+          "has_delivery": paymentlocatIndex == 0 ? "1" : "0",
+          "my_address": shipIndex == 0 ? "1" : "0",
+          "address": address ?? "",
+          "lat": lat.toString(),
+          "lng": lng.toString(),
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(StoreOrderSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(StoreOrderFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(StoreOrderFailure(error: error.toString()));
       }
     }
   }

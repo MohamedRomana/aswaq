@@ -348,7 +348,7 @@
     "add_to_cart": "اضف للسلة",
     "product_description": "وصف المنتج",
     "request_warranty_certificate": "طلب شهادة ضمان للجهاز",
-    "shop_details_number": "تفاصيل محل رقم",
+    "shop_details_number": "تفاصيل محل",
     "total_value": "القيمة الاجمالية",
     "complete_order": "اتمام الطلب",
     "bank_transfer": "تحويل بنكي",
@@ -403,5 +403,8 @@
     "current_chats": "المحادثات الحالية",
     "order_number": "رقم الطلب",
     "reason_for_returning_product": "سبب استرجاع المنتج",
-    "chat_with": "محادثة مع"
+    "chat_with": "محادثة مع",
+    "total_cart": "اجمالي السلة",
+    "store_number": "محل رقم",
+    "complete_the_selections": "اكمل الاختيارات من فضلك"
 }

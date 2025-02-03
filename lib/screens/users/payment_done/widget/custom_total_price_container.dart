@@ -3,11 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/colors.dart';
+import '../../../../core/service/model/show_cart_items_model.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 class CusomTotalPriceContainer extends StatelessWidget {
-  const CusomTotalPriceContainer({super.key});
+  final ShowCartItemsModel cartItemsModel;
+
+  const CusomTotalPriceContainer({super.key, required this.cartItemsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -45,38 +48,39 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     width: 150.w,
                     child: AppText(
                       textAlign: TextAlign.end,
-                      text: '‏250 ${LocaleKeys.sar.tr()}',
+                      text: '${cartItemsModel.total} ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 15.h, bottom: 19.h),
-                child: Divider(
-                  thickness: 1,
-                  color: AppColors.primary.withOpacity(0.4),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AppText(
-                    text: LocaleKeys.discount_coupon.tr(),
-                    size: 14.sp,
-                  ),
-                  SizedBox(
-                    width: 150.w,
-                    child: AppText(
-                      textAlign: TextAlign.end,
-                      text: '- 250 ${LocaleKeys.sar.tr()}',
-                      size: 14.sp,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ],
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(top: 15.h, bottom: 19.h),
+              //   child: Divider(
+              //     thickness: 1,
+              //     color: AppColors.primary.withOpacity(0.4),
+              //   ),
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     AppText(
+              //       text: LocaleKeys.discount_coupon.tr(),
+              //       size: 14.sp,
+              //     ),
+              //     SizedBox(
+              //       width: 150.w,
+              //       child: AppText(
+              //         textAlign: TextAlign.end,
+              //         text: '- 250 ${LocaleKeys.sar.tr()}',
+              //         size: 14.sp,
+              //         color: AppColors.primary,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+
               Padding(
                 padding: EdgeInsets.only(top: 15.h, bottom: 19.h),
                 child: Divider(
@@ -95,7 +99,8 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     width: 150.w,
                     child: AppText(
                       textAlign: TextAlign.end,
-                      text: '‏250 ${LocaleKeys.sar.tr()}',
+                      text:
+                          '${cartItemsModel.totalWithValue} ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),

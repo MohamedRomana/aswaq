@@ -1,7 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:aswaq/core/widgets/app_cached.dart';
 import 'package:aswaq/core/widgets/custom_app_bar.dart';
-import 'package:aswaq/core/widgets/custom_lottie_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,7 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../shop_screen/shop_screen.dart';
 import '../markets/widgets/custom_list_shimmer.dart';
+import 'widgets/custom_empty_fav.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({super.key});
@@ -41,7 +43,7 @@ class _FavoritesState extends State<Favorites> {
               isHomeLayout: true,
             ),
           ),
-          body: state is ShowFavoriteLoading && state is AddAddressLoading
+          body: state is ShowFavoriteLoading 
               ? const ShopsListShimmer()
               : AppCubit.get(context).provicersList.isEmpty
                   ? const CustomEmptyFav()
@@ -115,29 +117,25 @@ class _FavoritesState extends State<Favorites> {
                                         SizedBox(
                                           width: 30.w,
                                           child: InkWell(
-                                              onTap: () {
-                                                AppCubit.get(context)
-                                                    .changeRemoveFavIndex(
-                                                        index: index);
-                                                AppCubit.get(context).removeFav(
-                                                  providerId:
-                                                      AppCubit.get(context)
-                                                          .provicersList[index]
-                                                          .id
-                                                          .toString(),
-                                                  index: index,
-                                                );
-                                              },
-                                              child: Icon(
-                                                (AppCubit.get(context)
-                                                        .clientHomeModel!
-                                                        .providers[index]
-                                                        .isUserFav)
-                                                    ? Icons.favorite
-                                                    : Icons.favorite_border,
-                                                color: Colors.red,
-                                                size: 19.sp,
-                                              )),
+                                            onTap: () {
+                                              AppCubit.get(context)
+                                                  .changeRemoveFavIndex(
+                                                      index: index);
+                                              AppCubit.get(context).removeFav(
+                                                providerId:
+                                                    AppCubit.get(context)
+                                                        .provicersList[index]
+                                                        .id
+                                                        .toString(),
+                                                index: index,
+                                              );
+                                            },
+                                            child: Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                              size: 19.sp,
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -190,32 +188,6 @@ class _FavoritesState extends State<Favorites> {
                     ),
         );
       },
-    );
-  }
-}
-
-class CustomEmptyFav extends StatelessWidget {
-  const CustomEmptyFav({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CustomLottieWidget(
-          lottieName: Assets.img.notiEmpty,
-        ),
-        AppText(
-          top: 16.h,
-          text: LocaleKeys.favoritesEmpty.tr(),
-          size: 24.sp,
-          color: AppColors.primary,
-          fontStyle: FontStyle.italic,
-        ),
-        SizedBox(height: 140.h),
-      ],
     );
   }
 }

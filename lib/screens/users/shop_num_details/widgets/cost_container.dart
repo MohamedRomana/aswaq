@@ -1,3 +1,4 @@
+import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,8 @@ class CostContainer extends StatelessWidget {
                 width: 150.w,
                 child: AppText(
                   textAlign: TextAlign.end,
-                  text: '‏280  ${LocaleKeys.sar.tr()}',
+                  text:
+                      '${AppCubit.get(context).cartItemsModel?.total}  ${LocaleKeys.sar.tr()}',
                   size: 14.sp,
                   color: AppColors.primary,
                 ),
@@ -58,7 +60,8 @@ class CostContainer extends StatelessWidget {
                 width: 150.w,
                 child: AppText(
                   textAlign: TextAlign.end,
-                  text: '‏280  ${LocaleKeys.sar.tr()}',
+                  text:
+                      '${AppCubit.get(context).cartItemsModel?.totalWithValue}  ${LocaleKeys.sar.tr()}',
                   size: 14.sp,
                   color: AppColors.primary,
                 ),

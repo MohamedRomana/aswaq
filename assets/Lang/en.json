@@ -348,7 +348,7 @@
       "add_to_cart": "Add to cart",
       "product_description": "Product description",
       "request_warranty_certificate": "Request warranty certificate for the device",
-      "shop_details_number": "Shop details number",
+      "shop_details_number": "Shop details",
       "total_value": "Total value",
       "complete_order": "Complete order",
       "bank_transfer": "Bank transfer",
@@ -402,6 +402,10 @@
       "previous_chats": "Previous chats",
       "current_chats": "Current chats",
       "order_number": "Order number",
-       "reason_for_returning_product": "Reason for returning the product",
-       "chat_with": "Chat with"
+      "reason_for_returning_product": "Reason for returning the product",
+      "chat_with": "Chat with",
+      "total_cart": "Total cart",
+      "store_number": "Store number",
+      "complete_the_selections": "Complete the selections, please"
+
 }

@@ -16,7 +16,9 @@ class Markets extends StatefulWidget {
 class _MarketsState extends State<Markets> {
   @override
   void initState() {
-    AppCubit.get(context).allSections(sectionId: '1');
+    AppCubit.get(context).allSections(
+      sectionId: AppCubit.get(context).sections[0].id.toString(),
+    );
     super.initState();
   }
 
@@ -47,11 +49,9 @@ class _MarketsState extends State<Markets> {
                     onTap: (index) {
                       AppCubit.get(context).changeMarketIndex(index: index);
                       AppCubit.get(context).allSections(
-                          sectionId: AppCubit.get(context)
-                              .sections[index]
-                              .id
-                              .toString(),
-                              );
+                        sectionId:
+                            AppCubit.get(context).sections[index].id.toString(),
+                      );
                     },
                     padding: EdgeInsetsDirectional.only(start: -40.w),
                     physics: const BouncingScrollPhysics(),
