@@ -351,7 +351,6 @@ final class UpdateCartFailure extends AppState {
 
 final class ChangeIndexSuccess extends AppState {}
 
-
 final class StoreOrderLoading extends AppState {}
 
 final class StoreOrderSuccess extends AppState {
@@ -362,4 +361,148 @@ final class StoreOrderSuccess extends AppState {
 final class StoreOrderFailure extends AppState {
   final String error;
   StoreOrderFailure({required this.error});
+}
+
+final class AllOrdersLoading extends AppState {}
+
+final class AllOrdersSuccess extends AppState {
+  final String message;
+  AllOrdersSuccess({required this.message});
+}
+
+final class AllOrdersFailure extends AppState {
+  final String error;
+  AllOrdersFailure({required this.error});
+}
+
+final class ShowOrdersLoading extends AppState {}
+
+final class ShowOrdersSuccess extends AppState {
+  final String message;
+  ShowOrdersSuccess({required this.message});
+}
+
+final class ShowOrdersFailure extends AppState {
+  final String error;
+  ShowOrdersFailure({required this.error});
+}
+
+final class DeleteOrdersLoading extends AppState {}
+
+final class DeleteOrdersSuccess extends AppState {
+  final String message;
+  DeleteOrdersSuccess({required this.message});
+}
+
+final class DeleteOrdersFailure extends AppState {
+  final String error;
+  DeleteOrdersFailure({required this.error});
+}
+
+final class RestoreOrderLoading extends AppState {}
+
+final class RestoreOrderSuccess extends AppState {
+  final String message;
+  RestoreOrderSuccess({required this.message});
+}
+
+final class RestoreOrderFailure extends AppState {
+  final String error;
+  RestoreOrderFailure({required this.error});
+}
+
+final class CertificatesLoading extends AppState {}
+
+final class CertificatesSuccess extends AppState {
+  final String message;
+  CertificatesSuccess({required this.message});
+}
+
+final class CertificatesFailure extends AppState {
+  final String error;
+  CertificatesFailure({required this.error});
+}
+
+final class StoreCertificatesLoading extends AppState {}
+
+final class StoreCertificatesSuccess extends AppState {
+  final String message;
+  StoreCertificatesSuccess({required this.message});
+}
+
+final class StoreCertificatesFailure extends AppState {
+  final String error;
+  StoreCertificatesFailure({required this.error});
+}
+
+final class GetSerachLoading extends AppState {}
+
+final class GetSearchSuccess extends AppState {
+  final String message;
+  GetSearchSuccess({required this.message});
+}
+
+final class GetSearchFailure extends AppState {
+  final String error;
+  GetSearchFailure({required this.error});
+}
+
+final class AllCertificatesLoading extends AppState {}
+
+final class AllCertificatesSuccess extends AppState {
+  final String message;
+  AllCertificatesSuccess({required this.message});
+}
+
+final class AllCertificatesFailure extends AppState {
+  final String error;
+  AllCertificatesFailure({required this.error});
+}
+
+final class UpdateCertificatesLoading extends AppState {}
+
+final class UpdateCertificatesSuccess extends AppState {
+  final String message;
+  UpdateCertificatesSuccess({required this.message});
+}
+
+final class UpdateCertificatesFailure extends AppState {
+  final String error;
+  UpdateCertificatesFailure({required this.error});
+}
+
+final class ShowCertificatesLoading extends AppState {}
+
+final class ShowCertificatesSuccess extends AppState {
+  final String message;
+  ShowCertificatesSuccess({required this.message});
+}
+
+final class ShowCertificatesFailure extends AppState {
+  final String error;
+  ShowCertificatesFailure({required this.error});
+}
+
+final class TransferCertificateLoading extends AppState {}
+
+final class TransferCertificateSuccess extends AppState {
+  final String message;
+  TransferCertificateSuccess({required this.message});
+}
+
+final class TransferCertificateFailure extends AppState {
+  final String error;
+  TransferCertificateFailure({required this.error});
+}
+
+final class DeleteCertificatesLoading extends AppState {}
+
+final class DeleteCertificatesSuccess extends AppState {
+  final String message;
+  DeleteCertificatesSuccess({required this.message});
+}
+
+final class DeleteCertificatesFailure extends AppState {
+  final String error;
+  DeleteCertificatesFailure({required this.error});
 }

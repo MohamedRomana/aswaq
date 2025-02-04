@@ -63,7 +63,8 @@ class _PaymentDoneState extends State<PaymentDone> {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
-              text: '${LocaleKeys.shop_details_number.tr()} 1',
+              text:
+                  '${LocaleKeys.shop_details_number.tr()} ${widget.cartItemsModel.salerName}',
             ),
           ),
           body: SingleChildScrollView(
@@ -75,7 +76,9 @@ class _PaymentDoneState extends State<PaymentDone> {
                   const PaymentChoiceContainer(),
                   // const CustomAddPaymentContainer(),
                   const PaymentLocatContaine(),
-                  const CustomShippingMethod(),
+                  CustomShippingMethod(
+                    cartItemsModel: widget.cartItemsModel,
+                  ),
                   CusomTotalPriceContainer(
                     cartItemsModel: widget.cartItemsModel,
                   ),

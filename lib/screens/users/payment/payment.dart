@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:aswaq/core/widgets/app_button.dart';
 import 'package:aswaq/core/widgets/custom_bottom_nav.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -208,6 +209,17 @@ class Payment extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+              AppButton(
+                onPressed: () {
+                  // AppCubit.get(context).storeCertificatesSections(title: title)
+                },
+                top: 26.h,
+                child: AppText(
+                  text: LocaleKeys.payment_confirmation.tr(),
+                  size: 16.sp,
+                  color: Colors.white,
                 ),
               ),
             ],

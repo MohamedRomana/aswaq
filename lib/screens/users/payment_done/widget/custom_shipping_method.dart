@@ -7,13 +7,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/map/map.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
+import '../../../../core/service/model/show_cart_items_model.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/custom_bottom_sheet.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 class CustomShippingMethod extends StatelessWidget {
-  const CustomShippingMethod({super.key});
+  final ShowCartItemsModel cartItemsModel;
+
+  const CustomShippingMethod({super.key, required this.cartItemsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +84,8 @@ class CustomShippingMethod extends StatelessWidget {
                     Row(
                       children: [
                         AppText(
-                          text: '25 ${LocaleKeys.sar.tr()}',
+                          text:
+                              '${cartItemsModel.delivery} ${LocaleKeys.sar.tr()}',
                           size: 14.sp,
                           color: Colors.grey,
                         ),

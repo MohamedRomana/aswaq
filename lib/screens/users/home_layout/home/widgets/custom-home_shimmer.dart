@@ -59,7 +59,7 @@ class CustomHomeShimmer extends StatelessWidget {
             Center(
               child: Container(
                 height: 150.h,
-                width: 300.w,
+                width: 343.w,
                 margin: EdgeInsets.only(top: 40.h),
                 decoration: BoxDecoration(
                   color: Colors.white,

@@ -101,7 +101,9 @@ class ProviderGrideView extends StatelessWidget {
                             image: AppCubit.get(context)
                                 .allServiceList[index]
                                 .firstImage,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
+                            height: 120.h,
+                            width: 165.w,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -38,7 +38,7 @@ class _ShopNumDetailsState extends State<ShopNumDetails> {
             preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text:
-                  '${LocaleKeys.shop_details_number.tr()} ${AppCubit.get(context).cartItemsModel?.salerName}',
+                  '${LocaleKeys.shop_details_number.tr()} ${state is CartItemsLoading ? '' : AppCubit.get(context).cartItemsModel?.salerName}',
             ),
           ),
           body: state is CartItemsLoading &&

@@ -3,6 +3,7 @@ import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
 import 'package:aswaq/core/widgets/custom_app_bar.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/widgets/custom_empty_fav.dart';
+import 'package:aswaq/screens/users/home_layout/markets/widgets/custom_list_shimmer.dart';
 import 'package:aswaq/screens/users/shop_num_details/shop_num_details.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +42,7 @@ class _ShoppingCartsState extends State<ShoppingCarts> {
             ),
           ),
           body: state is ShowCartLoading
-              ? const Center(
-                  child: CircularProgressIndicator(color: AppColors.primary))
+              ? const ShopsListShimmer()
               : AppCubit.get(context).cartList.isEmpty
                   ? const CustomEmptyFav(isCart: true)
                   : ListView.separated(

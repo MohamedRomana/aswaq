@@ -20,16 +20,9 @@ class Faq extends StatefulWidget {
 }
 
 class _FaqState extends State<Faq> {
-  List<bool> isFaq = List<bool>.generate(4, (index) => false);
-
-  void toggleState(int index) {
-    setState(() {
-      isFaq[index] = !isFaq[index];
-    });
-  }
-
   @override
   void initState() {
+    AppCubit.get(context).changeFaqIndexs(index: -1);
     AppCubit.get(context).getQuestions();
     super.initState();
   }
@@ -70,11 +63,16 @@ class _FaqState extends State<Faq> {
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () {
-                            toggleState(index);
+                            if (AppCubit.get(context).changeFaqIndex == index) {
+                              AppCubit.get(context).changeFaqIndexs(index: -1);
+                            } else {
+                              AppCubit.get(context)
+                                  .changeFaqIndexs(index: index);
+                            }
                           },
                           child: Column(
                             children: [
-                              isFaq[index]
+                              AppCubit.get(context).changeFaqIndex == index
                                   ? Container(
                                       margin: EdgeInsets.all(16.sp),
                                       clipBehavior: Clip.antiAlias,

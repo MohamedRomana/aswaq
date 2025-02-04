@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/widgets/custom_shimmer.dart';
+import '../../../../core/widgets/custom_shimmer.dart';
 
-class ShopsListShimmer extends StatelessWidget {
-  const ShopsListShimmer({super.key});
+class CustomAllCertificateShimmer extends StatelessWidget {
+  const CustomAllCertificateShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CustomShimmer(
+      
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
+        padding: EdgeInsets.only(right: 16.w , left: 16.w, top: 20.h),
         itemCount: 7,
         separatorBuilder: (context, index) => SizedBox(height: 16.h),
         itemBuilder: (context, index) => Container(
-          height: 100.h,
+          height: 68.h,
           width: 343.w,
           decoration: BoxDecoration(
             color: Colors.white,

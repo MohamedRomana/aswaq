@@ -71,12 +71,15 @@ class CartsListView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: AppCachedImage(
-                    image: AppCubit.get(context)
-                        .cartItemsModel!
-                        .cartItems[index]
-                        .serviceFirstImage,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.r),
+                    child: AppCachedImage(
+                      image: AppCubit.get(context)
+                          .cartItemsModel!
+                          .cartItems[index]
+                          .serviceFirstImage,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
                 Padding(

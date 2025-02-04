@@ -51,8 +51,8 @@ class $AssetsImgGen {
   /// File path: assets/img/emptyorder.json
   String get emptyorder => 'assets/img/emptyorder.json';
 
-  /// File path: assets/img/emptysearch.json
-  String get emptysearch => 'assets/img/emptysearch.json';
+  /// File path: assets/img/emptyseach.json
+  String get emptyseach => 'assets/img/emptyseach.json';
 
   /// File path: assets/img/loading.json
   String get loading => 'assets/img/loading.json';
@@ -92,7 +92,7 @@ class $AssetsImgGen {
         ellipse234,
         alert,
         emptyorder,
-        emptysearch,
+        emptyseach,
         loading,
         login,
         logo,

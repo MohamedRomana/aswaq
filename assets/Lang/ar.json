@@ -406,5 +406,6 @@
     "chat_with": "محادثة مع",
     "total_cart": "اجمالي السلة",
     "store_number": "محل رقم",
-    "complete_the_selections": "اكمل الاختيارات من فضلك"
+    "complete_the_selections": "اكمل الاختيارات من فضلك",
+    "orderNumberValidate" : "رقم الطلب مطلوب"
 }

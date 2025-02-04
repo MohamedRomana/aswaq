@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:aswaq/core/service/model/all_certificate_model.dart';
+import 'package:aswaq/core/service/model/all_orders_model.dart';
 import 'package:aswaq/core/service/model/client_home_model.dart';
 import 'package:aswaq/core/service/model/fav_list_model.dart';
 import 'package:aswaq/core/service/model/show_cart_model.dart';
+import 'package:aswaq/core/service/model/show_certificate_model.dart';
+import 'package:aswaq/core/service/model/show_orders_model.dart';
 import 'package:aswaq/core/service/model/show_provider_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
@@ -18,6 +22,7 @@ import '../../../screens/users/home_layout/more/more.dart';
 import '../../cache/cache_helper.dart';
 import '../../constants/contsants.dart';
 import '../model/all_providers_model.dart';
+import '../model/certificates_model.dart';
 import '../model/cities_model.dart';
 import '../model/data_model.dart';
 import '../model/notifications_model.dart';
@@ -170,22 +175,6 @@ class AppCubit extends Cubit<AppState> {
 
   void removeProfileImage() {
     profileImage.clear();
-    emit(RemoveImageSuccess());
-  }
-
-  List<File> orderImage = [];
-  Future<void> getOrderImage() async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    orderImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
-  }
-
-  void removeOrderImage() {
-    orderImage.clear();
     emit(RemoveImageSuccess());
   }
 
@@ -590,15 +579,29 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
+  int changeFaqIndex = -1;
+
+  void changeFaqIndexs({required int index}) {
+    changeFaqIndex = index;
+
+    emit(ChangeIndex());
+  }
+
   ClientHomeModel? clientHomeModel;
   Future clientHome() async {
     emit(ClientHomeLoading());
-
+    // Position? myPosition;
+    // myPosition = await Geolocator.getCurrentPosition(
+    //     desiredAccuracy: LocationAccuracy.high);
+    // lat = myPosition.latitude;
+    // lng = myPosition.longitude;
     try {
       http.Response response =
           await http.post(Uri.parse("${baseUrl}api/client_home"), body: {
         "lang": CacheHelper.getLang(),
         'user_id': CacheHelper.getUserId(),
+        // "lat": lat.toString(),
+        // "lng": lng.toString(),
       });
       if (response.statusCode == 500) {
         emit(ServerError());
@@ -701,6 +704,43 @@ class AppCubit extends Cubit<AppState> {
       } else {
         debugPrint(error.toString());
         emit(AllServicesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<AllServiceModel> searchList = [];
+
+  Future getSearch({required String title}) async {
+    emit(GetSerachLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/services"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "title": title,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          searchList = List<AllServiceModel>.from(
+            (data["data"] ?? []).map((e) => AllServiceModel.fromJson(e)),
+          );
+          emit(GetSearchSuccess(message: data["msg"]));
+        } else {
+          emit(GetSearchFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(GetSearchFailure(error: error.toString()));
       }
     }
   }
@@ -1260,6 +1300,456 @@ class AppCubit extends Cubit<AppState> {
         emit(Timeoutt());
       } else {
         emit(StoreOrderFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<AllOrdersModel> ordersList = [];
+  Future allOrders() async {
+    emit(AllOrdersLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/show-all-orders"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          ordersList = List<AllOrdersModel>.from(
+            (data["data"] ?? []).map((e) => AllOrdersModel.fromJson(e)),
+          );
+          emit(AllOrdersSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(AllOrdersFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(AllOrdersFailure(error: error.toString()));
+      }
+    }
+  }
+
+  ShowOrdersModel? showOrdersModel;
+  Future showOrders({required String orderId}) async {
+    emit(ShowOrdersLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/show-order"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "order_id": orderId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          showOrdersModel = ShowOrdersModel.fromJson(data['data']);
+          emit(ShowOrdersSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(ShowOrdersFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(ShowOrdersFailure(error: error.toString()));
+      }
+    }
+  }
+
+  // Future deleteOrders({required String orderId, required int index}) async {
+  //   emit(DeleteOrdersLoading());
+  //   try {
+  //     http.Response response = await http.post(
+  //       Uri.parse("${baseUrl}api/show-order"),
+  //       body: {
+  //         "lang": CacheHelper.getLang(),
+  //         "user_id": CacheHelper.getUserId(),
+  //         "order_id": orderId,
+  //       },
+  //     ).timeout(const Duration(milliseconds: 8000));
+
+  //     if (response.statusCode == 500) {
+  //       emit(ServerError());
+  //     } else {
+  //       Map<String, dynamic> data = jsonDecode(response.body);
+  //       debugPrint(data.toString());
+
+  //       if (data["key"] == 1) {
+  //         showOrdersModel?.items.removeAt(index);
+
+  //         emit(DeleteOrdersSuccess(message: data["msg"]));
+  //       } else {
+  //         debugPrint(data["msg"]);
+  //         emit(DeleteOrdersFailure(error: data["msg"]));
+  //       }
+  //     }
+  //   } catch (error) {
+  //     if (error is TimeoutException) {
+  //       debugPrint("Request timed out");
+  //       emit(Timeoutt());
+  //     } else {
+  //       emit(DeleteOrdersFailure(error: error.toString()));
+  //     }
+  //   }
+  // }
+
+  List<File> orderImage = [];
+  Future<void> getOrderImage() async {
+    final picker = ImagePicker();
+    final pickedImages = await picker.pickMultiImage();
+    orderImage = pickedImages
+        .map((pickedImage) => File(pickedImage.path))
+        .take(1)
+        .toList();
+    emit(ChooseImageSuccess());
+  }
+
+  void removeOrderImage() {
+    orderImage.clear();
+    emit(RemoveImageSuccess());
+  }
+
+  Future restoreOrder({
+    required String orderId,
+    required String message,
+  }) async {
+    emit(RestoreOrderLoading());
+    try {
+      final request =
+          http.MultipartRequest('POST', Uri.parse("${baseUrl}api/contact-us"));
+      request.fields['lang'] = CacheHelper.getLang();
+      request.fields['user_id'] = CacheHelper.getUserId();
+      request.fields['order_id'] = orderId;
+      request.fields['message'] = message;
+      request.fields['type'] = 'restore';
+
+      var stream = http.ByteStream(orderImage.first.openRead());
+      var length = await orderImage.first.length();
+      var multipartFile = http.MultipartFile(
+        'photo',
+        stream,
+        length,
+        filename: orderImage.first.path.split('/').last,
+      );
+      request.files.add(multipartFile);
+
+      final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+        debugPrint("Response Body: $responseBody");
+      } else {
+        Map<String, dynamic> data = jsonDecode(responseBody);
+        if (data["key"] == 1) {
+          emit(RestoreOrderSuccess(message: data["msg"]));
+        } else {
+          emit(RestoreOrderFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(RestoreOrderFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future storeCertificatesSections({required String title}) async {
+    emit(StoreCertificatesLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/store-certificate-section"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "title": title,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(StoreCertificatesSuccess(message: data["msg"]));
+          certificatesSections();
+        } else {
+          debugPrint(data["msg"]);
+          emit(StoreCertificatesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(StoreCertificatesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<CertificatesModel> certificatesList = [];
+  Future certificatesSections() async {
+    emit(CertificatesLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/all-certificate-sections"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          certificatesList = List<CertificatesModel>.from(
+            (data["data"] ?? []).map((e) => CertificatesModel.fromJson(e)),
+          );
+          emit(CertificatesSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(CertificatesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(CertificatesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future deleteCertificateSections({
+    required String sectionId,
+    required int index,
+  }) async {
+    emit(DeleteCertificatesLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/delete-certificate-section"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "section_id": sectionId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          certificatesList.removeAt(index);
+          emit(DeleteCertificatesSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(DeleteCertificatesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(DeleteCertificatesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List<AllCertificateModel> allCertificatesList = [];
+  Future allCertificate({required String sectionId}) async {
+    emit(AllCertificatesLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/all-certificates"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "section_id": sectionId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          allCertificatesList = List<AllCertificateModel>.from(
+            (data["data"] ?? []).map((e) => AllCertificateModel.fromJson(e)),
+          );
+          emit(AllCertificatesSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(AllCertificatesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(AllCertificatesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  String sectionId = "";
+
+  Future updateCertificate({
+    required String certificateId,
+  }) async {
+    emit(UpdateCertificatesLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/update-certificate"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "section_id": sectionId,
+          "certificate_id": certificateId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(UpdateCertificatesSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(UpdateCertificatesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(UpdateCertificatesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  ShowCertificateModel? showCertificateModel;
+  Future showCertificate({required String certificateId}) async {
+    emit(ShowCertificatesLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/show-certificate"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "certificate_id": certificateId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          showCertificateModel = ShowCertificateModel.fromJson(data['data']);
+          emit(ShowCertificatesSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(ShowCertificatesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(ShowCertificatesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future transferCertificate({
+    required String certificateId,
+    required String name,
+    required String phone,
+    required String idNumber,
+  }) async {
+    emit(TransferCertificateLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/contact-us"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "certificate_id": certificateId,
+          "name": name,
+          "phone": phone,
+          "id_number": idNumber,
+          "type": 'certificate',
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(TransferCertificateSuccess(message: data["msg"]));
+        } else {
+          debugPrint(data["msg"]);
+          emit(TransferCertificateFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(TransferCertificateFailure(error: error.toString()));
       }
     }
   }
