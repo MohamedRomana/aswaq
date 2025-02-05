@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/contsants.dart';
+import '../../../../../core/service/cubit/app_cubit.dart';
 import '../../../../../core/widgets/alert_dialog.dart';
 import '../../../../../core/widgets/app_router.dart';
 import '../../../../../core/widgets/app_text.dart';
@@ -28,8 +29,6 @@ class CustomChangesAppContainer extends StatefulWidget {
 }
 
 class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
-  bool isNoti = false;
-  bool isLang = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,14 +76,19 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
                   trackOutlineColor:
                       const WidgetStatePropertyAll(Colors.transparent),
                   activeColor: AppColors.primary,
-                  activeTrackColor: const Color(0xffD4D4D4),
+                  activeTrackColor: AppColors.primary.withOpacity(0.2),
                   inactiveThumbColor: const Color(0xffB5B2B2),
                   inactiveTrackColor: const Color(0xffDCDCDC),
-                  value: isNoti,
+                  value: AppCubit.get(context).showUserMap['send_notify'],
                   onChanged: (bool value) {
                     setState(
                       () {
-                        isNoti = value;
+                        AppCubit.get(context).showUserMap['send_notify'] =
+                            value;
+                        AppCubit.get(context).userNotification(
+                          sendNotify:
+                              AppCubit.get(context).showUserMap['send_notify'],
+                        );
                       },
                     );
                   },

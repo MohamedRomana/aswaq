@@ -506,3 +506,13 @@ final class DeleteCertificatesFailure extends AppState {
   final String error;
   DeleteCertificatesFailure({required this.error});
 }
+
+final class UserNotificationLoading extends AppState {}
+
+final class UserNotificationSuccess extends AppState {}
+
+final class UserNotificationFailure extends AppState {
+  final String error;
+
+  UserNotificationFailure({required this.error});
+}

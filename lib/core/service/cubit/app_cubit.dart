@@ -1753,4 +1753,38 @@ class AppCubit extends Cubit<AppState> {
       }
     }
   }
+
+  Future userNotification({
+    required bool sendNotify,
+  }) async {
+    emit(UserNotificationLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/update-user"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "send_notify": sendNotify == true ? "1" : "0",
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(UserNotificationSuccess());
+        } else {
+          emit(UserNotificationFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(UserNotificationFailure(error: error.toString()));
+      }
+    }
+  }
 }
