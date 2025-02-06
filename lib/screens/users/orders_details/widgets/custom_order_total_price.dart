@@ -52,7 +52,7 @@ class CustomOrderTotalPrice extends StatelessWidget {
                         child: AppText(
                           textAlign: TextAlign.end,
                           text:
-                              '${AppCubit.get(context).showOrdersModel?.subTotal.toString()} ${LocaleKeys.sar.tr()}',
+                              '${AppCubit.get(context).showOrdersModel['sub_total'].toString()} ${LocaleKeys.sar.tr()}',
                           size: 14.sp,
                           color: AppColors.primary,
                         ),
@@ -84,32 +84,39 @@ class CustomOrderTotalPrice extends StatelessWidget {
                   //     ),
                   //   ],
                   // ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 15.h, bottom: 19.h),
-                    child: const Divider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppText(
-                        text: LocaleKeys.shipping_fees.tr(),
-                        size: 14.sp,
-                      ),
-                      SizedBox(
-                        width: 150.w,
-                        child: AppText(
-                          textAlign: TextAlign.end,
-                          text:
-                              '${AppCubit.get(context).showOrdersModel?.delivery.toString()} ${LocaleKeys.sar.tr()}',
-                          size: 14.sp,
-                          color: AppColors.primary,
+                  AppCubit.get(context).showOrdersModel['delivery'] == 0
+                      ? Container()
+                      : Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 15.h, bottom: 19.h),
+                              child: const Divider(
+                                thickness: 1,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AppText(
+                                  text: LocaleKeys.shipping_fees.tr(),
+                                  size: 14.sp,
+                                ),
+                                SizedBox(
+                                  width: 150.w,
+                                  child: AppText(
+                                    textAlign: TextAlign.end,
+                                    text:
+                                        '${AppCubit.get(context).showOrdersModel['delivery'].toString()} ${LocaleKeys.sar.tr()}',
+                                    size: 14.sp,
+                                    color: AppColors.primary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
+
                   Padding(
                     padding: EdgeInsets.only(top: 15.h, bottom: 19.h),
                     child: const Divider(
@@ -129,7 +136,7 @@ class CustomOrderTotalPrice extends StatelessWidget {
                         child: AppText(
                           textAlign: TextAlign.end,
                           text:
-                              '${AppCubit.get(context).showOrdersModel?.totalAfterPromo.toString()} ${LocaleKeys.sar.tr()}',
+                              '${AppCubit.get(context).showOrdersModel['total_after_promo'].toString()} ${LocaleKeys.sar.tr()}',
                           size: 14.sp,
                           color: AppColors.primary,
                         ),

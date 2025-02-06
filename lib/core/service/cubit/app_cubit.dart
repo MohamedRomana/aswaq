@@ -2,16 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:aswaq/core/service/model/all_certificate_model.dart';
-import 'package:aswaq/core/service/model/all_orders_model.dart';
 import 'package:aswaq/core/service/model/client_home_model.dart';
 import 'package:aswaq/core/service/model/fav_list_model.dart';
 import 'package:aswaq/core/service/model/show_cart_model.dart';
 import 'package:aswaq/core/service/model/show_certificate_model.dart';
-import 'package:aswaq/core/service/model/show_orders_model.dart';
 import 'package:aswaq/core/service/model/show_provider_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
 import 'package:aswaq/screens/users/home_layout/shopping_carts/shopping_carts.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -1262,8 +1261,11 @@ class AppCubit extends Cubit<AppState> {
       Position? myPosition;
       myPosition = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
+      final placeMarks = await placemarkFromCoordinates(
+          myPosition.latitude, myPosition.longitude);
       lat = myPosition.latitude;
       lng = myPosition.longitude;
+      address = placeMarks[0].street ?? "";
     }
     try {
       http.Response response = await http.post(
@@ -1274,10 +1276,10 @@ class AppCubit extends Cubit<AppState> {
           "cart_id": cartId,
           "payment_method": paymentIndex == 0 ? "online" : "cash",
           "has_delivery": paymentlocatIndex == 0 ? "1" : "0",
-          "my_address": shipIndex == 0 ? "1" : "0",
-          "address": address ?? "",
-          "lat": lat.toString(),
-          "lng": lng.toString(),
+          if (shipIndex != -1) "my_address": shipIndex == 0 ? "1" : "0",
+          if (shipIndex != -1) "address": address ?? "",
+          if (shipIndex != -1) "lat": lat.toString(),
+          if (shipIndex != -1) "lng": lng.toString(),
         },
       ).timeout(const Duration(milliseconds: 8000));
 
@@ -1304,7 +1306,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  List<AllOrdersModel> ordersList = [];
+  List ordersList = [];
   Future allOrders() async {
     emit(AllOrdersLoading());
     try {
@@ -1323,9 +1325,10 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          ordersList = List<AllOrdersModel>.from(
-            (data["data"] ?? []).map((e) => AllOrdersModel.fromJson(e)),
-          );
+          ordersList = data["data"];
+          // ordersList = List<AllOrdersModel>.from(
+          //   (data["data"] ?? []).map((e) => AllOrdersModel.fromJson(e)),
+          // );
           emit(AllOrdersSuccess(message: data["msg"]));
         } else {
           debugPrint(data["msg"]);
@@ -1342,7 +1345,8 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  ShowOrdersModel? showOrdersModel;
+  Map showOrdersModel = {};
+  List showitems = [];
   Future showOrders({required String orderId}) async {
     emit(ShowOrdersLoading());
     try {
@@ -1362,7 +1366,8 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          showOrdersModel = ShowOrdersModel.fromJson(data['data']);
+          showOrdersModel = data['data'];
+          showitems = data['data']['items'];
           emit(ShowOrdersSuccess(message: data["msg"]));
         } else {
           debugPrint(data["msg"]);

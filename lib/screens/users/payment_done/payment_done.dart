@@ -30,6 +30,7 @@ class PaymentDone extends StatefulWidget {
 class _PaymentDoneState extends State<PaymentDone> {
   @override
   void initState() {
+    AppCubit.get(context).address = '';
     AppCubit.get(context).changePaymentIndex(index: -1);
     AppCubit.get(context).changePaymentlocatIndex(index: -1);
     AppCubit.get(context).changeShipIndex(index: -1);
@@ -76,8 +77,11 @@ class _PaymentDoneState extends State<PaymentDone> {
                   const PaymentChoiceContainer(),
                   // const CustomAddPaymentContainer(),
                   const PaymentLocatContaine(),
-                  CustomShippingMethod(
-                    cartItemsModel: widget.cartItemsModel,
+                  Visibility(
+                    visible: AppCubit.get(context).paymentlocatIndex == 0,
+                    child: CustomShippingMethod(
+                      cartItemsModel: widget.cartItemsModel,
+                    ),
                   ),
                   CusomTotalPriceContainer(
                     cartItemsModel: widget.cartItemsModel,
@@ -85,8 +89,14 @@ class _PaymentDoneState extends State<PaymentDone> {
                   AppButton(
                     onPressed: () {
                       if (AppCubit.get(context).paymentlocatIndex == -1 ||
-                          AppCubit.get(context).shipIndex == -1 ||
                           AppCubit.get(context).paymentIndex == -1) {
+                        showFlashMessage(
+                          context: context,
+                          type: FlashMessageType.error,
+                          message: LocaleKeys.complete_the_selections.tr(),
+                        );
+                      } else if (AppCubit.get(context).paymentlocatIndex == 0 &&
+                          AppCubit.get(context).shipIndex == -1) {
                         showFlashMessage(
                           context: context,
                           type: FlashMessageType.error,

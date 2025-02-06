@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:aswaq/core/widgets/app_cached.dart';
-import 'package:aswaq/screens/users/home_layout/home_layout.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -257,9 +256,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                           BlocConsumer<AppCubit, AppState>(
                             listener: (context, state) {
                               if (state is AddToCartSuccess) {
-                                AppCubit.get(context).changebottomNavIndex(3);
-                                AppRouter.navigateAndFinish(
-                                    context, const HomeLayout());
+                               AppRouter.pop(context);
                                 showFlashMessage(
                                   context: context,
                                   type: FlashMessageType.success,

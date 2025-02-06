@@ -64,7 +64,7 @@ class _OrdersState extends State<Orders> {
                           AppRouter.navigateTo(
                             context,
                             OrdersDetails(
-                              id: AppCubit.get(context).ordersList[index].id,
+                              id: AppCubit.get(context).ordersList[index]['id'],
                             ),
                           );
                         },
@@ -102,8 +102,7 @@ class _OrdersState extends State<Orders> {
                                         child: AppText(
                                           text: AppCubit.get(context)
                                               .ordersList[index]
-                                              .id
-                                              .toString(),
+                                              ['id'].toString(),
                                           color: AppColors.primary,
                                           size: 14.sp,
                                         ),
@@ -116,7 +115,7 @@ class _OrdersState extends State<Orders> {
                                     child: AppText(
                                       text: AppCubit.get(context)
                                           .ordersList[index]
-                                          .orderDateFormat,
+                                          ['order_date_format'] ?? "",
                                       color: Colors.grey,
                                       size: 12.sp,
                                     ),
@@ -134,7 +133,7 @@ class _OrdersState extends State<Orders> {
                                         textAlign: TextAlign.end,
                                         text: AppCubit.get(context)
                                             .ordersList[index]
-                                            .orderDuration,
+                                            ['order_duration'] ?? '',
                                         size: 14.sp,
                                         color: Colors.grey,
                                       ),
@@ -155,15 +154,17 @@ class _OrdersState extends State<Orders> {
                                           textAlign: TextAlign.center,
                                           text: AppCubit.get(context)
                                               .ordersList[index]
-                                              .statusF,
+                                              ['status_f'] ?? '',
                                           size: 12.sp,
                                           color: Colors.green,
                                         ),
                                       ),
                                     ),
                                   ),
+                               
                                 ],
                               ),
+                          
                             ],
                           ),
                         ),

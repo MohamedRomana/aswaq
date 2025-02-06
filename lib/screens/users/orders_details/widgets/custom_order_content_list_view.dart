@@ -19,7 +19,7 @@ class CustomOrderContentListView extends StatelessWidget {
           padding: EdgeInsets.all(16.r),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: AppCubit.get(context).showOrdersModel?.items.length ?? 0,
+          itemCount: AppCubit.get(context).showitems.length,
           separatorBuilder: (BuildContext context, int index) =>
               SizedBox(height: 16.h),
           itemBuilder: (context, index) => Container(
@@ -58,10 +58,8 @@ class CustomOrderContentListView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.r),
                     child: AppCachedImage(
-                      image: AppCubit.get(context)
-                              .showOrdersModel
-                              ?.items[index]
-                              .serviceFirstImage ??
+                      image: AppCubit.get(context).showitems[index]
+                              ['service_first_image'] ??
                           "",
                       fit: BoxFit.fill,
                     ),
@@ -78,10 +76,8 @@ class CustomOrderContentListView extends StatelessWidget {
                           SizedBox(
                             width: 190.w,
                             child: AppText(
-                              text: AppCubit.get(context)
-                                      .showOrdersModel
-                                      ?.items[index]
-                                      .serviceTitle ??
+                              text: AppCubit.get(context).showitems[index]
+                                      ['service_title'] ??
                                   "",
                               lines: 2,
                               size: 16.sp,
@@ -115,10 +111,8 @@ class CustomOrderContentListView extends StatelessWidget {
                         width: 100.w,
                         child: AppText(
                           top: 6.h,
-                          text: AppCubit.get(context)
-                                  .showOrdersModel
-                                  ?.items[index]
-                                  .serviceSectionTitle ??
+                          text: AppCubit.get(context).showitems[index]
+                                  ['service_section_title'] ??
                               "",
                           size: 14.sp,
                           color: Colors.grey,
@@ -129,7 +123,7 @@ class CustomOrderContentListView extends StatelessWidget {
                         child: AppText(
                           top: 22.h,
                           text:
-                              '${AppCubit.get(context).showOrdersModel?.items[index].servicePrice}  ${LocaleKeys.sar.tr()}',
+                              '${AppCubit.get(context).showitems[index]['service_price']}  ${LocaleKeys.sar.tr()}',
                           size: 14.sp,
                           color: AppColors.primary,
                         ),
