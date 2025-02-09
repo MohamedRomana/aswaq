@@ -423,7 +423,8 @@ class CodegenLoader extends AssetLoader{
   "total_cart": "اجمالي السلة",
   "store_number": "محل رقم",
   "complete_the_selections": "اكمل الاختيارات من فضلك",
-  "orderNumberValidate": "رقم الطلب مطلوب"
+  "orderNumberValidate": "رقم الطلب مطلوب",
+  "select_image_source": "اختر مصدر الصورة"
 };
 static const Map<String,dynamic> en = {
   "chooseLang": "Choose the appropriate language",
@@ -834,7 +835,8 @@ static const Map<String,dynamic> en = {
   "total_cart": "Total cart",
   "store_number": "Store number",
   "complete_the_selections": "Complete the selections, please",
-  "orderNumberValidate": "Order Number Validate"
+  "orderNumberValidate": "Order Number Validate",
+  "select_image_source": "Select Image Source"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

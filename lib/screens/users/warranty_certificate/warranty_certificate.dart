@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../generated/locale_keys.g.dart';
 import 'widgets/custom_certificate_container.dart';
+import 'widgets/custom_warranty_shimmer.dart';
 
 class WarrantyCertificate extends StatefulWidget {
   final int id;
@@ -40,55 +41,61 @@ class _WarrantyCertificateState extends State<WarrantyCertificate> {
               text: LocaleKeys.warranty_certificate.tr(),
             ),
           ),
-          body: Column(
-            children: [
-              const CustomCertficateContainer(),
-              Padding(
-                padding: EdgeInsets.only(top: 16.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          body: state is ShowCertificatesLoading
+              ? const CustomWarrantyShimmer()
+              : Column(
                   children: [
-                    AppButton(
-                      onPressed: () {
-                        AppRouter.navigateTo(
-                          context,
-                          TransferWarrantyCertificate(
-                            id: AppCubit.get(context).showCertificateModel?.id ?? 0,
+                    const CustomCertficateContainer(),
+                    Padding(
+                      padding: EdgeInsets.only(top: 16.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          AppButton(
+                            onPressed: () {
+                              AppRouter.navigateTo(
+                                context,
+                                TransferWarrantyCertificate(
+                                  id: AppCubit.get(context)
+                                          .showCertificateModel
+                                          ?.id ??
+                                      0,
+                                ),
+                              );
+                            },
+                            color: Colors.white,
+                            borderColor: AppColors.primary,
+                            width: 165.w,
+                            radius: 15.r,
+                            child: AppText(
+                              text: LocaleKeys.transfer_certificate.tr(),
+                              color: AppColors.primary,
+                              size: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        );
-                      },
-                      color: Colors.white,
-                      borderColor: AppColors.primary,
-                      width: 165.w,
-                      radius: 15.r,
-                      child: AppText(
-                        text: LocaleKeys.transfer_certificate.tr(),
-                        color: AppColors.primary,
-                        size: 16.sp,
-                        fontWeight: FontWeight.bold,
+                          AppButton(
+                            onPressed: () {
+                              AppRouter.navigateTo(context,
+                                  const CertificateTransferRequestStatus());
+                            },
+                            width: 165.w,
+                            radius: 15.r,
+                            child: AppText(
+                              text: LocaleKeys.view_certificate.tr(),
+                              color: Colors.white,
+                              size: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    AppButton(
-                      onPressed: () {
-                        AppRouter.navigateTo(
-                            context, const CertificateTransferRequestStatus());
-                      },
-                      width: 165.w,
-                      radius: 15.r,
-                      child: AppText(
-                        text: LocaleKeys.view_certificate.tr(),
-                        color: Colors.white,
-                        size: 16.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
         );
       },
     );
   }
 }
+

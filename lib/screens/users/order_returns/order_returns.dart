@@ -126,7 +126,7 @@ class OrderReturns extends StatelessWidget {
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () {
-                                  AppCubit.get(context).getOrderImage();
+                                  AppCubit.get(context).getOrderImage(context);
                                 },
                                 child: DottedBorder(
                                   borderType: BorderType.RRect,

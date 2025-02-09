@@ -138,11 +138,11 @@ class CustomUserRegisterFields extends StatelessWidget {
                             return SimpleDialogOption(
                               onPressed: () {
                                 AuthCubit.get(context).cityId =
-                                    value.id.toString();
-                                Navigator.pop(context, value.title);
+                                    value['id'].toString();
+                                Navigator.pop(context, value['title']);
                               },
                               child: AppText(
-                                text: value.title,
+                                text: value['title'],
                                 size: 18.sp,
                                 color: AppColors.primary,
                               ),

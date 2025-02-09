@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/core/widgets/app_text.dart';

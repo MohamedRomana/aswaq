@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:aswaq/core/cache/cache_helper.dart';
 import 'package:aswaq/screens/auth/data/auth_cubit.dart';
 import 'package:aswaq/screens/start/splash/splash.dart';

@@ -50,7 +50,7 @@ class ProfileEdit extends StatelessWidget {
                       AppCubit.get(context).profileImage.isEmpty
                           ? InkWell(
                               onTap: () =>
-                                  AppCubit.get(context).getProfileImage(),
+                                  AppCubit.get(context).getProfileImage(context),
                               splashColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               child: Stack(

@@ -14,10 +14,11 @@ void openGoogleMap(double lat, double lng) async {
   }
 }
 
-Future<void> makePhoneCall(String phoneNumber) async {
-  final Uri launchUri = Uri(
-    scheme: 'tel',
-    path: phoneNumber,
-  );
-  await launchUrl(launchUri);
+Future<void> launchPDF({required String pdfUrl}) async {
+  Uri url = Uri.parse(pdfUrl);
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url, mode: LaunchMode.externalApplication);
+  } else {
+    throw "Could not launch $pdfUrl";
+  }
 }

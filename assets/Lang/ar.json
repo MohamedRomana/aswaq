@@ -407,5 +407,6 @@
     "total_cart": "اجمالي السلة",
     "store_number": "محل رقم",
     "complete_the_selections": "اكمل الاختيارات من فضلك",
-    "orderNumberValidate" : "رقم الطلب مطلوب"
+    "orderNumberValidate" : "رقم الطلب مطلوب",
+    "select_image_source": "اختر مصدر الصورة"
 }

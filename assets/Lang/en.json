@@ -407,6 +407,6 @@
       "total_cart": "Total cart",
       "store_number": "Store number",
       "complete_the_selections": "Complete the selections, please",
-      "orderNumberValidate" : "Order Number Validate"
-
+      "orderNumberValidate" : "Order Number Validate",
+      "select_image_source": "Select Image Source"
 }

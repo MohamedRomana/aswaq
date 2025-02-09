@@ -10,19 +10,20 @@ import 'package:aswaq/core/service/model/show_provider_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
 import 'package:aswaq/screens/users/home_layout/shopping_carts/shopping_carts.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../screens/users/home_layout/home/home.dart';
 import '../../../screens/users/home_layout/more/more.dart';
 import '../../cache/cache_helper.dart';
 import '../../constants/contsants.dart';
 import '../model/all_providers_model.dart';
 import '../model/certificates_model.dart';
-import '../model/cities_model.dart';
 import '../model/data_model.dart';
 import '../model/notifications_model.dart';
 import '../model/on_boarding_model.dart';
@@ -162,14 +163,49 @@ class AppCubit extends Cubit<AppState> {
   // Get Images
 
   List<File> profileImage = [];
-  Future<void> getProfileImage() async {
+  Future<void> getProfileImage(BuildContext context) async {
     final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    profileImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
+    final int? pickedOption = await showDialog<int>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(LocaleKeys.select_image_source.tr()),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text("Camera"),
+                onTap: () => Navigator.pop(context, 1),
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Gallery"),
+                onTap: () => Navigator.pop(context, 2),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (pickedOption == null) return;
+
+    XFile? pickedImage;
+
+    if (pickedOption == 1) {
+      pickedImage = await picker.pickImage(source: ImageSource.camera);
+    } else if (pickedOption == 2) {
+      final pickedImages = await picker.pickMultiImage();
+      if (pickedImages.isNotEmpty) {
+        pickedImage = pickedImages.first;
+      }
+    }
+
+    if (pickedImage != null) {
+      profileImage = [File(pickedImage.path)];
+      emit(ChooseImageSuccess());
+    }
   }
 
   void removeProfileImage() {
@@ -371,13 +407,14 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeIndex());
   }
 
-  List<CitiesModel> citiesList = [];
-  Future getSections() async {
+  List citiesList = [];
+  Future getCities() async {
     emit(GetSectionsLoading());
     try {
       http.Response response =
-          await http.post(Uri.parse("${baseUrl}api/sections"), body: {
+          await http.post(Uri.parse("${baseUrl}api/cities"), body: {
         "lang": CacheHelper.getLang(),
+        "user_id": CacheHelper.getUserId(),
       }).timeout(const Duration(milliseconds: 8000));
       if (response.statusCode == 500) {
         emit(ServerError());
@@ -386,9 +423,8 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          citiesList = List<CitiesModel>.from(
-            (data["data"]["cities"] ?? []).map((e) => CitiesModel.fromJson(e)),
-          );
+          citiesList = data['data'];
+
           emit(GetSectionsSuccess());
         } else {
           emit(GetSectionsFailure(error: data["msg"]));
@@ -1422,14 +1458,49 @@ class AppCubit extends Cubit<AppState> {
   // }
 
   List<File> orderImage = [];
-  Future<void> getOrderImage() async {
+  Future<void> getOrderImage(BuildContext context) async {
     final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
-    orderImage = pickedImages
-        .map((pickedImage) => File(pickedImage.path))
-        .take(1)
-        .toList();
-    emit(ChooseImageSuccess());
+    final int? pickedOption = await showDialog<int>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(LocaleKeys.select_image_source.tr()),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text("Camera"),
+                onTap: () => Navigator.pop(context, 1),
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Gallery"),
+                onTap: () => Navigator.pop(context, 2),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (pickedOption == null) return;
+
+    XFile? pickedImage;
+
+    if (pickedOption == 1) {
+      pickedImage = await picker.pickImage(source: ImageSource.camera);
+    } else if (pickedOption == 2) {
+      final pickedImages = await picker.pickMultiImage();
+      if (pickedImages.isNotEmpty) {
+        pickedImage = pickedImages.first;
+      }
+    }
+
+    if (pickedImage != null) {
+      orderImage = [File(pickedImage.path)];
+      emit(ChooseImageSuccess());
+    }
   }
 
   void removeOrderImage() {

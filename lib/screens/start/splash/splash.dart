@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    AppCubit.get(context).getSections();
+    AppCubit.get(context).getCities();
     AppCubit.get(context).getData();
     _customAnimation();
     _customNavigation();

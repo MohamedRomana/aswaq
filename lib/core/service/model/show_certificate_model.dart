@@ -6,6 +6,7 @@ class ShowCertificateModel {
   late final String name;
   late final String phone;
   late final String idNumber;
+  late final String status;
   late final String file;
 
   ShowCertificateModel.fromJson(Map<String, dynamic> json) {
@@ -16,6 +17,7 @@ class ShowCertificateModel {
     name = json['name'];
     phone = json['phone'];
     idNumber = json['id_number'];
+    status = json['status'];
     file = json['file'];
   }
 }

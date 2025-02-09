@@ -193,16 +193,20 @@ class CartsListView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        AppText(
-                          start: 10.w,
-                          end: 10.w,
-                          text: AppCubit.get(context)
-                              .cartItemsModel!
-                              .cartItems[index]
-                              .count
-                              .toString(),
-                          size: 18.sp,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: 30.w,
+                          child: AppText(
+                            // start: 10.w,
+                            // end: 10.w,
+                            textAlign: TextAlign.center,
+                            text: AppCubit.get(context)
+                                .cartItemsModel!
+                                .cartItems[index]
+                                .count
+                                .toString(),
+                            size: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         InkWell(
                           splashColor: Colors.transparent,
