@@ -435,6 +435,18 @@ final class StoreCertificatesFailure extends AppState {
   StoreCertificatesFailure({required this.error});
 }
 
+final class StoreCertificatesPaymentLoading extends AppState {}
+
+final class StoreCertificatesPaymentSuccess extends AppState {
+  final String message;
+  StoreCertificatesPaymentSuccess({required this.message});
+}
+
+final class StoreCertificatesPaymentFailure extends AppState {
+  final String error;
+  StoreCertificatesPaymentFailure({required this.error});
+}
+
 final class GetSerachLoading extends AppState {}
 
 final class GetSearchSuccess extends AppState {

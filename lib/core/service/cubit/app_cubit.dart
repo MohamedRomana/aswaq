@@ -855,6 +855,8 @@ class AppCubit extends Cubit<AppState> {
   }
 
   List<Sections> sections = [];
+  String cerPrice = '';
+
   Future getData() async {
     emit(GetDataLoading());
     try {
@@ -872,6 +874,7 @@ class AppCubit extends Cubit<AppState> {
           sections = List<Sections>.from(
             (data["data"]['sections'] ?? []).map((e) => Sections.fromJson(e)),
           );
+          cerPrice = data['certificate_section_price'].toString();
           emit(GetDataSuccess());
         } else {
           emit(GetDataFailure(error: data["msg"]));
@@ -1589,6 +1592,44 @@ class AppCubit extends Cubit<AppState> {
         emit(Timeoutt());
       } else {
         emit(StoreCertificatesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future storeCertificatesPaymentSections({required String title}) async {
+    emit(StoreCertificatesPaymentLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/store-certificate-section"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "title": title,
+          // "total": total,
+          "payment_method": paymentIndex == 1 ? "online" : "cash",
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(StoreCertificatesPaymentSuccess(message: data["msg"]));
+          certificatesSections();
+        } else {
+          debugPrint(data["msg"]);
+          emit(StoreCertificatesPaymentFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(StoreCertificatesPaymentFailure(error: error.toString()));
       }
     }
   }

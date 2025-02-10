@@ -6,6 +6,7 @@ import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
 import 'package:aswaq/core/widgets/custom_app_bar.dart';
 import 'package:aswaq/core/widgets/custom_bottom_nav.dart';
+import 'package:aswaq/core/widgets/custom_lottie_widget.dart';
 import 'package:aswaq/generated/locale_keys.g.dart';
 import 'package:aswaq/screens/users/all_certificates/all_certifcates.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -50,106 +51,117 @@ class _CertificatesState extends State<Certificates> {
                 ? const CustomCertificateShimmer()
                 : Column(
                     children: [
-                      ListView.separated(
-                        itemCount:
-                            AppCubit.get(context).certificatesList.length,
-                        shrinkWrap: true,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.w, vertical: 24.h),
-                        physics: const BouncingScrollPhysics(),
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: 16.h),
-                        itemBuilder: (context, index) => InkWell(
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () {
-                            AppRouter.navigateTo(
-                              context,
-                              AllCertifcates(
-                                id: AppCubit.get(context)
-                                    .certificatesList[index]
-                                    .id,
-                              ),
-                            );
-                          },
-                          child: Container(
-                            clipBehavior: Clip.antiAlias,
-                            width: 343.w,
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(15.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5.r,
-                                  spreadRadius: 1.r,
-                                  offset: Offset(0, 5.r),
+                      AppCubit.get(context).certificatesList.isEmpty
+                          ? Column(
+                              children: [
+                                SizedBox(height: 100.h),
+                                CustomLottieWidget(
+                                  lottieName: Assets.img.notiEmpty,
                                 ),
+                                SizedBox(height: 50.h),
                               ],
-                            ),
-                            child: Slidable(
-                              key: const ValueKey(0),
-                              endActionPane: ActionPane(
-                                motion: const StretchMotion(),
-                                children: [
-                                  SlidableAction(
-                                    onPressed: (context) {
-                                      AppCubit.get(context)
-                                          .deleteCertificateSections(
-                                        sectionId: AppCubit.get(context)
-                                            .certificatesList[index]
-                                            .id
-                                            .toString(),
-                                        index: index,
-                                      );
-                                    },
-                                    backgroundColor: AppColors.primary,
-                                    foregroundColor: Colors.white,
-                                    icon: Icons.done,
-                                    label: LocaleKeys.delete.tr(),
-                                  ),
-                                ],
-                              ),
-                              child: Container(
-                                height: 68.h,
-                                width: 343.w,
-                                padding: EdgeInsets.all(16.r),
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15.r),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5.r,
-                                      spreadRadius: 1.r,
-                                      offset: Offset(0, 5.r),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      Assets.svg.done3,
-                                      height: 36.w,
-                                      width: 36.w,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    SizedBox(width: 13.w),
-                                    AppText(
-                                      text: AppCubit.get(context)
+                            )
+                          : ListView.separated(
+                              itemCount:
+                                  AppCubit.get(context).certificatesList.length,
+                              shrinkWrap: true,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w, vertical: 24.h),
+                              physics: const BouncingScrollPhysics(),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 16.h),
+                              itemBuilder: (context, index) => InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () {
+                                  AppRouter.navigateTo(
+                                    context,
+                                    AllCertifcates(
+                                      id: AppCubit.get(context)
                                           .certificatesList[index]
-                                          .title,
-                                      size: 24.sp,
-                                      family: Assets.fonts.norsalMedium,
+                                          .id,
                                     ),
-                                  ],
+                                  );
+                                },
+                                child: Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  width: 343.w,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(15.r),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 5.r,
+                                        spreadRadius: 1.r,
+                                        offset: Offset(0, 5.r),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Slidable(
+                                    key: const ValueKey(0),
+                                    endActionPane: ActionPane(
+                                      motion: const StretchMotion(),
+                                      children: [
+                                        SlidableAction(
+                                          onPressed: (context) {
+                                            AppCubit.get(context)
+                                                .deleteCertificateSections(
+                                              sectionId: AppCubit.get(context)
+                                                  .certificatesList[index]
+                                                  .id
+                                                  .toString(),
+                                              index: index,
+                                            );
+                                          },
+                                          backgroundColor: AppColors.primary,
+                                          foregroundColor: Colors.white,
+                                          icon: Icons.done,
+                                          label: LocaleKeys.delete.tr(),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Container(
+                                      height: 68.h,
+                                      width: 343.w,
+                                      padding: EdgeInsets.all(16.r),
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(15.r),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 5.r,
+                                            spreadRadius: 1.r,
+                                            offset: Offset(0, 5.r),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                            Assets.svg.done3,
+                                            height: 36.w,
+                                            width: 36.w,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          SizedBox(width: 13.w),
+                                          AppText(
+                                            text: AppCubit.get(context)
+                                                .certificatesList[index]
+                                                .title,
+                                            size: 24.sp,
+                                            family: Assets.fonts.norsalMedium,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
                       AppButton(
                         top: 12.h,
                         onPressed: () {

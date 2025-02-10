@@ -52,7 +52,7 @@ class CustomLoginFields extends StatelessWidget {
               hint: LocaleKeys.phone.tr(),
               color: Colors.white,
               controller: phoneController,
-              inputType: TextInputType.number,
+              inputType: TextInputType.phone,
               validate: (value) {
                 if (value!.isEmpty) {
                   return LocaleKeys.phoneValidate.tr();

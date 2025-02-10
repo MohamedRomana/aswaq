@@ -14,8 +14,20 @@ import '../../payment/payment.dart';
 final _secrtionController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 
-class AddNewCategoryBottomSheet extends StatelessWidget {
+class AddNewCategoryBottomSheet extends StatefulWidget {
   const AddNewCategoryBottomSheet({super.key});
+
+  @override
+  State<AddNewCategoryBottomSheet> createState() =>
+      _AddNewCategoryBottomSheetState();
+}
+
+class _AddNewCategoryBottomSheetState extends State<AddNewCategoryBottomSheet> {
+  @override
+  void initState() {
+    _secrtionController.clear();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +121,6 @@ class AddNewCategoryBottomSheet extends StatelessWidget {
                     );
                     _secrtionController.clear();
                     AppRouter.pop(context);
-                    AppRouter.navigateTo(context, const Payment());
                   } else if (state is StoreCertificatesFailure) {
                     showFlashMessage(
                       message: state.error,
@@ -122,9 +133,20 @@ class AddNewCategoryBottomSheet extends StatelessWidget {
                   return AppButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        AppCubit.get(context).storeCertificatesSections(
-                          title: _secrtionController.text,
-                        );
+                        if (AppCubit.get(context).certificatesList.length >=
+                            2) {
+                          AppRouter.pop(context);
+                          AppRouter.navigateTo(
+                            context,
+                            Payment(
+                              sectionTitleController: _secrtionController,
+                            ),
+                          );
+                        } else {
+                          AppCubit.get(context).storeCertificatesSections(
+                            title: _secrtionController.text,
+                          );
+                        }
                       }
                     },
                     child: state is StoreCertificatesLoading

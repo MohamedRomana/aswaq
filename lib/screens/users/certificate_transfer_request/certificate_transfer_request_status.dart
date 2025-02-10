@@ -33,7 +33,11 @@ class CertificateTransferRequestStatus extends StatelessWidget {
                   children: [
                     const CertificateStatusContainer(),
                     AppCubit.get(context).showCertificateModel?.status ==
-                            'agree'
+                                'agree' ||
+                            AppCubit.get(context)
+                                    .showCertificateModel
+                                    ?.status ==
+                                'new'
                         ? AppButton(
                             top: 16.h,
                             onPressed: () {
