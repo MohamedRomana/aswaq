@@ -77,7 +77,8 @@ class CustomShopDetails extends StatelessWidget {
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () {
-                          Share.share('https://play.google.com/');
+                          Share.share(
+                              "https://www.google.com/maps/search/?api=1&query=${AppCubit.get(context).showProviderModel?.lat},${AppCubit.get(context).showProviderModel?.lng}");
                         },
                         child: Container(
                           height: 35.w,

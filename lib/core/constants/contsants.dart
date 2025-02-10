@@ -1,3 +1,4 @@
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String? token;
@@ -22,3 +23,9 @@ Future<void> launchPDF({required String pdfUrl}) async {
     throw "Could not launch $pdfUrl";
   }
 }
+
+void shareLocation(double lat, double lng) {
+  String location = 'Latitude: $lat, Longitude: $lng';
+  Share.share(location);
+}
+
