@@ -95,22 +95,24 @@ class _CustomMoreProfileRowState extends State<CustomMoreProfileRow> {
                   ],
                 ),
               ),
-              InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () {
-                  AppRouter.navigateTo(context, const Notifications());
-                },
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(end: 16.w),
-                  child: SvgPicture.asset(
-                    Assets.svg.notificationBing,
-                    height: 24.w,
-                    width: 24.w,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              CacheHelper.getUserId() == ""
+                  ? const SizedBox.shrink()
+                  : InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        AppRouter.navigateTo(context, const Notifications());
+                      },
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.only(end: 16.w),
+                        child: SvgPicture.asset(
+                          Assets.svg.notificationBing,
+                          height: 24.w,
+                          width: 24.w,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
             ],
           ),
         );

@@ -52,52 +52,54 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    Assets.svg.notificationBing,
-                    height: 24.w,
-                    width: 24.w,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(width: 6.w),
-                  AppText(
-                    text: LocaleKeys.notifications.tr(),
-                    size: 14.sp,
-                    color: const Color(0xff4E4E4E),
-                  ),
-                ],
-              ),
-              Transform.scale(
-                scale: 0.8.r,
-                child: Switch(
-                  padding: EdgeInsets.zero,
-                  trackOutlineColor:
-                      const WidgetStatePropertyAll(Colors.transparent),
-                  activeColor: AppColors.primary,
-                  activeTrackColor: AppColors.primary.withOpacity(0.2),
-                  inactiveThumbColor: const Color(0xffB5B2B2),
-                  inactiveTrackColor: const Color(0xffDCDCDC),
-                  value: AppCubit.get(context).showUserMap['send_notify'],
-                  onChanged: (bool value) {
-                    setState(
-                      () {
-                        AppCubit.get(context).showUserMap['send_notify'] =
-                            value;
-                        AppCubit.get(context).userNotification(
-                          sendNotify:
-                              AppCubit.get(context).showUserMap['send_notify'],
-                        );
-                      },
-                    );
-                  },
+          CacheHelper.getUserId() == ""
+              ? const SizedBox.shrink()
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          Assets.svg.notificationBing,
+                          height: 24.w,
+                          width: 24.w,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(width: 6.w),
+                        AppText(
+                          text: LocaleKeys.notifications.tr(),
+                          size: 14.sp,
+                          color: const Color(0xff4E4E4E),
+                        ),
+                      ],
+                    ),
+                    Transform.scale(
+                      scale: 0.8.r,
+                      child: Switch(
+                        padding: EdgeInsets.zero,
+                        trackOutlineColor:
+                            const WidgetStatePropertyAll(Colors.transparent),
+                        activeColor: AppColors.primary,
+                        activeTrackColor: AppColors.primary.withOpacity(0.2),
+                        inactiveThumbColor: const Color(0xffB5B2B2),
+                        inactiveTrackColor: const Color(0xffDCDCDC),
+                        value: AppCubit.get(context).showUserMap['send_notify'],
+                        onChanged: (bool value) {
+                          setState(
+                            () {
+                              AppCubit.get(context).showUserMap['send_notify'] =
+                                  value;
+                              AppCubit.get(context).userNotification(
+                                sendNotify: AppCubit.get(context)
+                                    .showUserMap['send_notify'],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
