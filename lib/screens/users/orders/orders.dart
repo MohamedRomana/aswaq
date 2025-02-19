@@ -79,7 +79,7 @@ class _OrdersState extends State<Orders> {
                               BoxShadow(
                                 blurRadius: 5.r,
                                 spreadRadius: 1.r,
-                                color: Colors.grey,
+                                color: Colors.grey.withOpacity(0.5.r),
                                 offset: Offset(0, 5.r),
                               ),
                             ],
@@ -101,8 +101,8 @@ class _OrdersState extends State<Orders> {
                                         width: 110.w,
                                         child: AppText(
                                           text: AppCubit.get(context)
-                                              .ordersList[index]
-                                              ['id'].toString(),
+                                              .ordersList[index]['id']
+                                              .toString(),
                                           color: AppColors.primary,
                                           size: 14.sp,
                                         ),
@@ -114,8 +114,9 @@ class _OrdersState extends State<Orders> {
                                     width: 150.w,
                                     child: AppText(
                                       text: AppCubit.get(context)
-                                          .ordersList[index]
-                                          ['order_date_format'] ?? "",
+                                                  .ordersList[index]
+                                              ['order_date_format'] ??
+                                          "",
                                       color: Colors.grey,
                                       size: 12.sp,
                                     ),
@@ -132,8 +133,9 @@ class _OrdersState extends State<Orders> {
                                       child: AppText(
                                         textAlign: TextAlign.end,
                                         text: AppCubit.get(context)
-                                            .ordersList[index]
-                                            ['order_duration'] ?? '',
+                                                    .ordersList[index]
+                                                ['order_duration'] ??
+                                            '',
                                         size: 14.sp,
                                         color: Colors.grey,
                                       ),
@@ -153,18 +155,17 @@ class _OrdersState extends State<Orders> {
                                         child: AppText(
                                           textAlign: TextAlign.center,
                                           text: AppCubit.get(context)
-                                              .ordersList[index]
-                                              ['status_f'] ?? '',
+                                                      .ordersList[index]
+                                                  ['status_f'] ??
+                                              '',
                                           size: 12.sp,
                                           color: Colors.green,
                                         ),
                                       ),
                                     ),
                                   ),
-                               
                                 ],
                               ),
-                          
                             ],
                           ),
                         ),

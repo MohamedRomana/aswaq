@@ -14,19 +14,8 @@ import '../../../../../generated/locale_keys.g.dart';
 import '../../../profile/profile.dart';
 import '../../../search/search.dart';
 
-class CustomHomeAppBar extends StatefulWidget {
+class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({super.key});
-
-  @override
-  State<CustomHomeAppBar> createState() => _CustomHomeAppBarState();
-}
-
-class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
-  @override
-  void initState() {
-    AppCubit.get(context).showUser();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

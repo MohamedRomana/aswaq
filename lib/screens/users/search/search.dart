@@ -73,6 +73,13 @@ class _SearchState extends State<Search> {
                           // _searchController.clear();
                         }
                       },
+                      onChanged: (value) {
+                        if (_searchController.text.isNotEmpty) {
+                          AppCubit.get(context)
+                              .getSearch(title: _searchController.text);
+                          // _searchController.clear();
+                        }
+                      },
                       validate: (value) {
                         if (value!.isEmpty) {
                           return LocaleKeys.enter_search_term.tr();

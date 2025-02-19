@@ -67,7 +67,7 @@ class _NotificationsState extends State<Notifications> {
                               borderRadius: BorderRadius.circular(10.r),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.grey,
+                                  color: Colors.grey.withOpacity(0.5.r),
                                   blurRadius: 5.r,
                                   spreadRadius: 1.r,
                                   offset: Offset(0, 5.r),

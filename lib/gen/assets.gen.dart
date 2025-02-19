@@ -41,10 +41,6 @@ class $AssetsFontsGen {
 class $AssetsImgGen {
   const $AssetsImgGen();
 
-  /// File path: assets/img/Ellipse 234.png
-  AssetGenImage get ellipse234 =>
-      const AssetGenImage('assets/img/Ellipse 234.png');
-
   /// File path: assets/img/alert.json
   String get alert => 'assets/img/alert.json';
 
@@ -78,18 +74,8 @@ class $AssetsImgGen {
   AssetGenImage get onboarding3 =>
       const AssetGenImage('assets/img/onboarding3.png');
 
-  /// File path: assets/img/shop.png
-  AssetGenImage get shop => const AssetGenImage('assets/img/shop.png');
-
-  /// File path: assets/img/swiper.png
-  AssetGenImage get swiper => const AssetGenImage('assets/img/swiper.png');
-
-  /// File path: assets/img/wash.png
-  AssetGenImage get wash => const AssetGenImage('assets/img/wash.png');
-
   /// List of all assets
   List<dynamic> get values => [
-        ellipse234,
         alert,
         emptyorder,
         emptyseach,
@@ -99,10 +85,7 @@ class $AssetsImgGen {
         notiEmpty,
         onboarding1,
         onboarding2,
-        onboarding3,
-        shop,
-        swiper,
-        wash
+        onboarding3
       ];
 }
 

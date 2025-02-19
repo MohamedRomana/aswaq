@@ -1,3 +1,5 @@
+import 'package:aswaq/core/widgets/custom_lottie_widget.dart';
+import 'package:aswaq/gen/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +19,9 @@ class CustomLoginFirst extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        CustomLottieWidget(
+          lottieName: Assets.img.emptyorder,
+        ),
         AppText(
           text: LocaleKeys.loginFirst.tr(),
           size: 24.sp,
@@ -33,6 +38,7 @@ class CustomLoginFirst extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        SizedBox(height: 150.h),
       ],
     ));
   }

@@ -119,14 +119,14 @@ class LogIn extends StatelessWidget {
                 AppRouter.navigateTo(context, const HomeLayout());
               },
               child: SizedBox(
-                height: 20.h,
                 width: 150.w,
-                child: Center(
-                  child: AppText(
-                    text: LocaleKeys.skip.tr(),
-                    size: 14.sp,
-                    color: Colors.black,
-                  ),
+                child: AppText(
+                  textAlign: TextAlign.center,
+                  text: LocaleKeys.skiptohome.tr(),
+                  size: 14.sp,
+                  color: Colors.black,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

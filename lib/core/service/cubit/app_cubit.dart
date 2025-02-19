@@ -647,6 +647,7 @@ class AppCubit extends Cubit<AppState> {
         if (data["key"] == 1) {
           clientHomeModel = ClientHomeModel.fromJson(data["data"]);
           emit(ClientHomeSuccess());
+          showUser();
         } else {
           emit(ClientHomeFailure(error: data["msg"]));
         }

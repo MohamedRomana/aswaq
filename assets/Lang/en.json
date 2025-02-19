@@ -405,6 +405,7 @@
       "reason_for_returning_product": "Reason for returning the product",
       "chat_with": "Chat with",
       "total_cart": "Total cart",
+      "skiptohome": "Skip to home",
       "store_number": "Store number",
       "complete_the_selections": "Complete the selections, please",
       "orderNumberValidate" : "Order Number Validate",

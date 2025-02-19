@@ -1,4 +1,5 @@
 // ignore_for_file: deprecated_member_use
+import 'package:aswaq/core/cache/cache_helper.dart';
 import 'package:aswaq/core/widgets/app_cached.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/service/cubit/app_cubit.dart';
+import '../../../../../core/widgets/alert_dialog.dart';
 import '../../../../../core/widgets/app_text.dart';
+import '../../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
 import '../../../shop_screen/widgets/custom_product_details.dart';
@@ -41,17 +44,27 @@ class BestProductsListView extends StatelessWidget {
                   return InkWell(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.white,
-                      builder: (context) => ProductDetailsBottomSheet(
-                        id: AppCubit.get(context)
-                            .clientHomeModel!
-                            .services[index]
-                            .id,
-                      ),
-                    ),
+                    onTap: () {
+                      if (CacheHelper.getUserId() == "") {
+                        customAlertDialog(
+                          dialogBackGroundColor: Colors.white,
+                          context: context,
+                          child: const CustomLoginDialog(),
+                        );
+                      } else {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.white,
+                          builder: (context) => ProductDetailsBottomSheet(
+                            id: AppCubit.get(context)
+                                .clientHomeModel!
+                                .services[index]
+                                .id,
+                          ),
+                        );
+                      }
+                    },
                     child: Stack(
                       children: [
                         Container(

@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../../core/cache/cache_helper.dart';
 import '../../../../../core/constants/colors.dart';
+import '../../../../../core/widgets/alert_dialog.dart';
 import '../../../../../core/widgets/app_router.dart';
 import '../../../../../core/widgets/app_text.dart';
+import '../../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
 import '../../../shop_screen/shop_screen.dart';
@@ -42,14 +45,17 @@ class MarketsAndShopsListView extends StatelessWidget {
                 return InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onTap: () => AppRouter.navigateTo(
+                  onTap: () {
+                    AppRouter.navigateTo(
                       context,
                       ShopScreen(
                         id: AppCubit.get(context)
                             .clientHomeModel!
                             .providers[index]
                             .id,
-                      )),
+                      ),
+                    );
+                  },
                   child: Container(
                     height: 100.h,
                     width: 343.w,
@@ -106,13 +112,21 @@ class MarketsAndShopsListView extends StatelessWidget {
                                   width: 30.w,
                                   child: InkWell(
                                     onTap: () {
-                                      AppCubit.get(context).addFavorite(
-                                        providerId: AppCubit.get(context)
-                                            .clientHomeModel!
-                                            .providers[index]
-                                            .id
-                                            .toString(),
-                                      );
+                                      if (CacheHelper.getUserId() == "") {
+                                        customAlertDialog(
+                                          dialogBackGroundColor: Colors.white,
+                                          context: context,
+                                          child: const CustomLoginDialog(),
+                                        );
+                                      } else {
+                                        AppCubit.get(context).addFavorite(
+                                          providerId: AppCubit.get(context)
+                                              .clientHomeModel!
+                                              .providers[index]
+                                              .id
+                                              .toString(),
+                                        );
+                                      }
                                     },
                                     child: Icon(
                                       AppCubit.get(context)

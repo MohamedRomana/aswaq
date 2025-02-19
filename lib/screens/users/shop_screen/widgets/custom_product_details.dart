@@ -1,4 +1,5 @@
 // ignore_for_file: deprecated_member_use
+import 'package:aswaq/core/cache/cache_helper.dart';
 import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:aswaq/core/widgets/app_cached.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -8,8 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/colors.dart';
+import '../../../../core/widgets/alert_dialog.dart';
 import '../../../../core/widgets/app_router.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../core/widgets/flash_message.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -256,7 +259,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                           BlocConsumer<AppCubit, AppState>(
                             listener: (context, state) {
                               if (state is AddToCartSuccess) {
-                               AppRouter.pop(context);
+                                AppRouter.pop(context);
                                 showFlashMessage(
                                   context: context,
                                   type: FlashMessageType.success,
@@ -275,8 +278,16 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () {
-                                  AppCubit.get(context).addToCart(
-                                      serviceId: widget.id.toString());
+                                  if (CacheHelper.getUserId() == "") {
+                                    customAlertDialog(
+                                      dialogBackGroundColor: Colors.white,
+                                      context: context,
+                                      child: const CustomLoginDialog(),
+                                    );
+                                  } else {
+                                    AppCubit.get(context).addToCart(
+                                        serviceId: widget.id.toString());
+                                  }
                                 },
                                 child: Container(
                                   height: 50.h,

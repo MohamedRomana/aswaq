@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -66,8 +68,8 @@ class CartsListView extends StatelessWidget {
                       BoxShadow(
                         blurRadius: 5.r,
                         spreadRadius: 1.r,
-                        color: Colors.grey,
-                        offset: Offset(0, 5.r),
+                        color: Colors.grey.withOpacity(0.7.r),
+                        offset: const Offset(0, 0),
                       ),
                     ],
                   ),

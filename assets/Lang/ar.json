@@ -318,7 +318,7 @@
     "price_includes": "السعر يشمل: رسوم الخدمة وحجز الموعد وتعبئة النماذج ولا يشمل رسوم السفارة",
     "chooseCountry" : "اختر الدولة",
     "agree_to_terms_and_conditions": "أوافق علي الشروط والاحكام",
-    "welcome_dear_customer": "مرحبا بك عملنا العزيز",
+    "welcome_dear_customer": "مرحبا بك عميلنا العزيز",
     "thank_you_for_your_preference": "نشكرك على تفضيلك لنا",
     "editprofile" : "تعديل الحساب",
     "edit_personal_information": "تعديل البيانات الشخصية",
@@ -406,6 +406,7 @@
     "chat_with": "محادثة مع",
     "total_cart": "اجمالي السلة",
     "store_number": "محل رقم",
+    "skiptohome": "تخطى للرئيسية",
     "complete_the_selections": "اكمل الاختيارات من فضلك",
     "orderNumberValidate" : "رقم الطلب مطلوب",
     "select_image_source": "اختر مصدر الصورة"
