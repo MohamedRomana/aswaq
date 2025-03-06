@@ -1,0 +1,2 @@
+D:/Projects/aswaq/android/app/.cxx/RelWithDebInfo/5z06d81v/x86_64/CMakeFiles/edit_cache.dir
+D:/Projects/aswaq/android/app/.cxx/RelWithDebInfo/5z06d81v/x86_64/CMakeFiles/rebuild_cache.dir
