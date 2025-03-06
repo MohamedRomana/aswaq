@@ -52,7 +52,8 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CacheHelper.getUserId() == ""
+          CacheHelper.getUserId() == "" ||
+                  AppCubit.get(context).showUserMap.isEmpty
               ? const SizedBox.shrink()
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

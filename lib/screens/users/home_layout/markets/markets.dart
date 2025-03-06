@@ -30,63 +30,72 @@ class _MarketsState extends State<Markets> {
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(80.h),
               child: const CustomAppBar(isMarket: true)),
-          body: DefaultTabController(
-            initialIndex: 0,
-            length: AppCubit.get(context).sections.length,
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsetsDirectional.only(
-                    top: 16.h,
-                    start: 10.w,
-                    bottom: 20.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.r),
-                  ),
-                  child: TabBar(
-                    onTap: (index) {
-                      AppCubit.get(context).changeMarketIndex(index: index);
-                      AppCubit.get(context).allSections(
-                        sectionId:
-                            AppCubit.get(context).sections[index].id.toString(),
-                      );
-                    },
-                    padding: EdgeInsetsDirectional.only(start: -40.w),
-                    physics: const BouncingScrollPhysics(),
-                    isScrollable: true,
-                    splashBorderRadius: BorderRadius.circular(5.r),
-                    dividerColor: Colors.transparent,
-                    indicatorColor: AppColors.primary,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(15.r),
-                    ),
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.grey,
-                    labelStyle: TextStyle(fontSize: 16.sp),
-                    tabs: List.generate(
-                      AppCubit.get(context).sections.length,
-                      (index) => Tab(
-                        text: AppCubit.get(context).sections[index].title,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: List.generate(
-                      AppCubit.get(context).sections.length,
-                      (index) => const CustomMarketsListView(),
-                    ),
+          body: AppCubit.get(context).sections.isEmpty
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primary,
                   ),
                 )
-              ],
-            ),
-          ),
+              : DefaultTabController(
+                  initialIndex: 0,
+                  length: AppCubit.get(context).sections.length,
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsetsDirectional.only(
+                          top: 16.h,
+                          start: 10.w,
+                          bottom: 20.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5.r),
+                        ),
+                        child: TabBar(
+                          onTap: (index) {
+                            AppCubit.get(context)
+                                .changeMarketIndex(index: index);
+                            AppCubit.get(context).allSections(
+                              sectionId: AppCubit.get(context)
+                                  .sections[index]
+                                  .id
+                                  .toString(),
+                            );
+                          },
+                          padding: EdgeInsetsDirectional.only(start: -40.w),
+                          physics: const BouncingScrollPhysics(),
+                          isScrollable: true,
+                          splashBorderRadius: BorderRadius.circular(5.r),
+                          dividerColor: Colors.transparent,
+                          indicatorColor: AppColors.primary,
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          indicator: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(15.r),
+                          ),
+                          labelColor: Colors.white,
+                          unselectedLabelColor: Colors.grey,
+                          labelStyle: TextStyle(fontSize: 16.sp),
+                          tabs: List.generate(
+                            AppCubit.get(context).sections.length,
+                            (index) => Tab(
+                              text: AppCubit.get(context).sections[index].title,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: TabBarView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: List.generate(
+                            AppCubit.get(context).sections.length,
+                            (index) => const CustomMarketsListView(),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
         );
       },
     );
