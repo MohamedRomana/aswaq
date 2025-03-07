@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
       builder: (context, state) {
         return Scaffold(
           body: state is ClientHomeLoading &&
-                  AppCubit.get(context).clientHomeModel == null
+                  AppCubit.get(context).clientHomeModel.isEmpty
               ? const CustomHomeShimmer()
               : SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),

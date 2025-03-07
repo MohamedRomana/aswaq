@@ -34,11 +34,11 @@ class SwiperContainer extends StatelessWidget {
           child: Swiper(
             itemBuilder: (context, index) => AppCachedImage(
               image:
-                  AppCubit.get(context).clientHomeModel?.sliders[index].image ?? "",
+                  AppCubit.get(context).clientHomeModel['sliders'][index]['image'] ?? "",
               fit: BoxFit.cover,
             ),
             autoplay: true,
-            itemCount: AppCubit.get(context).clientHomeModel?.sliders.length ?? 0,
+            itemCount: AppCubit.get(context).clientHomeModel['sliders'].length,
             scrollDirection: Axis.horizontal,
             curve: Curves.fastOutSlowIn,
             pagination: SwiperPagination(

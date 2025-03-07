@@ -44,7 +44,7 @@ class CostContainer extends StatelessWidget {
                     child: AppText(
                       textAlign: TextAlign.end,
                       text:
-                          '${AppCubit.get(context).cartItemsModel!.total}  ${LocaleKeys.sar.tr()}',
+                          '${AppCubit.get(context).cartItemsModel['total']}  ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),
@@ -64,7 +64,7 @@ class CostContainer extends StatelessWidget {
                     child: AppText(
                       textAlign: TextAlign.end,
                       text:
-                          '${AppCubit.get(context).cartItemsModel!.totalWithValue}  ${LocaleKeys.sar.tr()}',
+                          '${AppCubit.get(context).cartItemsModel['total_with_value']}  ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),

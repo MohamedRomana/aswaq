@@ -38,7 +38,7 @@ class BestProductsListView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 scrollDirection: Axis.horizontal,
                 itemCount:
-                    AppCubit.get(context).clientHomeModel?.services.length ?? 0,
+                    AppCubit.get(context).clientHomeModel['services'].length,
                 separatorBuilder: (context, index) => SizedBox(width: 13.w),
                 itemBuilder: (context, index) {
                   return InkWell(
@@ -58,9 +58,9 @@ class BestProductsListView extends StatelessWidget {
                           backgroundColor: Colors.white,
                           builder: (context) => ProductDetailsBottomSheet(
                             id: AppCubit.get(context)
-                                .clientHomeModel!
-                                .services[index]
-                                .id,
+                                .clientHomeModel
+                                ['services'][index]
+                                ['id'],
                           ),
                         );
                       }
@@ -76,8 +76,8 @@ class BestProductsListView extends StatelessWidget {
                           child: AppCachedImage(
                             image: AppCubit.get(context)
                                     .clientHomeModel
-                                    ?.services[index]
-                                    .firstImage ??
+                                    ['services'][index]
+                                    ['first_image'] ??
                                 "",
                             fit: BoxFit.cover,
                           ),
@@ -103,8 +103,8 @@ class BestProductsListView extends StatelessWidget {
                                         start: 10.w,
                                         text: AppCubit.get(context)
                                                 .clientHomeModel
-                                                ?.services[index]
-                                                .title ??
+                                                ['services'][index]
+                                                ['title'] ??
                                             "",
                                         color: Colors.white,
                                         size: 11.sp,
@@ -118,8 +118,8 @@ class BestProductsListView extends StatelessWidget {
                                         top: 5.h,
                                         text: AppCubit.get(context)
                                                 .clientHomeModel
-                                                ?.services[index]
-                                                .sectionTitle ??
+                                                ['services'][index]
+                                                ['section_title'] ??
                                             "",
                                         color: AppColors.primary,
                                         size: 9.sp,
@@ -164,7 +164,7 @@ class BestProductsListView extends StatelessWidget {
                                   child: AppText(
                                     textAlign: TextAlign.end,
                                     text:
-                                        '${AppCubit.get(context).clientHomeModel?.services[index].price} ${LocaleKeys.sar.tr()}',
+                                        '${AppCubit.get(context).clientHomeModel['services'][index]['price']} ${LocaleKeys.sar.tr()}',
                                     size: 12.sp,
                                     color: AppColors.primary,
                                   ),

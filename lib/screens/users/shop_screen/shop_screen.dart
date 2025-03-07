@@ -39,7 +39,7 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
           ),
           body: state is ShowProviderLoading &&
-                  AppCubit.get(context).showProviderModel == null
+                  AppCubit.get(context).showProviderModel.isEmpty
               ? const CustomShopShimmer()
               : DefaultTabController(
                   length: AppCubit.get(context).subSections.length,

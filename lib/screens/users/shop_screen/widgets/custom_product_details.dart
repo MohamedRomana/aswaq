@@ -89,8 +89,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                                 child: AppText(
                                   text: AppCubit.get(context)
                                           .showServiceModel
-                                          ?.title ??
-                                      '',
+                                          ['title'],
                                   size: 19.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -101,9 +100,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                                   top: 16.h,
                                   bottom: 16.h,
                                   text: AppCubit.get(context)
-                                          .showServiceModel
-                                          ?.sectionTitle ??
-                                      '',
+                                          .showServiceModel['section_title'],
                                   size: 16.sp,
                                   color: Colors.grey,
                                 ),
@@ -115,7 +112,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                             child: AppText(
                               textAlign: TextAlign.end,
                               text:
-                                  '${AppCubit.get(context).showServiceModel?.price} ${LocaleKeys.sar.tr()}',
+                                  '${AppCubit.get(context).showServiceModel['price']} ${LocaleKeys.sar.tr()}',
                               color: AppColors.primary,
                               size: 22.sp,
                               fontWeight: FontWeight.bold,
@@ -145,7 +142,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                               bottom: 16.h,
                               text: AppCubit.get(context)
                                       .showServiceModel
-                                      ?.desc ??
+                                      ['desc'] ??
                                   '',
                               color: Colors.grey,
                               size: 14.sp,

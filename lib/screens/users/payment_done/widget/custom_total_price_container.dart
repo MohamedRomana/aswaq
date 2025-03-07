@@ -3,14 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/colors.dart';
-import '../../../../core/service/model/show_cart_items_model.dart';
+import '../../../../core/service/cubit/app_cubit.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 class CusomTotalPriceContainer extends StatelessWidget {
-  final ShowCartItemsModel cartItemsModel;
+  
 
-  const CusomTotalPriceContainer({super.key, required this.cartItemsModel});
+  const CusomTotalPriceContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     width: 150.w,
                     child: AppText(
                       textAlign: TextAlign.end,
-                      text: '${cartItemsModel.total} ${LocaleKeys.sar.tr()}',
+                      text: '${AppCubit.get(context).cartItemsModel['total']} ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),
@@ -100,7 +100,7 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     child: AppText(
                       textAlign: TextAlign.end,
                       text:
-                          '${cartItemsModel.totalWithValue} ${LocaleKeys.sar.tr()}',
+                          '${AppCubit.get(context).cartItemsModel['total_with_value']} ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),

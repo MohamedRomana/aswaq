@@ -2,11 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:aswaq/core/service/model/all_certificate_model.dart';
-import 'package:aswaq/core/service/model/client_home_model.dart';
-import 'package:aswaq/core/service/model/fav_list_model.dart';
-import 'package:aswaq/core/service/model/show_cart_model.dart';
 import 'package:aswaq/core/service/model/show_certificate_model.dart';
-import 'package:aswaq/core/service/model/show_provider_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
 import 'package:aswaq/screens/users/home_layout/shopping_carts/shopping_carts.dart';
@@ -29,7 +25,6 @@ import '../model/notifications_model.dart';
 import '../model/on_boarding_model.dart';
 import '../model/chat_messages_model.dart';
 import '../model/question_model.dart';
-import '../model/show_cart_items_model.dart';
 import '../model/show_service_model.dart';
 part 'app_state.dart';
 
@@ -622,7 +617,7 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeIndex());
   }
 
-  ClientHomeModel? clientHomeModel;
+  Map clientHomeModel = {};
   Future clientHome() async {
     emit(ClientHomeLoading());
     // Position? myPosition;
@@ -645,7 +640,7 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          clientHomeModel = ClientHomeModel.fromJson(data["data"]);
+          clientHomeModel = data["data"];
           emit(ClientHomeSuccess());
           showUser();
         } else {
@@ -663,7 +658,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  ShowProviderModel? showProviderModel;
+  Map showProviderModel = {};
   List subSections = [];
   Future showProvider({required String providerId}) async {
     emit(ShowProviderLoading());
@@ -681,8 +676,8 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          showProviderModel = ShowProviderModel.fromJson(data["data"]);
-          allServiceList = showProviderModel!.services;
+          showProviderModel = data["data"];
+          allServiceList = showProviderModel['services'];
           if (data["data"]["sub_sections"].length == 1) {
             subSections = data["data"]["sub_sections"];
           } else {
@@ -707,7 +702,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  List<AllServiceModel> allServiceList = [];
+  List allServiceList = [];
 
   Future allServices({required String subsectionId}) async {
     emit(AllServicesLoading());
@@ -725,9 +720,7 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          allServiceList = List<AllServiceModel>.from(
-            (data["data"] ?? []).map((e) => AllServiceModel.fromJson(e)),
-          );
+          allServiceList = data["data"];
           emit(AllServicesSuccess());
         } else {
           emit(AllServicesFailure(error: data["msg"]));
@@ -744,7 +737,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  List<AllServiceModel> searchList = [];
+  List searchList = [];
 
   Future getSearch({required String title}) async {
     emit(GetSerachLoading());
@@ -762,9 +755,7 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          searchList = List<AllServiceModel>.from(
-            (data["data"] ?? []).map((e) => AllServiceModel.fromJson(e)),
-          );
+          searchList = data["data"];
           emit(GetSearchSuccess(message: data["msg"]));
         } else {
           emit(GetSearchFailure(error: data["msg"]));
@@ -781,7 +772,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  ShowServiceModel? showServiceModel;
+  Map showServiceModel = {};
   List<ImagesList> serviceImages = [];
 
   Future showService({required String serviceId}) async {
@@ -802,7 +793,7 @@ class AppCubit extends Cubit<AppState> {
           serviceImages = List<ImagesList>.from(
             (data["data"]["images"] ?? []).map((e) => ImagesList.fromJson(e)),
           );
-          showServiceModel = ShowServiceModel.fromJson(data["data"]);
+          showServiceModel = data["data"];
           emit(ShowServiceSuccess());
         } else {
           emit(ShowServiceFailure(error: data["msg"]));
@@ -1021,7 +1012,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  List<Provicers> provicersList = [];
+  List provicersList = [];
   Future showFavorite() async {
     emit(ShowFavoriteLoading());
     try {
@@ -1037,9 +1028,7 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          provicersList = List<Provicers>.from(
-            (data["data"]['provicers'] ?? []).map((e) => Provicers.fromJson(e)),
-          );
+          provicersList = data["data"]['provicers'];
           emit(ShowFavoriteSuccess());
         } else {
           emit(ShowFavoriteFailure(error: data["msg"]));
@@ -1137,7 +1126,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  List<ShowCartModel> cartList = [];
+  List cartList = [];
   Future showCart() async {
     emit(ShowCartLoading());
     try {
@@ -1156,9 +1145,7 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          cartList = List<ShowCartModel>.from(
-            (data["data"] ?? []).map((e) => ShowCartModel.fromJson(e)),
-          );
+          cartList = data["data"];
 
           emit(ShowCartSuccess());
         } else {
@@ -1212,7 +1199,7 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  ShowCartItemsModel? cartItemsModel;
+  Map cartItemsModel = {};
   Future cartItems({required String cartItemId}) async {
     emit(CartItemsLoading());
     try {
@@ -1231,7 +1218,7 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          cartItemsModel = ShowCartItemsModel.fromJson(data["data"]);
+          cartItemsModel = data["data"];
           emit(CartItemsSuccess(message: data["msg"]));
         } else {
           debugPrint(data["msg"]);

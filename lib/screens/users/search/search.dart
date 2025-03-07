@@ -174,8 +174,7 @@ class _SearchState extends State<Search> {
                                               start: 10.w,
                                               top: 10.h,
                                               text: AppCubit.get(context)
-                                                  .searchList[index]
-                                                  .title,
+                                                  .searchList[index]['title'],
                                               size: 12.sp,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -187,8 +186,8 @@ class _SearchState extends State<Search> {
                                               start: 10.w,
                                               top: 3.h,
                                               text: AppCubit.get(context)
-                                                  .searchList[index]
-                                                  .sectionTitle,
+                                                      .searchList[index]
+                                                  ['section_title'],
                                               color: AppColors.primary,
                                               size: 9.sp,
                                             ),
@@ -197,8 +196,7 @@ class _SearchState extends State<Search> {
                                       ),
                                       AppCachedImage(
                                         image: AppCubit.get(context)
-                                            .searchList[index]
-                                            .firstImage,
+                                            .searchList[index]['first_image'],
                                         fit: BoxFit.cover,
                                       ),
                                       Row(
@@ -232,7 +230,7 @@ class _SearchState extends State<Search> {
                                               end: 10.w,
                                               textAlign: TextAlign.end,
                                               text:
-                                                  '${AppCubit.get(context).searchList[index].price} ${LocaleKeys.sar.tr()}',
+                                                  '${AppCubit.get(context).searchList[index]['price']} ${LocaleKeys.sar.tr()}',
                                               size: 12.sp,
                                               color: AppColors.primary,
                                             ),

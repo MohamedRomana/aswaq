@@ -10,7 +10,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/service/model/show_cart_items_model.dart';
 import '../../../core/widgets/flash_message.dart';
 import '../../../generated/locale_keys.g.dart';
 import 'widget/custom_dialog_goto_orders.dart';
@@ -20,8 +19,7 @@ import 'widget/payment_choice_container.dart';
 import 'widget/payment_locat_index.dart';
 
 class PaymentDone extends StatefulWidget {
-  final ShowCartItemsModel cartItemsModel;
-  const PaymentDone({super.key, required this.cartItemsModel});
+  const PaymentDone({super.key});
 
   @override
   State<PaymentDone> createState() => _PaymentDoneState();
@@ -65,7 +63,7 @@ class _PaymentDoneState extends State<PaymentDone> {
             preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text:
-                  '${LocaleKeys.shop_details_number.tr()} ${widget.cartItemsModel.salerName}',
+                  '${LocaleKeys.shop_details_number.tr()} ${AppCubit.get(context).cartItemsModel['saler_name']}',
             ),
           ),
           body: SingleChildScrollView(
@@ -79,13 +77,9 @@ class _PaymentDoneState extends State<PaymentDone> {
                   const PaymentLocatContaine(),
                   Visibility(
                     visible: AppCubit.get(context).paymentlocatIndex == 0,
-                    child: CustomShippingMethod(
-                      cartItemsModel: widget.cartItemsModel,
-                    ),
+                    child: const CustomShippingMethod(),
                   ),
-                  CusomTotalPriceContainer(
-                    cartItemsModel: widget.cartItemsModel,
-                  ),
+                  const CusomTotalPriceContainer(),
                   AppButton(
                     onPressed: () {
                       if (AppCubit.get(context).paymentlocatIndex == -1 ||
@@ -104,7 +98,9 @@ class _PaymentDoneState extends State<PaymentDone> {
                         );
                       } else {
                         AppCubit.get(context).storeOrder(
-                            cartId: widget.cartItemsModel.id.toString());
+                            cartId: AppCubit.get(context)
+                                .cartItemsModel['id']
+                                .toString());
                       }
                     },
                     child: state is StoreOrderLoading

@@ -26,7 +26,7 @@ class CustomShopDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(
-                text: AppCubit.get(context).showProviderModel?.firstName ?? '',
+                text: AppCubit.get(context).showProviderModel['first_name'] ?? '',
                 size: 20.sp,
                 fontWeight: FontWeight.bold,
               ),
@@ -43,7 +43,7 @@ class CustomShopDetails extends StatelessWidget {
                   SizedBox(width: 3.w),
                   AppText(
                     text:
-                        '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).showProviderModel?.distance} ${LocaleKeys.km.tr()}',
+                        '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).showProviderModel['distance']} ${LocaleKeys.km.tr()}',
                     size: 10.sp,
                     color: Colors.grey,
                   ),
@@ -63,9 +63,9 @@ class CustomShopDetails extends StatelessWidget {
                       AppText(
                         text: AppCubit.get(context)
                                 .showProviderModel
-                                ?.rate
-                                .toString() ??
-                            '',
+                                ['rate']
+                                .toString()
+                           ,
                         size: 14.sp,
                       )
                     ],
@@ -78,7 +78,7 @@ class CustomShopDetails extends StatelessWidget {
                         highlightColor: Colors.transparent,
                         onTap: () {
                           Share.share(
-                              "https://www.google.com/maps/search/?api=1&query=${AppCubit.get(context).showProviderModel?.lat},${AppCubit.get(context).showProviderModel?.lng}");
+                              "https://www.google.com/maps/search/?api=1&query=${AppCubit.get(context).showProviderModel['lat']},${AppCubit.get(context).showProviderModel['lng']}");
                         },
                         child: Container(
                           height: 35.w,
@@ -109,11 +109,11 @@ class CustomShopDetails extends StatelessWidget {
                             child: ShopLocation(
                               lat: AppCubit.get(context)
                                       .showProviderModel
-                                      ?.lat ??
-                                  0,
+                                      ['lat'] ?? 0
+                                  ,
                               lng: AppCubit.get(context)
                                       .showProviderModel
-                                      ?.lng ??
+                                      ['lng'] ??
                                   0,
                               address: 'jhg jg k',
                             ),

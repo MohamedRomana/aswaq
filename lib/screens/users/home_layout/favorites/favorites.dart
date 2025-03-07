@@ -67,7 +67,7 @@ class _FavoritesState extends State<Favorites> {
                                   ShopScreen(
                                     id: AppCubit.get(context)
                                         .provicersList[index]
-                                        .id,
+                                        ['id'],
                                   )),
                               child: Container(
                                 height: 100.h,
@@ -92,7 +92,7 @@ class _FavoritesState extends State<Favorites> {
                                       child: AppCachedImage(
                                         image: AppCubit.get(context)
                                             .provicersList[index]
-                                            .avatar,
+                                            ['avatar'],
                                         height: 100.h,
                                         width: 110.w,
                                         fit: BoxFit.cover,
@@ -113,7 +113,7 @@ class _FavoritesState extends State<Favorites> {
                                               child: AppText(
                                                 text: AppCubit.get(context)
                                                     .provicersList[index]
-                                                    .firstName,
+                                                    ['first_name'],
                                                 color: Colors.black,
                                                 size: 16.sp,
                                                 fontWeight: FontWeight.bold,
@@ -131,7 +131,7 @@ class _FavoritesState extends State<Favorites> {
                                                     providerId: AppCubit.get(
                                                             context)
                                                         .provicersList[index]
-                                                        .id
+                                                        ['id']
                                                         .toString(),
                                                     index: index,
                                                   );
@@ -156,7 +156,7 @@ class _FavoritesState extends State<Favorites> {
                                             AppText(
                                               text: AppCubit.get(context)
                                                   .provicersList[index]
-                                                  .rate
+                                                  ['rate']
                                                   .toString(),
                                               size: 14.sp,
                                             ),
@@ -176,7 +176,7 @@ class _FavoritesState extends State<Favorites> {
                                               width: 190.w,
                                               child: AppText(
                                                 text:
-                                                    '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).provicersList[index].distance} ${LocaleKeys.km.tr()}',
+                                                    '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).provicersList[index]['distance']} ${LocaleKeys.km.tr()}',
                                                 color: Colors.grey,
                                                 size: 10.sp,
                                               ),

@@ -39,7 +39,7 @@ class MarketsAndShopsListView extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount:
-                  AppCubit.get(context).clientHomeModel?.providers.length ?? 0,
+                  AppCubit.get(context).clientHomeModel['providers'].length,
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
@@ -49,10 +49,8 @@ class MarketsAndShopsListView extends StatelessWidget {
                     AppRouter.navigateTo(
                       context,
                       ShopScreen(
-                        id: AppCubit.get(context)
-                            .clientHomeModel!
-                            .providers[index]
-                            .id,
+                        id: AppCubit.get(context).clientHomeModel['providers']
+                            [index]['id'],
                       ),
                     );
                   },
@@ -78,9 +76,8 @@ class MarketsAndShopsListView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.r),
                           child: AppCachedImage(
                             image: AppCubit.get(context)
-                                    .clientHomeModel
-                                    ?.providers[index]
-                                    .avatar ??
+                                        .clientHomeModel['providers'][index]
+                                    ['avatar'] ??
                                 '',
                             height: 100.h,
                             width: 110.w,
@@ -99,9 +96,8 @@ class MarketsAndShopsListView extends StatelessWidget {
                                   width: 180.w,
                                   child: AppText(
                                     text: AppCubit.get(context)
-                                            .clientHomeModel
-                                            ?.providers[index]
-                                            .firstName ??
+                                                .clientHomeModel['providers']
+                                            [index]['first_name'] ??
                                         '',
                                     color: Colors.black,
                                     size: 16.sp,
@@ -121,18 +117,16 @@ class MarketsAndShopsListView extends StatelessWidget {
                                       } else {
                                         AppCubit.get(context).addFavorite(
                                           providerId: AppCubit.get(context)
-                                              .clientHomeModel!
-                                              .providers[index]
-                                              .id
+                                              .clientHomeModel['providers']
+                                                  [index]['id']
                                               .toString(),
                                         );
                                       }
                                     },
                                     child: Icon(
                                       AppCubit.get(context)
-                                              .clientHomeModel!
-                                              .providers[index]
-                                              .isUserFav
+                                                  .clientHomeModel['providers']
+                                              [index]['is_user_fav']
                                           ? Icons.favorite
                                           : Icons.favorite_border,
                                       color: Colors.red,
@@ -152,11 +146,9 @@ class MarketsAndShopsListView extends StatelessWidget {
                                 SizedBox(width: 3.w),
                                 AppText(
                                   text: AppCubit.get(context)
-                                          .clientHomeModel
-                                          ?.providers[index]
-                                          .rate
-                                          .toString() ??
-                                      '',
+                                      .clientHomeModel['providers'][index]
+                                          ['rate']
+                                      .toString(),
                                   size: 14.sp,
                                 ),
                               ],
@@ -175,7 +167,7 @@ class MarketsAndShopsListView extends StatelessWidget {
                                   width: 190.w,
                                   child: AppText(
                                     text:
-                                        '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).clientHomeModel?.providers[index].distance} ${LocaleKeys.km.tr()}',
+                                        '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).clientHomeModel['providers'][index]['distance']} ${LocaleKeys.km.tr()}',
                                     color: Colors.grey,
                                     size: 10.sp,
                                   ),

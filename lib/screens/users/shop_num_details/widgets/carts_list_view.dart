@@ -35,8 +35,7 @@ class CartsListView extends StatelessWidget {
             start: 16.w,
             end: 16.w,
           ),
-          itemCount:
-              AppCubit.get(context).cartItemsModel?.cartItems.length ?? 0,
+          itemCount: AppCubit.get(context).cartItemsModel['cart_items'].length,
           separatorBuilder: (context, index) => SizedBox(
             height: 16.h,
           ),
@@ -76,10 +75,8 @@ class CartsListView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.r),
                     child: AppCachedImage(
-                      image: AppCubit.get(context)
-                          .cartItemsModel!
-                          .cartItems[index]
-                          .serviceFirstImage,
+                      image: AppCubit.get(context).cartItemsModel['cart_items']
+                          [index]['service_first_image'],
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -92,10 +89,9 @@ class CartsListView extends StatelessWidget {
                       SizedBox(
                         width: 110.w,
                         child: AppText(
-                          text: AppCubit.get(context)
-                              .cartItemsModel!
-                              .cartItems[index]
-                              .serviceTitle,
+                          text:
+                              AppCubit.get(context).cartItemsModel['cart_items']
+                                  [index]['service_title'],
                           size: 16.sp,
                           lines: 2,
                           fontWeight: FontWeight.bold,
@@ -105,10 +101,9 @@ class CartsListView extends StatelessWidget {
                         width: 110.w,
                         child: AppText(
                           top: 6.h,
-                          text: AppCubit.get(context)
-                              .cartItemsModel!
-                              .cartItems[index]
-                              .serviceSectionTitle,
+                          text:
+                              AppCubit.get(context).cartItemsModel['cart_items']
+                                  [index]['service_section_title'],
                           size: 14.sp,
                           color: Colors.grey,
                         ),
@@ -118,7 +113,7 @@ class CartsListView extends StatelessWidget {
                         child: AppText(
                           top: 22.h,
                           text:
-                              '${AppCubit.get(context).cartItemsModel!.cartItems[index].servicePrice}  ${LocaleKeys.sar.tr()}',
+                              '${AppCubit.get(context).cartItemsModel['cart_items'][index]['service_price']}  ${LocaleKeys.sar.tr()}',
                           size: 14.sp,
                           color: AppColors.primary,
                         ),
@@ -137,13 +132,10 @@ class CartsListView extends StatelessWidget {
                         AppCubit.get(context).updateCartIndex(index: index);
                         AppCubit.get(context).updateCart(
                           cartItemId: AppCubit.get(context)
-                              .cartItemsModel!
-                              .cartItems[index]
-                              .id
+                              .cartItemsModel['cart_items'][index]['id']
                               .toString(),
                           cartId: AppCubit.get(context)
-                              .cartItemsModel!
-                              .id
+                              .cartItemsModel['id']
                               .toString(),
                           count: '0',
                         );
@@ -165,18 +157,14 @@ class CartsListView extends StatelessWidget {
                             AppCubit.get(context).updateCartIndex(index: index);
                             AppCubit.get(context).updateCart(
                               cartItemId: AppCubit.get(context)
-                                  .cartItemsModel!
-                                  .cartItems[index]
-                                  .id
+                                  .cartItemsModel['cart_items'][index]['id']
                                   .toString(),
                               cartId: AppCubit.get(context)
-                                  .cartItemsModel!
-                                  .id
+                                  .cartItemsModel['id']
                                   .toString(),
                               count: (AppCubit.get(context)
-                                          .cartItemsModel!
-                                          .cartItems[index]
-                                          .count +
+                                              .cartItemsModel['cart_items']
+                                          [index]['count'] +
                                       1)
                                   .toString(),
                             );
@@ -202,9 +190,7 @@ class CartsListView extends StatelessWidget {
                             // end: 10.w,
                             textAlign: TextAlign.center,
                             text: AppCubit.get(context)
-                                .cartItemsModel!
-                                .cartItems[index]
-                                .count
+                                .cartItemsModel['cart_items'][index]['count']
                                 .toString(),
                             size: 18.sp,
                             fontWeight: FontWeight.bold,
@@ -217,18 +203,14 @@ class CartsListView extends StatelessWidget {
                             AppCubit.get(context).updateCartIndex(index: index);
                             AppCubit.get(context).updateCart(
                               cartItemId: AppCubit.get(context)
-                                  .cartItemsModel!
-                                  .cartItems[index]
-                                  .id
+                                  .cartItemsModel['cart_items'][index]['id']
                                   .toString(),
                               cartId: AppCubit.get(context)
-                                  .cartItemsModel!
-                                  .id
+                                  .cartItemsModel['id']
                                   .toString(),
                               count: (AppCubit.get(context)
-                                          .cartItemsModel!
-                                          .cartItems[index]
-                                          .count -
+                                              .cartItemsModel['cart_items']
+                                          [index]['count'] -
                                       1)
                                   .toString(),
                             );

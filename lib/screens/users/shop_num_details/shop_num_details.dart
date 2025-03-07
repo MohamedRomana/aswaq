@@ -38,11 +38,11 @@ class _ShopNumDetailsState extends State<ShopNumDetails> {
             preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               text:
-                  '${LocaleKeys.shop_details_number.tr()} ${state is CartItemsLoading && AppCubit.get(context).cartItemsModel == null ? '' : AppCubit.get(context).cartItemsModel?.salerName}',
+                  '${LocaleKeys.shop_details_number.tr()} ${state is CartItemsLoading && AppCubit.get(context).cartItemsModel.isEmpty ? AppCubit.get(context).cartItemsModel['saler_name'] : ''}',
             ),
           ),
           body: state is CartItemsLoading &&
-                  AppCubit.get(context).cartItemsModel == null
+                  AppCubit.get(context).cartItemsModel.isEmpty
               ? const CustomShopNumShimmer()
               : SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
@@ -57,8 +57,7 @@ class _ShopNumDetailsState extends State<ShopNumDetails> {
                           AppRouter.navigateTo(
                             context,
                             PaymentDone(
-                              cartItemsModel:
-                                  AppCubit.get(context).cartItemsModel!,
+                             
                             ),
                           );
                         },

@@ -45,7 +45,7 @@ class ProviderGrideView extends StatelessWidget {
                         isScrollControlled: true,
                         backgroundColor: Colors.white,
                         builder: (context) => ProductDetailsBottomSheet(
-                          id: AppCubit.get(context).allServiceList[index].id,
+                          id: AppCubit.get(context).allServiceList[index]['id'],
                         ),
                       );
                     },
@@ -77,7 +77,7 @@ class ProviderGrideView extends StatelessWidget {
                                   top: 10.h,
                                   text: AppCubit.get(context)
                                       .allServiceList[index]
-                                      .title,
+                                      ['title'],
                                   size: 12.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -90,7 +90,7 @@ class ProviderGrideView extends StatelessWidget {
                                   top: 3.h,
                                   text: AppCubit.get(context)
                                       .allServiceList[index]
-                                      .sectionTitle,
+                                      ['section_title'],
                                   color: AppColors.primary,
                                   size: 9.sp,
                                 ),
@@ -100,7 +100,7 @@ class ProviderGrideView extends StatelessWidget {
                           AppCachedImage(
                             image: AppCubit.get(context)
                                 .allServiceList[index]
-                                .firstImage,
+                                ['first_image'] ?? "",
                             fit: BoxFit.fill,
                             height: 120.h,
                             width: 165.w,
@@ -133,7 +133,7 @@ class ProviderGrideView extends StatelessWidget {
                                   end: 10.w,
                                   textAlign: TextAlign.end,
                                   text:
-                                      '${AppCubit.get(context).allServiceList[index].price} ${LocaleKeys.sar.tr()}',
+                                      '${AppCubit.get(context).allServiceList[index]['price']} ${LocaleKeys.sar.tr()}',
                                   size: 12.sp,
                                   color: AppColors.primary,
                                 ),

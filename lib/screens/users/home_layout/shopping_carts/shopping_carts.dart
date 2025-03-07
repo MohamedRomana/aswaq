@@ -67,7 +67,7 @@ class _ShoppingCartsState extends State<ShoppingCarts> {
                               AppRouter.navigateTo(
                                 context,
                                 ShopNumDetails(
-                                  id: AppCubit.get(context).cartList[index].id,
+                                  id: AppCubit.get(context).cartList[index]['id'],
                                 ),
                               );
                             },
@@ -125,7 +125,7 @@ class _ShoppingCartsState extends State<ShoppingCarts> {
                                                 child: AppText(
                                                   text: AppCubit.get(context)
                                                       .cartList[index]
-                                                      .salerName,
+                                                      ['saler_name'],
                                                   size: 16,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -141,7 +141,7 @@ class _ShoppingCartsState extends State<ShoppingCarts> {
                                                     cartId:
                                                         AppCubit.get(context)
                                                             .cartList[index]
-                                                            .id
+                                                            ['id']
                                                             .toString(),
                                                   );
                                                 },
@@ -176,7 +176,7 @@ class _ShoppingCartsState extends State<ShoppingCarts> {
                                                 child: AppText(
                                                   textAlign: TextAlign.end,
                                                   text:
-                                                      '${AppCubit.get(context).cartList[index].totalWithValue} ${LocaleKeys.sar.tr()}',
+                                                      '${AppCubit.get(context).cartList[index]['total_with_value']} ${LocaleKeys.sar.tr()}',
                                                   size: 14.sp,
                                                   color: AppColors.primary,
                                                 ),
