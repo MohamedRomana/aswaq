@@ -245,8 +245,8 @@ abstract class  LocaleKeys {
   static const anytimeServices = 'anytimeServices';
   static const start_now = 'start_now';
   static const new_registration = 'new_registration';
-  static const firstName = 'firstName';
   static const firstNameValidate = 'firstNameValidate';
+  static const firstName = 'firstName';
   static const lastName = 'lastName';
   static const lastNameValidate = 'lastNameValidate';
   static const visaRequirements = 'visaRequirements';
@@ -388,8 +388,8 @@ abstract class  LocaleKeys {
   static const add_certificate = 'add_certificate';
   static const section = 'section';
   static const enter_section = 'enter_section';
-  static const insert_certificate_into_category = 'insert_certificate_into_category';
   static const choose_appropriate_category = 'choose_appropriate_category';
+  static const insert_certificate_into_category = 'insert_certificate_into_category';
   static const warranty_name = 'warranty_name';
   static const warranty_duration = 'warranty_duration';
   static const transfer_certificate = 'transfer_certificate';
@@ -407,10 +407,19 @@ abstract class  LocaleKeys {
   static const reason_for_returning_product = 'reason_for_returning_product';
   static const chat_with = 'chat_with';
   static const total_cart = 'total_cart';
-  static const skiptohome = 'skiptohome';
   static const store_number = 'store_number';
+  static const skiptohome = 'skiptohome';
   static const complete_the_selections = 'complete_the_selections';
   static const orderNumberValidate = 'orderNumberValidate';
   static const select_image_source = 'select_image_source';
+  static const discount = 'discount';
+  static const rates = 'rates';
+  static const Writeyourreview = 'Writeyourreview';
+  static const submit = 'submit';
+  static const cancel = 'cancel';
+  static const yourComment = 'yourComment';
+  static const rate = 'rate';
+  static const visit_store = 'visit_store';
+  static const items_you_may_also_like = 'items_you_may_also_like';
 
 }

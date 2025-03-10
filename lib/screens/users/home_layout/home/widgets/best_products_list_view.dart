@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:aswaq/core/cache/cache_helper.dart';
 import 'package:aswaq/core/widgets/app_cached.dart';
+import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ import '../../../../../core/widgets/app_text.dart';
 import '../../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
-import '../../../shop_screen/widgets/custom_product_details.dart';
+import '../../products_details/products_details.dart';
 
 class BestProductsListView extends StatelessWidget {
   const BestProductsListView({super.key});
@@ -52,15 +53,11 @@ class BestProductsListView extends StatelessWidget {
                           child: const CustomLoginDialog(),
                         );
                       } else {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.white,
-                          builder: (context) => ProductDetailsBottomSheet(
+                        AppRouter.navigateTo(
+                          context,
+                          ProductDetailsBottomSheet(
                             id: AppCubit.get(context)
-                                .clientHomeModel
-                                ['services'][index]
-                                ['id'],
+                                .clientHomeModel['services'][index]['id'],
                           ),
                         );
                       }
@@ -75,8 +72,7 @@ class BestProductsListView extends StatelessWidget {
                           ),
                           child: AppCachedImage(
                             image: AppCubit.get(context)
-                                    .clientHomeModel
-                                    ['services'][index]
+                                        .clientHomeModel['services'][index]
                                     ['first_image'] ??
                                 "",
                             fit: BoxFit.cover,
@@ -102,9 +98,8 @@ class BestProductsListView extends StatelessWidget {
                                         textAlign: TextAlign.start,
                                         start: 10.w,
                                         text: AppCubit.get(context)
-                                                .clientHomeModel
-                                                ['services'][index]
-                                                ['title'] ??
+                                                    .clientHomeModel['services']
+                                                [index]['title'] ??
                                             "",
                                         color: Colors.white,
                                         size: 11.sp,
@@ -117,9 +112,8 @@ class BestProductsListView extends StatelessWidget {
                                         textAlign: TextAlign.start,
                                         top: 5.h,
                                         text: AppCubit.get(context)
-                                                .clientHomeModel
-                                                ['services'][index]
-                                                ['section_title'] ??
+                                                    .clientHomeModel['services']
+                                                [index]['section_title'] ??
                                             "",
                                         color: AppColors.primary,
                                         size: 9.sp,

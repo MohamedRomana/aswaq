@@ -409,5 +409,14 @@
       "store_number": "Store number",
       "complete_the_selections": "Complete the selections, please",
       "orderNumberValidate" : "Order Number Validate",
-      "select_image_source": "Select Image Source"
+      "select_image_source": "Select Image Source",
+      "discount": "Discount",
+      "rates" : "Rates",
+      "Writeyourreview": "Write your review",
+      "submit" : "Submit",
+      "cancel" : "Cancel",
+      "yourComment" : "Your Comment",
+      "rate" : "Rate",
+      "visit_store": "Visit Store",
+      "items_you_may_also_like": "Items You May Also Like"
 }

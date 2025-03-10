@@ -17,6 +17,7 @@ class AppButton extends StatelessWidget {
   final List<Color>? colors;
   final Widget child;
   final Color? borderColor;
+  final WidgetStateProperty<Size?>? minimumSize;
 
   const AppButton({
     super.key,
@@ -33,7 +34,7 @@ class AppButton extends StatelessWidget {
     this.iconComponent,
     this.textComponent,
     this.colors,
-    this.borderColor,
+    this.borderColor, this.minimumSize,
   });
 
   @override
@@ -53,6 +54,7 @@ class AppButton extends StatelessWidget {
           maximumSize: WidgetStateProperty.all(
             Size(width ?? 327.w, height ?? 48.h),
           ),
+          minimumSize: minimumSize,
           backgroundColor: WidgetStateColor.transparent,
         ),
         child: Ink(

@@ -409,5 +409,14 @@
     "skiptohome": "تخطى للرئيسية",
     "complete_the_selections": "اكمل الاختيارات من فضلك",
     "orderNumberValidate" : "رقم الطلب مطلوب",
-    "select_image_source": "اختر مصدر الصورة"
+    "select_image_source": "اختر مصدر الصورة",
+    "discount": "خصم",
+    "rates": "تقييمات",
+    "Writeyourreview": "اكتب تقييمك",
+    "submit" : "ارسال",
+    "cancel" : "الغاء",
+    "yourComment" : "تعليقك",
+    "rate" : "تقييم",
+    "visit_store": "زيارة المتجر",
+    "items_you_may_also_like": "أصناف قد تعجبك أيضًا"
 }

@@ -6,6 +6,7 @@ import 'package:aswaq/core/service/model/show_certificate_model.dart';
 import 'package:aswaq/screens/users/home_layout/favorites/favorites.dart';
 import 'package:aswaq/screens/users/home_layout/markets/markets.dart';
 import 'package:aswaq/screens/users/home_layout/shopping_carts/shopping_carts.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -96,7 +97,15 @@ class AppCubit extends Cubit<AppState> {
   int isTab = -1;
   changeIsTab({required int index}) {
     isTab = index;
-    emit(IsSecureIcon());
+    emit(ChangeIndex());
+  }
+
+  int isSwiperTab = 0;
+  final SwiperController swiperController = SwiperController();
+  void changeIsSwiperTab({required int index}) {
+    isTab = index;
+    swiperController.move(index);
+    emit(ChangeIndex());
   }
 
   void changebottomNavIndex(index) async {
@@ -660,6 +669,7 @@ class AppCubit extends Cubit<AppState> {
 
   Map showProviderModel = {};
   List subSections = [];
+  List providerServicesList = [];
   Future showProvider({required String providerId}) async {
     emit(ShowProviderLoading());
     try {
@@ -677,7 +687,7 @@ class AppCubit extends Cubit<AppState> {
 
         if (data["key"] == 1) {
           showProviderModel = data["data"];
-          allServiceList = showProviderModel['services'];
+          providerServicesList = showProviderModel['services'];
           if (data["data"]["sub_sections"].length == 1) {
             subSections = data["data"]["sub_sections"];
           } else {
