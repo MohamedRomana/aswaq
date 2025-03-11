@@ -439,7 +439,16 @@ class CodegenLoader extends AssetLoader{
   "store": "المتجر",
   "description": "الوصف",
   "items_you_may_like": "أصناف قد تعجبك",
-  "purchase": "الشراء"
+  "purchase": "الشراء",
+  "store_rating": "تقييم المتجر",
+  "positive_rating": "التقييم الإيجابي",
+  "store_category": "تصنيف المتجر",
+  "favorite": "تفضيل",
+  "discounts": "تخفيضات",
+  "store_recommendations": "ترشيحات المتجر",
+  "customer_reviews": "تقييم العملاء",
+  "products": "المنتجات",
+  "store_information": "معلومات المتجر"
 };
 static const Map<String,dynamic> en = {
   "chooseLang": "Choose the appropriate language",
@@ -865,8 +874,17 @@ static const Map<String,dynamic> en = {
   "overview": "Overview",
   "store": "Store",
   "description": "Description",
-  "items_you_may_like": "أصناف قد تعجبك",
-  "purchase": "Purchase"
+  "items_you_may_like": "Items you may like",
+  "purchase": "Purchase",
+  "store_rating": "Store Rating",
+  "positive_rating": "Positive Rating",
+  "store_category": "Store Category",
+  "favorite": "Favorite",
+  "discounts": "Discounts",
+  "store_recommendations": "Store Recommendations",
+  "customer_reviews": "Customer Reviews",
+  "products": "Products",
+  "store_information": "Store Information"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

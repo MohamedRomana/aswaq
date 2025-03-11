@@ -423,5 +423,14 @@
     "store": "المتجر",
     "description": "الوصف",
     "items_you_may_like": "أصناف قد تعجبك",
-    "purchase": "الشراء"
+    "purchase": "الشراء",
+    "store_rating": "تقييم المتجر",
+    "positive_rating": "التقييم الإيجابي",
+    "store_category": "تصنيف المتجر",
+    "favorite" : "تفضيل",
+    "discounts": "تخفيضات",
+    "store_recommendations": "ترشيحات المتجر",
+    "customer_reviews": "تقييم العملاء",
+    "products": "المنتجات",
+    "store_information": "معلومات المتجر"
 }

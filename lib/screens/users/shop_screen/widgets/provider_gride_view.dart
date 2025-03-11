@@ -29,7 +29,7 @@ class ProviderGrideView extends StatelessWidget {
                   end: 10.w,
                   bottom: 150.h,
                 ),
-                itemCount: AppCubit.get(context).providerServicesList.length,
+                itemCount: AppCubit.get(context).allServiceList.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisExtent: 205.h,
@@ -45,7 +45,7 @@ class ProviderGrideView extends StatelessWidget {
                           context,
                           ProductDetailsBottomSheet(
                             id: AppCubit.get(context)
-                                .providerServicesList[index]['id'],
+                                .allServiceList[index]['id'],
                           ));
                     },
                     child: Container(
@@ -75,7 +75,7 @@ class ProviderGrideView extends StatelessWidget {
                                   start: 10.w,
                                   top: 10.h,
                                   text: AppCubit.get(context)
-                                      .providerServicesList[index]['title'],
+                                      .allServiceList[index]['title'],
                                   size: 12.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -87,7 +87,7 @@ class ProviderGrideView extends StatelessWidget {
                                   start: 10.w,
                                   top: 3.h,
                                   text: AppCubit.get(context)
-                                          .providerServicesList[index]
+                                          .allServiceList[index]
                                       ['section_title'],
                                   color: AppColors.primary,
                                   size: 9.sp,
@@ -97,7 +97,7 @@ class ProviderGrideView extends StatelessWidget {
                           ),
                           AppCachedImage(
                             image: AppCubit.get(context)
-                                        .providerServicesList[index]
+                                        .allServiceList[index]
                                     ['first_image'] ??
                                 "",
                             fit: BoxFit.fill,
@@ -132,7 +132,7 @@ class ProviderGrideView extends StatelessWidget {
                                   end: 10.w,
                                   textAlign: TextAlign.end,
                                   text:
-                                      '${AppCubit.get(context).providerServicesList[index]['price']} ${LocaleKeys.sar.tr()}',
+                                      '${AppCubit.get(context).allServiceList[index]['price']} ${LocaleKeys.sar.tr()}',
                                   size: 12.sp,
                                   color: AppColors.primary,
                                 ),

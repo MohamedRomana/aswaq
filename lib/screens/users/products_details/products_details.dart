@@ -38,7 +38,6 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
   final GlobalKey _storeKey = GlobalKey();
   final GlobalKey _descKey = GlobalKey();
   final GlobalKey _mayLikeKey = GlobalKey();
-  final GlobalKey _addCartKey = GlobalKey();
 
   void _scrollToSection(GlobalKey key) {
     final context = key.currentContext;
@@ -57,8 +56,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
     AppCubit.get(context).hasCertificate = false;
     AppCubit.get(context).count = 1;
     AppCubit.get(context).isTab = 0;
-    _tabController = TabController(length: 6, vsync: this);
-
+    _tabController = TabController(length: 5, vsync: this);
     _scrollController.addListener(_handleScroll);
     super.initState();
   }
@@ -83,7 +81,6 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
       _storeKey,
       _descKey,
       _mayLikeKey,
-      _addCartKey
     ];
 
     for (int i = 0; i < sections.length; i++) {
@@ -105,27 +102,29 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
       builder: (context, state) {
         return CustomBottomNav(
             appBar: PreferredSize(
-                preferredSize: Size.fromHeight(80.h),
-                child: CustomAppBar(
-                  text: LocaleKeys.product_description.tr(),
-                )),
+              preferredSize: Size.fromHeight(60.h),
+              child: CustomAppBar(
+                text: LocaleKeys.product_description.tr(),
+                isProduct: true,
+              ),
+            ),
             body: state is ShowServiceLoading
                 ? const CustomBottomSheetLoading()
                 : DefaultTabController(
-                    length: 6,
+                    length: 5,
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 10.h),
+                          margin: EdgeInsets.only(bottom: 20.h),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10.r),
-                            boxShadow: const [
+                            boxShadow: [
                               BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 5,
-                                spreadRadius: 1,
-                              )
+                                  color: Colors.black12,
+                                  blurRadius: 5.r,
+                                  spreadRadius: 1.r,
+                                  offset: Offset(0, 5.r))
                             ],
                           ),
                           child: TabBar(
@@ -137,6 +136,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
                             dividerColor: Colors.transparent,
                             indicatorColor: AppColors.primary,
                             unselectedLabelColor: Colors.grey,
+                            indicatorSize: TabBarIndicatorSize.label,
                             labelStyle: TextStyle(
                                 fontSize: 16.sp, fontWeight: FontWeight.bold),
                             unselectedLabelStyle: TextStyle(fontSize: 14.sp),
@@ -157,9 +157,6 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
                                 case 4:
                                   _scrollToSection(_mayLikeKey);
                                   break;
-                                case 5:
-                                  _scrollToSection(_addCartKey);
-                                  break;
                               }
                             },
                             tabs: [
@@ -177,9 +174,6 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
                               ),
                               Tab(
                                 text: LocaleKeys.items_you_may_like.tr(),
-                              ),
-                              Tab(
-                                text: LocaleKeys.purchase.tr(),
                               ),
                             ],
                           ),
@@ -217,10 +211,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
                                     key: _mayLikeKey,
                                     child: const ItemsMayLike(),
                                   ),
-                                  Container(
-                                    key: _addCartKey,
-                                    child: const ProductCertificate(),
-                                  ),
+                                  const ProductCertificate(),
                                   AddToCartRow(widget: widget),
                                   SizedBox(height: 120.h),
                                 ],

@@ -422,6 +422,15 @@
       "overview": "Overview",
       "store": "Store",
       "description": "Description",
-      "items_you_may_like": "أصناف قد تعجبك",
-      "purchase": "Purchase"
+      "items_you_may_like": "Items you may like",
+      "purchase": "Purchase",
+      "store_rating": "Store Rating",
+      "positive_rating": "Positive Rating",
+      "store_category": "Store Category",
+      "favorite" : "Favorite",
+      "discounts": "Discounts",
+      "store_recommendations": "Store Recommendations",
+      "customer_reviews": "Customer Reviews",
+      "products": "Products",
+      "store_information": "Store Information"
 }

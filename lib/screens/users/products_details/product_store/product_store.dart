@@ -26,73 +26,96 @@ class ProductStore extends StatelessWidget {
               color: Colors.grey,
             ),
             SizedBox(height: 6.h),
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(1000.r),
-                  child: AppCachedImage(
-                    image:
-                        AppCubit.get(context).showServiceModel['saler_avatar'] ?? "",
-                    height: 50.w,
-                    width: 50.w,
-                    fit: BoxFit.fill,
+            InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () {
+                AppRouter.navigateTo(
+                  context,
+                  ShopScreen(
+                    id: AppCubit.get(context).showServiceModel['saler_id'],
                   ),
-                ),
-                SizedBox(width: 7.w),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      text:
-                          AppCubit.get(context).showServiceModel['saler_name'] ?? "",
-                      size: 18.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    Row(
-                      children: [
-                        AppText(
-                          text: LocaleKeys.rate.tr(),
-                          size: 12.sp,
-                          color: Colors.grey,
-                        ),
-                        AppText(
-                          start: 5.w,
-                          text: AppCubit.get(context)
-                              .showServiceModel['saler_rate']
-                              .toString(),
-                          size: 12.sp,
-                          color: Colors.black,
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 16.sp,
-                          color: Colors.amber,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                SizedBox(
-                  height: 35.h,
-                  child: AppButton(
-                    onPressed: () {
-                      AppRouter.navigateTo(
-                        context,
-                        ShopScreen(
-                          id: AppCubit.get(context)
-                              .showServiceModel['saler_id'],
-                        ),
-                      );
-                    },
-                    width: 100.w,
-                    child: AppText(
-                      text: LocaleKeys.visit_store.tr(),
-                      color: Colors.white,
+                );
+              },
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(1000.r),
+                    child: AppCachedImage(
+                      image: AppCubit.get(context)
+                              .showServiceModel['saler_avatar'] ??
+                          "",
+                      height: 50.w,
+                      width: 50.w,
+                      fit: BoxFit.fill,
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(width: 7.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        text: AppCubit.get(context)
+                                .showServiceModel['saler_name'] ??
+                            "",
+                        size: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      Row(
+                        children: [
+                          AppText(
+                            text: LocaleKeys.rate.tr(),
+                            size: 12.sp,
+                            color: Colors.grey,
+                          ),
+                          AppText(
+                            start: 5.w,
+                            text: AppCubit.get(context)
+                                .showServiceModel['saler_rate']
+                                .toString(),
+                            size: 12.sp,
+                            color: Colors.black,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 16.sp,
+                            color: Colors.amber,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    height: 35.h,
+                    child: AppButton(
+                      onPressed: () {
+                        AppRouter.navigateTo(
+                          context,
+                          ShopScreen(
+                            id: AppCubit.get(context)
+                                .showServiceModel['saler_id'],
+                          ),
+                        );
+                      },
+                      width: 100.w,
+                      child: AppText(
+                        text: LocaleKeys.visit_store.tr(),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: AppText(
+                top: 10.h,
+                text: LocaleKeys.store_recommendations.tr(),
+                size: 18.sp,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(
               height: 400.h,
@@ -139,7 +162,9 @@ class ProductStore extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.r),
                           child: AppCachedImage(
                             image: AppCubit.get(context)
-                                .providerServicesList[index]['first_image'] ?? "",
+                                        .providerServicesList[index]
+                                    ['first_image'] ??
+                                "",
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -149,7 +174,8 @@ class ProductStore extends StatelessWidget {
                           AppText(
                             top: 8.h,
                             text: AppCubit.get(context)
-                                .providerServicesList[index]['title'] ?? "",
+                                    .providerServicesList[index]['title'] ??
+                                "",
                             size: 12.sp,
                             fontWeight: FontWeight.bold,
                           ),

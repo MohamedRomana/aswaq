@@ -426,5 +426,14 @@ abstract class  LocaleKeys {
   static const description = 'description';
   static const items_you_may_like = 'items_you_may_like';
   static const purchase = 'purchase';
+  static const store_rating = 'store_rating';
+  static const positive_rating = 'positive_rating';
+  static const store_category = 'store_category';
+  static const favorite = 'favorite';
+  static const discounts = 'discounts';
+  static const store_recommendations = 'store_recommendations';
+  static const customer_reviews = 'customer_reviews';
+  static const products = 'products';
+  static const store_information = 'store_information';
 
 }

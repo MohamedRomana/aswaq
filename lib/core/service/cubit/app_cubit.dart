@@ -689,6 +689,7 @@ class AppCubit extends Cubit<AppState> {
         if (data["key"] == 1) {
           showProviderModel = data["data"];
           providerServicesList = showProviderModel['services'];
+          allServiceList = showProviderModel['services'];
           if (data["data"]["sub_sections"].length == 1) {
             subSections = data["data"]["sub_sections"];
           } else {

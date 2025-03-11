@@ -35,6 +35,7 @@ class _ShopScreenState extends State<ShopScreen> {
             preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
               isSearch: true,
+              isStore: true,
               text: LocaleKeys.shop_page.tr(),
             ),
           ),
@@ -42,7 +43,7 @@ class _ShopScreenState extends State<ShopScreen> {
                   AppCubit.get(context).showProviderModel.isEmpty
               ? const CustomShopShimmer()
               : DefaultTabController(
-                  length: AppCubit.get(context).subSections.length,
+                  length: AppCubit.get(context).subSections.length + 1,
                   child: NestedScrollView(
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
                       SliverToBoxAdapter(
@@ -53,7 +54,6 @@ class _ShopScreenState extends State<ShopScreen> {
                               margin: EdgeInsetsDirectional.only(
                                 start: 13.w,
                                 bottom: 16.h,
-                                top: 30.h,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -82,14 +82,19 @@ class _ShopScreenState extends State<ShopScreen> {
                                 labelColor: AppColors.primary,
                                 unselectedLabelColor: Colors.grey,
                                 labelStyle: TextStyle(fontSize: 16.sp),
-                                tabs: List.generate(
-                                  AppCubit.get(context).subSections.length,
-                                  (index) => Tab(
-                                    text: AppCubit.get(context)
-                                            .subSections[index]['title'] ??
-                                        "",
+                                tabs: [
+                                  ...List.generate(
+                                    AppCubit.get(context).subSections.length,
+                                    (index) => Tab(
+                                      text: AppCubit.get(context)
+                                              .subSections[index]['title'] ??
+                                          "",
+                                    ),
                                   ),
-                                ),
+                                  Tab(
+                                    text: LocaleKeys.discounts.tr(),
+                                  )
+                                ],
                               ),
                             ),
                           ],
@@ -98,10 +103,13 @@ class _ShopScreenState extends State<ShopScreen> {
                     ],
                     body: TabBarView(
                       physics: const BouncingScrollPhysics(),
-                      children: List.generate(
-                        AppCubit.get(context).subSections.length,
-                        (index) => const ProviderGrideView(),
-                      ),
+                      children: [
+                        ...List.generate(
+                          AppCubit.get(context).subSections.length,
+                          (index) => const ProviderGrideView(),
+                        ),
+                        Container(),
+                      ],
                     ),
                   ),
                 ),

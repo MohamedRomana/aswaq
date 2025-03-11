@@ -18,6 +18,9 @@ class CustomAppBar extends StatelessWidget {
   final bool? isSearch;
   final bool? isHomeLayout;
   final String? text;
+  final bool? isStore;
+  final bool? isProduct;
+
   const CustomAppBar({
     super.key,
     this.isHome = false,
@@ -25,6 +28,8 @@ class CustomAppBar extends StatelessWidget {
     this.isHomeLayout = false,
     this.text,
     this.isSearch = false,
+    this.isStore = false,
+    this.isProduct = false,
   });
 
   @override
@@ -34,13 +39,13 @@ class CustomAppBar extends StatelessWidget {
         return Container(
           // height: 90.h,
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-          margin: EdgeInsets.only(bottom: 10.h),
+          margin: EdgeInsets.only(bottom: isStore! || isProduct! ? 0.h : 10.h),
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color:
-                    isHome! ? Colors.transparent : Colors.grey.withOpacity(0.3),
+                    isHome! || isProduct! ? Colors.transparent : Colors.grey.withOpacity(0.3),
                 blurRadius: 5.r,
                 spreadRadius: 1.r,
                 offset: Offset(0, 3.r),

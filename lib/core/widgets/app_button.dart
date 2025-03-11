@@ -18,6 +18,8 @@ class AppButton extends StatelessWidget {
   final Widget child;
   final Color? borderColor;
   final WidgetStateProperty<Size?>? minimumSize;
+  final WidgetStateProperty<double?>? elevation;
+  final WidgetStateProperty<Color?>? shadowColor;
 
   const AppButton({
     super.key,
@@ -34,7 +36,8 @@ class AppButton extends StatelessWidget {
     this.iconComponent,
     this.textComponent,
     this.colors,
-    this.borderColor, this.minimumSize,
+    this.borderColor,
+    this.minimumSize, this.elevation, this.shadowColor,
   });
 
   @override
@@ -49,7 +52,8 @@ class AppButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          elevation: WidgetStateProperty.all(0),
+          shadowColor: shadowColor,
+          elevation: elevation ?? WidgetStateProperty.all(0),
           padding: const WidgetStatePropertyAll(EdgeInsets.all(0)),
           maximumSize: WidgetStateProperty.all(
             Size(width ?? 327.w, height ?? 48.h),
