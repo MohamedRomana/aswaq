@@ -94,13 +94,13 @@ class AppCubit extends Cubit<AppState> {
     emit(IsSecureIcon());
   }
 
-  int isTab = -1;
-  changeIsTab({required int index}) {
-    isTab = index;
-    emit(ChangeIndex());
-  }
+  // int isTab = -1;
+  // changeIsTab({required int index}) {
+  //   isTab = index;
+  //   emit(ChangeIndex());
+  // }
 
-  int isSwiperTab = 0;
+  int isTab = 0;
   final SwiperController swiperController = SwiperController();
   void changeIsSwiperTab({required int index}) {
     isTab = index;
@@ -144,6 +144,7 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeIndex());
   }
 
+ 
   List<OnBoardingModel> onBoardingList = [];
   Future intro() async {
     emit(GetIntroLoading());
@@ -731,6 +732,39 @@ class AppCubit extends Cubit<AppState> {
 
         if (data["key"] == 1) {
           allServiceList = data["data"];
+          emit(AllServicesSuccess());
+        } else {
+          emit(AllServicesFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(AllServicesFailure(error: error.toString()));
+      }
+    }
+  }
+
+  List servicesList = [];
+  Future services() async {
+    emit(AllServicesLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/services"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          servicesList = data["data"];
           emit(AllServicesSuccess());
         } else {
           emit(AllServicesFailure(error: data["msg"]));

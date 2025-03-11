@@ -4,7 +4,7 @@ import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../../gen/assets.gen.dart';
+import '../../../../../gen/assets.gen.dart';
 
 class UsersReviews extends StatelessWidget {
   const UsersReviews({super.key});

@@ -3,9 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/constants/colors.dart';
-import '../../../../../core/widgets/app_text.dart';
-import '../../../../../generated/locale_keys.g.dart';
+import '../../../../core/constants/colors.dart';
+import '../../../../core/widgets/app_text.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 class ProductTitlePrice extends StatelessWidget {
   const ProductTitlePrice({super.key});
@@ -26,7 +26,7 @@ class ProductTitlePrice extends StatelessWidget {
                       AppText(
                         textAlign: TextAlign.start,
                         text:
-                            '${AppCubit.get(context).showServiceModel['price']} ${LocaleKeys.sar.tr()}',
+                            '${AppCubit.get(context).showServiceModel['price'] ?? ""} ${LocaleKeys.sar.tr()}',
                         color: AppColors.primary,
                         size: 22.sp,
                         fontWeight: FontWeight.bold,
@@ -36,7 +36,7 @@ class ProductTitlePrice extends StatelessWidget {
                         start: 5.w,
                         decoration: TextDecoration.lineThrough,
                         text:
-                            '${AppCubit.get(context).showServiceModel['price']} ${LocaleKeys.sar.tr()}',
+                            '${AppCubit.get(context).showServiceModel['price'] ?? ""} ${LocaleKeys.sar.tr()}',
                         color: Colors.grey,
                         size: 12.sp,
                         fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class ProductTitlePrice extends StatelessWidget {
                   child: AppText(
                     top: 10.h,
                     textAlign: TextAlign.start,
-                    text: AppCubit.get(context).showServiceModel['title'],
+                    text: AppCubit.get(context).showServiceModel['title'] ?? "",
                     size: 19.sp,
                     fontWeight: FontWeight.bold,
                   ),
@@ -70,7 +70,7 @@ class ProductTitlePrice extends StatelessWidget {
                     top: 5.h,
                     bottom: 16.h,
                     text:
-                        AppCubit.get(context).showServiceModel['section_title'],
+                        AppCubit.get(context).showServiceModel['section_title'] ?? "",
                     size: 16.sp,
                     color: Colors.grey,
                   ),

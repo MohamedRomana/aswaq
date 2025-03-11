@@ -3,13 +3,13 @@ import 'package:aswaq/core/widgets/app_button.dart';
 import 'package:aswaq/core/widgets/app_cached.dart';
 import 'package:aswaq/core/widgets/app_router.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
-import 'package:aswaq/screens/users/home_layout/products_details/products_details.dart';
+import 'package:aswaq/screens/users/products_details/products_details.dart';
 import 'package:aswaq/screens/users/shop_screen/shop_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../generated/locale_keys.g.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 class ProductStore extends StatelessWidget {
   const ProductStore({super.key});
@@ -32,7 +32,7 @@ class ProductStore extends StatelessWidget {
                   borderRadius: BorderRadius.circular(1000.r),
                   child: AppCachedImage(
                     image:
-                        AppCubit.get(context).showServiceModel['saler_avatar'],
+                        AppCubit.get(context).showServiceModel['saler_avatar'] ?? "",
                     height: 50.w,
                     width: 50.w,
                     fit: BoxFit.fill,
@@ -44,7 +44,7 @@ class ProductStore extends StatelessWidget {
                   children: [
                     AppText(
                       text:
-                          AppCubit.get(context).showServiceModel['saler_name'],
+                          AppCubit.get(context).showServiceModel['saler_name'] ?? "",
                       size: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
@@ -139,7 +139,7 @@ class ProductStore extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.r),
                           child: AppCachedImage(
                             image: AppCubit.get(context)
-                                .providerServicesList[index]['first_image'],
+                                .providerServicesList[index]['first_image'] ?? "",
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -149,7 +149,7 @@ class ProductStore extends StatelessWidget {
                           AppText(
                             top: 8.h,
                             text: AppCubit.get(context)
-                                .providerServicesList[index]['title'],
+                                .providerServicesList[index]['title'] ?? "",
                             size: 12.sp,
                             fontWeight: FontWeight.bold,
                           ),

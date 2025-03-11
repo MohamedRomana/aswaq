@@ -421,5 +421,10 @@ abstract class  LocaleKeys {
   static const rate = 'rate';
   static const visit_store = 'visit_store';
   static const items_you_may_also_like = 'items_you_may_also_like';
+  static const overview = 'overview';
+  static const store = 'store';
+  static const description = 'description';
+  static const items_you_may_like = 'items_you_may_like';
+  static const purchase = 'purchase';
 
 }

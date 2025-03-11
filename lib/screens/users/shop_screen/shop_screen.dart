@@ -43,61 +43,66 @@ class _ShopScreenState extends State<ShopScreen> {
               ? const CustomShopShimmer()
               : DefaultTabController(
                   length: AppCubit.get(context).subSections.length,
-                  child: Column(
-                    children: [
-                      const CustomShopDetails(),
-                      Container(
-                        margin: EdgeInsetsDirectional.only(
-                          start: 13.w,
-                          bottom: 16.h,
-                          top: 30.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5.r),
-                        ),
-                        child: TabBar(
-                          onTap: (index) {
-                            if (index == 0) {
-                              AppCubit.get(context).showProvider(
-                                  providerId: widget.id.toString());
-                            } else {
-                              AppCubit.get(context).allServices(
-                                  subsectionId: AppCubit.get(context)
-                                      .subSections[index]["id"]
-                                      .toString());
-                            }
-                          },
-                          padding: EdgeInsetsDirectional.only(start: -40.w),
-                          physics: const BouncingScrollPhysics(),
-                          isScrollable: true,
-                          splashBorderRadius: BorderRadius.circular(5.r),
-                          dividerColor: Colors.transparent,
-                          indicatorColor: AppColors.primary,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          labelColor: AppColors.primary,
-                          unselectedLabelColor: Colors.grey,
-                          labelStyle: TextStyle(fontSize: 16.sp),
-                          tabs: List.generate(
-                            AppCubit.get(context).subSections.length,
-                            (index) => Tab(
-                              text: AppCubit.get(context).subSections[index]
-                                      ['title'] ??
-                                  "",
+                  child: NestedScrollView(
+                    headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                      SliverToBoxAdapter(
+                        child: Column(
+                          children: [
+                            const CustomShopDetails(),
+                            Container(
+                              margin: EdgeInsetsDirectional.only(
+                                start: 13.w,
+                                bottom: 16.h,
+                                top: 30.h,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5.r),
+                              ),
+                              child: TabBar(
+                                onTap: (index) {
+                                  if (index == 0) {
+                                    AppCubit.get(context).showProvider(
+                                        providerId: widget.id.toString());
+                                  } else {
+                                    AppCubit.get(context).allServices(
+                                        subsectionId: AppCubit.get(context)
+                                            .subSections[index]["id"]
+                                            .toString());
+                                  }
+                                },
+                                padding:
+                                    EdgeInsetsDirectional.only(start: -40.w),
+                                physics: const BouncingScrollPhysics(),
+                                isScrollable: true,
+                                splashBorderRadius: BorderRadius.circular(5.r),
+                                dividerColor: Colors.transparent,
+                                indicatorColor: AppColors.primary,
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                labelColor: AppColors.primary,
+                                unselectedLabelColor: Colors.grey,
+                                labelStyle: TextStyle(fontSize: 16.sp),
+                                tabs: List.generate(
+                                  AppCubit.get(context).subSections.length,
+                                  (index) => Tab(
+                                    text: AppCubit.get(context)
+                                            .subSections[index]['title'] ??
+                                        "",
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: TabBarView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: List.generate(
-                            AppCubit.get(context).subSections.length,
-                            (index) => const ProviderGrideView(),
-                          ),
+                          ],
                         ),
                       ),
                     ],
+                    body: TabBarView(
+                      physics: const BouncingScrollPhysics(),
+                      children: List.generate(
+                        AppCubit.get(context).subSections.length,
+                        (index) => const ProviderGrideView(),
+                      ),
+                    ),
                   ),
                 ),
         );

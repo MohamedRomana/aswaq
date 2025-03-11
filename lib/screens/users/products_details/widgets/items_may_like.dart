@@ -2,17 +2,26 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../core/service/cubit/app_cubit.dart';
-import '../../../../../core/widgets/app_cached.dart';
-import '../../../../../core/widgets/app_router.dart';
-import '../../../../../core/widgets/app_text.dart';
-import '../../../../../generated/locale_keys.g.dart';
+import '../../../../core/service/cubit/app_cubit.dart';
+import '../../../../core/widgets/app_cached.dart';
+import '../../../../core/widgets/app_router.dart';
+import '../../../../core/widgets/app_text.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../products_details.dart';
 
-class ItemsMayLike extends StatelessWidget {
+class ItemsMayLike extends StatefulWidget {
   const ItemsMayLike({super.key});
 
+  @override
+  State<ItemsMayLike> createState() => _ItemsMayLikeState();
+}
+
+class _ItemsMayLikeState extends State<ItemsMayLike> {
+  @override
+  void initState() {
+    AppCubit.get(context).services();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
@@ -30,7 +39,7 @@ class ItemsMayLike extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsetsDirectional.only(
                   start: 10.w, end: 10.w, top: 15.h, bottom: 5.h),
-              itemCount: AppCubit.get(context).allServiceList.length,
+              itemCount: AppCubit.get(context).servicesList.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10.w,
@@ -44,7 +53,7 @@ class ItemsMayLike extends StatelessWidget {
                   AppRouter.navigateTo(
                     context,
                     ProductDetailsBottomSheet(
-                      id: AppCubit.get(context).allServiceList[index]['id'],
+                      id: AppCubit.get(context).servicesList[index]['id'],
                     ),
                   );
                 },
@@ -67,7 +76,7 @@ class ItemsMayLike extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.r),
                         child: AppCachedImage(
-                          image: AppCubit.get(context).allServiceList[index]
+                          image: AppCubit.get(context).servicesList[index]
                               ['first_image'],
                           fit: BoxFit.fill,
                         ),
@@ -77,14 +86,14 @@ class ItemsMayLike extends StatelessWidget {
                       children: [
                         AppText(
                           top: 8.h,
-                          text: AppCubit.get(context).allServiceList[index]
+                          text: AppCubit.get(context).servicesList[index]
                               ['title'],
                           size: 12.sp,
                           fontWeight: FontWeight.bold,
                         ),
                         AppText(
                           text:
-                              "${AppCubit.get(context).allServiceList[index]['price'].toString()} ${LocaleKeys.sar.tr()}",
+                              "${AppCubit.get(context).servicesList[index]['price'].toString()} ${LocaleKeys.sar.tr()}",
                           size: 12.sp,
                           fontWeight: FontWeight.bold,
                         ),

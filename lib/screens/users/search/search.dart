@@ -14,7 +14,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/widgets/app_cached.dart';
 import '../../../gen/assets.gen.dart';
-import '../home_layout/products_details/products_details.dart';
+import '../products_details/products_details.dart';
 
 final _searchController = TextEditingController();
 final _formKey = GlobalKey<FormState>();

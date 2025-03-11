@@ -14,7 +14,7 @@ import '../../../../../core/widgets/app_text.dart';
 import '../../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
-import '../../products_details/products_details.dart';
+import '../../../products_details/products_details.dart';
 
 class BestProductsListView extends StatelessWidget {
   const BestProductsListView({super.key});

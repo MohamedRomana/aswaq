@@ -10,7 +10,7 @@ import '../../../../core/widgets/app_cached.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../home_layout/products_details/products_details.dart';
+import '../../products_details/products_details.dart';
 import 'custom_grid_view_load.dart';
 
 class ProviderGrideView extends StatelessWidget {

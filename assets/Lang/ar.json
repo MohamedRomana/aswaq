@@ -418,5 +418,10 @@
     "yourComment" : "تعليقك",
     "rate" : "تقييم",
     "visit_store": "زيارة المتجر",
-    "items_you_may_also_like": "أصناف قد تعجبك أيضًا"
+    "items_you_may_also_like": "أصناف قد تعجبك أيضًا",
+    "overview": "نظرة عامة",
+    "store": "المتجر",
+    "description": "الوصف",
+    "items_you_may_like": "أصناف قد تعجبك",
+    "purchase": "الشراء"
 }
