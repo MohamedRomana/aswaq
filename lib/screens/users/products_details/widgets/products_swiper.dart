@@ -16,7 +16,10 @@ class ProductSwiper extends StatelessWidget {
         return Container(
           height: 230.h,
           width: 343.w,
-          margin: EdgeInsetsDirectional.only(bottom: 20.h),
+          margin: EdgeInsetsDirectional.only(
+            bottom: 20.h,
+            top: 20.h,
+          ),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: Colors.white,

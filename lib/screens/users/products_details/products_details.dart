@@ -115,7 +115,6 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(bottom: 20.h),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10.r),
