@@ -140,10 +140,10 @@ class CustomMarketsListView extends StatelessWidget {
                                       SizedBox(
                                         width: 50.w,
                                         child: AppText(
-                                          text: AppCubit.get(context)
+                                          text:double.parse( AppCubit.get(context)
                                               .sectionsProvidersList[index]
                                                   ['rate']
-                                              .toString(),
+                                              .toString()).toStringAsFixed(1),
                                           size: 14.sp,
                                         ),
                                       ),

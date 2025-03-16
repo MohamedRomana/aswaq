@@ -7,7 +7,6 @@ import '../../../../core/cache/cache_helper.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
 import '../../../../core/widgets/alert_dialog.dart';
-import '../../../../core/widgets/app_router.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../core/widgets/flash_message.dart';
@@ -85,7 +84,6 @@ class AddToCartRow extends StatelessWidget {
         BlocConsumer<AppCubit, AppState>(
           listener: (context, state) {
             if (state is AddToCartSuccess) {
-              AppRouter.pop(context);
               showFlashMessage(
                 context: context,
                 type: FlashMessageType.success,

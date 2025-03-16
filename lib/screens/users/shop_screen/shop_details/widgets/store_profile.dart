@@ -76,30 +76,40 @@ class StoreProfile extends StatelessWidget {
                   PositionedDirectional(
                     top: 110.h,
                     start: 20.w,
-                    child: Container(
-                      height: 75.w,
-                      width: 75.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 1.5.w),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
-                            spreadRadius: 1.r,
-                            blurRadius: 5.r,
-                            offset: Offset(1, 3.r),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => const ShowProviderImage(),
+                        );
+                      },
+                      child: Container(
+                        height: 75.w,
+                        width: 75.w,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 1.5.w),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              spreadRadius: 1.r,
+                              blurRadius: 5.r,
+                              offset: Offset(1, 3.r),
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(1000.r),
+                          child: AppCachedImage(
+                            image: AppCubit.get(context)
+                                    .showProviderModel['avatar'] ??
+                                "",
+                            height: 75.w,
+                            width: 75.w,
+                            fit: BoxFit.cover,
                           ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(1000.r),
-                        child: AppCachedImage(
-                          image: AppCubit.get(context)
-                                  .showProviderModel['avatar'] ??
-                              "",
-                          height: 75.w,
-                          width: 75.w,
-                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -216,6 +226,48 @@ class StoreProfile extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+class ShowProviderImage extends StatelessWidget {
+  const ShowProviderImage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      backgroundColor: Colors.transparent,
+      child: SizedBox(
+        width: 300.w,
+        height: 300.w,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
+              child: AppCachedImage(
+                image: AppCubit.get(context).showProviderModel['avatar'] ?? "",
+                fit: BoxFit.cover,
+                width: 300.w,
+                height: 300.w,
+              ),
+            ),
+            Positioned(
+              top: 5,
+              right: 5,
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.white, size: 20),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

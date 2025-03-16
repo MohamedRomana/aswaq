@@ -104,9 +104,10 @@ class ProductTitlePrice extends StatelessWidget {
                     ),
                     AppText(
                       start: 5.w,
-                      text: AppCubit.get(context)
-                          .showServiceModel['rate_avg']
-                          .toString(),
+                      text: double.parse(AppCubit.get(context)
+                              .showServiceModel['rate_avg']
+                              .toString())
+                          .toStringAsFixed(1),
                       size: 12.sp,
                     ),
                   ],

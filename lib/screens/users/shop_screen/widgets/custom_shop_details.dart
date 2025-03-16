@@ -173,9 +173,10 @@ class CustomShopDetails extends StatelessWidget {
                                   ),
                                   SizedBox(width: 3.w),
                                   AppText(
-                                    text: AppCubit.get(context)
-                                        .showProviderModel['rate']
-                                        .toString(),
+                                    text: double.parse(AppCubit.get(context)
+                                            .showProviderModel['rate']
+                                            .toString())
+                                        .toStringAsFixed(1),
                                     size: 16.sp,
                                     color: Colors.black,
                                   ),
@@ -200,7 +201,7 @@ class CustomShopDetails extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   AppText(
-                                    text: '$percentage%',
+                                    text: '${percentage.toStringAsFixed(1)}%',
                                     size: 16.sp,
                                     color: Colors.black,
                                   ),
@@ -226,7 +227,7 @@ class CustomShopDetails extends StatelessWidget {
                                 children: [
                                   AppText(
                                     text:
-                                        "${(percentage / 100) * 5}/5",
+                                        "${((percentage / 100) * 5).toStringAsFixed(1)}/5",
                                     size: 16.sp,
                                     color: Colors.black,
                                   ),

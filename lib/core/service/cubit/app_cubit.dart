@@ -670,6 +670,7 @@ class AppCubit extends Cubit<AppState> {
   Map showProviderModel = {};
   List subSections = [];
   List providerServicesList = [];
+  num subsectionId = 0;
   Future showProvider({required String providerId}) async {
     emit(ShowProviderLoading());
     try {
@@ -696,7 +697,10 @@ class AppCubit extends Cubit<AppState> {
               {"id": 0, "title": "الكل"}
             ];
             subSections.addAll(data["data"]["sub_sections"]);
+
+            subSections.add({"id": -1, "title": LocaleKeys.discounts.tr()});
           }
+
           emit(ShowProviderSuccess());
         } else {
           emit(ShowProviderFailure(error: data["msg"]));
@@ -1960,7 +1964,7 @@ class AppCubit extends Cubit<AppState> {
 
         if (data["key"] == 1) {
           emit(RateProviderSuccess(message: data["msg"]));
-          // showProvider(providerId: providerId);
+          showProvider(providerId: providerId);
         } else {
           emit(RateProviderFailure(error: data["msg"]));
         }

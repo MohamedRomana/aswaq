@@ -43,7 +43,7 @@ class _ShopScreenState extends State<ShopScreen> {
                   AppCubit.get(context).showProviderModel.isEmpty
               ? const CustomShopShimmer()
               : DefaultTabController(
-                  length: AppCubit.get(context).subSections.length + 1,
+                  length: AppCubit.get(context).subSections.length,
                   child: NestedScrollView(
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
                       SliverToBoxAdapter(
@@ -91,9 +91,6 @@ class _ShopScreenState extends State<ShopScreen> {
                                           "",
                                     ),
                                   ),
-                                  Tab(
-                                    text: LocaleKeys.discounts.tr(),
-                                  )
                                 ],
                               ),
                             ),
@@ -102,13 +99,12 @@ class _ShopScreenState extends State<ShopScreen> {
                       ),
                     ],
                     body: TabBarView(
-                      physics: const BouncingScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         ...List.generate(
                           AppCubit.get(context).subSections.length,
                           (index) => const ProviderGrideView(),
                         ),
-                        Container(),
                       ],
                     ),
                   ),

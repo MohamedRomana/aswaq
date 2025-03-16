@@ -224,17 +224,49 @@ class _SearchState extends State<Search> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 100.w,
-                                            child: AppText(
-                                              end: 10.w,
-                                              textAlign: TextAlign.end,
-                                              text:
-                                                  '${AppCubit.get(context).searchList[index]['price']} ${LocaleKeys.sar.tr()}',
-                                              size: 12.sp,
-                                              color: AppColors.primary,
-                                            ),
-                                          ),
+                                          AppCubit.get(context)
+                                                          .searchList[index]
+                                                      ['discount'] ==
+                                                  0
+                                              ? SizedBox(
+                                                  width: 100.w,
+                                                  child: AppText(
+                                                    end: 10.w,
+                                                    textAlign: TextAlign.end,
+                                                    text:
+                                                        '${AppCubit.get(context).searchList[index]['price']} ${LocaleKeys.sar.tr()}',
+                                                    size: 12.sp,
+                                                    color: AppColors.primary,
+                                                  ),
+                                                )
+                                              : SizedBox(
+                                                  width: 100.w,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      AppText(
+                                                        end: 10.w,
+                                                        text:
+                                                            '${AppCubit.get(context).searchList[index]['discount']} ${LocaleKeys.sar.tr()}',
+                                                        size: 12.sp,
+                                                        color:
+                                                            AppColors.primary,
+                                                      ),
+                                                      AppText(
+                                                        end: 10.w,
+                                                        text:
+                                                            '${AppCubit.get(context).searchList[index]['price']} ${LocaleKeys.sar.tr()}',
+                                                        size: 12.sp,
+                                                        color:
+                                                            Colors.grey,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
                                         ],
                                       ),
                                     ],

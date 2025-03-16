@@ -44,7 +44,8 @@ class StoreProducts extends StatelessWidget {
                   AppRouter.navigateTo(
                     context,
                     ProductDetailsBottomSheet(
-                      id: AppCubit.get(context).providerServicesList[index]['id'],
+                      id: AppCubit.get(context).providerServicesList[index]
+                          ['id'],
                     ),
                   );
                 },
@@ -68,8 +69,8 @@ class StoreProducts extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.r),
                         child: AppCachedImage(
-                          image: AppCubit.get(context).providerServicesList[index]
-                              ['first_image'],
+                          image: AppCubit.get(context)
+                              .providerServicesList[index]['first_image'],
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -78,17 +79,43 @@ class StoreProducts extends StatelessWidget {
                       children: [
                         AppText(
                           top: 8.h,
-                          text: AppCubit.get(context).providerServicesList[index]
-                              ['title'],
+                          text: AppCubit.get(context)
+                              .providerServicesList[index]['title'],
                           size: 12.sp,
                           fontWeight: FontWeight.bold,
                         ),
-                        AppText(
-                          text:
-                              "${AppCubit.get(context).providerServicesList[index]['price'].toString()} ${LocaleKeys.sar.tr()}",
-                          size: 12.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        AppCubit.get(context).providerServicesList[index]
+                                    ['discount'] ==
+                                0
+                            ? AppText(
+                                text:
+                                    "${AppCubit.get(context).providerServicesList[index]['price'].toString()} ${LocaleKeys.sar.tr()}",
+                                size: 12.sp,
+                                fontWeight: FontWeight.bold,
+                              )
+                            : SizedBox(
+                                width: 150.w,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AppText(
+                                      end: 5.w,
+                                      text:
+                                          "${AppCubit.get(context).providerServicesList[index]['discount'].toString()} ${LocaleKeys.sar.tr()}",
+                                      size: 12.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    AppText(
+                                      text:
+                                          " ${AppCubit.get(context).providerServicesList[index]['price'].toString()} ${LocaleKeys.sar.tr()}",
+                                      size: 12.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ],
+                                ),
+                              ),
                       ],
                     )
                   ],

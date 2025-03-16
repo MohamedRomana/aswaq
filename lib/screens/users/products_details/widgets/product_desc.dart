@@ -24,7 +24,8 @@ class _ProductDescState extends State<ProductDesc> {
   void initState() {
     _controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(
-          'https://www.youtube.com/watch?v=vQXvyV0zIP4')!,
+              AppCubit.get(context).showServiceModel['video']) ??
+          "",
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -111,51 +112,61 @@ class _ProductDescState extends State<ProductDesc> {
                 fit: BoxFit.fill,
               ),
             ),
-            GestureDetector(
-              onTap: _toggleControls,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: true,
-                  ),
-                  if (_showControls)
-                    Positioned(
-                      bottom: 5,
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  _isPlaying ? Icons.pause : Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 30,
+            AppCubit.get(context).showServiceModel['video'] == ''
+                ? const SizedBox.shrink()
+                : GestureDetector(
+                    onTap: _toggleControls,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        YoutubePlayer(
+                          controller: _controller,
+                          showVideoProgressIndicator: true,
+                        ),
+                        if (_showControls)
+                          Positioned(
+                            bottom: 5,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(
+                                        _isPlaying
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                      onPressed: _togglePlayPause,
+                                    ),
+                                    const SizedBox(width: 20),
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.fast_forward,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                      onPressed: () => _controller.seekTo(
+                                        _controller.value.position +
+                                            const Duration(seconds: 10),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                onPressed: _togglePlayPause,
-                              ),
-                              const SizedBox(width: 20),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.fast_forward,
-                                  color: Colors.white,
-                                  size: 30,
-                                ),
-                                onPressed: () => _controller.seekTo(
-                                  _controller.value.position +
-                                      const Duration(seconds: 10),
-                                ),
-                              ),
-                            ],
+                                AppCubit.get(context)
+                                            .showServiceModel['video'] ==
+                                        ''
+                                    ? const SizedBox.shrink()
+                                    : YoutubeProgressBar(
+                                        controller: _controller,
+                                      ),
+                              ],
+                            ),
                           ),
-                          YoutubeProgressBar(controller: _controller),
-                        ],
-                      ),
+                      ],
                     ),
-                ],
-              ),
-            ),
+                  ),
             SizedBox(height: 16.h),
             const Divider(
               thickness: 1,
@@ -183,12 +194,9 @@ class YoutubeProgressBar extends StatelessWidget {
         return SizedBox(
           width: 300.w,
           child: Slider(
-            value: (maxDuration > 0)
-                ? currentPosition.clamp(0, maxDuration)
-                : 0, 
-            max: maxDuration > 0
-                ? maxDuration
-                : 1, 
+            value:
+                (maxDuration > 0) ? currentPosition.clamp(0, maxDuration) : 0,
+            max: maxDuration > 0 ? maxDuration : 1,
             onChanged: (newValue) {
               if (maxDuration > 0) {
                 controller.seekTo(Duration(seconds: newValue.toInt()));

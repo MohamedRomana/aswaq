@@ -70,9 +70,10 @@ class ProductStore extends StatelessWidget {
                           ),
                           AppText(
                             start: 5.w,
-                            text: AppCubit.get(context)
-                                .showServiceModel['saler_rate']
-                                .toString(),
+                            text: double.parse(AppCubit.get(context)
+                                    .showServiceModel['saler_rate']
+                                    .toString())
+                                .toStringAsFixed(1),
                             size: 12.sp,
                             color: Colors.black,
                           ),
@@ -108,90 +109,132 @@ class ProductStore extends StatelessWidget {
                 ],
               ),
             ),
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: AppText(
-                top: 10.h,
-                text: LocaleKeys.store_recommendations.tr(),
-                size: 18.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 400.h,
-              child: GridView.builder(
-                padding: EdgeInsetsDirectional.only(
-                    start: 10.w, end: 10.w, top: 15.h, bottom: 5.h),
-                scrollDirection: Axis.horizontal,
-                itemCount: AppCubit.get(context).providerServicesList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.w,
-                  mainAxisSpacing: 15.h,
-                  childAspectRatio: 1.7.h,
-                ),
-                itemBuilder: (context, index) => InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () {
-                    AppRouter.navigateTo(
-                      context,
-                      ProductDetailsBottomSheet(
-                        id: AppCubit.get(context).providerServicesList[index]
-                            ['id'],
-                      ),
-                    );
-                  },
-                  child: Column(
+            AppCubit.get(context).showServiceModel['favourite_services'].isEmpty
+                ? const SizedBox.shrink()
+                : Column(
                     children: [
-                      Container(
-                        height: 130.h,
-                        width: 130.w,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.r),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                blurRadius: 5.r,
-                                spreadRadius: 1.r,
-                                offset: Offset(0, 5.r))
-                          ],
+                      Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: AppText(
+                          top: 10.h,
+                          text: LocaleKeys.store_recommendations.tr(),
+                          size: 18.sp,
+                          fontWeight: FontWeight.bold,
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.r),
-                          child: AppCachedImage(
-                            image: AppCubit.get(context)
-                                        .providerServicesList[index]
-                                    ['first_image'] ??
-                                "",
-                            fit: BoxFit.fill,
+                      ),
+                      GridView.builder(
+                        padding: EdgeInsetsDirectional.only(
+                          start: 10.w,
+                          end: 10.w,
+                          top: 15.h,
+                          bottom: 5.h,
+                        ),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: AppCubit.get(context)
+                            .showServiceModel['favourite_services']
+                            .length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10.w,
+                          mainAxisSpacing: 20.h,
+                          childAspectRatio: 0.9.h,
+                        ),
+                        itemBuilder: (context, index) => InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            AppRouter.navigateTo(
+                              context,
+                              ProductDetailsBottomSheet(
+                                id: AppCubit.get(context)
+                                        .showServiceModel['favourite_services']
+                                    [index]['id'],
+                              ),
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 130.h,
+                                width: 130.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        blurRadius: 5.r,
+                                        spreadRadius: 1.r,
+                                        offset: Offset(0, 5.r))
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  child: AppCachedImage(
+                                    image:
+                                        AppCubit.get(context).showServiceModel[
+                                                    'favourite_services'][index]
+                                                ['first_image'] ??
+                                            "",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  AppText(
+                                    top: 8.h,
+                                    text:
+                                        AppCubit.get(context).showServiceModel[
+                                                    'favourite_services'][index]
+                                                ['title'] ??
+                                            "",
+                                    size: 12.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  AppCubit.get(context).showServiceModel[
+                                                  'favourite_services'][index]
+                                              ['discount'] ==
+                                          0
+                                      ? AppText(
+                                          text:
+                                              "${AppCubit.get(context).showServiceModel['favourite_services'][index]['price'].toString()} ${LocaleKeys.sar.tr()}",
+                                          size: 12.sp,
+                                          fontWeight: FontWeight.bold,
+                                        )
+                                      : SizedBox(
+                                          width: 150.w,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              AppText(
+                                                text:
+                                                    "${AppCubit.get(context).showServiceModel['favourite_services'][index]['discount'].toString()} ${LocaleKeys.sar.tr()}",
+                                                size: 12.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              AppText(
+                                                start: 10.w,
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                text:
+                                                    "${AppCubit.get(context).showServiceModel['favourite_services'][index]['price'].toString()} ${LocaleKeys.sar.tr()}",
+                                                size: 12.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                ],
+                              )
+                            ],
                           ),
                         ),
                       ),
-                      Column(
-                        children: [
-                          AppText(
-                            top: 8.h,
-                            text: AppCubit.get(context)
-                                    .providerServicesList[index]['title'] ??
-                                "",
-                            size: 12.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          AppText(
-                            text:
-                                "${AppCubit.get(context).providerServicesList[index]['price'].toString()} ${LocaleKeys.sar.tr()}",
-                            size: 12.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ],
-                      )
                     ],
                   ),
-                ),
-              ),
-            ),
           ],
         );
       },

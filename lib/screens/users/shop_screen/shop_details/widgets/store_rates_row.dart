@@ -13,8 +13,19 @@ import 'shop_reviews_dialog.dart';
 final _formKey = GlobalKey<FormState>();
 final _commentShopController = TextEditingController();
 
-class StoreRatesRow extends StatelessWidget {
+class StoreRatesRow extends StatefulWidget {
   const StoreRatesRow({super.key});
+
+  @override
+  State<StoreRatesRow> createState() => _StoreRatesRowState();
+}
+
+class _StoreRatesRowState extends State<StoreRatesRow> {
+  @override
+  void initState() {
+    _commentShopController.clear();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +59,8 @@ class StoreRatesRow extends StatelessWidget {
                       width: 100.w,
                       child: AppText(
                         start: 16.w,
-                        text: '${(percentage / 100) * 5}/5',
+                        text:
+                            '${((percentage / 100) * 5).toStringAsFixed(1)}/5',
                         size: 24.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -68,7 +80,7 @@ class StoreRatesRow extends StatelessWidget {
                       width: 100.w,
                       child: AppText(
                         start: 16.w,
-                        text: '$percentage%',
+                        text: '${percentage.toStringAsFixed(1)}%',
                         size: 24.sp,
                         fontWeight: FontWeight.bold,
                       ),

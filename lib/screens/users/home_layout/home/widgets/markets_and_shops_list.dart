@@ -148,7 +148,7 @@ class MarketsAndShopsListView extends StatelessWidget {
                                   text: AppCubit.get(context)
                                       .clientHomeModel['providers'][index]
                                           ['rate']
-                                      .toString(),
+                                      .toStringAsFixed(1),
                                   size: 14.sp,
                                 ),
                               ],
