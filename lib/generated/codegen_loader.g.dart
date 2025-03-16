@@ -448,7 +448,8 @@ class CodegenLoader extends AssetLoader{
   "store_recommendations": "ترشيحات المتجر",
   "customer_reviews": "تقييم العملاء",
   "products": "المنتجات",
-  "store_information": "معلومات المتجر"
+  "store_information": "معلومات المتجر",
+  "please_write_your_comment": "من فضلك اكتب تعليقك"
 };
 static const Map<String,dynamic> en = {
   "chooseLang": "Choose the appropriate language",
@@ -884,7 +885,8 @@ static const Map<String,dynamic> en = {
   "store_recommendations": "Store Recommendations",
   "customer_reviews": "Customer Reviews",
   "products": "Products",
-  "store_information": "Store Information"
+  "store_information": "Store Information",
+  "please_write_your_comment": "Please write your comment"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

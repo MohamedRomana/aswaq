@@ -23,6 +23,9 @@ class CustomShopDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    num rate = AppCubit.get(context).showProviderModel['rate'];
+    num rateCount = AppCubit.get(context).showProviderModel['rate_count'];
+    num percentage = (rate * rateCount) / (5 * rateCount) * 100;
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
         if (state is AddFavoriteSuccess) {
@@ -197,8 +200,7 @@ class CustomShopDetails extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   AppText(
-                                    text:
-                                        "${AppCubit.get(context).showProviderModel['rate'].toString()}%",
+                                    text: '$percentage%',
                                     size: 16.sp,
                                     color: Colors.black,
                                   ),
@@ -224,7 +226,7 @@ class CustomShopDetails extends StatelessWidget {
                                 children: [
                                   AppText(
                                     text:
-                                        "${AppCubit.get(context).showProviderModel['rate'].toString()}/5",
+                                        "${(percentage / 100) * 5}/5",
                                     size: 16.sp,
                                     color: Colors.black,
                                   ),
@@ -245,7 +247,6 @@ class CustomShopDetails extends StatelessWidget {
                           size: 15.sp,
                           color: Colors.black,
                         ),
-                      
                       ],
                     ),
                   ),

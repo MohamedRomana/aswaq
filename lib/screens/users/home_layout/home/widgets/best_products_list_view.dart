@@ -39,7 +39,7 @@ class BestProductsListView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 scrollDirection: Axis.horizontal,
                 itemCount:
-                    AppCubit.get(context).clientHomeModel['services'].length,
+                    AppCubit.get(context).clientHomeModel['services'].length ?? 0,
                 separatorBuilder: (context, index) => SizedBox(width: 13.w),
                 itemBuilder: (context, index) {
                   return InkWell(

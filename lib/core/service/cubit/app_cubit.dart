@@ -144,7 +144,6 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeIndex());
   }
 
- 
   List<OnBoardingModel> onBoardingList = [];
   Future intro() async {
     emit(GetIntroLoading());
@@ -1934,6 +1933,84 @@ class AppCubit extends Cubit<AppState> {
       } else {
         debugPrint(error.toString());
         emit(UserNotificationFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future rateProvider({
+    required String providerId,
+    required String rate,
+    required String desc,
+  }) async {
+    emit(RateProviderLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/rate-provider"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "provider_id": providerId,
+        "rate": rate,
+        "desc": desc,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(RateProviderSuccess(message: data["msg"]));
+          // showProvider(providerId: providerId);
+        } else {
+          emit(RateProviderFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(RateProviderFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future rateService({
+    required String serviceId,
+    required String rate,
+    required String desc,
+  }) async {
+    emit(RateServiceLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/rate-provider"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "service_id": serviceId,
+        "rate": rate,
+        "desc": desc,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(RateServiceSuccess(message: data["msg"]));
+          showService(serviceId: serviceId);
+        } else {
+          emit(RateServiceFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(RateServiceFailure(error: error.toString()));
       }
     }
   }

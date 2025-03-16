@@ -22,6 +22,12 @@ class ProductRates extends StatefulWidget {
 
 class _ProductRatesState extends State<ProductRates> {
   double value = 1.0;
+  @override
+  void initState() {
+    _commentController.clear();
+    value = 1.0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +37,7 @@ class _ProductRatesState extends State<ProductRates> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Divider(color: Colors.grey),
+            SizedBox(height: 16.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -46,7 +53,7 @@ class _ProductRatesState extends State<ProductRates> {
                     onPressed: () {
                       customAlertDialog(
                         alertDialogWidth: 300.w,
-                        alertDialogHeight: 343.w,
+                        alertDialogHeight: 360.h,
                         context: context,
                         child: ReviewsDialog(
                           formKey: _formKey,
@@ -63,7 +70,7 @@ class _ProductRatesState extends State<ProductRates> {
                 ),
               ],
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 10.h),
             const UsersReviews()
           ],
         );

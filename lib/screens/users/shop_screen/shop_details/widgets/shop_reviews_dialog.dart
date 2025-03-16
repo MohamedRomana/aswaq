@@ -1,21 +1,23 @@
-import 'package:aswaq/core/service/cubit/app_cubit.dart';
-import 'package:aswaq/core/widgets/app_router.dart';
-import 'package:aswaq/core/widgets/flash_message.dart';
-import 'package:aswaq/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../core/service/cubit/app_cubit.dart';
 import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_input.dart';
+import '../../../../../core/widgets/app_router.dart';
 import '../../../../../core/widgets/app_text.dart';
+import '../../../../../core/widgets/flash_message.dart';
+import '../../../../../generated/locale_keys.g.dart';
 
-class ReviewsDialog extends StatelessWidget {
+class ShopReviewsDialog extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final TextEditingController commentController;
-  const ReviewsDialog(
-      {super.key, required this.formKey, required this.commentController});
+  final TextEditingController commentShopController;
+  const ShopReviewsDialog({
+    super.key, required this.formKey, required this.commentShopController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class ReviewsDialog extends StatelessWidget {
               const Divider(color: Colors.grey),
               SizedBox(height: 20.h),
               AppInput(
-                controller: commentController,
+                controller: commentShopController,
                 contentTop: 30.h,
                 enabledBorderColor: Colors.grey,
                 filled: true,
@@ -75,16 +77,16 @@ class ReviewsDialog extends StatelessWidget {
                 children: [
                   BlocConsumer<AppCubit, AppState>(
                     listener: (context, state) {
-                      if (state is RateServiceSuccess) {
+                      if (state is RateProviderSuccess) {
                         showFlashMessage(
                           message: state.message,
                           type: FlashMessageType.success,
                           context: context,
                         );
                         AppRouter.pop(context);
-                        commentController.clear();
+                        commentShopController.clear();
                         value = 1.0;
-                      } else if (state is RateServiceFailure) {
+                      } else if (state is RateProviderFailure) {
                         showFlashMessage(
                           message: state.error,
                           type: FlashMessageType.error,
@@ -98,17 +100,17 @@ class ReviewsDialog extends StatelessWidget {
                         child: AppButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              AppCubit.get(context).rateService(
-                                  serviceId: AppCubit.get(context)
-                                      .showServiceModel['id']
+                              AppCubit.get(context).rateProvider(
+                                  providerId: AppCubit.get(context)
+                                      .showProviderModel['id']
                                       .toString(),
                                   rate: value.toString(),
-                                  desc: commentController.text);
+                                  desc: commentShopController.text);
                             }
                           },
                           color: Colors.green,
                           width: 120.w,
-                          child: state is RateServiceLoading
+                          child: state is RateProviderLoading
                               ? const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.white,

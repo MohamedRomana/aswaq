@@ -1,21 +1,21 @@
-import 'package:aswaq/core/service/cubit/app_cubit.dart';
-import 'package:aswaq/core/widgets/app_cached.dart';
-import 'package:aswaq/core/widgets/app_text.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/service/cubit/app_cubit.dart';
+import '../../../../../core/widgets/app_cached.dart';
+import '../../../../../core/widgets/app_text.dart';
 
-class UsersReviews extends StatelessWidget {
-  const UsersReviews({super.key});
+class ShopReviewsComments extends StatelessWidget {
+  const ShopReviewsComments({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return ListView.separated(
-          padding: EdgeInsets.only(bottom: 20.h),
-          itemCount: AppCubit.get(context).showServiceModel['rates'].length,
+          padding: EdgeInsetsDirectional.only(start: 16.w, bottom: 20.h),
+          itemCount: AppCubit.get(context).showProviderModel['rates'].length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           separatorBuilder: (context, index) => SizedBox(height: 8.h),
@@ -27,7 +27,7 @@ class UsersReviews extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(1000.r),
                     child: AppCachedImage(
-                      image: AppCubit.get(context).showServiceModel['rates']
+                      image: AppCubit.get(context).showProviderModel['rates']
                               [index]['user_avatar'] ??
                           "",
                       height: 30.w,
@@ -40,7 +40,7 @@ class UsersReviews extends StatelessWidget {
                     filledIcon: Icons.star,
                     emptyIcon: Icons.star_border,
                     initialRating: double.parse(AppCubit.get(context)
-                        .showServiceModel['rates'][index]['rate']),
+                        .showProviderModel['rates'][index]['rate']),
                     maxRating: 5,
                     isHalfAllowed: true,
                     halfFilledIcon: Icons.star_half,
@@ -52,7 +52,7 @@ class UsersReviews extends StatelessWidget {
                 width: 300.w,
                 child: AppText(
                   top: 6.h,
-                  text: AppCubit.get(context).showServiceModel['rates'][index]
+                  text: AppCubit.get(context).showProviderModel['rates'][index]
                           ['desc'] ??
                       "",
                   lines: 3,

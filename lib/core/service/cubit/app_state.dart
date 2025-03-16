@@ -528,3 +528,27 @@ final class UserNotificationFailure extends AppState {
 
   UserNotificationFailure({required this.error});
 }
+
+final class RateProviderLoading extends AppState {}
+
+final class RateProviderSuccess extends AppState {
+  final String message;
+  RateProviderSuccess({required this.message});
+}
+
+final class RateProviderFailure extends AppState {
+  final String error;
+  RateProviderFailure({required this.error});
+}
+
+final class RateServiceLoading extends AppState {}
+
+final class RateServiceSuccess extends AppState {
+  final String message;
+  RateServiceSuccess({required this.message});
+}
+
+final class RateServiceFailure extends AppState {
+  final String error;
+  RateServiceFailure({required this.error});
+}
