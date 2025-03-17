@@ -23,8 +23,8 @@ class CustomShopDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    num rate = AppCubit.get(context).showProviderModel['rate'];
-    num rateCount = AppCubit.get(context).showProviderModel['rate_count'];
+    num rate = AppCubit.get(context).showProviderModel['rate'] ?? 0;
+    num rateCount = AppCubit.get(context).showProviderModel['rate_count'] ?? 0;
     num percentage = (rate * rateCount) / (5 * rateCount) * 100;
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
@@ -70,7 +70,7 @@ class CustomShopDetails extends StatelessWidget {
                       borderRadius: BorderRadius.circular(1000.r),
                       child: AppCachedImage(
                         image:
-                            AppCubit.get(context).showProviderModel['avatar'],
+                            AppCubit.get(context).showProviderModel['avatar'] ?? "",
                         height: 50.w,
                         width: 50.w,
                         fit: BoxFit.cover,

@@ -126,7 +126,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           AppText(
                             text: AppCubit.get(context)
-                                    .showUserMap['city_title'],
+                                    .showUserMap['city_title'] ?? "",
                             color: Colors.grey,
                             size: 12.sp,
                           ),

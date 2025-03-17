@@ -51,7 +51,7 @@ class EditProfileFields extends StatelessWidget {
                     color: Colors.grey,
                     spreadRadius: 1.r,
                     blurRadius: 5.r,
-                    offset: Offset(0, 5.r), // changes position of shadow
+                    offset: Offset(0, 5.r),
                   ),
                 ],
               ),
@@ -93,7 +93,7 @@ class EditProfileFields extends StatelessWidget {
                     enabledBorderColor: Colors.grey,
                     bottom: 16.h,
                     filled: true,
-                    hint: AppCubit.get(context).showUserMap['city_title'],
+                    hint: AppCubit.get(context).showUserMap['city_title'] ?? "",
                     controller: cityController,
                     prefixIcon: Icon(
                       Icons.location_on_outlined,
@@ -125,7 +125,7 @@ class EditProfileFields extends StatelessWidget {
                                     Navigator.pop(context, value['title']);
                                   },
                                   child: AppText(
-                                    text: value['title'],
+                                    text: value['title'] ?? "",
                                     size: 18.sp,
                                     color: AppColors.primary,
                                   ),

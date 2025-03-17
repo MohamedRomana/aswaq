@@ -73,7 +73,7 @@ class CustomMarketsListView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.r),
                                 child: AppCachedImage(
                                   image: AppCubit.get(context)
-                                      .sectionsProvidersList[index]['avatar'],
+                                      .sectionsProvidersList[index]['avatar'] ?? "",
                                   fit: BoxFit.cover,
                                   height: 100.h,
                                   width: 100.w,

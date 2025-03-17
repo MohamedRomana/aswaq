@@ -84,7 +84,7 @@ class _CustomChangesAppContainerState extends State<CustomChangesAppContainer> {
                         activeTrackColor: AppColors.primary.withOpacity(0.2),
                         inactiveThumbColor: const Color(0xffB5B2B2),
                         inactiveTrackColor: const Color(0xffDCDCDC),
-                        value: AppCubit.get(context).showUserMap['send_notify'],
+                        value: AppCubit.get(context).showUserMap['send_notify'] ?? false,
                         onChanged: (bool value) {
                           setState(
                             () {

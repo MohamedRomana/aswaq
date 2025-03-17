@@ -174,7 +174,7 @@ class _SearchState extends State<Search> {
                                               start: 10.w,
                                               top: 10.h,
                                               text: AppCubit.get(context)
-                                                  .searchList[index]['title'],
+                                                  .searchList[index]['title']??"",
                                               size: 12.sp,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -187,7 +187,7 @@ class _SearchState extends State<Search> {
                                               top: 3.h,
                                               text: AppCubit.get(context)
                                                       .searchList[index]
-                                                  ['section_title'],
+                                                  ['section_title']??"",
                                               color: AppColors.primary,
                                               size: 9.sp,
                                             ),
@@ -196,7 +196,7 @@ class _SearchState extends State<Search> {
                                       ),
                                       AppCachedImage(
                                         image: AppCubit.get(context)
-                                            .searchList[index]['first_image'],
+                                            .searchList[index]['first_image']??"",
                                         fit: BoxFit.cover,
                                       ),
                                       Row(

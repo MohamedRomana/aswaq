@@ -87,7 +87,7 @@ class _ItemsMayLikeState extends State<ItemsMayLike> {
                               child: AppCachedImage(
                                 image: AppCubit.get(context)
                                         .showServiceModel['related_services']
-                                    [index]['first_image'],
+                                    [index]['first_image'] ?? '',
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -98,7 +98,7 @@ class _ItemsMayLikeState extends State<ItemsMayLike> {
                                 top: 8.h,
                                 text: AppCubit.get(context)
                                         .showServiceModel['related_services']
-                                    [index]['title'],
+                                    [index]['title'] ?? '',
                                 size: 12.sp,
                                 fontWeight: FontWeight.bold,
                               ),

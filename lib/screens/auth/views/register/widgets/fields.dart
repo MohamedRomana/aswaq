@@ -142,7 +142,7 @@ class CustomUserRegisterFields extends StatelessWidget {
                                 Navigator.pop(context, value['title']);
                               },
                               child: AppText(
-                                text: value['title'],
+                                text: value['title'] ?? "",
                                 size: 18.sp,
                                 color: AppColors.primary,
                               ),

@@ -70,7 +70,7 @@ class StoreProducts extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.r),
                         child: AppCachedImage(
                           image: AppCubit.get(context)
-                              .providerServicesList[index]['first_image'],
+                              .providerServicesList[index]['first_image'] ?? "",
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -80,7 +80,7 @@ class StoreProducts extends StatelessWidget {
                         AppText(
                           top: 8.h,
                           text: AppCubit.get(context)
-                              .providerServicesList[index]['title'],
+                              .providerServicesList[index]['title'] ?? "",
                           size: 12.sp,
                           fontWeight: FontWeight.bold,
                         ),

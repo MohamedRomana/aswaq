@@ -89,8 +89,8 @@ class CustomOrderInformation extends StatelessWidget {
                           highlightColor: Colors.transparent,
                           onTap: () {
                             openGoogleMap(
-                              AppCubit.get(context).showOrdersModel['lat'],
-                              AppCubit.get(context).showOrdersModel['lng'],
+                              AppCubit.get(context).showOrdersModel['lat'] ?? 0.0,
+                              AppCubit.get(context).showOrdersModel['lng'] ?? 0.0,
                             );
                           },
                           child: Row(

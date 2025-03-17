@@ -76,7 +76,7 @@ class CartsListView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.r),
                     child: AppCachedImage(
                       image: AppCubit.get(context).cartItemsModel['cart_items']
-                          [index]['service_first_image'],
+                          [index]['service_first_image'] ?? "",
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -91,7 +91,7 @@ class CartsListView extends StatelessWidget {
                         child: AppText(
                           text:
                               AppCubit.get(context).cartItemsModel['cart_items']
-                                  [index]['service_title'],
+                                  [index]['service_title'] ?? "",
                           size: 16.sp,
                           lines: 2,
                           fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class CartsListView extends StatelessWidget {
                           top: 6.h,
                           text:
                               AppCubit.get(context).cartItemsModel['cart_items']
-                                  [index]['service_section_title'],
+                                  [index]['service_section_title'] ?? "",
                           size: 14.sp,
                           color: Colors.grey,
                         ),

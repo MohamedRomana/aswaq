@@ -83,7 +83,7 @@ class ProviderGrideView extends StatelessWidget {
                                       start: 10.w,
                                       top: 10.h,
                                       text: AppCubit.get(context)
-                                          .allServiceList[index]['title'],
+                                          .allServiceList[index]['title'] ?? "",
                                       size: 12.sp,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -96,7 +96,7 @@ class ProviderGrideView extends StatelessWidget {
                                       top: 3.h,
                                       text: AppCubit.get(context)
                                               .allServiceList[index]
-                                          ['section_title'],
+                                          ['section_title'] ?? "",
                                       color: AppColors.primary,
                                       size: 9.sp,
                                     ),
