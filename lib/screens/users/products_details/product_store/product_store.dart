@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aswaq/core/service/cubit/app_cubit.dart';
 import 'package:aswaq/core/widgets/app_button.dart';
 import 'package:aswaq/core/widgets/app_cached.dart';
@@ -138,7 +140,7 @@ class ProductStore extends StatelessWidget {
                           crossAxisCount: 2,
                           crossAxisSpacing: 10.w,
                           mainAxisSpacing: 20.h,
-                          childAspectRatio: 0.9.h,
+                          childAspectRatio: Platform.isIOS ? 0.7.h : 0.9.h,
                         ),
                         itemBuilder: (context, index) => InkWell(
                           splashColor: Colors.transparent,

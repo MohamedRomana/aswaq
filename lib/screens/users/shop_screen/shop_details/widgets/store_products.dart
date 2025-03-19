@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +37,7 @@ class StoreProducts extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 10.w,
                 mainAxisSpacing: 15.h,
-                childAspectRatio: 0.7.h,
+                childAspectRatio: Platform.isIOS ? 0.6.h : 0.7.h,
               ),
               itemBuilder: (context, index) => InkWell(
                 splashColor: Colors.transparent,
@@ -70,7 +72,8 @@ class StoreProducts extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.r),
                         child: AppCachedImage(
                           image: AppCubit.get(context)
-                              .providerServicesList[index]['first_image'] ?? "",
+                                  .providerServicesList[index]['first_image'] ??
+                              "",
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -80,7 +83,8 @@ class StoreProducts extends StatelessWidget {
                         AppText(
                           top: 8.h,
                           text: AppCubit.get(context)
-                              .providerServicesList[index]['title'] ?? "",
+                                  .providerServicesList[index]['title'] ??
+                              "",
                           size: 12.sp,
                           fontWeight: FontWeight.bold,
                         ),

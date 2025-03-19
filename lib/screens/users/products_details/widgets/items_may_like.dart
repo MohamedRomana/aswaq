@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,7 @@ class _ItemsMayLikeState extends State<ItemsMayLike> {
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
-        return  AppCubit.get(context)
+        return AppCubit.get(context)
                 .showServiceModel['related_services']
                 .isEmpty
             ? const SizedBox.shrink()
@@ -51,7 +53,7 @@ class _ItemsMayLikeState extends State<ItemsMayLike> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 10.w,
                       mainAxisSpacing: 15.h,
-                      childAspectRatio: 0.7.h,
+                      childAspectRatio: Platform.isIOS ? 0.55.h : 0.7.h,
                     ),
                     itemBuilder: (context, index) => InkWell(
                       splashColor: Colors.transparent,
@@ -85,9 +87,10 @@ class _ItemsMayLikeState extends State<ItemsMayLike> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.r),
                               child: AppCachedImage(
-                                image: AppCubit.get(context)
-                                        .showServiceModel['related_services']
-                                    [index]['first_image'] ?? '',
+                                image: AppCubit.get(context).showServiceModel[
+                                            'related_services'][index]
+                                        ['first_image'] ??
+                                    '',
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -96,9 +99,9 @@ class _ItemsMayLikeState extends State<ItemsMayLike> {
                             children: [
                               AppText(
                                 top: 8.h,
-                                text: AppCubit.get(context)
-                                        .showServiceModel['related_services']
-                                    [index]['title'] ?? '',
+                                text: AppCubit.get(context).showServiceModel[
+                                        'related_services'][index]['title'] ??
+                                    '',
                                 size: 12.sp,
                                 fontWeight: FontWeight.bold,
                               ),
