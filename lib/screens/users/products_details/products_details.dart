@@ -21,7 +21,9 @@ import 'widgets/products_swiper.dart';
 
 class ProductDetailsBottomSheet extends StatefulWidget {
   final int id;
-  const ProductDetailsBottomSheet({super.key, required this.id});
+  final bool isSearch;
+  const ProductDetailsBottomSheet(
+      {super.key, required this.id, this.isSearch = false});
 
   @override
   State<ProductDetailsBottomSheet> createState() =>
@@ -102,7 +104,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet>
       builder: (context, state) {
         return CustomBottomNav(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(60.h),
+              preferredSize: Size.fromHeight(widget.isSearch ? 90.h : 60.h),
               child: CustomAppBar(
                 text: LocaleKeys.product_description.tr(),
                 isProduct: true,

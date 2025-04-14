@@ -292,6 +292,7 @@ class AppCubit extends Cubit<AppState> {
   Future contactUs({
     required String name,
     required String phone,
+    required String email,
     required String message,
   }) async {
     emit(ContactUsLoading());
@@ -301,6 +302,7 @@ class AppCubit extends Cubit<AppState> {
       'user_id': CacheHelper.getUserId(),
       "name": name,
       "phone": phone,
+      "email": email,
       "message": message,
     });
     Map<String, dynamic> data = jsonDecode(response.body);
@@ -310,6 +312,33 @@ class AppCubit extends Cubit<AppState> {
       emit(ContactUsSuccess(message: data["msg"]));
     } else {
       emit(ContactUsFailure(error: data["msg"]));
+    }
+  }
+
+  Future complaints({
+    required String name,
+    required String phone,
+    required String email,
+    required String message,
+  }) async {
+    emit(ComplaintLoading());
+    http.Response response =
+        await http.post(Uri.parse("${baseUrl}api/contact-us"), body: {
+      "lang": CacheHelper.getLang(),
+      'user_id': CacheHelper.getUserId(),
+      "name": name,
+      "phone": phone,
+      "email": email,
+      "message": message,
+      "type": "complaint",
+    });
+    Map<String, dynamic> data = jsonDecode(response.body);
+    debugPrint(data.toString());
+
+    if (data["key"] == 1) {
+      emit(ComplaintSuccess(message: data["msg"]));
+    } else {
+      emit(ComplaintFailure(error: data["msg"]));
     }
   }
 
@@ -896,6 +925,7 @@ class AppCubit extends Cubit<AppState> {
 
   List<Sections> sections = [];
   String cerPrice = '';
+  String whatsApp = '';
 
   Future getData() async {
     emit(GetDataLoading());
@@ -915,6 +945,7 @@ class AppCubit extends Cubit<AppState> {
             (data["data"]['sections'] ?? []).map((e) => Sections.fromJson(e)),
           );
           cerPrice = data['certificate_section_price'].toString();
+          whatsApp = data['whatsapp'];
           emit(GetDataSuccess());
         } else {
           emit(GetDataFailure(error: data["msg"]));
@@ -1060,7 +1091,48 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
+  Future addServiceFavorite({required String serviceId}) async {
+    emit(AddFavoriteLoading());
+    try {
+      http.Response response =
+          await http.post(Uri.parse("${baseUrl}api/add-to-favourite"), body: {
+        "lang": CacheHelper.getLang(),
+        'user_id': CacheHelper.getUserId(),
+        "service_id": serviceId,
+      }).timeout(const Duration(milliseconds: 8000));
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          emit(AddFavoriteSuccess(message: data["msg"]));
+          int index =
+              allServiceList.indexWhere((e) => e['id'].toString() == serviceId);
+          if (index != -1) {
+            allServiceList[index]['is_fav'] =
+                !(allServiceList[index]['is_fav'] ?? false);
+            emit(ChangeIndex());
+          }
+          showServiceModel['is_fav'] = !(showServiceModel['is_fav'] ?? false);
+        } else {
+          emit(AddFavoriteFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        debugPrint(error.toString());
+        emit(AddFavoriteFailure(error: error.toString()));
+      }
+    }
+  }
+
   List provicersList = [];
+  List favServicesList = [];
   Future showFavorite() async {
     emit(ShowFavoriteLoading());
     try {
@@ -1077,6 +1149,7 @@ class AppCubit extends Cubit<AppState> {
 
         if (data["key"] == 1) {
           provicersList = data["data"]['provicers'];
+          favServicesList = data["data"]['services'];
           emit(ShowFavoriteSuccess());
         } else {
           emit(ShowFavoriteFailure(error: data["msg"]));
@@ -1119,6 +1192,43 @@ class AppCubit extends Cubit<AppState> {
 
         if (data["key"] == 1) {
           provicersList.removeAt(index);
+          emit(RemoveFavSuccess());
+        } else {
+          debugPrint(data["msg"]);
+          emit(RemoveFavFailure(error: data["msg"]));
+        }
+      }
+    } catch (error) {
+      if (error is TimeoutException) {
+        debugPrint("Request timed out");
+        emit(Timeoutt());
+      } else {
+        emit(RemoveFavFailure(error: error.toString()));
+      }
+    }
+  }
+
+  Future removeServicesFav(
+      {required String serviceId, required int index}) async {
+    emit(RemoveFavLoading());
+    try {
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/add-to-favourite"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          "user_id": CacheHelper.getUserId(),
+          "service_id": serviceId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
+      if (response.statusCode == 500) {
+        emit(ServerError());
+      } else {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        debugPrint(data.toString());
+
+        if (data["key"] == 1) {
+          favServicesList.removeAt(index);
           emit(RemoveFavSuccess());
         } else {
           debugPrint(data["msg"]);

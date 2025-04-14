@@ -8,9 +8,9 @@ class CustomAuthHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 85.h,
-      width: 188.w,
-      margin: EdgeInsets.only(top: 90.w),
+      height: 250.w,
+      width: 350.w,
+      margin: EdgeInsetsDirectional.only(top: 50.h),
       child: Image.asset(
         Assets.img.logo.path,
         fit: BoxFit.fill,

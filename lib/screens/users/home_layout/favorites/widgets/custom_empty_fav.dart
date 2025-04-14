@@ -10,11 +10,15 @@ import '../../../../../generated/locale_keys.g.dart';
 class CustomEmptyFav extends StatelessWidget {
   final bool isCart;
   final bool isMarket;
+  final bool isProvider;
+  final bool isService;
 
   const CustomEmptyFav({
     super.key,
     this.isCart = false,
     this.isMarket = true,
+    this.isProvider = false,
+    this.isService = false,
   });
 
   @override
@@ -25,7 +29,7 @@ class CustomEmptyFav extends StatelessWidget {
         CustomLottieWidget(
           lottieName: Assets.img.notiEmpty,
         ),
-        if (isMarket)
+        if (isMarket) ...{
           AppText(
             top: 16.h,
             text: isCart
@@ -35,6 +39,23 @@ class CustomEmptyFav extends StatelessWidget {
             color: AppColors.primary,
             fontStyle: FontStyle.italic,
           ),
+        } else if (isProvider) ...{
+          AppText(
+            top: 16.h,
+            text: LocaleKeys.no_favorite_stores.tr(),
+            size: 24.sp,
+            color: AppColors.primary,
+            fontStyle: FontStyle.italic,
+          ),
+        } else if (isService) ...{
+          AppText(
+            top: 16.h,
+            text: LocaleKeys.no_favorite_products.tr(),
+            size: 24.sp,
+            color: AppColors.primary,
+            fontStyle: FontStyle.italic,
+          ),
+        },
         SizedBox(height: 140.h),
       ],
     );

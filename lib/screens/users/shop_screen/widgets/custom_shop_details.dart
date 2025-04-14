@@ -26,6 +26,10 @@ class CustomShopDetails extends StatelessWidget {
     num rate = AppCubit.get(context).showProviderModel['rate'] ?? 0;
     num rateCount = AppCubit.get(context).showProviderModel['rate_count'] ?? 0;
     num percentage = (rate * rateCount) / (5 * rateCount) * 100;
+    final rateRaw = AppCubit.get(context).showProviderModel['rate'];
+    final providerRate =
+        rateRaw != null ? double.tryParse(rateRaw.toString()) ?? 0.0 : 0.0;
+
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
         if (state is AddFavoriteSuccess) {
@@ -70,7 +74,8 @@ class CustomShopDetails extends StatelessWidget {
                       borderRadius: BorderRadius.circular(1000.r),
                       child: AppCachedImage(
                         image:
-                            AppCubit.get(context).showProviderModel['avatar'] ?? "",
+                            AppCubit.get(context).showProviderModel['avatar'] ??
+                                "",
                         height: 50.w,
                         width: 50.w,
                         fit: BoxFit.cover,
@@ -144,7 +149,12 @@ class CustomShopDetails extends StatelessWidget {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () {
-                    AppRouter.navigateTo(context, const ShopDetails());
+                    AppRouter.navigateTo(
+                      context,
+                      ShopDetails(
+                        id: AppCubit.get(context).showProviderModel['id'],
+                      ),
+                    );
                   },
                   child: Container(
                     width: 343.w,
@@ -173,10 +183,7 @@ class CustomShopDetails extends StatelessWidget {
                                   ),
                                   SizedBox(width: 3.w),
                                   AppText(
-                                    text: double.parse(AppCubit.get(context)
-                                            .showProviderModel['rate']
-                                            .toString())
-                                        .toStringAsFixed(1),
+                                    text: providerRate.toStringAsFixed(1),
                                     size: 16.sp,
                                     color: Colors.black,
                                   ),

@@ -45,11 +45,10 @@ class _FaqState extends State<Faq> {
                 SizedBox(height: 25.h),
                 Image.asset(
                   Assets.img.logo.path,
-                  height: 115.h,
-                  width: 240.w,
+                  height: 250.w,
+                  width: 350.w,
                   fit: BoxFit.fill,
                 ),
-                SizedBox(height: 20.h),
                 state is GetQuestionsLoading
                     ? const FaqShimmer()
                     : ListView.separated(

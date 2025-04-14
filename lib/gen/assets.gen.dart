@@ -104,6 +104,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/book.svg
   String get book => 'assets/svg/book.svg';
 
+  /// File path: assets/svg/call.svg
+  String get call => 'assets/svg/call.svg';
+
   /// File path: assets/svg/copy.svg
   String get copy => 'assets/svg/copy.svg';
 
@@ -134,6 +137,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/import.svg
   String get import => 'assets/svg/import.svg';
 
+  /// File path: assets/svg/key.svg
+  String get key => 'assets/svg/key.svg';
+
   /// File path: assets/svg/location.svg
   String get location => 'assets/svg/location.svg';
 
@@ -160,6 +166,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/people.svg
   String get people => 'assets/svg/people.svg';
+
+  /// File path: assets/svg/person.svg
+  String get person => 'assets/svg/person.svg';
 
   /// File path: assets/svg/profile.svg
   String get profile => 'assets/svg/profile.svg';
@@ -206,6 +215,7 @@ class $AssetsSvgGen {
         bag,
         bank,
         book,
+        call,
         copy,
         done3,
         edit,
@@ -216,6 +226,7 @@ class $AssetsSvgGen {
         iconcard,
         id,
         import,
+        key,
         location,
         map,
         markets,
@@ -225,6 +236,7 @@ class $AssetsSvgGen {
         notificationBing,
         output,
         people,
+        person,
         profile,
         profilecircle,
         search,

@@ -4,8 +4,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/cache/cache_helper.dart';
 import '../../../../core/constants/colors.dart';
+import '../../../../core/widgets/alert_dialog.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 class ProductTitlePrice extends StatelessWidget {
@@ -66,15 +69,46 @@ class ProductTitlePrice extends StatelessWidget {
                           ],
                         ),
                       ),
-                SizedBox(
-                  width: 343.w,
-                  child: AppText(
-                    top: 10.h,
-                    textAlign: TextAlign.start,
-                    text: AppCubit.get(context).showServiceModel['title'] ?? "",
-                    size: 19.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 290.w,
+                      child: AppText(
+                        top: 10.h,
+                        textAlign: TextAlign.start,
+                        text: AppCubit.get(context).showServiceModel['title'] ??
+                            "",
+                        size: 19.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35.h,
+                      child: IconButton(
+                        onPressed: () {
+                          if (CacheHelper.getUserId() == "") {
+                            customAlertDialog(
+                              dialogBackGroundColor: Colors.white,
+                              context: context,
+                              child: const CustomLoginDialog(),
+                            );
+                          } else {
+                            AppCubit.get(context).addServiceFavorite(
+                                serviceId: AppCubit.get(context)
+                                    .showServiceModel['id']
+                                    .toString());
+                          }
+                        },
+                        icon: Icon(
+                          AppCubit.get(context).showServiceModel['is_fav']
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Colors.red,
+                          size: 30.sp,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   width: 343.w,
@@ -94,9 +128,10 @@ class ProductTitlePrice extends StatelessWidget {
                     RatingBar.readOnly(
                       filledIcon: Icons.star,
                       emptyIcon: Icons.star_border,
-                      initialRating: AppCubit.get(context)
-                          .showServiceModel['rate_avg']
-                          .toDouble(),
+                      initialRating:
+                          (AppCubit.get(context).showServiceModel['rate_avg'] ??
+                                  0)
+                              .toDouble(),
                       maxRating: 5,
                       isHalfAllowed: true,
                       halfFilledIcon: Icons.star_half,

@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../../core/cache/cache_helper.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/service/cubit/app_cubit.dart';
+import '../../../../core/widgets/alert_dialog.dart';
 import '../../../../core/widgets/app_cached.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/widgets/custom_login_dialog.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../products_details/products_details.dart';
@@ -40,7 +43,7 @@ class ProviderGrideView extends StatelessWidget {
                     itemCount: AppCubit.get(context).allServiceList.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisExtent: 205.h,
+                      mainAxisExtent: 210.h,
                       crossAxisSpacing: 16.w,
                       mainAxisSpacing: 16.h,
                     ),
@@ -50,11 +53,12 @@ class ProviderGrideView extends StatelessWidget {
                         highlightColor: Colors.transparent,
                         onTap: () {
                           AppRouter.navigateTo(
-                              context,
-                              ProductDetailsBottomSheet(
-                                id: AppCubit.get(context).allServiceList[index]
-                                    ['id'],
-                              ));
+                            context,
+                            ProductDetailsBottomSheet(
+                              id: AppCubit.get(context).allServiceList[index]
+                                  ['id'],
+                            ),
+                          );
                         },
                         child: Container(
                           height: 210.h,
@@ -76,17 +80,59 @@ class ProviderGrideView extends StatelessWidget {
                             children: [
                               Column(
                                 children: [
-                                  SizedBox(
-                                    width: 150.w,
-                                    child: AppText(
-                                      textAlign: TextAlign.start,
-                                      start: 10.w,
-                                      top: 10.h,
-                                      text: AppCubit.get(context)
-                                          .allServiceList[index]['title'] ?? "",
-                                      size: 12.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 130.w,
+                                        child: AppText(
+                                          textAlign: TextAlign.start,
+                                          start: 10.w,
+                                          top: 10.h,
+                                          text: AppCubit.get(context)
+                                                      .allServiceList[index]
+                                                  ['title'] ??
+                                              "",
+                                          size: 12.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 10.h,
+                                          right: 8.w,
+                                          left: 8.w,
+                                        ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            if (CacheHelper.getUserId() == "") {
+                                              customAlertDialog(
+                                                dialogBackGroundColor:
+                                                    Colors.white,
+                                                context: context,
+                                                child:
+                                                    const CustomLoginDialog(),
+                                              );
+                                            } else {
+                                              AppCubit.get(context)
+                                                  .addServiceFavorite(
+                                                serviceId: AppCubit.get(context)
+                                                    .allServiceList[index]['id']
+                                                    .toString(),
+                                              );
+                                            }
+                                          },
+                                          child: Icon(
+                                            AppCubit.get(context)
+                                                        .allServiceList[index]
+                                                    ['is_fav']
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            color: Colors.red,
+                                            size: 19.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(
                                     width: 150.w,
@@ -95,8 +141,9 @@ class ProviderGrideView extends StatelessWidget {
                                       start: 10.w,
                                       top: 3.h,
                                       text: AppCubit.get(context)
-                                              .allServiceList[index]
-                                          ['section_title'] ?? "",
+                                                  .allServiceList[index]
+                                              ['section_title'] ??
+                                          "",
                                       color: AppColors.primary,
                                       size: 9.sp,
                                     ),

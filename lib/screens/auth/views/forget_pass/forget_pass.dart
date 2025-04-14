@@ -1,13 +1,16 @@
+import 'package:aswaq/core/constants/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
 import 'package:aswaq/generated/locale_keys.g.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_input.dart';
 import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../gen/fonts.gen.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../data/auth_cubit.dart';
 import '../reset_pass/reset_pass.dart';
 import '../widgets/auth_header.dart';
@@ -16,8 +19,26 @@ final _formKey = GlobalKey<FormState>();
 final _phoneController = TextEditingController();
 String forgetPassPhoneCode = "";
 
-class ForgetPass extends StatelessWidget {
+class ForgetPass extends StatefulWidget {
   const ForgetPass({super.key});
+
+  @override
+  State<ForgetPass> createState() => _ForgetPassState();
+}
+
+class _ForgetPassState extends State<ForgetPass> {
+  final FocusNode phoneFocusNode = FocusNode();
+  @override
+  void initState() {
+    super.initState();
+    phoneFocusNode.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    phoneFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +69,7 @@ class ForgetPass extends StatelessWidget {
                 ),
               ),
               AppInput(
+                focusNode: phoneFocusNode,
                 top: 27.h,
                 bottom: 24.h,
                 filled: true,
@@ -62,10 +84,19 @@ class ForgetPass extends StatelessWidget {
                     return null;
                   }
                 },
-                prefixIcon: Icon(
-                  Icons.phone_outlined,
-                  color: Colors.grey,
-                  size: 25.sp,
+                prefixIcon: SizedBox(
+                  height: 28.w,
+                  width: 28.w,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      height: 28.w,
+                      width: 28.w,
+                      Assets.svg.call,
+                      color: phoneFocusNode.hasFocus
+                          ? AppColors.primary
+                          : Colors.grey,
+                    ),
+                  ),
                 ),
               ),
               BlocConsumer<AuthCubit, AuthState>(

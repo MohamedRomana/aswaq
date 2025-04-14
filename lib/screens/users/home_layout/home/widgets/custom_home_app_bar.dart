@@ -75,10 +75,6 @@ class CustomHomeAppBar extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: AppColors.primary,
                         ),
-                        AppText(
-                          text: LocaleKeys.thank_you_for_your_preference.tr(),
-                          size: 12.sp,
-                        )
                       ],
                     ),
                   ],

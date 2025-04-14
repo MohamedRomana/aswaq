@@ -62,14 +62,12 @@ class OrderReturns extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height: 32.h),
                   Image.asset(
                     Assets.img.logo.path,
-                    height: 115.h,
-                    width: 250.w,
+                    height: 250.w,
+                    width: 350.w,
                     fit: BoxFit.fill,
                   ),
-                  SizedBox(height: 35.h),
                   Container(
                     width: 343.w,
                     padding: EdgeInsets.all(16.r),

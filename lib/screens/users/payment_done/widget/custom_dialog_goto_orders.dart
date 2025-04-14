@@ -19,9 +19,9 @@ class CustomDialogGoToOrders extends StatelessWidget {
       children: [
         Image.asset(
           Assets.img.logo.path,
-          height: 115.h,
+          height: 130.h,
           width: 250.w,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
         AppText(
           text: LocaleKeys.request_sent_successfully.tr(),

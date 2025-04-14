@@ -72,10 +72,16 @@ class ProductStore extends StatelessWidget {
                           ),
                           AppText(
                             start: 5.w,
-                            text: double.parse(AppCubit.get(context)
-                                    .showServiceModel['saler_rate']
-                                    .toString())
-                                .toStringAsFixed(1),
+                            text: ((AppCubit.get(context).showServiceModel[
+                                                'saler_rate'] ??
+                                            0)
+                                        .toString())
+                                    .isEmpty
+                                ? '0.0'
+                                : double.parse(AppCubit.get(context)
+                                        .showServiceModel['saler_rate']
+                                        .toString())
+                                    .toStringAsFixed(1),
                             size: 12.sp,
                             color: Colors.black,
                           ),

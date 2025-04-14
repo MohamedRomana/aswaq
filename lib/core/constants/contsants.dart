@@ -29,3 +29,10 @@ void shareLocation(double lat, double lng) {
   Share.share(location);
 }
 
+Future<void> openWhatsApp(String phoneNumber) async {
+  final Uri launchUri = Uri.parse(
+    "https://wa.me/$phoneNumber",
+  );
+  await launchUrl(launchUri);
+}
+

@@ -141,8 +141,10 @@ class _SearchState extends State<Search> {
                                     isScrollControlled: true,
                                     backgroundColor: Colors.white,
                                     builder: (context) =>
-                                        const ProductDetailsBottomSheet(
-                                      id: 0,
+                                        ProductDetailsBottomSheet(
+                                      isSearch: true,
+                                      id: AppCubit.get(context)
+                                          .searchList[index]['id'],
                                     ),
                                   );
                                 },
@@ -174,7 +176,9 @@ class _SearchState extends State<Search> {
                                               start: 10.w,
                                               top: 10.h,
                                               text: AppCubit.get(context)
-                                                  .searchList[index]['title']??"",
+                                                          .searchList[index]
+                                                      ['title'] ??
+                                                  "",
                                               size: 12.sp,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -186,8 +190,9 @@ class _SearchState extends State<Search> {
                                               start: 10.w,
                                               top: 3.h,
                                               text: AppCubit.get(context)
-                                                      .searchList[index]
-                                                  ['section_title']??"",
+                                                          .searchList[index]
+                                                      ['section_title'] ??
+                                                  "",
                                               color: AppColors.primary,
                                               size: 9.sp,
                                             ),
@@ -196,7 +201,9 @@ class _SearchState extends State<Search> {
                                       ),
                                       AppCachedImage(
                                         image: AppCubit.get(context)
-                                            .searchList[index]['first_image']??"",
+                                                    .searchList[index]
+                                                ['first_image'] ??
+                                            "",
                                         fit: BoxFit.cover,
                                       ),
                                       Row(
@@ -258,8 +265,7 @@ class _SearchState extends State<Search> {
                                                         text:
                                                             '${AppCubit.get(context).searchList[index]['price']} ${LocaleKeys.sar.tr()}',
                                                         size: 12.sp,
-                                                        color:
-                                                            Colors.grey,
+                                                        color: Colors.grey,
                                                         decoration:
                                                             TextDecoration
                                                                 .lineThrough,

@@ -436,5 +436,8 @@ abstract class  LocaleKeys {
   static const products = 'products';
   static const store_information = 'store_information';
   static const please_write_your_comment = 'please_write_your_comment';
+  static const view_more = 'view_more';
+  static const no_favorite_products = 'no_favorite_products';
+  static const no_favorite_stores = 'no_favorite_stores';
 
 }

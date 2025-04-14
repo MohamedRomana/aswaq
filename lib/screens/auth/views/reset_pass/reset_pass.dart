@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/widgets/app_button.dart';
@@ -10,6 +11,7 @@ import '../../../../../core/widgets/app_text.dart';
 import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../gen/fonts.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../data/auth_cubit.dart';
 import '../widgets/auth_header.dart';
 
@@ -17,8 +19,30 @@ final _formKey = GlobalKey<FormState>();
 final _passController = TextEditingController();
 final _confirmPassController = TextEditingController();
 
-class ResetPass extends StatelessWidget {
+class ResetPass extends StatefulWidget {
   const ResetPass({super.key});
+
+  @override
+  State<ResetPass> createState() => _ResetPassState();
+}
+
+class _ResetPassState extends State<ResetPass> {
+  final FocusNode passFocus = FocusNode();
+  final FocusNode confirmPassFocus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    passFocus.addListener(() => setState(() {}));
+    confirmPassFocus.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    passFocus.dispose();
+    confirmPassFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +111,7 @@ class ResetPass extends StatelessWidget {
                         size: 14.sp,
                       ),
                       AppInput(
+                        focusNode: passFocus,
                         filled: true,
                         bottom: 16.h,
                         hint: LocaleKeys.password.tr(),
@@ -98,10 +123,19 @@ class ResetPass extends StatelessWidget {
                             return null;
                           }
                         },
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: AppColors.primary,
-                          size: 25.sp,
+                        prefixIcon: SizedBox(
+                          height: 28.w,
+                          width: 28.w,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              Assets.svg.key,
+                              height: 28.w,
+                              width: 28.w,
+                              color: passFocus.hasFocus
+                                  ? AppColors.primary
+                                  : Colors.grey,
+                            ),
+                          ),
                         ),
                         secureText: AuthCubit.get(context).isSecureNewPass1,
                         suffixIcon: AuthCubit.get(context).isSecureNewPass1
@@ -116,7 +150,7 @@ class ResetPass extends StatelessWidget {
                                   padding: EdgeInsets.all(8.h),
                                   child: Icon(
                                     Icons.visibility_off,
-                                    color: AppColors.primary,
+                                    color: Colors.grey,
                                     size: 21.sp,
                                   ),
                                 ),
@@ -154,6 +188,7 @@ class ResetPass extends StatelessWidget {
                         size: 14.sp,
                       ),
                       AppInput(
+                        focusNode: confirmPassFocus,
                         filled: true,
                         hint: LocaleKeys.confirmPassword.tr(),
                         controller: _confirmPassController,
@@ -165,10 +200,19 @@ class ResetPass extends StatelessWidget {
                             return null;
                           }
                         },
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: AppColors.primary,
-                          size: 25.sp,
+                        prefixIcon: SizedBox(
+                          height: 28.w,
+                          width: 28.w,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              Assets.svg.key,
+                              height: 28.w,
+                              width: 28.w,
+                              color: confirmPassFocus.hasFocus
+                                  ? AppColors.primary
+                                  : Colors.grey,
+                            ),
+                          ),
                         ),
                         secureText: AuthCubit.get(context).isSecureNewPass2,
                         suffixIcon: AuthCubit.get(context).isSecureNewPass2
@@ -183,7 +227,7 @@ class ResetPass extends StatelessWidget {
                                   padding: EdgeInsets.all(8.h),
                                   child: Icon(
                                     Icons.visibility_off,
-                                    color: AppColors.primary,
+                                    color: Colors.grey,
                                     size: 21.sp,
                                   ),
                                 ),

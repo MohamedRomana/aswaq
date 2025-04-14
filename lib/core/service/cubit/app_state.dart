@@ -100,6 +100,18 @@ final class ContactUsFailure extends AppState {
   ContactUsFailure({required this.error});
 }
 
+final class ComplaintLoading extends AppState {}
+
+final class ComplaintSuccess extends AppState {
+  final String message;
+  ComplaintSuccess({required this.message});
+}
+
+final class ComplaintFailure extends AppState {
+  final String error;
+  ComplaintFailure({required this.error});
+}
+
 final class PrivacyPolicyLoading extends AppState {}
 
 final class PrivacyPolicySuccess extends AppState {}
@@ -551,4 +563,16 @@ final class RateServiceSuccess extends AppState {
 final class RateServiceFailure extends AppState {
   final String error;
   RateServiceFailure({required this.error});
+}
+
+final class AddServiceFavoriteLoading extends AppState {}
+
+final class AddServiceFavoriteSuccess extends AppState {
+  final String message;
+  AddServiceFavoriteSuccess({required this.message});
+}
+
+final class AddServiceFavoriteFailure extends AppState {
+  final String error;
+  AddServiceFavoriteFailure({required this.error});
 }

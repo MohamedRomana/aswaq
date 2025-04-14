@@ -58,8 +58,8 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                         offset: Offset(_shakeAnimation.value, 0),
                         child: Image.asset(
                           Assets.img.logo.path,
-                          height: 121.w,
-                          width: 267.w,
+                          height: 300.w,
+                          width: 300.w,
                           fit: BoxFit.fill,
                         ),
                       );

@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aswaq/core/widgets/app_text.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../../../core/constants/colors.dart';
 import '../../../../../../core/widgets/app_input.dart';
 import '../../../../../../generated/locale_keys.g.dart';
 import '../../../../../core/service/cubit/app_cubit.dart';
+import '../../../../../gen/assets.gen.dart';
 import '../../../data/auth_cubit.dart';
 
-class CustomUserRegisterFields extends StatelessWidget {
+class CustomUserRegisterFields extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController phoneController;
   final TextEditingController fullNameController;
@@ -28,11 +30,43 @@ class CustomUserRegisterFields extends StatelessWidget {
   });
 
   @override
+  State<CustomUserRegisterFields> createState() =>
+      _CustomUserRegisterFieldsState();
+}
+
+class _CustomUserRegisterFieldsState extends State<CustomUserRegisterFields> {
+  final FocusNode nameFocus = FocusNode();
+  final FocusNode phoneFocus = FocusNode();
+  final FocusNode cityFocus = FocusNode();
+  final FocusNode passFocus = FocusNode();
+  final FocusNode confirmPassFocus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    nameFocus.addListener(() => setState(() {}));
+    phoneFocus.addListener(() => setState(() {}));
+    cityFocus.addListener(() => setState(() {}));
+    passFocus.addListener(() => setState(() {}));
+    confirmPassFocus.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    nameFocus.dispose();
+    phoneFocus.dispose();
+    cityFocus.dispose();
+    passFocus.dispose();
+    confirmPassFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return Form(
-          key: formKey,
+          key: widget.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,11 +90,12 @@ class CustomUserRegisterFields extends StatelessWidget {
                 size: 14.sp,
               ),
               AppInput(
+                focusNode: nameFocus,
                 enabledBorderColor: Colors.grey,
                 bottom: 16.h,
                 filled: true,
                 hint: LocaleKeys.fullName.tr(),
-                controller: fullNameController,
+                controller: widget.fullNameController,
                 inputType: TextInputType.name,
                 validate: (value) {
                   if (value!.isEmpty) {
@@ -69,10 +104,12 @@ class CustomUserRegisterFields extends StatelessWidget {
                     return null;
                   }
                 },
-                prefixIcon: Icon(
-                  Icons.person,
-                  color: Colors.grey,
-                  size: 25.sp,
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(10.r),
+                  child: SvgPicture.asset(
+                    Assets.svg.person,
+                    color: nameFocus.hasFocus ? AppColors.primary : Colors.grey,
+                  ),
                 ),
               ),
               AppText(
@@ -84,11 +121,12 @@ class CustomUserRegisterFields extends StatelessWidget {
                 size: 14.sp,
               ),
               AppInput(
+                focusNode: phoneFocus,
                 enabledBorderColor: Colors.grey,
                 bottom: 16.h,
                 filled: true,
                 hint: LocaleKeys.phone.tr(),
-                controller: phoneController,
+                controller: widget.phoneController,
                 inputType: TextInputType.phone,
                 validate: (value) {
                   if (value!.isEmpty) {
@@ -97,10 +135,18 @@ class CustomUserRegisterFields extends StatelessWidget {
                     return null;
                   }
                 },
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: Colors.grey,
-                  size: 25.sp,
+                prefixIcon: SizedBox(
+                  height: 28.w,
+                  width: 28.w,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      height: 28.w,
+                      width: 28.w,
+                      Assets.svg.call,
+                      color:
+                          phoneFocus.hasFocus ? AppColors.primary : Colors.grey,
+                    ),
+                  ),
                 ),
               ),
               AppText(
@@ -112,11 +158,12 @@ class CustomUserRegisterFields extends StatelessWidget {
                 size: 14.sp,
               ),
               AppInput(
+                focusNode: cityFocus,
                 enabledBorderColor: Colors.grey,
                 bottom: 16.h,
                 filled: true,
                 hint: LocaleKeys.chooseCity.tr(),
-                controller: locationController,
+                controller: widget.locationController,
                 suffixIcon: Icon(
                   Icons.arrow_drop_down,
                   color: Colors.grey,
@@ -153,7 +200,7 @@ class CustomUserRegisterFields extends StatelessWidget {
                     },
                   );
                   if (value != null) {
-                    locationController.text = value;
+                    widget.locationController.text = value;
                   }
                 },
                 validate: (value) {
@@ -163,10 +210,12 @@ class CustomUserRegisterFields extends StatelessWidget {
                     return null;
                   }
                 },
-                prefixIcon: Icon(
-                  Icons.location_on_outlined,
-                  color: Colors.grey,
-                  size: 25.sp,
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(10.r),
+                  child: SvgPicture.asset(
+                    Assets.svg.location,
+                    color: cityFocus.hasFocus ? AppColors.primary : Colors.grey,
+                  ),
                 ),
               ),
               AppText(
@@ -180,11 +229,12 @@ class CustomUserRegisterFields extends StatelessWidget {
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   return AppInput(
+                    focusNode: passFocus,
                     enabledBorderColor: Colors.grey,
                     filled: true,
                     bottom: 16.h,
                     hint: LocaleKeys.password.tr(),
-                    controller: passController,
+                    controller: widget.passController,
                     validate: (value) {
                       if (value!.isEmpty) {
                         return LocaleKeys.passwordValidate.tr();
@@ -192,10 +242,19 @@ class CustomUserRegisterFields extends StatelessWidget {
                         return null;
                       }
                     },
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.grey,
-                      size: 25.sp,
+                    prefixIcon: SizedBox(
+                      height: 28.w,
+                      width: 28.w,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          Assets.svg.key,
+                          height: 28.w,
+                          width: 28.w,
+                          color: passFocus.hasFocus
+                              ? AppColors.primary
+                              : Colors.grey,
+                        ),
+                      ),
                     ),
                     secureText: AuthCubit.get(context).isSecureRegister1,
                     suffixIcon: AuthCubit.get(context).isSecureRegister1
@@ -226,7 +285,7 @@ class CustomUserRegisterFields extends StatelessWidget {
                               padding: EdgeInsets.all(8.h),
                               child: Icon(
                                 Icons.visibility,
-                                color: Colors.grey,
+                                color: AppColors.primary,
                                 size: 21.sp,
                               ),
                             ),
@@ -245,21 +304,32 @@ class CustomUserRegisterFields extends StatelessWidget {
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   return AppInput(
+                    focusNode: confirmPassFocus,
                     enabledBorderColor: Colors.grey,
                     filled: true,
                     hint: LocaleKeys.confirmPassword.tr(),
-                    controller: confirmPassController,
+                    controller: widget.confirmPassController,
                     validate: (value) {
-                      if (passController.text != confirmPassController.text) {
+                      if (widget.passController.text !=
+                          widget.confirmPassController.text) {
                         return LocaleKeys.passwordDoesNotMatch.tr();
                       } else {
                         return null;
                       }
                     },
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.grey,
-                      size: 25.sp,
+                    prefixIcon: SizedBox(
+                      height: 28.w,
+                      width: 28.w,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          Assets.svg.key,
+                          height: 28.w,
+                          width: 28.w,
+                          color: confirmPassFocus.hasFocus
+                              ? AppColors.primary
+                              : Colors.grey,
+                        ),
+                      ),
                     ),
                     secureText: AuthCubit.get(context).isSecureRegister2,
                     suffixIcon: AuthCubit.get(context).isSecureRegister2
@@ -290,7 +360,7 @@ class CustomUserRegisterFields extends StatelessWidget {
                               padding: EdgeInsets.all(8.h),
                               child: Icon(
                                 Icons.visibility,
-                                color: Colors.grey,
+                                color: AppColors.primary,
                                 size: 21.sp,
                               ),
                             ),

@@ -48,13 +48,10 @@ class _AboutUsState extends State<AboutUs> {
                     children: [
                       Image.asset(
                         Assets.img.logo.path,
-                        color: AppColors.primary,
-                        height: 115.h,
-                        width: 240.w,
+                        height: 250.w,
+                        width: 350.w,
                         fit: BoxFit.fill,
                       ),
-                      SizedBox(height: 20.h),
-                      SizedBox(height: 35.h),
                       AppText(
                         text: AppCubit.get(context).aboutUsTitle,
                         lines: 100,

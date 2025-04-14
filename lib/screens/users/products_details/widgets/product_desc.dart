@@ -22,10 +22,11 @@ class _ProductDescState extends State<ProductDesc> {
 
   @override
   void initState() {
+    final videoUrl = AppCubit.get(context).showServiceModel['video'];
+    final videoId =
+        videoUrl != null ? YoutubePlayer.convertUrlToId(videoUrl) : null;
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(
-              AppCubit.get(context).showServiceModel['video']) ??
-          "",
+      initialVideoId: videoId ?? "",
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -131,6 +132,17 @@ class _ProductDescState extends State<ProductDesc> {
                                 Row(
                                   children: [
                                     IconButton(
+                                      icon: const Icon(
+                                        Icons.replay_5,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                      onPressed: () => _controller.seekTo(
+                                        _controller.value.position +
+                                            const Duration(seconds: 5),
+                                      ),
+                                    ),
+                                    IconButton(
                                       icon: Icon(
                                         _isPlaying
                                             ? Icons.pause
@@ -143,13 +155,13 @@ class _ProductDescState extends State<ProductDesc> {
                                     const SizedBox(width: 20),
                                     IconButton(
                                       icon: const Icon(
-                                        Icons.fast_forward,
+                                        Icons.forward_5,
                                         color: Colors.white,
                                         size: 30,
                                       ),
                                       onPressed: () => _controller.seekTo(
-                                        _controller.value.position +
-                                            const Duration(seconds: 10),
+                                        _controller.value.position -
+                                            const Duration(seconds: 5),
                                       ),
                                     ),
                                   ],

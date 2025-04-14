@@ -11,7 +11,7 @@ import '../../../../core/widgets/app_text.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 
-class EditProfileFields extends StatelessWidget {
+class EditProfileFields extends StatefulWidget {
   final TextEditingController passController;
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
@@ -25,6 +25,37 @@ class EditProfileFields extends StatelessWidget {
     required this.lastNameController,
     required this.cityController,
   });
+
+  @override
+  State<EditProfileFields> createState() => _EditProfileFieldsState();
+}
+
+class _EditProfileFieldsState extends State<EditProfileFields> {
+  final FocusNode nameFocus = FocusNode();
+  final FocusNode lastNameFocus = FocusNode();
+  final FocusNode phoneFocus = FocusNode();
+  final FocusNode cityFocus = FocusNode();
+  final FocusNode passFocus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    nameFocus.addListener(() => setState(() {}));
+    lastNameFocus.addListener(() => setState(() {}));
+    phoneFocus.addListener(() => setState(() {}));
+    cityFocus.addListener(() => setState(() {}));
+    passFocus.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    nameFocus.dispose();
+    lastNameFocus.dispose();
+    phoneFocus.dispose();
+    cityFocus.dispose();
+    passFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,51 +89,97 @@ class EditProfileFields extends StatelessWidget {
               child: Column(
                 children: [
                   AppInput(
+                    focusNode: nameFocus,
                     filled: true,
                     enabledBorderColor: Colors.grey,
                     hint: AppCubit.get(context).showUserMap['first_name'] ?? "",
-                    controller: firstNameController,
+                    controller: widget.firstNameController,
+                    prefixIcon: SizedBox(
+                      height: 28.w,
+                      width: 28.w,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          Assets.svg.person,
+                          height: 28.w,
+                          width: 28.w,
+                          color: nameFocus.hasFocus
+                              ? AppColors.primary
+                              : Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                  AppInput(
+                    focusNode: lastNameFocus,
+                    top: 16.h,
+                    bottom: 16.h,
+                    filled: true,
+                    enabledBorderColor: Colors.grey,
+                    hint: AppCubit.get(context).showUserMap['last_name'] ?? "",
+                    controller: widget.lastNameController,
+                    prefixIcon: SizedBox(
+                      height: 28.w,
+                      width: 28.w,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          Assets.svg.person,
+                          height: 28.w,
+                          width: 28.w,
+                          color: lastNameFocus.hasFocus
+                              ? AppColors.primary
+                              : Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                  AppInput(
+                    focusNode: phoneFocus,
+                    bottom: 16.h,
+                    filled: true,
+                    enabledBorderColor: Colors.grey,
+                    hint: AppCubit.get(context).showUserMap['phone'] ?? "",
+                    controller: widget.phoneController,
+                    inputType: TextInputType.phone,
+                    prefixIcon: SizedBox(
+                      height: 28.w,
+                      width: 28.w,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          height: 28.w,
+                          width: 28.w,
+                          Assets.svg.call,
+                          color: phoneFocus.hasFocus
+                              ? AppColors.primary
+                              : Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                  AppInput(
+                    focusNode: cityFocus,
+                    enabledBorderColor: Colors.grey,
+                    bottom: 16.h,
+                    filled: true,
+                    hint: AppCubit.get(context).showUserMap['city_title'] ?? "",
+                    controller: widget.cityController,
                     prefixIcon: SizedBox(
                       height: 25.w,
                       width: 25.w,
                       child: Center(
                         child: SvgPicture.asset(
-                          Assets.svg.profile,
+                          Assets.svg.location,
                           height: 25.w,
                           width: 25.w,
-                          color: Colors.grey,
+                          color: cityFocus.hasFocus
+                              ? AppColors.primary
+                              : Colors.grey,
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 16.h),
-                  AppInput(
-                    filled: true,
-                    enabledBorderColor: Colors.grey,
-                    hint: AppCubit.get(context).showUserMap['phone'] ?? "",
-                    controller: phoneController,
-                    inputType: TextInputType.phone,
-                    prefixIcon: Icon(
-                      Icons.phone_outlined,
-                      color: Colors.grey,
-                      size: 25.sp,
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-                  AppInput(
-                    enabledBorderColor: Colors.grey,
-                    bottom: 16.h,
-                    filled: true,
-                    hint: AppCubit.get(context).showUserMap['city_title'] ?? "",
-                    controller: cityController,
-                    prefixIcon: Icon(
-                      Icons.location_on_outlined,
-                      color: Colors.grey,
-                      size: 25.sp,
-                    ),
                     suffixIcon: Icon(
                       Icons.arrow_drop_down,
-                      color: Colors.grey,
+                      color:
+                          cityFocus.hasFocus ? AppColors.primary : Colors.grey,
                       size: 25.sp,
                     ),
                     read: true,
@@ -136,17 +213,18 @@ class EditProfileFields extends StatelessWidget {
                         },
                       );
                       if (value != null) {
-                        cityController.text = value;
+                        widget.cityController.text = value;
                       }
                     },
                   ),
                   BlocBuilder<AppCubit, AppState>(
                     builder: (context, state) {
                       return AppInput(
+                        focusNode: passFocus,
                         filled: true,
                         hint: LocaleKeys.password.tr(),
                         enabledBorderColor: Colors.grey,
-                        controller: passController,
+                        controller: widget.passController,
                         validate: (value) {
                           if (value!.isEmpty) {
                             return LocaleKeys.passwordValidate.tr();
@@ -154,10 +232,19 @@ class EditProfileFields extends StatelessWidget {
                             return null;
                           }
                         },
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: Colors.grey,
-                          size: 25.sp,
+                        prefixIcon: SizedBox(
+                          height: 28.w,
+                          width: 28.w,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              Assets.svg.key,
+                              height: 28.w,
+                              width: 28.w,
+                              color: passFocus.hasFocus
+                                  ? AppColors.primary
+                                  : Colors.grey,
+                            ),
+                          ),
                         ),
                         secureText: AppCubit.get(context).isSecureLogIn,
                         suffixIcon: AppCubit.get(context).isSecureLogIn
@@ -187,7 +274,7 @@ class EditProfileFields extends StatelessWidget {
                                   padding: EdgeInsets.all(8.h),
                                   child: Icon(
                                     Icons.visibility,
-                                    color: Colors.grey,
+                                    color: AppColors.primary,
                                     size: 21.sp,
                                   ),
                                 ),

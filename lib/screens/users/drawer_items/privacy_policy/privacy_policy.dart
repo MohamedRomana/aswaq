@@ -44,17 +44,15 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   physics: const BouncingScrollPhysics(),
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 30.w, vertical: 40.h),
+                        EdgeInsets.symmetric(horizontal: 30.w),
                     child: Column(
                       children: [
                         Image.asset(
                           Assets.img.logo.path,
-                          color: AppColors.primary,
-                          height: 115.h,
-                          width: 240.w,
+                          height: 250.w,
+                          width: 350.w,
                           fit: BoxFit.fill,
                         ),
-                        SizedBox(height: 20.h),
                         AppText(
                           text: AppCubit.get(context).privacyPolicyTitle,
                           lines: 100,

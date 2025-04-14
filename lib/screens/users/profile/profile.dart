@@ -105,7 +105,7 @@ class _ProfileState extends State<Profile> {
                                 width: 200.w,
                                 child: AppText(
                                   text: AppCubit.get(context)
-                                          .showUserMap['first_name'] ??
+                                          .showUserMap['full_name'] ??
                                       "",
                                   size: 14.sp,
                                 ),
