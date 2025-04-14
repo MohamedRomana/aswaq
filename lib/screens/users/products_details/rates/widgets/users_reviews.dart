@@ -57,7 +57,7 @@ class _UsersReviewsState extends State<UsersReviews> {
                         filledIcon: Icons.star,
                         emptyIcon: Icons.star_border,
                         initialRating:
-                            double.parse(ratess[index]['rate'].toString()),
+                            double.parse(ratess[index]['rate']),
                         maxRating: 5,
                         isHalfAllowed: true,
                         halfFilledIcon: Icons.star_half,

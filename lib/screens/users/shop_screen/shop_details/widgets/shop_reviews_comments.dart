@@ -54,8 +54,7 @@ class _ShopReviewsCommentsState extends State<ShopReviewsComments> {
                       RatingBar.readOnly(
                         filledIcon: Icons.star,
                         emptyIcon: Icons.star_border,
-                        initialRating: double.parse(AppCubit.get(context)
-                            .showProviderModel['rates'][index]['rate']),
+                        initialRating: double.parse(rates[index]['rate']),
                         maxRating: 5,
                         isHalfAllowed: true,
                         halfFilledIcon: Icons.star_half,
