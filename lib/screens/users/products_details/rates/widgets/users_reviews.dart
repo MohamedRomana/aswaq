@@ -31,53 +31,65 @@ class _UsersReviewsState extends State<UsersReviews> {
       builder: (context, state) {
         return Column(
           children: [
-            ListView.separated(
-              padding: EdgeInsets.only(bottom: 20.h),
-              itemCount:
-                  visibleCount < ratess.length ? visibleCount : ratess.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              separatorBuilder: (context, index) => SizedBox(height: 8.h),
-              itemBuilder: (context, index) => Column(
-                children: [
-                  SizedBox(height: 10.h),
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(1000.r),
-                        child: AppCachedImage(
-                          image: ratess[index]['user_avatar'] ?? "",
-                          height: 30.w,
-                          width: 30.w,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      SizedBox(width: 5.w),
-                      RatingBar.readOnly(
-                        filledIcon: Icons.star,
-                        emptyIcon: Icons.star_border,
-                        initialRating:
-                            double.parse(ratess[index]['rate']),
-                        maxRating: 5,
-                        isHalfAllowed: true,
-                        halfFilledIcon: Icons.star_half,
-                        size: 18.sp,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 300.w,
+            ratess.isEmpty
+                ? SizedBox(
+                    width: 343.w,
                     child: AppText(
-                      top: 6.h,
-                      text: ratess[index]['desc'] ?? "",
-                      lines: 3,
-                      size: 12.sp,
-                      color: Colors.grey,
+                      textAlign: TextAlign.center,
+                      text: LocaleKeys.rates_empty.tr(),
+                      color: AppColors.primary,
+                      family: FontFamily.norsalBold,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  )
+                : ListView.separated(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    itemCount: visibleCount < ratess.length
+                        ? visibleCount
+                        : ratess.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    separatorBuilder: (context, index) => SizedBox(height: 8.h),
+                    itemBuilder: (context, index) => Column(
+                      children: [
+                        SizedBox(height: 10.h),
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(1000.r),
+                              child: AppCachedImage(
+                                image: ratess[index]['user_avatar'] ?? "",
+                                height: 30.w,
+                                width: 30.w,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            RatingBar.readOnly(
+                              filledIcon: Icons.star,
+                              emptyIcon: Icons.star_border,
+                              initialRating:
+                                  double.parse(ratess[index]['rate']),
+                              maxRating: 5,
+                              isHalfAllowed: true,
+                              halfFilledIcon: Icons.star_half,
+                              size: 18.sp,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 300.w,
+                          child: AppText(
+                            top: 6.h,
+                            text: ratess[index]['desc'] ?? "",
+                            lines: 3,
+                            size: 12.sp,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
             if (visibleCount < ratess.length)
               InkWell(
                 splashColor: Colors.transparent,

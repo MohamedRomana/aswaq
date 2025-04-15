@@ -439,5 +439,6 @@ abstract class  LocaleKeys {
   static const view_more = 'view_more';
   static const no_favorite_products = 'no_favorite_products';
   static const no_favorite_stores = 'no_favorite_stores';
+  static const rates_empty = 'rates_empty';
 
 }

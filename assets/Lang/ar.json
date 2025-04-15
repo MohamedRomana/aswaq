@@ -436,5 +436,6 @@
     "please_write_your_comment": "من فضلك اكتب تعليقك",
     "view_more" : "عرض المزيد",
     "no_favorite_products": "لا يوجد منتجات مفضلة",
-    "no_favorite_stores": "لا يوجد متاجر مفضلة"
+    "no_favorite_stores": "لا يوجد متاجر مفضلة",
+    "rates_empty": "لا توجد تقييمات حتى الآن"
 }
