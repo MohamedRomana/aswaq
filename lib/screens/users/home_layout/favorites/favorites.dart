@@ -22,6 +22,12 @@ class Favorites extends StatefulWidget {
 
 class _FavoritesState extends State<Favorites> {
   @override
+  void initState() {
+    AppCubit.get(context).showFavorite();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
@@ -71,7 +77,7 @@ class _FavoritesState extends State<Favorites> {
                       ),
                       const Expanded(
                         child: TabBarView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: BouncingScrollPhysics(),
                           children: [
                             FavoriteStores(),
                             FavoriteServices(),

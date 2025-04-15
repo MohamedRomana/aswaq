@@ -76,7 +76,7 @@ class CustomOrderContentListView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 190.w,
+                            width: 200.w,
                             child: AppText(
                               text: AppCubit.get(context).showitems[index]
                                       ['service_title'] ??
@@ -110,7 +110,7 @@ class CustomOrderContentListView extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        width: 100.w,
+                        width: 200.w,
                         child: AppText(
                           top: 6.h,
                           text: AppCubit.get(context).showitems[index]
@@ -125,7 +125,7 @@ class CustomOrderContentListView extends StatelessWidget {
                         child: AppText(
                           top: 22.h,
                           text:
-                              '${AppCubit.get(context).showitems[index]['service_price']}  ${LocaleKeys.sar.tr()}',
+                              '${AppCubit.get(context).showitems[index]['service_price'].toStringAsFixed(1) ?? ""}  ${LocaleKeys.sar.tr()}',
                           size: 14.sp,
                           color: AppColors.primary,
                         ),

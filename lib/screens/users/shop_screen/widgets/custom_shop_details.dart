@@ -85,13 +85,15 @@ class CustomShopDetails extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AppText(
-                          text: AppCubit.get(context)
-                                  .showProviderModel['first_name'] ??
-                              '',
-                          color: Colors.black,
-                          size: 20.sp,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: 150.w,
+                          child: AppText(
+                            text:
+                                AppCubit.get(context) .showProviderModel['first_name'] ?? '',
+                            color: Colors.black,
+                            size: 20.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         SizedBox(height: 3.h),
                         Row(
@@ -104,11 +106,14 @@ class CustomShopDetails extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                             SizedBox(width: 3.w),
-                            AppText(
-                              text:
-                                  '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).showProviderModel['distance']} ${LocaleKeys.km.tr()}',
-                              size: 10.sp,
-                              color: Colors.black,
+                            SizedBox(
+                              width: 150.w,
+                              child: AppText(
+                                text:
+                                    '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).showProviderModel['distance']} ${LocaleKeys.km.tr()}',
+                                size: 10.sp,
+                                color: Colors.black,
+                              ),
                             ),
                           ],
                         ),

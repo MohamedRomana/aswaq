@@ -87,7 +87,7 @@ class _CustomMoreProfileRowState extends State<CustomMoreProfileRow> {
                         : AppText(
                             start: 10.w,
                             text: AppCubit.get(context)
-                                    .showUserMap['first_name'] ??
+                                    .showUserMap['full_name'] ??
                                 "",
                             size: 14.sp,
                             fontWeight: FontWeight.bold,

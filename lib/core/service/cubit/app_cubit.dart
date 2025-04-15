@@ -1092,7 +1092,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Future addServiceFavorite({required String serviceId}) async {
-    emit(AddFavoriteLoading());
+    emit(AddServiceFavoriteLoading());
     try {
       http.Response response =
           await http.post(Uri.parse("${baseUrl}api/add-to-favourite"), body: {
@@ -1107,7 +1107,7 @@ class AppCubit extends Cubit<AppState> {
         debugPrint(data.toString());
 
         if (data["key"] == 1) {
-          emit(AddFavoriteSuccess(message: data["msg"]));
+          emit(AddServiceFavoriteSuccess(message: data["msg"]));
           int index =
               allServiceList.indexWhere((e) => e['id'].toString() == serviceId);
           if (index != -1) {
@@ -1117,7 +1117,7 @@ class AppCubit extends Cubit<AppState> {
           }
           showServiceModel['is_fav'] = !(showServiceModel['is_fav'] ?? false);
         } else {
-          emit(AddFavoriteFailure(error: data["msg"]));
+          emit(AddServiceFavoriteFailure(error: data["msg"]));
         }
       }
     } catch (error) {
@@ -1126,7 +1126,7 @@ class AppCubit extends Cubit<AppState> {
         emit(Timeoutt());
       } else {
         debugPrint(error.toString());
-        emit(AddFavoriteFailure(error: error.toString()));
+        emit(AddServiceFavoriteFailure(error: error.toString()));
       }
     }
   }

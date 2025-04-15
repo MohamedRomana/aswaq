@@ -31,10 +31,11 @@ class ShopReviewsDialog extends StatelessWidget {
               SizedBox(height: 20.h),
               RatingBar.builder(
                 initialRating: 1,
-                allowHalfRating: true,
+                allowHalfRating: false,
                 minRating: 1,
                 itemCount: 5,
                 itemSize: 30.sp,
+                
                 direction: Axis.horizontal,
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.w),
                 itemBuilder: (context, _) => const Icon(

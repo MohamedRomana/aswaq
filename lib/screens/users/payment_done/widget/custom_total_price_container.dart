@@ -48,7 +48,7 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     width: 150.w,
                     child: AppText(
                       textAlign: TextAlign.end,
-                      text: '${AppCubit.get(context).cartItemsModel['total']} ${LocaleKeys.sar.tr()}',
+                      text: '${AppCubit.get(context).cartItemsModel['total'].toStringAsFixed(1) ?? ""} ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),
@@ -100,7 +100,7 @@ class CusomTotalPriceContainer extends StatelessWidget {
                     child: AppText(
                       textAlign: TextAlign.end,
                       text:
-                          '${AppCubit.get(context).cartItemsModel['total_with_value']} ${LocaleKeys.sar.tr()}',
+                          '${AppCubit.get(context).cartItemsModel['total_with_value'].toStringAsFixed(1) ?? ""} ${LocaleKeys.sar.tr()}',
                       size: 14.sp,
                       color: AppColors.primary,
                     ),

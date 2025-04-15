@@ -9,6 +9,7 @@ import '../../../../core/constants/colors.dart';
 import '../../../../core/widgets/alert_dialog.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/custom_login_dialog.dart';
+import '../../../../core/widgets/flash_message.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 class ProductTitlePrice extends StatelessWidget {
@@ -16,7 +17,22 @@ class ProductTitlePrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {
+        if (state is AddServiceFavoriteSuccess) {
+          showFlashMessage(
+            message: state.message,
+            type: FlashMessageType.success,
+            context: context,
+          );
+        } else if (state is AddServiceFavoriteFailure) {
+          showFlashMessage(
+            message: state.error,
+            type: FlashMessageType.success,
+            context: context,
+          );
+        }
+      },
       builder: (context, state) {
         return Row(
           children: [

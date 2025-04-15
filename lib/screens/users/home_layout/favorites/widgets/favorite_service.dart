@@ -37,7 +37,12 @@ class _FavoriteServicesState extends State<FavoriteServices> {
                     isService: true,
                   )
                 : ListView.separated(
-                    padding: EdgeInsets.all(16.r),
+                    padding: EdgeInsetsDirectional.only(
+                      start: 16.w,
+                      end: 16.w,
+                      top: 16.h,
+                      bottom: 150.h,
+                    ),
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     itemCount: AppCubit.get(context).favServicesList.length,

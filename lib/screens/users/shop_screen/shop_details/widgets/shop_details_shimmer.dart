@@ -1,3 +1,5 @@
+import 'package:aswaq/core/widgets/app_text.dart';
+import 'package:aswaq/gen/fonts.gen.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +12,7 @@ class ShopDetailsShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
       child: Column(
         children: [
           Stack(
@@ -90,10 +93,87 @@ class ShopDetailsShimmer extends StatelessWidget {
                   ),
                 ],
               ),
+              Container(
+                margin: EdgeInsetsDirectional.only(
+                  top: 16.h,
+                  bottom: 20.h,
+                ),
+                height: 20.h,
+                width: double.infinity,
+                color: Colors.white,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        height: 15.h,
+                        width: 150.w,
+                        color: Colors.white,
+                      ),
+                      AppText(
+                        top: 10.h,
+                        text: '5 / 5',
+                        color: Colors.white,
+                        family: FontFamily.norsalBold,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 15.h,
+                        width: 150.w,
+                        color: Colors.white,
+                      ),
+                      AppText(
+                        top: 10.h,
+                        text: '100%',
+                        color: Colors.white,
+                        family: FontFamily.norsalBold,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsetsDirectional.only(
+                  bottom: 16.h,
+                  top: 20.h,
+                ),
+                height: 20.h,
+                width: double.infinity,
+                color: Colors.white,
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Container(
+                  margin: EdgeInsetsDirectional.only(
+                    start: 16.w,
+                    top: 16.h,
+                  ),
+                  height: 15.h,
+                  width: 150.w,
+                  color: Colors.white,
+                ),
+                Container(
+                  margin: EdgeInsetsDirectional.only(
+                    end: 16.w,
+                    top: 16.h,
+                  ),
+                  height: 45.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15.r),
+                  ),
+                ),
+              ]),
               ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: 4,
                 separatorBuilder: (context, index) => SizedBox(height: 16.h),
                 itemBuilder: (context, index) => Row(
                   children: [

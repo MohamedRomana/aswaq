@@ -34,7 +34,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(80.h),
             child: CustomAppBar(
-              text: LocaleKeys.privacy_policy.tr(),
+              text: LocaleKeys.privacyPolicy.tr(),
             ),
           ),
           body: state is PrivacyPolicyLoading
@@ -43,8 +43,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
               : SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 30.w),
+                    padding: EdgeInsets.symmetric(horizontal: 30.w),
                     child: Column(
                       children: [
                         Image.asset(
