@@ -443,7 +443,6 @@ class CodegenLoader extends AssetLoader{
   "store_rating": "تقييم المتجر",
   "positive_rating": "التقييم الإيجابي",
   "store_category": "تصنيف المتجر",
-  "favorite": "تفضيل",
   "discounts": "تخفيضات",
   "store_recommendations": "ترشيحات المتجر",
   "customer_reviews": "تقييم العملاء",
@@ -453,7 +452,9 @@ class CodegenLoader extends AssetLoader{
   "view_more": "عرض المزيد",
   "no_favorite_products": "لا يوجد منتجات مفضلة",
   "no_favorite_stores": "لا يوجد متاجر مفضلة",
-  "rates_empty": "لا توجد تقييمات حتى الآن"
+  "rates_empty": "لا توجد تقييمات حتى الآن",
+  "favorite": "مفضل",
+  "preference": "تفضيل"
 };
 static const Map<String,dynamic> en = {
   "chooseLang": "Choose the appropriate language",
@@ -884,7 +885,6 @@ static const Map<String,dynamic> en = {
   "store_rating": "Store Rating",
   "positive_rating": "Positive Rating",
   "store_category": "Store Category",
-  "favorite": "Favorite",
   "discounts": "Discounts",
   "store_recommendations": "Store Recommendations",
   "customer_reviews": "Customer Reviews",
@@ -894,7 +894,9 @@ static const Map<String,dynamic> en = {
   "view_more": "View more",
   "no_favorite_products": "No Favorite Products",
   "no_favorite_stores": "No Favorite Stores",
-  "rates_empty": "No ratings yet"
+  "rates_empty": "No ratings yet",
+  "favorite": "Favorite",
+  "preference": "Preference"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

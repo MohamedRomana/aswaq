@@ -427,7 +427,6 @@
       "store_rating": "Store Rating",
       "positive_rating": "Positive Rating",
       "store_category": "Store Category",
-      "favorite" : "Favorite",
       "discounts": "Discounts",
       "store_recommendations": "Store Recommendations",
       "customer_reviews": "Customer Reviews",
@@ -437,5 +436,7 @@
       "view_more": "View more",
       "no_favorite_products": "No Favorite Products",
       "no_favorite_stores": "No Favorite Stores",
-      "rates_empty": "No ratings yet"
+      "rates_empty": "No ratings yet",
+      "favorite": "Favorite",
+      "preference": "Preference"
 }

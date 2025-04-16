@@ -78,9 +78,11 @@ class ProductStore extends StatelessWidget {
                                         .toString())
                                     .isEmpty
                                 ? '0.0'
-                                : double.parse(AppCubit.get(context)
-                                        .showServiceModel['saler_rate']
-                                        .toString())
+                                : (double.tryParse(AppCubit.get(context)
+                                                .showServiceModel['saler_rate']
+                                                ?.toString() ??
+                                            "0.0") ??
+                                        0.0)
                                     .toStringAsFixed(1),
                             size: 12.sp,
                             color: Colors.black,

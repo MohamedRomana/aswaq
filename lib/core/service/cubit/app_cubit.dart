@@ -926,6 +926,9 @@ class AppCubit extends Cubit<AppState> {
   List<Sections> sections = [];
   String cerPrice = '';
   String whatsApp = '';
+  String complaintsTitle = '';
+  bool showCash = true;
+  bool showOnline = true;
 
   Future getData() async {
     emit(GetDataLoading());
@@ -946,6 +949,9 @@ class AppCubit extends Cubit<AppState> {
           );
           cerPrice = data['certificate_section_price'].toString();
           whatsApp = data['whatsapp'];
+          complaintsTitle = data['help_desc'];
+          showCash = data['cash'];
+          showOnline = data['online'];
           emit(GetDataSuccess());
         } else {
           emit(GetDataFailure(error: data["msg"]));
@@ -1058,14 +1064,21 @@ class AppCubit extends Cubit<AppState> {
 
   Future addFavorite({required String providerId}) async {
     emit(AddFavoriteLoading());
+    final oldIsFav = showProviderModel['is_user_fav'];
+    showProviderModel['is_user_fav'] = !(oldIsFav);
+    emit(ChangeIndexSuccess());
     try {
-      http.Response response =
-          await http.post(Uri.parse("${baseUrl}api/add-to-favourite"), body: {
-        "lang": CacheHelper.getLang(),
-        'user_id': CacheHelper.getUserId(),
-        "provider_id": providerId,
-      }).timeout(const Duration(milliseconds: 8000));
+      http.Response response = await http.post(
+        Uri.parse("${baseUrl}api/add-to-favourite"),
+        body: {
+          "lang": CacheHelper.getLang(),
+          'user_id': CacheHelper.getUserId(),
+          "provider_id": providerId,
+        },
+      ).timeout(const Duration(milliseconds: 8000));
+
       if (response.statusCode == 500) {
+        showProviderModel['is_user_fav'] = oldIsFav;
         emit(ServerError());
       } else {
         Map<String, dynamic> data = jsonDecode(response.body);
@@ -1077,10 +1090,12 @@ class AppCubit extends Cubit<AppState> {
           allSections(
               sectionId: sections[marketIndex].id.toString(), isFav: true);
         } else {
+          showProviderModel['is_user_fav'] = oldIsFav;
           emit(AddFavoriteFailure(error: data["msg"]));
         }
       }
     } catch (error) {
+      showProviderModel['is_user_fav'] = oldIsFav;
       if (error is TimeoutException) {
         debugPrint("Request timed out");
         emit(Timeoutt());

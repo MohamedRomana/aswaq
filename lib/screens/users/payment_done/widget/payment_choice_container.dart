@@ -34,123 +34,133 @@ class PaymentChoiceContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () {
-                  if (AppCubit.get(context).paymentIndex == 0) {
-                    AppCubit.get(context).changePaymentIndex(index: -1);
-                  } else {
-                    AppCubit.get(context).changePaymentIndex(index: 0);
-                  }
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(16.r),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            Assets.svg.iconcard,
-                            height: 18.w,
-                            width: 18.w,
-                            color: AppCubit.get(context).paymentIndex == 0
-                                ? AppColors.primary
-                                : Colors.grey,
-                            fit: BoxFit.cover,
-                          ),
-                          SizedBox(width: 6.w),
-                          AppText(
-                            text: LocaleKeys.onlinePayment.tr(),
-                            size: 14.sp,
-                            color: AppCubit.get(context).paymentIndex == 0
-                                ? Colors.black
-                                : Colors.grey,
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 22.w,
-                        width: 22.w,
-                        decoration: BoxDecoration(
-                          color: AppCubit.get(context).paymentIndex == 0
-                              ? AppColors.primary
-                              : Colors.white,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey),
+              Visibility(
+                visible: AppCubit.get(context).showOnline,
+                child: Column(
+                  children: [
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        if (AppCubit.get(context).paymentIndex == 0) {
+                          AppCubit.get(context).changePaymentIndex(index: -1);
+                        } else {
+                          AppCubit.get(context).changePaymentIndex(index: 0);
+                        }
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(16.r),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  Assets.svg.iconcard,
+                                  height: 18.w,
+                                  width: 18.w,
+                                  color: AppCubit.get(context).paymentIndex == 0
+                                      ? AppColors.primary
+                                      : Colors.grey,
+                                  fit: BoxFit.cover,
+                                ),
+                                SizedBox(width: 6.w),
+                                AppText(
+                                  text: LocaleKeys.onlinePayment.tr(),
+                                  size: 14.sp,
+                                  color: AppCubit.get(context).paymentIndex == 0
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ],
+                            ),
+                            Container(
+                              height: 22.w,
+                              width: 22.w,
+                              decoration: BoxDecoration(
+                                color: AppCubit.get(context).paymentIndex == 0
+                                    ? AppColors.primary
+                                    : Colors.white,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.done,
+                                  size: 15.sp,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Center(
-                          child: Icon(
-                            Icons.done,
-                            size: 15.sp,
-                            color: Colors.white,
-                          ),
-                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    const Divider(
+                      thickness: 1,
+                      color: AppColors.primary,
+                    ),
+                  ],
                 ),
               ),
-              const Divider(
-                thickness: 1,
-                color: AppColors.primary,
-              ),
-              InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () {
-                  if (AppCubit.get(context).paymentIndex == 1) {
-                    AppCubit.get(context).changePaymentIndex(index: -1);
-                  } else {
-                    AppCubit.get(context).changePaymentIndex(index: 1);
-                  }
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(16.r),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            Assets.svg.bank,
-                            height: 24.w,
-                            width: 24.w,
+              Visibility(
+                visible: AppCubit.get(context).showCash,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () {
+                    if (AppCubit.get(context).paymentIndex == 1) {
+                      AppCubit.get(context).changePaymentIndex(index: -1);
+                    } else {
+                      AppCubit.get(context).changePaymentIndex(index: 1);
+                    }
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(16.r),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              Assets.svg.bank,
+                              height: 24.w,
+                              width: 24.w,
+                              color: AppCubit.get(context).paymentIndex == 1
+                                  ? AppColors.primary
+                                  : Colors.grey,
+                              fit: BoxFit.cover,
+                            ),
+                            SizedBox(width: 6.w),
+                            AppText(
+                              text: LocaleKeys.cashOnDelivery.tr(),
+                              size: 14.sp,
+                              color: AppCubit.get(context).paymentIndex == 1
+                                  ? Colors.black
+                                  : Colors.grey,
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 22.w,
+                          width: 22.w,
+                          decoration: BoxDecoration(
                             color: AppCubit.get(context).paymentIndex == 1
                                 ? AppColors.primary
-                                : Colors.grey,
-                            fit: BoxFit.cover,
+                                : Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey),
                           ),
-                          SizedBox(width: 6.w),
-                          AppText(
-                            text: LocaleKeys.cashOnDelivery.tr(),
-                            size: 14.sp,
-                            color: AppCubit.get(context).paymentIndex == 1
-                                ? Colors.black
-                                : Colors.grey,
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 22.w,
-                        width: 22.w,
-                        decoration: BoxDecoration(
-                          color: AppCubit.get(context).paymentIndex == 1
-                              ? AppColors.primary
-                              : Colors.white,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.done,
-                            size: 15.sp,
-                            color: Colors.white,
+                          child: Center(
+                            child: Icon(
+                              Icons.done,
+                              size: 15.sp,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

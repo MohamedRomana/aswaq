@@ -429,7 +429,6 @@ abstract class  LocaleKeys {
   static const store_rating = 'store_rating';
   static const positive_rating = 'positive_rating';
   static const store_category = 'store_category';
-  static const favorite = 'favorite';
   static const discounts = 'discounts';
   static const store_recommendations = 'store_recommendations';
   static const customer_reviews = 'customer_reviews';
@@ -440,5 +439,7 @@ abstract class  LocaleKeys {
   static const no_favorite_products = 'no_favorite_products';
   static const no_favorite_stores = 'no_favorite_stores';
   static const rates_empty = 'rates_empty';
+  static const favorite = 'favorite';
+  static const preference = 'preference';
 
 }

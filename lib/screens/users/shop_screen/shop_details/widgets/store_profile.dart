@@ -151,9 +151,24 @@ class StoreProfile extends StatelessWidget {
                     shadowColor: WidgetStateProperty.all(Colors.black),
                     width: 100.w,
                     color: Colors.red,
-                    child: AppText(
-                      text: '+ ${LocaleKeys.favorite.tr()}',
-                      color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          AppCubit.get(context).showProviderModel['is_user_fav']
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Colors.white,
+                        ),
+                        AppText(
+                          start: 3.w,
+                          text: AppCubit.get(context)
+                                  .showProviderModel['is_user_fav']
+                              ? LocaleKeys.favorite.tr()
+                              : LocaleKeys.preference.tr(),
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
                   ),
                 ),

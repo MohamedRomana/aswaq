@@ -116,7 +116,7 @@ class ProductTitlePrice extends StatelessWidget {
                           }
                         },
                         icon: Icon(
-                          AppCubit.get(context).showServiceModel['is_fav']
+                          AppCubit.get(context).showServiceModel['is_fav'] ?? false
                               ? Icons.favorite
                               : Icons.favorite_border,
                           color: Colors.red,
