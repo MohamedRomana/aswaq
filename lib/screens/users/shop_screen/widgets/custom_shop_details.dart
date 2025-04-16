@@ -159,6 +159,8 @@ class CustomShopDetails extends StatelessWidget {
                                   ? LocaleKeys.favorite.tr()
                                   : LocaleKeys.preference.tr(),
                               color: Colors.white,
+                              size:
+                                  CacheHelper.getLang() == 'en' ? 12.sp : 16.sp,
                             ),
                           ],
                         ),

@@ -52,7 +52,7 @@ class _StoreRatesRowState extends State<StoreRatesRow> {
                       start: 16.w,
                       bottom: 10.h,
                       text: LocaleKeys.store_category.tr(),
-                      size: 20.sp,
+                      size: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     SizedBox(
@@ -73,7 +73,7 @@ class _StoreRatesRowState extends State<StoreRatesRow> {
                       start: 16.w,
                       bottom: 10.h,
                       text: LocaleKeys.customer_reviews.tr(),
-                      size: 20.sp,
+                      size: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     SizedBox(
