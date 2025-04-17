@@ -438,5 +438,7 @@
     "no_favorite_stores": "لا يوجد متاجر مفضلة",
     "rates_empty": "لا توجد تقييمات حتى الآن",
     "favorite": "مفضل",
-    "preference": "تفضيل"
+    "preference": "تفضيل",
+    "retry": "إعادة المحاولة",
+    "no_internet_connection": "فشل الاتصال بالإنترنت، يرجى المحاولة مرة أخرى"
 }

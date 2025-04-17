@@ -441,5 +441,7 @@ abstract class  LocaleKeys {
   static const rates_empty = 'rates_empty';
   static const favorite = 'favorite';
   static const preference = 'preference';
+  static const retry = 'retry';
+  static const no_internet_connection = 'no_internet_connection';
 
 }

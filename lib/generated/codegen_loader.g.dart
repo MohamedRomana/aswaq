@@ -454,7 +454,9 @@ class CodegenLoader extends AssetLoader{
   "no_favorite_stores": "لا يوجد متاجر مفضلة",
   "rates_empty": "لا توجد تقييمات حتى الآن",
   "favorite": "مفضل",
-  "preference": "تفضيل"
+  "preference": "تفضيل",
+  "retry": "إعادة المحاولة",
+  "no_internet_connection": "فشل الاتصال بالإنترنت، يرجى المحاولة مرة أخرى"
 };
 static const Map<String,dynamic> en = {
   "chooseLang": "Choose the appropriate language",
@@ -896,7 +898,9 @@ static const Map<String,dynamic> en = {
   "no_favorite_stores": "No Favorite Stores",
   "rates_empty": "No ratings yet",
   "favorite": "Favorite",
-  "preference": "Preference"
+  "preference": "Preference",
+  "retry": "Retry",
+  "no_internet_connection": "Internet connection failed, please try again"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

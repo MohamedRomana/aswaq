@@ -438,5 +438,7 @@
       "no_favorite_stores": "No Favorite Stores",
       "rates_empty": "No ratings yet",
       "favorite": "Favorite",
-      "preference": "Preference"
+      "preference": "Preference",
+      "retry": "Retry",
+      "no_internet_connection": "Internet connection failed, please try again"
 }

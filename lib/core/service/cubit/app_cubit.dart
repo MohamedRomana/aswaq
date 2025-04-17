@@ -670,7 +670,7 @@ class AppCubit extends Cubit<AppState> {
         'user_id': CacheHelper.getUserId(),
         // "lat": lat.toString(),
         // "lng": lng.toString(),
-      }).timeout(const Duration(milliseconds: 8000));
+      }).timeout(const Duration(milliseconds: 10000));
       if (response.statusCode == 500) {
         emit(ServerError());
       } else {
