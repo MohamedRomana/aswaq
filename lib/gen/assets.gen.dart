@@ -50,6 +50,9 @@ class $AssetsImgGen {
   /// File path: assets/img/emptyseach.json
   String get emptyseach => 'assets/img/emptyseach.json';
 
+  /// File path: assets/img/internet_lost.json
+  String get internetLost => 'assets/img/internet_lost.json';
+
   /// File path: assets/img/loading.json
   String get loading => 'assets/img/loading.json';
 
@@ -79,6 +82,7 @@ class $AssetsImgGen {
         alert,
         emptyorder,
         emptyseach,
+        internetLost,
         loading,
         login,
         logo,

@@ -11,6 +11,7 @@ import '../../../../core/widgets/alert_dialog.dart';
 import '../../../../core/widgets/app_cached.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/custom_login_dialog.dart';
+import '../../../../core/widgets/flash_message.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../products_details/products_details.dart';
@@ -21,7 +22,22 @@ class ProviderGrideView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {
+        if (state is AddServiceFavoriteSuccess) {
+          showFlashMessage(
+            message: state.message,
+            type: FlashMessageType.success,
+            context: context,
+          );
+        } else if (state is AddServiceFavoriteFailure) {
+          showFlashMessage(
+            message: state.error,
+            type: FlashMessageType.error,
+            context: context,
+          );
+        }
+      },
       builder: (context, state) {
         return state is AllServicesLoading || state is ShowProviderLoading
             ? const CustomGrideViewLoading()

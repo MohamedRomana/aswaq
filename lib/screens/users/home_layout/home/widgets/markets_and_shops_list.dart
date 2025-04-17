@@ -13,6 +13,7 @@ import '../../../../../core/widgets/alert_dialog.dart';
 import '../../../../../core/widgets/app_router.dart';
 import '../../../../../core/widgets/app_text.dart';
 import '../../../../../core/widgets/custom_login_dialog.dart';
+import '../../../../../core/widgets/flash_message.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../generated/locale_keys.g.dart';
 import '../../../shop_screen/shop_screen.dart';
@@ -22,7 +23,22 @@ class MarketsAndShopsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {
+        if (state is AddFavoriteSuccess) {
+          showFlashMessage(
+            message: state.message,
+            type: FlashMessageType.success,
+            context: context,
+          );
+        } else if (state is AddFavoriteFailure) {
+          showFlashMessage(
+            message: state.error,
+            type: FlashMessageType.error,
+            context: context,
+          );
+        }
+      },
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +55,7 @@ class MarketsAndShopsListView extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount:
-                  AppCubit.get(context).clientHomeModel['providers'].length,
+                  (AppCubit.get(context).clientHomeModel['providers'] ?? []).length,
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
@@ -124,9 +140,10 @@ class MarketsAndShopsListView extends StatelessWidget {
                                       }
                                     },
                                     child: Icon(
-                                      AppCubit.get(context)
-                                                  .clientHomeModel['providers']
-                                              [index]['is_user_fav']
+                                      AppCubit.get(context).clientHomeModel[
+                                                      'providers'][index]
+                                                  ['is_user_fav'] ??
+                                              false
                                           ? Icons.favorite
                                           : Icons.favorite_border,
                                       color: Colors.red,
@@ -146,9 +163,10 @@ class MarketsAndShopsListView extends StatelessWidget {
                                 SizedBox(width: 3.w),
                                 AppText(
                                   text: AppCubit.get(context)
-                                      .clientHomeModel['providers'][index]
-                                          ['rate']
-                                      .toStringAsFixed(1),
+                                          .clientHomeModel['providers'][index]
+                                              ['rate']
+                                          .toStringAsFixed(1) ??
+                                      '0.0',
                                   size: 14.sp,
                                 ),
                               ],
@@ -167,7 +185,7 @@ class MarketsAndShopsListView extends StatelessWidget {
                                   width: 190.w,
                                   child: AppText(
                                     text:
-                                        '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).clientHomeModel['providers'][index]['distance']} ${LocaleKeys.km.tr()}',
+                                        '${LocaleKeys.distanceFromYou.tr()} ${AppCubit.get(context).clientHomeModel['providers'][index]['distance'] ?? ""} ${LocaleKeys.km.tr()}',
                                     color: Colors.grey,
                                     size: 10.sp,
                                   ),

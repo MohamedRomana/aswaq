@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'widgets/best_products_list_view.dart';
 import 'widgets/custom-home_shimmer.dart';
+import 'widgets/custom_connection_lost.dart';
 import 'widgets/custom_home_app_bar.dart';
 import 'widgets/markets_and_shops_list.dart';
 import 'widgets/swiper_container.dart';
@@ -28,9 +29,11 @@ class _HomeState extends State<Home> {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return Scaffold(
-          body: state is ClientHomeLoading &&
+          body: state is ClientHomeLoading ||
                   AppCubit.get(context).clientHomeModel.isEmpty
-              ? const CustomHomeShimmer()
+              ? state is Timeoutt
+                  ? const CustomConnectionLost()
+                  : const CustomHomeShimmer()
               : SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Column(
