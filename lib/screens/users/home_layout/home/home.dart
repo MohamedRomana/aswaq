@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return Scaffold(
-          body: state is ClientHomeLoading ||
+          body: state is ClientHomeLoading &&
                   AppCubit.get(context).clientHomeModel.isEmpty
               ? state is Timeoutt
                   ? const CustomConnectionLost()

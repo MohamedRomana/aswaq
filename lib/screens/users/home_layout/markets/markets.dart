@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/colors.dart';
+import 'widgets/custom_list_shimmer.dart';
 import 'widgets/custom_markets_list_view.dart';
 
 class Markets extends StatefulWidget {
@@ -31,11 +32,7 @@ class _MarketsState extends State<Markets> {
               preferredSize: Size.fromHeight(80.h),
               child: const CustomAppBar(isMarket: true)),
           body: AppCubit.get(context).sections.isEmpty
-              ? const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primary,
-                  ),
-                )
+              ? const ShopsListShimmer()
               : DefaultTabController(
                   initialIndex: 0,
                   length: AppCubit.get(context).sections.length,

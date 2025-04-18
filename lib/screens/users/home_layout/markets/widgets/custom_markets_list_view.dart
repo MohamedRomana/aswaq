@@ -31,7 +31,7 @@ class CustomMarketsListView extends StatelessWidget {
                 ? const CustomEmptyFav(isMarket: false)
                 : ListView.separated(
                     padding: EdgeInsetsDirectional.only(
-                      bottom: 130.h,
+                      bottom: 150.h,
                       start: 16.w,
                       end: 16.w,
                     ),
